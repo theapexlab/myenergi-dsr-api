@@ -3,12 +3,12 @@ import { helloHandler } from ".";
 
 describe("handler", () => {
   test("return Hello Myenergi!", async () => {
-    const testEvent: Partial<APIGatewayProxyEvent> = {
+    const testEvent: APIGatewayProxyEvent = {
       queryStringParameters: {
         message: "Myenergi",
       },
-    };
-    const result = await helloHandler(testEvent as any);
+    } as any;
+    const result = await helloHandler(testEvent);
     const bodyJSON = JSON.parse(result.body);
     expect(bodyJSON.message).toEqual("Hello Myenergi!");
   });
