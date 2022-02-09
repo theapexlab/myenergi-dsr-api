@@ -1,9 +1,14 @@
-// Lambda function code
-const handler = async (event) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.helloHandler = void 0;
+const helloHandler = async (event) => {
     console.log("Event: ", event);
-    let responseMessage = "Hello, World!";
-    if (event.queryStringParameters && event.queryStringParameters["Name"]) {
-        responseMessage = "Hello, " + event.queryStringParameters["Name"] + "!";
+    let responseMessage = "Hello World!";
+    const message = event.queryStringParameters
+        ? event.queryStringParameters["message"]
+        : "";
+    if (message) {
+        responseMessage = "Hello " + message + "!";
     }
     return {
         statusCode: 200,
@@ -15,3 +20,4 @@ const handler = async (event) => {
         }),
     };
 };
+exports.helloHandler = helloHandler;

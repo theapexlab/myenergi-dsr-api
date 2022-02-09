@@ -1,11 +1,14 @@
-// Lambda function code
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-const handler = async (event) => {
+export const helloHandler = async (event: APIGatewayProxyEvent) => {
   console.log("Event: ", event);
-  let responseMessage = "Hello, World!";
+  let responseMessage = "Hello World!";
+  const message = event.queryStringParameters
+    ? event.queryStringParameters["message"]
+    : "";
 
-  if (event.queryStringParameters && event.queryStringParameters["Name"]) {
-    responseMessage = "Hello, " + event.queryStringParameters["Name"] + "!";
+  if (message) {
+    responseMessage = "Hello " + message + "!";
   }
 
   return {
