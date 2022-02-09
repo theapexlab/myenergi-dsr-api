@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
   "repository": "git@github.com:theapexlab/myenergi-dsr-api.git",
   "scripts": {
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "lint": "eslint --ext .js,.ts,.tsx ./lambda/src/",
     "script:build-dependency-layer": "yarn install --prod; ./scripts/build-dependency-layer.sh; yarn install;",
     "build": "tsc",
