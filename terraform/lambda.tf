@@ -6,6 +6,16 @@ data "archive_file" "lambda_hello_world" {
   output_path = "${path.module}/../lambda/dist/function.zip"
 }
 
+resource "aws_lambda_layer_version" "dependency_layer" {
+  layer_name = "dependency_layer"
+
+  s3_bucket = aws_s3_bucket.lambda_bucket.id
+  s3_key    = aws_s3_bucket_object.lambda_dependency.key
+
+  compatible_runtimes = ["nodejs12.x"]
+  source_code_hash    = base64sha256(filebase64("${path.module}/../dist/layers/layers.zip"))
+}
+
 resource "aws_lambda_function" "hello_world" {
   function_name = "HelloWorld"
 
