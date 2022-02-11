@@ -36,3 +36,4 @@ hello-world.zip
 response.json
 
 node_modules/*
+dist/*
