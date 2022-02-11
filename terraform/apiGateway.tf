@@ -37,14 +37,9 @@ resource "aws_apigatewayv2_integration" "hello_world" {
 }
 
 resource "aws_apigatewayv2_route" "hello_world" {
-  api_id = aws_apigatewayv2_api.lambda.id
-
-  route_key = "GET /graphql"
+  api_id    = aws_apigatewayv2_api.lambda.id
+  route_key = "ANY /graphql"
   target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
 }
-resource "aws_apigatewayv2_route" "hello_world2" {
-  api_id = aws_apigatewayv2_api.lambda.id
 
-  route_key = "POST /graphql"
-  target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
-}
+
