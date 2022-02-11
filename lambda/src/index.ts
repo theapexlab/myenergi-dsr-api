@@ -1,28 +1,10 @@
-// import { APIGatewayProxyEvent } from 'aws-lambda';
-
-// export const helloHandler = async (event: APIGatewayProxyEvent) => {
-//   console.log('Event: ', event);
-//   let responseMessage = 'Hello World!';
-//   const message = event.queryStringParameters ? event.queryStringParameters['message'] : '';
-
-//   if (message) {
-//     responseMessage = 'Hello ' + message + '!';
-//   }
-
-//   return {
-//     statusCode: 200,
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       message: responseMessage,
-//     }),
-//   };
-// };
-
-// graphql.js
-
 import { ApolloServer, gql } from 'apollo-server-lambda';
+import express from 'express';
+import http from 'http';
+import getStream from 'get-stream';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { createSofaRouter, useSofa } from 'sofa-api';
+import serverless from 'serverless-http';
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -37,7 +19,26 @@ const resolvers = {
     hello: () => 'Hello Myenergi!',
   },
 };
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
+// server.applyMiddleware({ app });
+
+const app = express();
+
+app.use(
+  '/rest',
+  useSofa({
+    basePath: '/rest',
+    schema,
+  })
+);
+// export const helloHandler = serverless(app);
+
 export const helloHandler = server.createHandler();
+
+// const invokeSofa = createSofaRouter({
+//   basePath: '/api',
+//   schema,
+// });
