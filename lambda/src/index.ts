@@ -1,10 +1,12 @@
-import { ApolloServer, gql } from 'apollo-server-lambda';
+import { gql } from 'apollo-server-lambda';
 import express from 'express';
-import http from 'http';
-import getStream from 'get-stream';
+// import http from 'http';
+// import getStream from 'get-stream';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { createSofaRouter, useSofa } from 'sofa-api';
-import serverless from 'serverless-http';
+import { useSofa } from 'sofa-api';
+
+import serverlessExpress from '@vendia/serverless-express';
+// import serverless from 'serverless-http';
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -21,11 +23,15 @@ const resolvers = {
 };
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-const server = new ApolloServer({ typeDefs, resolvers });
+// const server = new ApolloServer({ typeDefs, resolvers });
 
 // server.applyMiddleware({ app });
 
-const app = express();
+export const app = express();
+
+app.get('/hello', function (req, res) {
+  res.send('hello world');
+});
 
 app.use(
   '/rest',
@@ -34,11 +40,5 @@ app.use(
     schema,
   })
 );
-// export const helloHandler = serverless(app);
 
-export const helloHandler = server.createHandler();
-
-// const invokeSofa = createSofaRouter({
-//   basePath: '/api',
-//   schema,
-// });
+export const helloHandler = serverlessExpress({ app });

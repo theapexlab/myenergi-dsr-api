@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.tsx ./lambda/src/",
     "script:build-dependency-layer": "yarn install --prod; sh ./scripts/build-dependency-layer.sh; yarn install;",
-    "build": "tsc",
+    "build": "rm -rf lambda/dist && tsc",
     "tf:init": "cd terraform; terraform init",
     "tf:plan": "cd terraform; terraform plan -var-file ./config/terraform.tfvars",
     "tf:apply": "yarn build; cd terraform; terraform apply -var-file ./config/terraform.tfvars; yarn cleanup;",
