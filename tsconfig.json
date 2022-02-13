@@ -12,8 +12,9 @@
       "node_modules/@types",
       "../node_modules/@types"
     ],
-    "types": ["node"]
+    "types": ["node"],
+    "resolveJsonModule": true
   },
-  "include": ["./lambda/src/**/*"],
+  "include": ["./lambda/src/**/*", "./lambda/src/**/*.json"],
   "exclude": ["./lambda/src/**/*.test.ts"]
 }

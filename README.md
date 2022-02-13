@@ -1,13 +1,9 @@
-# Terraform Lambda Typescript Starter 🏗λ
+# Terraform Lambda Typescript Graphql Sofa showcase
 
-This is a basic Hello World starter template that utilises terraform for provisioning cloud resources. It is an opionanted starter which
-uses TypeScript, ESlint, Prettier and Husky.
+## Get started
 
-## Usage 🔬
-
-_Currently being consumed by these project(s) of mine, will try and keep this list updated_
-
-- [Serverless Weather 🌦](https://github.com/rahman95/serverless-weather)
+1. ` cp terraform/config/terraform.tfvars.example  cp terraform/config/terraform.tfvars `
+2. Modify vars if needed
 
 ## Tech 🧰
 
@@ -16,6 +12,8 @@ _Currently being consumed by these project(s) of mine, will try and keep this li
 - ESLint
 - Prettier
 - Husky
+- Apollo
+- Sofa
 
 ## What gets provisioned? 🔍
 

@@ -1,12 +1,9 @@
-import { gql } from 'apollo-server-lambda';
+import { gql, ApolloServer } from 'apollo-server-lambda';
 import express from 'express';
-// import http from 'http';
-// import getStream from 'get-stream';
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { useSofa } from 'sofa-api';
 
-import serverlessExpress from '@vendia/serverless-express';
-// import serverless from 'serverless-http';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { useSofa, OpenAPI } from 'sofa-api';
+// const swaggerUi = require('swagger-ui-express');
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -22,23 +19,41 @@ const resolvers = {
   },
 };
 const schema = makeExecutableSchema({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers });
 
-// const server = new ApolloServer({ typeDefs, resolvers });
-
-// server.applyMiddleware({ app });
-
-export const app = express();
-
-app.get('/hello', function (req, res) {
-  res.send('hello world');
+const openApi = OpenAPI({
+  schema,
+  info: {
+    title: 'Myenergi DSR',
+    version: '0.1.0',
+  },
 });
 
+const app = express();
 app.use(
-  '/rest',
+  '/api',
   useSofa({
-    basePath: '/rest',
     schema,
+    basePath: '/api',
+    onRoute(info) {
+      openApi.addRoute(info, {
+        basePath: '/api',
+      });
+    },
   })
 );
 
-export const helloHandler = serverlessExpress({ app });
+// This is WIP
+// openApi.save('./swagger.json');
+// openApi.save('./swagger.yaml');
+// const swaggerDocument = require('./swagger.json');
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+export const handler = server.createHandler({
+  expressAppFromMiddleware(middleware) {
+    app.use(middleware);
+    return app;
+  },
+});
+
+export { app };

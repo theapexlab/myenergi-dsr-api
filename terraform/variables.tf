@@ -8,6 +8,6 @@ variable "aws_region" {
 variable "lambda_bucket" {
   description = "AWS S3 bucket name, in which lambda is stored."
   type        = string
-  default     = "apexlab-lambda-bucket-3"
+  default     = "apexlab-lambda-bucket-4"
 
 }

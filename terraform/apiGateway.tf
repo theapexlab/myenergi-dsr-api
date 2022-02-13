@@ -6,7 +6,7 @@ resource "aws_apigatewayv2_api" "lambda" {
 resource "aws_apigatewayv2_stage" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  name        = "serverless_lambda_stage"
+  name        = "$default"
   auto_deploy = true
 
   access_log_settings {
@@ -36,10 +36,15 @@ resource "aws_apigatewayv2_integration" "hello_world" {
   integration_method = "POST"
 }
 
-resource "aws_apigatewayv2_route" "hello_world" {
+resource "aws_apigatewayv2_route" "graphql" {
   api_id    = aws_apigatewayv2_api.lambda.id
-  route_key = "ANY /graphql"
+  route_key = "$default"
   target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
 }
 
+# resource "aws_apigatewayv2_route" "test" {
+#   api_id    = aws_apigatewayv2_api.lambda.id
+#   route_key = "ANY /rest"
+#   target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
+# }
 
