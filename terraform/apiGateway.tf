@@ -41,5 +41,17 @@ resource "aws_apigatewayv2_route" "hello_world" {
   route_key = "ANY /graphql"
   target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
 }
+resource "aws_apigatewayv2_integration" "hello_rest" {
+  api_id = aws_apigatewayv2_api.lambda.id
+
+  integration_uri    = aws_lambda_function.hello_rest.invoke_arn
+  integration_type   = "AWS_PROXY"
+  integration_method = "POST"
+}
+resource "aws_apigatewayv2_route" "hello_rest" {
+  api_id    = aws_apigatewayv2_api.lambda.id
+  route_key = "GET /rest"
+  target    = "integrations/${aws_apigatewayv2_integration.hello_rest.id}"
+}
 
 

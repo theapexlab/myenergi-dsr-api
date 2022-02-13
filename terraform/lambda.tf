@@ -2,8 +2,14 @@
 data "archive_file" "lambda_hello_world" {
   type = "zip"
 
-  source_dir  = "${path.module}/../lambda/dist/"
-  output_path = "${path.module}/../lambda/dist/function.zip"
+  source_dir  = "${path.module}/../lambda/dist/graphql"
+  output_path = "${path.module}/../lambda/dist/src/graphql.zip"
+}
+data "archive_file" "lambda_hello_rest" {
+  type = "zip"
+
+  source_dir  = "${path.module}/../lambda/dist/rest"
+  output_path = "${path.module}/../lambda/dist/src/rest.zip"
 }
 
 resource "aws_lambda_layer_version" "dependency_layer" {
@@ -25,10 +31,26 @@ resource "aws_lambda_function" "hello_world" {
   s3_key    = aws_s3_bucket_object.lambda_hello_world.key
 
   runtime = "nodejs12.x"
-  handler = "index.helloHandler"
+  handler = "index.graphqlHandler"
 
   layers           = [aws_lambda_layer_version.dependency_layer.arn]
   source_code_hash = data.archive_file.lambda_hello_world.output_base64sha256
+
+  role = aws_iam_role.lambda_exec.arn
+}
+
+resource "aws_lambda_function" "hello_rest" {
+  depends_on    = [aws_lambda_layer_version.dependency_layer]
+  function_name = "HelloRest"
+
+  s3_bucket = aws_s3_bucket.lambda_bucket.id
+  s3_key    = aws_s3_bucket_object.lambda_hello_rest.key
+
+  runtime = "nodejs12.x"
+  handler = "index.restHandler"
+
+  layers           = [aws_lambda_layer_version.dependency_layer.arn]
+  source_code_hash = data.archive_file.lambda_hello_rest.output_base64sha256
 
   role = aws_iam_role.lambda_exec.arn
 }
@@ -38,6 +60,14 @@ resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.hello_world.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
+}
+resource "aws_lambda_permission" "api_gw_rest" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.hello_rest.function_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"

@@ -1,0 +1,606 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MyEnergi Project API",
+    "description": "This is an example of the possible Demand Side Response API for Energy Aggregation Services.",
+    "version": "0.0.2"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/apexlab/myenergi-apexlab/0.0.2",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/units": {
+      "get": {
+        "summary": "Doesn't exist on old DSR API",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/units/{id}": {
+      "get": {
+        "summary": "Doesn't exist on old DSR API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/units/{id}/status": {
+      "get": {
+        "summary": "List status of units. (cgi-list-jstatus)",
+        "description": "Reports the current status of the device or group of devices in JSON. This status based on the last live data received. The tim and dat fields show that date and time the last status information was received.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/units/{id}/history": {
+      "get": {
+        "summary": "List historic data of a unit (cgi-list-jhistoric-day / cgi-list-jhistoric-hour)",
+        "description": "Retrieve one days worth of historic data for a unit.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/units/{id}/set-load": {
+      "put": {
+        "summary": "Set output power of units. (cgi-set-jload)",
+        "description": "Set output power of units.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_setload_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/units/{id}/set-frequency": {
+      "put": {
+        "summary": "Set Frequency Response Limits (cgi-jset-fr)",
+        "description": "Sets the parameters for frequency response. Once parameters are set the EDDI and ZAPPI units will act autonomously. Note the DAF<DDF<UDF<UAF unless frequency response is deactivated. The set values are reported in cgi-list-jstatus as sdaf,sddf,suaf and sudf. The values reported by the unit (echoed back) are in cgi-list-jstatus as daf,ddf,uaf.udf.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_setfrequency_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/units/{id}/set-control-group": {
+      "put": {
+        "summary": "Set the control group for a unit. (cgi-set-control-group)",
+        "description": "Sets the parameters for frequency response. Once parameters are set the EDDI and ZAPPI units will act autonomously. Note the DAF<DDF<UDF<UAF unless frequency response is deactivated. The set values are reported in cgi-list-jstatus as sdaf,sddf,suaf and sudf. The values reported by the unit (echoed back) are in cgi-list-jstatus as daf,ddf,uaf.udf.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_setcontrolgroup_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/units/{id}/clear-command": {
+      "put": {
+        "summary": "cgi-clear-command",
+        "description": "Clear the last DSR command for an individual device or group of devices.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_clearcommand_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups": {
+      "get": {
+        "summary": "Doesn't exist on old DSR API",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups/{id}": {
+      "get": {
+        "summary": "Doesn't exist on old DSR API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups/{id}/status": {
+      "get": {
+        "summary": "List status of units. (cgi-list-jstatus)",
+        "description": "Reports the current status of the device or group of devices in JSON. This status based on the last live data received. The tim and dat fields show that date and time the last status information was received.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups/{id}/history": {
+      "get": {
+        "summary": "List historic data of a unit (cgi-list-jhistoric-day / cgi-list-jhistoric-hour)",
+        "description": "Retrieve one days worth of historic data for a unit.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups/{id}/set-load": {
+      "put": {
+        "summary": "Set output power of units. (cgi-set-jload)",
+        "description": "Set output power of units.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_setload_body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups/{id}/set-frequency": {
+      "put": {
+        "summary": "Set Frequency Response Limits (cgi-jset-fr)",
+        "description": "Sets the parameters for frequency response. Once parameters are set the EDDI and ZAPPI units will act autonomously. Note the DAF<DDF<UDF<UAF unless frequency response is deactivated. The set values are reported in cgi-list-jstatus as sdaf,sddf,suaf and sudf. The values reported by the unit (echoed back) are in cgi-list-jstatus as daf,ddf,uaf.udf.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_setfrequency_body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups/{id}/set-control-group": {
+      "put": {
+        "summary": "Set the control group for a unit. (cgi-set-control-group)",
+        "description": "Sets the parameters for frequency response. Once parameters are set the EDDI and ZAPPI units will act autonomously. Note the DAF<DDF<UDF<UAF unless frequency response is deactivated. The set values are reported in cgi-list-jstatus as sdaf,sddf,suaf and sudf. The values reported by the unit (echoed back) are in cgi-list-jstatus as daf,ddf,uaf.udf.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_setcontrolgroup_body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/control-groups/{id}/clear-command": {
+      "put": {
+        "summary": "cgi-clear-command",
+        "description": "Clear the last DSR command for an individual device or group of devices.\n",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unit ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_clearcommand_body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "id_setload_body": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of device or group.",
+            "example": "evergreen"
+          },
+          "commandSequenceNo": {
+            "type": "integer",
+            "description": "Sequence number of command (CSN).",
+            "example": 17
+          },
+          "value": {
+            "type": "string",
+            "description": "Load value in watts requested or keyword min or max or nodsr.",
+            "example": "min"
+          },
+          "ttl": {
+            "maximum": 240,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Time to live in minutes.",
+            "example": 10
+          }
+        }
+      },
+      "id_setfrequency_body": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "Frequency response",
+            "enum": ["daf", "ddf", "uaf", "udf"]
+          }
+        }
+      },
+      "id_setcontrolgroup_body": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string",
+            "description": "The new control group name of the units. This can be any alphanumeric string. Valid group names do not need to be declared or added.\n"
+          },
+          "lock": {
+            "type": "number",
+            "description": "If Lock=1 all specified devices are locked and will not be auto-enrolled into a different group. If a hub is locked, child devices will not inherit their admin or control group names. If Lock=0 the lock flag is cleared for all specified devices.  If the lock field is not present, the lock flags are not changed.\n"
+          }
+        }
+      },
+      "id_clearcommand_body": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "integer",
+            "description": "Sequence number of command (CSN).",
+            "example": 3
+          }
+        }
+      },
+      "id_setload_body_1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of device or group.",
+            "example": "evergreen"
+          },
+          "commandSequenceNo": {
+            "type": "integer",
+            "description": "Sequence number of command (CSN).",
+            "example": 17
+          },
+          "value": {
+            "type": "string",
+            "description": "Load value in watts requested or keyword min or max or nodsr.",
+            "example": "min"
+          },
+          "ttl": {
+            "maximum": 240,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Time to live in minutes.",
+            "example": 10
+          }
+        }
+      },
+      "id_setfrequency_body_1": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "Frequency response",
+            "enum": ["daf", "ddf", "uaf", "udf"]
+          }
+        }
+      },
+      "id_setcontrolgroup_body_1": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string",
+            "description": "The new control group name of the control-groups. This can be any alphanumeric string. Valid group names do not need to be declared or added.\n"
+          },
+          "lock": {
+            "type": "number",
+            "description": "If Lock=1 all specified devices are locked and will not be auto-enrolled into a different group. If a hub is locked, child devices will not inherit their admin or control group names. If Lock=0 the lock flag is cleared for all specified devices.  If the lock field is not present, the lock flags are not changed.\n"
+          }
+        }
+      },
+      "id_clearcommand_body_1": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "integer",
+            "description": "Sequence number of command (CSN).",
+            "example": 3
+          }
+        }
+      }
+    }
+  }
+}
