@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "lib": ["dom", "es2018", "esnext.asynciterable"],
+    "moduleResolution": "node",
+    "module": "commonJS",
+    "outDir": "./dist",
+    "strict": false,
+    "target": "es2018",
+    "typeRoots": [
+      "src/@types",
+      "node_modules/@types",
+      "../node_modules/@types"
+    ],
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["./lambda/src/**/*.ts", "./lambda/src/**/*.json"],
+  "exclude": ["**/*.test.ts", "node_modules", "lambda/src/server.ts"]
+}
