@@ -15,12 +15,13 @@ terraform {
       version = "~> 2.2.0"
     }
   }
-  backend "s3" {
-    bucket = "circle-ci-backend-20220216073156857200000001"
-    key    = "terraform/dsr-api/terraform.tfstate"
-    region = "eu-west-1"
-  }
+  cloud {
+    organization = "myenergi"
 
+    workspaces {
+      name = "dsr-api-dev"
+    }
+  }
   required_version = "~> 1.0"
 }
 

@@ -46,6 +46,11 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          command: >-
+            echo "credentials \"app.terraform.io\" {token =
+            \"$TERRAFORM_TOKEN\"}" > $HOME/.terraformrc
+          name: Create .terraformrc file locally
+      - run:
           name: terraform init & validate & plan
           command: |
             terraform -chdir=./terraform init -input=false
@@ -75,7 +80,7 @@ workflows:
             - lint-test
       - plan-apply:
           context:
-            - apexlab-test
+            - AWS-DSR
           requires:
             - build
       - hold-apply:
@@ -88,6 +93,6 @@ workflows:
                 - master
       - apply:
           context:
-            - apexlab-test
+            - AWS-DSR
           requires:
             - hold-apply
