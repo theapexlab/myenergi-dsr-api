@@ -27,6 +27,45 @@ terraform {
 
 
 
+# locals {
+#   ecs_environment = [
+#     {
+#       name  = "HASURA_GRAPHQL_DATABASE_URL",
+#       value = "postgres://${var.db_user_main}:${var.db_password_main}@${var.db_host_main}:${var.db_port}/${var.db_name_main}"
+#     }
+#   ]
+# }
+
+module "hasura" {
+  source                         = "./modules/hasura"
+  region                         = var.aws_region
+  domain                         = var.domain
+  hasura_subdomain               = var.hasura_subdomain
+  app_subdomain                  = var.app_subdomain
+  hasura_version_tag             = var.hasura_version_tag
+  hasura_admin_secret            = var.hasura_admin_secret
+  hasura_jwt_secret_algo         = var.hasura_jwt_secret_algo
+  hasura_jwt_secret_key          = var.hasura_jwt_secret_key
+  hasura_console_enabled         = var.hasura_console_enabled
+  rds_db_name                    = var.rds_db_name
+  rds_instance                   = var.rds_instance
+  rds_username                   = var.rds_username
+  rds_password                   = var.rds_password
+  rds_storage_encrypted          = var.rds_storage_encrypted
+  multi_az                       = var.multi_az
+  az_count                       = var.az_count
+  vpc_enable_dns_hostnames       = var.vpc_enable_dns_hostnames
+  additional_db_security_groups  = var.additional_db_security_groups
+  create_iam_service_linked_role = var.create_iam_service_linked_role
+  ecs_cluster_name               = var.ecs_cluster_name
+  # environment                    = local.ecs_environment
+  vpc                 = var.vpc
+  internet_gateway_id = var.internet_gateway_id
+  nat_gateway_id      = var.nat_gateway_id
+  sg_main_db          = var.sg_main_db
+  common_tags         = local.common_tags
+}
+
 
 
 

@@ -38,7 +38,7 @@ jobs:
             - dist
             - dist_layer
             - terraform
-  plan-apply:
+  validate-plan:
     working_directory: /tmp/project
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
@@ -78,7 +78,7 @@ workflows:
       - build:
           requires:
             - lint-test
-      - plan-apply:
+      - validate-plan:
           context:
             - AWS-DSR
           requires:
@@ -86,7 +86,7 @@ workflows:
       - hold-apply:
           type: approval
           requires:
-            - plan-apply
+            - validate-plan
           filters:
             branches:
               only:

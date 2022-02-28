@@ -24,6 +24,7 @@
     "cleanup:layer": "rm -fr dist_layer",
     "cleanup:lambda": "rm -rf dist",
     "tf:init": "terraform -chdir=./terraform init -var-file ./config/terraform.tfvars",
+    "tf:validate": "terraform -chdir=./terraform validate",
     "tf:plan": "terraform -chdir=./terraform plan -var-file ./config/terraform.tfvars",
     "tf:apply": "terraform -chdir=./terraform apply -var-file ./config/terraform.tfvars",
     "tf:destroy": "terraform -chdir=./terraform destroy -var-file ./config/terraform.tfvars"
@@ -39,6 +40,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "hasura-cli": "^2.2.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "prettier": "^2.5.1",
