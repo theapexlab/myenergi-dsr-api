@@ -1,0 +1,17 @@
+overwrite: true
+schema:
+  - 'https://dsr-hasura-api.myenergi-dev.zoosh.ie/v1/graphql':
+      headers:
+        x-hasura-admin-secret: 'admin123'
+
+documents:
+  - 'graphql/**/*.graphql'
+generates:
+  lambda/src/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-request'
+hooks:
+  afterAllFileWrite:
+    - yarn lint --fix

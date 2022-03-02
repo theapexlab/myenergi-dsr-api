@@ -37,6 +37,13 @@ resource "aws_lambda_function" "dsr_api" {
   source_code_hash = data.archive_file.lambda_dsr_api.output_base64sha256
 
   role = aws_iam_role.lambda_exec.arn
+
+  environment {
+    variables = {
+      DAL_ENDPOINT     = "https://${module.hasura.hasura_route53_record_name}/v1/graphql"
+      DAL_ADMIN_SECRET = var.hasura_admin_secret
+    }
+  }
 }
 
 

@@ -1,8 +1,10 @@
 import { buildSchemaSync } from 'type-graphql';
-import { AdminGroupResolver, ControlGroupResolver, DeviceResolver, GroupStatusResolver } from './resolvers';
+import { DeviceResolver } from './device';
+import { DeviceStatusResolver } from './device-status';
+import { ControlGroupResolver } from './control-group';
 
 const schema = buildSchemaSync({
-  resolvers: [AdminGroupResolver, DeviceResolver, ControlGroupResolver, GroupStatusResolver],
+  resolvers: [DeviceResolver, DeviceStatusResolver, ControlGroupResolver],
 });
 
 export { schema };

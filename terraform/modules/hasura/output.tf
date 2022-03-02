@@ -17,3 +17,7 @@ output "ecs_security_group" {
   description = "Security group controlling access to the ECS tasks"
   value       = aws_security_group.hasura_ecs
 }
+output "hasura_route53_record_name" {
+  description = "Route53 record on which hasura can be accessed"
+  value       = aws_route53_record.hasura.name
+}

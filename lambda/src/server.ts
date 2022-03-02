@@ -1,19 +1,21 @@
+import 'reflect-metadata';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
 import http from 'http';
-import 'reflect-metadata';
-import swaggerUi from 'swagger-ui-express';
 import { app } from './rest-api';
 import { schema } from './schema';
-import swaggerDocument from './swagger.json';
+import dotenv from 'dotenv';
+import { getAPIs } from './data-sources';
 
 export const port = process.env.PORT || 3000;
 
+dotenv.config();
+
 const bootstrap = async () => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     schema,
+    dataSources: getAPIs,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   await server.start();

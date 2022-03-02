@@ -27,7 +27,8 @@
     "import/no-cycle": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "@typescript-eslint/explicit-function-return-type": "warn"
   },
   "overrides": [
     {

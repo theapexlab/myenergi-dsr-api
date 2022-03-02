@@ -67,6 +67,11 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          command: >-
+            echo "credentials \"app.terraform.io\" {token =
+            \"$TERRAFORM_TOKEN\"}" > $HOME/.terraformrc
+          name: Create .terraformrc file locally
+      - run:
           name: terraform
           command: |
             terraform -chdir=./terraform apply -auto-approve tfapply

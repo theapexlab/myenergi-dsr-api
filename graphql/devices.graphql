@@ -1,0 +1,50 @@
+# After changing anything here run yarn codegen to generate new types
+query Devices($limit: Int, $offset: Int) {
+    zappis: zappi(limit: $limit, offset: $offset) {
+        ... ZappiData
+    }
+    eddis: eddi(limit: $limit, offset: $offset) {
+        ... EddiData
+    } 
+}
+
+query Device($id: bigint!) {
+    zappi: zappi_by_pk(serialno: $id) {
+        ... ZappiData
+    }
+    eddi: eddi_by_pk(serialno: $id) {
+        ... EddiData
+    }
+}
+query DeviceStatus($id: bigint!) {
+    zappi: zappi_by_pk(serialno: $id) {
+        ... ZappiStatus
+    }
+    eddi: eddi_by_pk(serialno: $id) {
+        ... EddiStatus
+    }
+}
+
+fragment ZappiData on zappi {
+    serialNo: serialno
+    deviceClass: deviceclass
+    productCode: productcode
+}
+
+fragment EddiData on eddi {
+    serialNo: serialno
+    deviceClass: deviceclass
+    productCode: productcode
+}
+
+fragment ZappiStatus on zappi {
+    serialNo: serialno
+    voltage
+    frequency
+}
+
+fragment EddiStatus on eddi {
+    serialNo: serialno
+    voltage
+    frequency
+}

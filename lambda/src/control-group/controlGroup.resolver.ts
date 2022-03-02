@@ -1,13 +1,8 @@
-import { Arg, FieldResolver, ID, Query, Resolver } from 'type-graphql';
-import { ControlGroup, GroupStatus } from '../types';
+import { Arg, ID, Query, Resolver } from 'type-graphql';
+import { ControlGroup } from './controlGroup.type';
 
 @Resolver(ControlGroup)
 export class ControlGroupResolver {
-  @FieldResolver(() => [GroupStatus])
-  groupStatuses(): GroupStatus[] {
-    return [];
-  }
-
   @Query(() => [ControlGroup])
   controlGroups(): ControlGroup[] {
     return [];

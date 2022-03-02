@@ -7,11 +7,7 @@
     "outDir": "./dist",
     "strict": false,
     "target": "es2018",
-    "typeRoots": [
-      "src/@types",
-      "node_modules/@types",
-      "../node_modules/@types"
-    ],
+    "typeRoots": ["src/@types", "node_modules/@types", "../node_modules/@types"],
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
