@@ -15,3 +15,10 @@ generates:
 hooks:
   afterAllFileWrite:
     - yarn lint --fix
+config:
+  scalars:
+    bigint: number
+    smallint: number
+    uuid: string
+    timestamp: string
+    timestamptz: string

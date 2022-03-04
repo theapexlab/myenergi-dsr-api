@@ -1,11 +1,11 @@
-import { Field, ID, ObjectType } from 'type-graphql';
-import { ZappiDataFragment, EddiDataFragment } from '../generated/graphql';
+import { Field, ObjectType } from 'type-graphql';
+import { EddiDataFragment, ZappiDataFragment } from '../generated/graphql';
 
 type DeviceBase = Omit<ZappiDataFragment | EddiDataFragment, '__typename'>;
 
 @ObjectType()
 export class Device implements DeviceBase {
-  @Field(() => ID)
+  @Field({ description: 'Serial Number of unit' })
   serialNo: number;
 
   @Field({ nullable: true, description: '3200 : Eddi (Heater controller) OR 3300 : Zappi (Carcharger)' })

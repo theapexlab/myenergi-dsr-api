@@ -1,8 +1,8 @@
 import express from 'express';
 import { OpenAPI, useSofa } from 'sofa-api';
 import swaggerUi from 'swagger-ui-express';
-import { schema } from './schema';
 import { getAPIs } from './data-sources';
+import { schema } from './schema';
 
 const basePath = '/api';
 
@@ -30,10 +30,15 @@ const restMiddleware = useSofa({
   },
   routes: {
     'Query.deviceStatus': {
-      path: '/device/:id/status',
+      path: '/devices/:serialNo/status',
+    },
+    'Query.deviceHistory': {
+      path: '/devices/:serialNo/history',
+    },
+    'Query.device': {
+      path: '/devices/:serialNo',
     },
   },
-  depthLimit: 3,
 });
 
 const app = express();

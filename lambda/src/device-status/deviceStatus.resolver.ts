@@ -1,5 +1,6 @@
-import { Context } from '../context';
-import { Resolver, Root, Query, Arg, Ctx, ID, FieldResolver } from 'type-graphql';
+import { Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
+import { AppContext } from '../context';
+import { IdArgs } from '../shared';
 import { DeviceStatus } from './deviceStatus.type';
 
 @Resolver(DeviceStatus)
@@ -11,7 +12,7 @@ export class DeviceStatusResolver {
   }
 
   @Query(() => DeviceStatus)
-  deviceStatus(@Ctx() ctx: Context, @Arg('id', () => ID) id: number): Promise<DeviceStatus> {
-    return ctx.dataSources.deviceApi.getDeviceStatus(id);
+  deviceStatus(@Ctx() ctx: AppContext, @Args() { serialNo }: IdArgs): Promise<DeviceStatus> {
+    return ctx.dataSources.deviceApi.getDeviceStatus(serialNo);
   }
 }

@@ -1,9 +1,5 @@
-import { DeviceAPI } from './data-sources';
+import { AppDataSources } from './data-sources';
 
-export interface DataSources {
-  deviceApi: DeviceAPI;
-}
-
-export interface Context {
-  dataSources: DataSources;
+export interface AppContext {
+  dataSources: AppDataSources;
 }

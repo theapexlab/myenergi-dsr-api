@@ -1,0 +1,50 @@
+# FYI: After changing anything here run yarn codegen to generate new types
+query DeviceHistory ( $serialNo: bigint!, $timestampGte: timestamp, $timestampLte: timestamp, $offset: Int, $limit: Int ) {
+    zappiMinutes: zappi_minute(offset: $offset, limit: $limit, where: {_and: {timestamp: {_gte: $timestampGte, _lt:  $timestampLte}, serialno: {_eq: $serialNo}}}) {
+        ...ZappiHistory
+    }
+    eddiMinutes: eddi_minute(offset: $offset, limit: $limit, where: {_and: {timestamp: {_gte: $timestampGte, _lt:  $timestampLte}, serialno: {_eq: $serialNo}}}) {
+        ...EddiHistory
+    }
+}
+
+fragment ZappiHistory on zappi_minute {
+    serialNo: serialno
+    importPower: importpower
+    exportPower: exportpower
+    externalCtPositivePower1: externalctpospower1
+    externalCtPositivePower2: externalctpospower2
+    externalCtPositivePower3: externalctpospower3
+    externalCtNegativePower1: externalctnegpower1
+    externalCtNegativePower2: externalctnegpower2
+    externalCtNegativePower3: externalctnegpower3
+    divertedLoadPower1: divloadpower1
+    divertedLoadPower2: divloadpower2
+    divertedLoadPower3: divloadpower3
+    boostLoadPower1: boostloadpower1
+    boostLoadPower2: boostloadpower2
+    boostLoadPower3: boostloadpower3
+    voltage1
+    voltage2
+    voltage3
+    frequency
+    timestamp
+}
+
+fragment EddiHistory on eddi_minute {
+    serialNo: serialno
+    importPower: importpower
+    exportPower: exportpower
+    externalCtPositivePower1: externalctpospower1
+    externalCtPositivePower2:  externalctpospower2
+    externalCtNegativePower1:  externalctnegpower1
+    externalCtNegativePower2:  externalctnegpower2
+    divertedLoadPower1: divloadpower1
+    divertedLoadPower2: divloadpower2
+    boostLoadPower1: boostloadpower1
+    boostLoadPower2: boostloadpower2
+    voltage1: voltage
+    frequency
+    timestamp
+}
+

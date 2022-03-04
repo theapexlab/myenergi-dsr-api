@@ -38,6 +38,8 @@ resource "aws_lambda_function" "dsr_api" {
 
   role = aws_iam_role.lambda_exec.arn
 
+  timeout = 10
+
   environment {
     variables = {
       DAL_ENDPOINT     = "https://${module.hasura.hasura_route53_record_name}/v1/graphql"

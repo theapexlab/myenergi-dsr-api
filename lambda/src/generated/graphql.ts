@@ -13,20 +13,18 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  bigint: any;
+  bigint: number;
   bytea: any;
   command_commandinitiatorservice_enum: any;
   command_commandstate_enum: any;
   command_commandtype_enum: any;
   command_destinationdevicename_enum: any;
-  config_reply_boost_timer_heatertype_enum: any;
   jsonb: any;
   macaddr: any;
-  smallint: any;
-  timestamp: any;
-  timestamptz: any;
-  update_box_updateboxicontype_enum: any;
-  uuid: any;
+  smallint: number;
+  timestamp: string;
+  timestamptz: string;
+  uuid: string;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -577,229 +575,6 @@ export type Aggregation_Data_Variance_Fields = {
   udf?: Maybe<Scalars['Float']>;
 };
 
-/** columns and relationships of "alternate_servers" */
-export type Alternate_Servers = {
-  __typename?: 'alternate_servers';
-  id: Scalars['Int'];
-  /** An object relationship */
-  server?: Maybe<Server>;
-  /** An object relationship */
-  serverByServeraid?: Maybe<Server>;
-  serveraid?: Maybe<Scalars['Int']>;
-  serverbid?: Maybe<Scalars['Int']>;
-};
-
-/** aggregated selection of "alternate_servers" */
-export type Alternate_Servers_Aggregate = {
-  __typename?: 'alternate_servers_aggregate';
-  aggregate?: Maybe<Alternate_Servers_Aggregate_Fields>;
-  nodes: Array<Alternate_Servers>;
-};
-
-/** aggregate fields of "alternate_servers" */
-export type Alternate_Servers_Aggregate_Fields = {
-  __typename?: 'alternate_servers_aggregate_fields';
-  avg?: Maybe<Alternate_Servers_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Alternate_Servers_Max_Fields>;
-  min?: Maybe<Alternate_Servers_Min_Fields>;
-  stddev?: Maybe<Alternate_Servers_Stddev_Fields>;
-  stddev_pop?: Maybe<Alternate_Servers_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Alternate_Servers_Stddev_Samp_Fields>;
-  sum?: Maybe<Alternate_Servers_Sum_Fields>;
-  var_pop?: Maybe<Alternate_Servers_Var_Pop_Fields>;
-  var_samp?: Maybe<Alternate_Servers_Var_Samp_Fields>;
-  variance?: Maybe<Alternate_Servers_Variance_Fields>;
-};
-
-/** aggregate fields of "alternate_servers" */
-export type Alternate_Servers_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Alternate_Servers_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Alternate_Servers_Avg_Fields = {
-  __typename?: 'alternate_servers_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-  serveraid?: Maybe<Scalars['Float']>;
-  serverbid?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "alternate_servers". All fields are combined with a logical 'AND'. */
-export type Alternate_Servers_Bool_Exp = {
-  _and?: InputMaybe<Array<Alternate_Servers_Bool_Exp>>;
-  _not?: InputMaybe<Alternate_Servers_Bool_Exp>;
-  _or?: InputMaybe<Array<Alternate_Servers_Bool_Exp>>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  server?: InputMaybe<Server_Bool_Exp>;
-  serverByServeraid?: InputMaybe<Server_Bool_Exp>;
-  serveraid?: InputMaybe<Int_Comparison_Exp>;
-  serverbid?: InputMaybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "alternate_servers" */
-export enum Alternate_Servers_Constraint {
-  /** unique or primary key constraint */
-  PkE61a680a6adf6a3372f5498a5da = 'PK_e61a680a6adf6a3372f5498a5da',
-  /** unique or primary key constraint */
-  RelD7ddafb47c4de740afe922c38d = 'REL_d7ddafb47c4de740afe922c38d',
-  /** unique or primary key constraint */
-  RelF3f54c7cf1d5dbad68a2b17e78 = 'REL_f3f54c7cf1d5dbad68a2b17e78',
-}
-
-/** input type for incrementing numeric columns in table "alternate_servers" */
-export type Alternate_Servers_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-  serveraid?: InputMaybe<Scalars['Int']>;
-  serverbid?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "alternate_servers" */
-export type Alternate_Servers_Insert_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-  server?: InputMaybe<Server_Obj_Rel_Insert_Input>;
-  serverByServeraid?: InputMaybe<Server_Obj_Rel_Insert_Input>;
-  serveraid?: InputMaybe<Scalars['Int']>;
-  serverbid?: InputMaybe<Scalars['Int']>;
-};
-
-/** aggregate max on columns */
-export type Alternate_Servers_Max_Fields = {
-  __typename?: 'alternate_servers_max_fields';
-  id?: Maybe<Scalars['Int']>;
-  serveraid?: Maybe<Scalars['Int']>;
-  serverbid?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate min on columns */
-export type Alternate_Servers_Min_Fields = {
-  __typename?: 'alternate_servers_min_fields';
-  id?: Maybe<Scalars['Int']>;
-  serveraid?: Maybe<Scalars['Int']>;
-  serverbid?: Maybe<Scalars['Int']>;
-};
-
-/** response of any mutation on the table "alternate_servers" */
-export type Alternate_Servers_Mutation_Response = {
-  __typename?: 'alternate_servers_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Alternate_Servers>;
-};
-
-/** input type for inserting object relation for remote table "alternate_servers" */
-export type Alternate_Servers_Obj_Rel_Insert_Input = {
-  data: Alternate_Servers_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Alternate_Servers_On_Conflict>;
-};
-
-/** on_conflict condition type for table "alternate_servers" */
-export type Alternate_Servers_On_Conflict = {
-  constraint: Alternate_Servers_Constraint;
-  update_columns?: Array<Alternate_Servers_Update_Column>;
-  where?: InputMaybe<Alternate_Servers_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "alternate_servers". */
-export type Alternate_Servers_Order_By = {
-  id?: InputMaybe<Order_By>;
-  server?: InputMaybe<Server_Order_By>;
-  serverByServeraid?: InputMaybe<Server_Order_By>;
-  serveraid?: InputMaybe<Order_By>;
-  serverbid?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: alternate_servers */
-export type Alternate_Servers_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "alternate_servers" */
-export enum Alternate_Servers_Select_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Serveraid = 'serveraid',
-  /** column name */
-  Serverbid = 'serverbid',
-}
-
-/** input type for updating data in table "alternate_servers" */
-export type Alternate_Servers_Set_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-  serveraid?: InputMaybe<Scalars['Int']>;
-  serverbid?: InputMaybe<Scalars['Int']>;
-};
-
-/** aggregate stddev on columns */
-export type Alternate_Servers_Stddev_Fields = {
-  __typename?: 'alternate_servers_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-  serveraid?: Maybe<Scalars['Float']>;
-  serverbid?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Alternate_Servers_Stddev_Pop_Fields = {
-  __typename?: 'alternate_servers_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  serveraid?: Maybe<Scalars['Float']>;
-  serverbid?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Alternate_Servers_Stddev_Samp_Fields = {
-  __typename?: 'alternate_servers_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  serveraid?: Maybe<Scalars['Float']>;
-  serverbid?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Alternate_Servers_Sum_Fields = {
-  __typename?: 'alternate_servers_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-  serveraid?: Maybe<Scalars['Int']>;
-  serverbid?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "alternate_servers" */
-export enum Alternate_Servers_Update_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Serveraid = 'serveraid',
-  /** column name */
-  Serverbid = 'serverbid',
-}
-
-/** aggregate var_pop on columns */
-export type Alternate_Servers_Var_Pop_Fields = {
-  __typename?: 'alternate_servers_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  serveraid?: Maybe<Scalars['Float']>;
-  serverbid?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Alternate_Servers_Var_Samp_Fields = {
-  __typename?: 'alternate_servers_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  serveraid?: Maybe<Scalars['Float']>;
-  serverbid?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Alternate_Servers_Variance_Fields = {
-  __typename?: 'alternate_servers_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-  serveraid?: Maybe<Scalars['Float']>;
-  serverbid?: Maybe<Scalars['Float']>;
-};
-
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
 export type Bigint_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['bigint']>;
@@ -928,682 +703,6 @@ export type Command_Avg_Order_By = {
   destinationdeviceserialno?: InputMaybe<Order_By>;
   hubnetworkid?: InputMaybe<Order_By>;
   hubport?: InputMaybe<Order_By>;
-};
-
-/** columns and relationships of "command_backup" */
-export type Command_Backup = {
-  __typename?: 'command_backup';
-  commandinitiated?: Maybe<Scalars['timestamptz']>;
-  commandinitiatorservice?: Maybe<Scalars['command_commandinitiatorservice_enum']>;
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandlastsent?: Maybe<Scalars['timestamptz']>;
-  commandparameters?: Maybe<Scalars['jsonb']>;
-  commandstate?: Maybe<Scalars['command_commandstate_enum']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  commandtype?: Maybe<Scalars['command_commandtype_enum']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdevicename?: Maybe<Scalars['command_destinationdevicename_enum']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubipaddress?: Maybe<Scalars['String']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['uuid']>;
-};
-
-/** columns and relationships of "command_backup" */
-export type Command_BackupCommandparametersArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** columns and relationships of "command_backup2" */
-export type Command_Backup2 = {
-  __typename?: 'command_backup2';
-  commandinitiated?: Maybe<Scalars['timestamptz']>;
-  commandinitiatorservice?: Maybe<Scalars['command_commandinitiatorservice_enum']>;
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandlastsent?: Maybe<Scalars['timestamptz']>;
-  commandparameters?: Maybe<Scalars['jsonb']>;
-  commandstate?: Maybe<Scalars['command_commandstate_enum']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  commandtype?: Maybe<Scalars['command_commandtype_enum']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdevicename?: Maybe<Scalars['command_destinationdevicename_enum']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubipaddress?: Maybe<Scalars['String']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['uuid']>;
-  rn?: Maybe<Scalars['bigint']>;
-};
-
-/** columns and relationships of "command_backup2" */
-export type Command_Backup2CommandparametersArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregated selection of "command_backup2" */
-export type Command_Backup2_Aggregate = {
-  __typename?: 'command_backup2_aggregate';
-  aggregate?: Maybe<Command_Backup2_Aggregate_Fields>;
-  nodes: Array<Command_Backup2>;
-};
-
-/** aggregate fields of "command_backup2" */
-export type Command_Backup2_Aggregate_Fields = {
-  __typename?: 'command_backup2_aggregate_fields';
-  avg?: Maybe<Command_Backup2_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Command_Backup2_Max_Fields>;
-  min?: Maybe<Command_Backup2_Min_Fields>;
-  stddev?: Maybe<Command_Backup2_Stddev_Fields>;
-  stddev_pop?: Maybe<Command_Backup2_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Command_Backup2_Stddev_Samp_Fields>;
-  sum?: Maybe<Command_Backup2_Sum_Fields>;
-  var_pop?: Maybe<Command_Backup2_Var_Pop_Fields>;
-  var_samp?: Maybe<Command_Backup2_Var_Samp_Fields>;
-  variance?: Maybe<Command_Backup2_Variance_Fields>;
-};
-
-/** aggregate fields of "command_backup2" */
-export type Command_Backup2_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Command_Backup2_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** append existing jsonb value of filtered columns with new jsonb value */
-export type Command_Backup2_Append_Input = {
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** aggregate avg on columns */
-export type Command_Backup2_Avg_Fields = {
-  __typename?: 'command_backup2_avg_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-  rn?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "command_backup2". All fields are combined with a logical 'AND'. */
-export type Command_Backup2_Bool_Exp = {
-  _and?: InputMaybe<Array<Command_Backup2_Bool_Exp>>;
-  _not?: InputMaybe<Command_Backup2_Bool_Exp>;
-  _or?: InputMaybe<Array<Command_Backup2_Bool_Exp>>;
-  commandinitiated?: InputMaybe<Timestamptz_Comparison_Exp>;
-  commandinitiatorservice?: InputMaybe<Command_Commandinitiatorservice_Enum_Comparison_Exp>;
-  commandinitiatoruserid?: InputMaybe<Int_Comparison_Exp>;
-  commandlastsent?: InputMaybe<Timestamptz_Comparison_Exp>;
-  commandparameters?: InputMaybe<Jsonb_Comparison_Exp>;
-  commandstate?: InputMaybe<Command_Commandstate_Enum_Comparison_Exp>;
-  commandtries?: InputMaybe<Smallint_Comparison_Exp>;
-  commandtype?: InputMaybe<Command_Commandtype_Enum_Comparison_Exp>;
-  destinationdeviceaddressraw?: InputMaybe<Int_Comparison_Exp>;
-  destinationdevicename?: InputMaybe<Command_Destinationdevicename_Enum_Comparison_Exp>;
-  destinationdeviceserialno?: InputMaybe<Bigint_Comparison_Exp>;
-  hubipaddress?: InputMaybe<String_Comparison_Exp>;
-  hubnetworkid?: InputMaybe<Int_Comparison_Exp>;
-  hubport?: InputMaybe<Int_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  rn?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-export type Command_Backup2_Delete_At_Path_Input = {
-  commandparameters?: InputMaybe<Array<Scalars['String']>>;
-};
-
-/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-export type Command_Backup2_Delete_Elem_Input = {
-  commandparameters?: InputMaybe<Scalars['Int']>;
-};
-
-/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-export type Command_Backup2_Delete_Key_Input = {
-  commandparameters?: InputMaybe<Scalars['String']>;
-};
-
-/** input type for incrementing numeric columns in table "command_backup2" */
-export type Command_Backup2_Inc_Input = {
-  commandinitiatoruserid?: InputMaybe<Scalars['Int']>;
-  commandtries?: InputMaybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: InputMaybe<Scalars['Int']>;
-  destinationdeviceserialno?: InputMaybe<Scalars['bigint']>;
-  hubnetworkid?: InputMaybe<Scalars['Int']>;
-  hubport?: InputMaybe<Scalars['Int']>;
-  rn?: InputMaybe<Scalars['bigint']>;
-};
-
-/** input type for inserting data into table "command_backup2" */
-export type Command_Backup2_Insert_Input = {
-  commandinitiated?: InputMaybe<Scalars['timestamptz']>;
-  commandinitiatorservice?: InputMaybe<Scalars['command_commandinitiatorservice_enum']>;
-  commandinitiatoruserid?: InputMaybe<Scalars['Int']>;
-  commandlastsent?: InputMaybe<Scalars['timestamptz']>;
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-  commandstate?: InputMaybe<Scalars['command_commandstate_enum']>;
-  commandtries?: InputMaybe<Scalars['smallint']>;
-  commandtype?: InputMaybe<Scalars['command_commandtype_enum']>;
-  destinationdeviceaddressraw?: InputMaybe<Scalars['Int']>;
-  destinationdevicename?: InputMaybe<Scalars['command_destinationdevicename_enum']>;
-  destinationdeviceserialno?: InputMaybe<Scalars['bigint']>;
-  hubipaddress?: InputMaybe<Scalars['String']>;
-  hubnetworkid?: InputMaybe<Scalars['Int']>;
-  hubport?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  rn?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate max on columns */
-export type Command_Backup2_Max_Fields = {
-  __typename?: 'command_backup2_max_fields';
-  commandinitiated?: Maybe<Scalars['timestamptz']>;
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandlastsent?: Maybe<Scalars['timestamptz']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubipaddress?: Maybe<Scalars['String']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['uuid']>;
-  rn?: Maybe<Scalars['bigint']>;
-};
-
-/** aggregate min on columns */
-export type Command_Backup2_Min_Fields = {
-  __typename?: 'command_backup2_min_fields';
-  commandinitiated?: Maybe<Scalars['timestamptz']>;
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandlastsent?: Maybe<Scalars['timestamptz']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubipaddress?: Maybe<Scalars['String']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['uuid']>;
-  rn?: Maybe<Scalars['bigint']>;
-};
-
-/** response of any mutation on the table "command_backup2" */
-export type Command_Backup2_Mutation_Response = {
-  __typename?: 'command_backup2_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Command_Backup2>;
-};
-
-/** Ordering options when selecting data from "command_backup2". */
-export type Command_Backup2_Order_By = {
-  commandinitiated?: InputMaybe<Order_By>;
-  commandinitiatorservice?: InputMaybe<Order_By>;
-  commandinitiatoruserid?: InputMaybe<Order_By>;
-  commandlastsent?: InputMaybe<Order_By>;
-  commandparameters?: InputMaybe<Order_By>;
-  commandstate?: InputMaybe<Order_By>;
-  commandtries?: InputMaybe<Order_By>;
-  commandtype?: InputMaybe<Order_By>;
-  destinationdeviceaddressraw?: InputMaybe<Order_By>;
-  destinationdevicename?: InputMaybe<Order_By>;
-  destinationdeviceserialno?: InputMaybe<Order_By>;
-  hubipaddress?: InputMaybe<Order_By>;
-  hubnetworkid?: InputMaybe<Order_By>;
-  hubport?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  rn?: InputMaybe<Order_By>;
-};
-
-/** prepend existing jsonb value of filtered columns with new jsonb value */
-export type Command_Backup2_Prepend_Input = {
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** select columns of table "command_backup2" */
-export enum Command_Backup2_Select_Column {
-  /** column name */
-  Commandinitiated = 'commandinitiated',
-  /** column name */
-  Commandinitiatorservice = 'commandinitiatorservice',
-  /** column name */
-  Commandinitiatoruserid = 'commandinitiatoruserid',
-  /** column name */
-  Commandlastsent = 'commandlastsent',
-  /** column name */
-  Commandparameters = 'commandparameters',
-  /** column name */
-  Commandstate = 'commandstate',
-  /** column name */
-  Commandtries = 'commandtries',
-  /** column name */
-  Commandtype = 'commandtype',
-  /** column name */
-  Destinationdeviceaddressraw = 'destinationdeviceaddressraw',
-  /** column name */
-  Destinationdevicename = 'destinationdevicename',
-  /** column name */
-  Destinationdeviceserialno = 'destinationdeviceserialno',
-  /** column name */
-  Hubipaddress = 'hubipaddress',
-  /** column name */
-  Hubnetworkid = 'hubnetworkid',
-  /** column name */
-  Hubport = 'hubport',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Rn = 'rn',
-}
-
-/** input type for updating data in table "command_backup2" */
-export type Command_Backup2_Set_Input = {
-  commandinitiated?: InputMaybe<Scalars['timestamptz']>;
-  commandinitiatorservice?: InputMaybe<Scalars['command_commandinitiatorservice_enum']>;
-  commandinitiatoruserid?: InputMaybe<Scalars['Int']>;
-  commandlastsent?: InputMaybe<Scalars['timestamptz']>;
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-  commandstate?: InputMaybe<Scalars['command_commandstate_enum']>;
-  commandtries?: InputMaybe<Scalars['smallint']>;
-  commandtype?: InputMaybe<Scalars['command_commandtype_enum']>;
-  destinationdeviceaddressraw?: InputMaybe<Scalars['Int']>;
-  destinationdevicename?: InputMaybe<Scalars['command_destinationdevicename_enum']>;
-  destinationdeviceserialno?: InputMaybe<Scalars['bigint']>;
-  hubipaddress?: InputMaybe<Scalars['String']>;
-  hubnetworkid?: InputMaybe<Scalars['Int']>;
-  hubport?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  rn?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate stddev on columns */
-export type Command_Backup2_Stddev_Fields = {
-  __typename?: 'command_backup2_stddev_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-  rn?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Command_Backup2_Stddev_Pop_Fields = {
-  __typename?: 'command_backup2_stddev_pop_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-  rn?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Command_Backup2_Stddev_Samp_Fields = {
-  __typename?: 'command_backup2_stddev_samp_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-  rn?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Command_Backup2_Sum_Fields = {
-  __typename?: 'command_backup2_sum_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-  rn?: Maybe<Scalars['bigint']>;
-};
-
-/** aggregate var_pop on columns */
-export type Command_Backup2_Var_Pop_Fields = {
-  __typename?: 'command_backup2_var_pop_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-  rn?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Command_Backup2_Var_Samp_Fields = {
-  __typename?: 'command_backup2_var_samp_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-  rn?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Command_Backup2_Variance_Fields = {
-  __typename?: 'command_backup2_variance_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-  rn?: Maybe<Scalars['Float']>;
-};
-
-/** aggregated selection of "command_backup" */
-export type Command_Backup_Aggregate = {
-  __typename?: 'command_backup_aggregate';
-  aggregate?: Maybe<Command_Backup_Aggregate_Fields>;
-  nodes: Array<Command_Backup>;
-};
-
-/** aggregate fields of "command_backup" */
-export type Command_Backup_Aggregate_Fields = {
-  __typename?: 'command_backup_aggregate_fields';
-  avg?: Maybe<Command_Backup_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Command_Backup_Max_Fields>;
-  min?: Maybe<Command_Backup_Min_Fields>;
-  stddev?: Maybe<Command_Backup_Stddev_Fields>;
-  stddev_pop?: Maybe<Command_Backup_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Command_Backup_Stddev_Samp_Fields>;
-  sum?: Maybe<Command_Backup_Sum_Fields>;
-  var_pop?: Maybe<Command_Backup_Var_Pop_Fields>;
-  var_samp?: Maybe<Command_Backup_Var_Samp_Fields>;
-  variance?: Maybe<Command_Backup_Variance_Fields>;
-};
-
-/** aggregate fields of "command_backup" */
-export type Command_Backup_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Command_Backup_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** append existing jsonb value of filtered columns with new jsonb value */
-export type Command_Backup_Append_Input = {
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** aggregate avg on columns */
-export type Command_Backup_Avg_Fields = {
-  __typename?: 'command_backup_avg_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "command_backup". All fields are combined with a logical 'AND'. */
-export type Command_Backup_Bool_Exp = {
-  _and?: InputMaybe<Array<Command_Backup_Bool_Exp>>;
-  _not?: InputMaybe<Command_Backup_Bool_Exp>;
-  _or?: InputMaybe<Array<Command_Backup_Bool_Exp>>;
-  commandinitiated?: InputMaybe<Timestamptz_Comparison_Exp>;
-  commandinitiatorservice?: InputMaybe<Command_Commandinitiatorservice_Enum_Comparison_Exp>;
-  commandinitiatoruserid?: InputMaybe<Int_Comparison_Exp>;
-  commandlastsent?: InputMaybe<Timestamptz_Comparison_Exp>;
-  commandparameters?: InputMaybe<Jsonb_Comparison_Exp>;
-  commandstate?: InputMaybe<Command_Commandstate_Enum_Comparison_Exp>;
-  commandtries?: InputMaybe<Smallint_Comparison_Exp>;
-  commandtype?: InputMaybe<Command_Commandtype_Enum_Comparison_Exp>;
-  destinationdeviceaddressraw?: InputMaybe<Int_Comparison_Exp>;
-  destinationdevicename?: InputMaybe<Command_Destinationdevicename_Enum_Comparison_Exp>;
-  destinationdeviceserialno?: InputMaybe<Bigint_Comparison_Exp>;
-  hubipaddress?: InputMaybe<String_Comparison_Exp>;
-  hubnetworkid?: InputMaybe<Int_Comparison_Exp>;
-  hubport?: InputMaybe<Int_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-export type Command_Backup_Delete_At_Path_Input = {
-  commandparameters?: InputMaybe<Array<Scalars['String']>>;
-};
-
-/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-export type Command_Backup_Delete_Elem_Input = {
-  commandparameters?: InputMaybe<Scalars['Int']>;
-};
-
-/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-export type Command_Backup_Delete_Key_Input = {
-  commandparameters?: InputMaybe<Scalars['String']>;
-};
-
-/** input type for incrementing numeric columns in table "command_backup" */
-export type Command_Backup_Inc_Input = {
-  commandinitiatoruserid?: InputMaybe<Scalars['Int']>;
-  commandtries?: InputMaybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: InputMaybe<Scalars['Int']>;
-  destinationdeviceserialno?: InputMaybe<Scalars['bigint']>;
-  hubnetworkid?: InputMaybe<Scalars['Int']>;
-  hubport?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "command_backup" */
-export type Command_Backup_Insert_Input = {
-  commandinitiated?: InputMaybe<Scalars['timestamptz']>;
-  commandinitiatorservice?: InputMaybe<Scalars['command_commandinitiatorservice_enum']>;
-  commandinitiatoruserid?: InputMaybe<Scalars['Int']>;
-  commandlastsent?: InputMaybe<Scalars['timestamptz']>;
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-  commandstate?: InputMaybe<Scalars['command_commandstate_enum']>;
-  commandtries?: InputMaybe<Scalars['smallint']>;
-  commandtype?: InputMaybe<Scalars['command_commandtype_enum']>;
-  destinationdeviceaddressraw?: InputMaybe<Scalars['Int']>;
-  destinationdevicename?: InputMaybe<Scalars['command_destinationdevicename_enum']>;
-  destinationdeviceserialno?: InputMaybe<Scalars['bigint']>;
-  hubipaddress?: InputMaybe<Scalars['String']>;
-  hubnetworkid?: InputMaybe<Scalars['Int']>;
-  hubport?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['uuid']>;
-};
-
-/** aggregate max on columns */
-export type Command_Backup_Max_Fields = {
-  __typename?: 'command_backup_max_fields';
-  commandinitiated?: Maybe<Scalars['timestamptz']>;
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandlastsent?: Maybe<Scalars['timestamptz']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubipaddress?: Maybe<Scalars['String']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['uuid']>;
-};
-
-/** aggregate min on columns */
-export type Command_Backup_Min_Fields = {
-  __typename?: 'command_backup_min_fields';
-  commandinitiated?: Maybe<Scalars['timestamptz']>;
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandlastsent?: Maybe<Scalars['timestamptz']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubipaddress?: Maybe<Scalars['String']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['uuid']>;
-};
-
-/** response of any mutation on the table "command_backup" */
-export type Command_Backup_Mutation_Response = {
-  __typename?: 'command_backup_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Command_Backup>;
-};
-
-/** Ordering options when selecting data from "command_backup". */
-export type Command_Backup_Order_By = {
-  commandinitiated?: InputMaybe<Order_By>;
-  commandinitiatorservice?: InputMaybe<Order_By>;
-  commandinitiatoruserid?: InputMaybe<Order_By>;
-  commandlastsent?: InputMaybe<Order_By>;
-  commandparameters?: InputMaybe<Order_By>;
-  commandstate?: InputMaybe<Order_By>;
-  commandtries?: InputMaybe<Order_By>;
-  commandtype?: InputMaybe<Order_By>;
-  destinationdeviceaddressraw?: InputMaybe<Order_By>;
-  destinationdevicename?: InputMaybe<Order_By>;
-  destinationdeviceserialno?: InputMaybe<Order_By>;
-  hubipaddress?: InputMaybe<Order_By>;
-  hubnetworkid?: InputMaybe<Order_By>;
-  hubport?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-};
-
-/** prepend existing jsonb value of filtered columns with new jsonb value */
-export type Command_Backup_Prepend_Input = {
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** select columns of table "command_backup" */
-export enum Command_Backup_Select_Column {
-  /** column name */
-  Commandinitiated = 'commandinitiated',
-  /** column name */
-  Commandinitiatorservice = 'commandinitiatorservice',
-  /** column name */
-  Commandinitiatoruserid = 'commandinitiatoruserid',
-  /** column name */
-  Commandlastsent = 'commandlastsent',
-  /** column name */
-  Commandparameters = 'commandparameters',
-  /** column name */
-  Commandstate = 'commandstate',
-  /** column name */
-  Commandtries = 'commandtries',
-  /** column name */
-  Commandtype = 'commandtype',
-  /** column name */
-  Destinationdeviceaddressraw = 'destinationdeviceaddressraw',
-  /** column name */
-  Destinationdevicename = 'destinationdevicename',
-  /** column name */
-  Destinationdeviceserialno = 'destinationdeviceserialno',
-  /** column name */
-  Hubipaddress = 'hubipaddress',
-  /** column name */
-  Hubnetworkid = 'hubnetworkid',
-  /** column name */
-  Hubport = 'hubport',
-  /** column name */
-  Id = 'id',
-}
-
-/** input type for updating data in table "command_backup" */
-export type Command_Backup_Set_Input = {
-  commandinitiated?: InputMaybe<Scalars['timestamptz']>;
-  commandinitiatorservice?: InputMaybe<Scalars['command_commandinitiatorservice_enum']>;
-  commandinitiatoruserid?: InputMaybe<Scalars['Int']>;
-  commandlastsent?: InputMaybe<Scalars['timestamptz']>;
-  commandparameters?: InputMaybe<Scalars['jsonb']>;
-  commandstate?: InputMaybe<Scalars['command_commandstate_enum']>;
-  commandtries?: InputMaybe<Scalars['smallint']>;
-  commandtype?: InputMaybe<Scalars['command_commandtype_enum']>;
-  destinationdeviceaddressraw?: InputMaybe<Scalars['Int']>;
-  destinationdevicename?: InputMaybe<Scalars['command_destinationdevicename_enum']>;
-  destinationdeviceserialno?: InputMaybe<Scalars['bigint']>;
-  hubipaddress?: InputMaybe<Scalars['String']>;
-  hubnetworkid?: InputMaybe<Scalars['Int']>;
-  hubport?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['uuid']>;
-};
-
-/** aggregate stddev on columns */
-export type Command_Backup_Stddev_Fields = {
-  __typename?: 'command_backup_stddev_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Command_Backup_Stddev_Pop_Fields = {
-  __typename?: 'command_backup_stddev_pop_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Command_Backup_Stddev_Samp_Fields = {
-  __typename?: 'command_backup_stddev_samp_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Command_Backup_Sum_Fields = {
-  __typename?: 'command_backup_sum_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Int']>;
-  commandtries?: Maybe<Scalars['smallint']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
-  destinationdeviceserialno?: Maybe<Scalars['bigint']>;
-  hubnetworkid?: Maybe<Scalars['Int']>;
-  hubport?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate var_pop on columns */
-export type Command_Backup_Var_Pop_Fields = {
-  __typename?: 'command_backup_var_pop_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Command_Backup_Var_Samp_Fields = {
-  __typename?: 'command_backup_var_samp_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Command_Backup_Variance_Fields = {
-  __typename?: 'command_backup_variance_fields';
-  commandinitiatoruserid?: Maybe<Scalars['Float']>;
-  commandtries?: Maybe<Scalars['Float']>;
-  destinationdeviceaddressraw?: Maybe<Scalars['Float']>;
-  destinationdeviceserialno?: Maybe<Scalars['Float']>;
-  hubnetworkid?: Maybe<Scalars['Float']>;
-  hubport?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "command". All fields are combined with a logical 'AND'. */
@@ -2070,944 +1169,6 @@ export type Command_Variance_Order_By = {
   hubport?: InputMaybe<Order_By>;
 };
 
-/** columns and relationships of "config_reply" */
-export type Config_Reply = {
-  __typename?: 'config_reply';
-  /** An object relationship */
-  eddi?: Maybe<Eddi>;
-  /** An object relationship */
-  eddi_config_reply_datum?: Maybe<Eddi_Config_Reply_Data>;
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  eddiserialno?: Maybe<Scalars['bigint']>;
-  id: Scalars['Int'];
-  serialno: Scalars['bigint'];
-  structure: Scalars['smallint'];
-  updatedat: Scalars['timestamptz'];
-  /** An object relationship */
-  zappi?: Maybe<Zappi>;
-  /** An object relationship */
-  zappi1_config_reply_datum?: Maybe<Zappi1_Config_Reply_Data>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  /** An object relationship */
-  zappi2_config_reply_datum?: Maybe<Zappi2_Config_Reply_Data>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-  zappiserialno?: Maybe<Scalars['bigint']>;
-};
-
-/** aggregated selection of "config_reply" */
-export type Config_Reply_Aggregate = {
-  __typename?: 'config_reply_aggregate';
-  aggregate?: Maybe<Config_Reply_Aggregate_Fields>;
-  nodes: Array<Config_Reply>;
-};
-
-/** aggregate fields of "config_reply" */
-export type Config_Reply_Aggregate_Fields = {
-  __typename?: 'config_reply_aggregate_fields';
-  avg?: Maybe<Config_Reply_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Config_Reply_Max_Fields>;
-  min?: Maybe<Config_Reply_Min_Fields>;
-  stddev?: Maybe<Config_Reply_Stddev_Fields>;
-  stddev_pop?: Maybe<Config_Reply_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Config_Reply_Stddev_Samp_Fields>;
-  sum?: Maybe<Config_Reply_Sum_Fields>;
-  var_pop?: Maybe<Config_Reply_Var_Pop_Fields>;
-  var_samp?: Maybe<Config_Reply_Var_Samp_Fields>;
-  variance?: Maybe<Config_Reply_Variance_Fields>;
-};
-
-/** aggregate fields of "config_reply" */
-export type Config_Reply_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Config_Reply_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Config_Reply_Avg_Fields = {
-  __typename?: 'config_reply_avg_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  eddiserialno?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-  structure?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-  zappiserialno?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "config_reply". All fields are combined with a logical 'AND'. */
-export type Config_Reply_Bool_Exp = {
-  _and?: InputMaybe<Array<Config_Reply_Bool_Exp>>;
-  _not?: InputMaybe<Config_Reply_Bool_Exp>;
-  _or?: InputMaybe<Array<Config_Reply_Bool_Exp>>;
-  eddi?: InputMaybe<Eddi_Bool_Exp>;
-  eddi_config_reply_datum?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-  eddiconfigreplydataid?: InputMaybe<Int_Comparison_Exp>;
-  eddiserialno?: InputMaybe<Bigint_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  serialno?: InputMaybe<Bigint_Comparison_Exp>;
-  structure?: InputMaybe<Smallint_Comparison_Exp>;
-  updatedat?: InputMaybe<Timestamptz_Comparison_Exp>;
-  zappi?: InputMaybe<Zappi_Bool_Exp>;
-  zappi1_config_reply_datum?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-  zappi1configreplydataid?: InputMaybe<Int_Comparison_Exp>;
-  zappi2_config_reply_datum?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-  zappi2configreplydataid?: InputMaybe<Int_Comparison_Exp>;
-  zappiserialno?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** columns and relationships of "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer = {
-  __typename?: 'config_reply_boost_timer';
-  duration: Scalars['smallint'];
-  economy: Scalars['Boolean'];
-  /** An object relationship */
-  eddi_config_reply_datum?: Maybe<Eddi_Config_Reply_Data>;
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  fridayon: Scalars['Boolean'];
-  heatertype?: Maybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  id: Scalars['Int'];
-  mondayon: Scalars['Boolean'];
-  saturdayon: Scalars['Boolean'];
-  slot: Scalars['smallint'];
-  starthour: Scalars['smallint'];
-  startminute: Scalars['smallint'];
-  sundayon: Scalars['Boolean'];
-  temperature?: Maybe<Scalars['smallint']>;
-  thursdayon: Scalars['Boolean'];
-  tuesdayon: Scalars['Boolean'];
-  wednesdayon: Scalars['Boolean'];
-  /** An object relationship */
-  zappi1_config_reply_datum?: Maybe<Zappi1_Config_Reply_Data>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  /** An object relationship */
-  zappi2_config_reply_datum?: Maybe<Zappi2_Config_Reply_Data>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-};
-
-/** aggregated selection of "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Aggregate = {
-  __typename?: 'config_reply_boost_timer_aggregate';
-  aggregate?: Maybe<Config_Reply_Boost_Timer_Aggregate_Fields>;
-  nodes: Array<Config_Reply_Boost_Timer>;
-};
-
-/** aggregate fields of "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Aggregate_Fields = {
-  __typename?: 'config_reply_boost_timer_aggregate_fields';
-  avg?: Maybe<Config_Reply_Boost_Timer_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Config_Reply_Boost_Timer_Max_Fields>;
-  min?: Maybe<Config_Reply_Boost_Timer_Min_Fields>;
-  stddev?: Maybe<Config_Reply_Boost_Timer_Stddev_Fields>;
-  stddev_pop?: Maybe<Config_Reply_Boost_Timer_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Config_Reply_Boost_Timer_Stddev_Samp_Fields>;
-  sum?: Maybe<Config_Reply_Boost_Timer_Sum_Fields>;
-  var_pop?: Maybe<Config_Reply_Boost_Timer_Var_Pop_Fields>;
-  var_samp?: Maybe<Config_Reply_Boost_Timer_Var_Samp_Fields>;
-  variance?: Maybe<Config_Reply_Boost_Timer_Variance_Fields>;
-};
-
-/** aggregate fields of "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Aggregate_Order_By = {
-  avg?: InputMaybe<Config_Reply_Boost_Timer_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Config_Reply_Boost_Timer_Max_Order_By>;
-  min?: InputMaybe<Config_Reply_Boost_Timer_Min_Order_By>;
-  stddev?: InputMaybe<Config_Reply_Boost_Timer_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Config_Reply_Boost_Timer_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Config_Reply_Boost_Timer_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Config_Reply_Boost_Timer_Sum_Order_By>;
-  var_pop?: InputMaybe<Config_Reply_Boost_Timer_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Config_Reply_Boost_Timer_Var_Samp_Order_By>;
-  variance?: InputMaybe<Config_Reply_Boost_Timer_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Arr_Rel_Insert_Input = {
-  data: Array<Config_Reply_Boost_Timer_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Config_Reply_Boost_Timer_On_Conflict>;
-};
-
-/** aggregate avg on columns */
-export type Config_Reply_Boost_Timer_Avg_Fields = {
-  __typename?: 'config_reply_boost_timer_avg_fields';
-  duration?: Maybe<Scalars['Float']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  slot?: Maybe<Scalars['Float']>;
-  starthour?: Maybe<Scalars['Float']>;
-  startminute?: Maybe<Scalars['Float']>;
-  temperature?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Avg_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** Boolean expression to filter rows from the table "config_reply_boost_timer". All fields are combined with a logical 'AND'. */
-export type Config_Reply_Boost_Timer_Bool_Exp = {
-  _and?: InputMaybe<Array<Config_Reply_Boost_Timer_Bool_Exp>>;
-  _not?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-  _or?: InputMaybe<Array<Config_Reply_Boost_Timer_Bool_Exp>>;
-  duration?: InputMaybe<Smallint_Comparison_Exp>;
-  economy?: InputMaybe<Boolean_Comparison_Exp>;
-  eddi_config_reply_datum?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-  eddiconfigreplydataid?: InputMaybe<Int_Comparison_Exp>;
-  fridayon?: InputMaybe<Boolean_Comparison_Exp>;
-  heatertype?: InputMaybe<Config_Reply_Boost_Timer_Heatertype_Enum_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  mondayon?: InputMaybe<Boolean_Comparison_Exp>;
-  saturdayon?: InputMaybe<Boolean_Comparison_Exp>;
-  slot?: InputMaybe<Smallint_Comparison_Exp>;
-  starthour?: InputMaybe<Smallint_Comparison_Exp>;
-  startminute?: InputMaybe<Smallint_Comparison_Exp>;
-  sundayon?: InputMaybe<Boolean_Comparison_Exp>;
-  temperature?: InputMaybe<Smallint_Comparison_Exp>;
-  thursdayon?: InputMaybe<Boolean_Comparison_Exp>;
-  tuesdayon?: InputMaybe<Boolean_Comparison_Exp>;
-  wednesdayon?: InputMaybe<Boolean_Comparison_Exp>;
-  zappi1_config_reply_datum?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-  zappi1configreplydataid?: InputMaybe<Int_Comparison_Exp>;
-  zappi2_config_reply_datum?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-  zappi2configreplydataid?: InputMaybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "config_reply_boost_timer" */
-export enum Config_Reply_Boost_Timer_Constraint {
-  /** unique or primary key constraint */
-  Pk_5a81356ceabecdd7309e8cc2414 = 'PK_5a81356ceabecdd7309e8cc2414',
-}
-
-/** Boolean expression to compare columns of type "config_reply_boost_timer_heatertype_enum". All fields are combined with logical 'AND'. */
-export type Config_Reply_Boost_Timer_Heatertype_Enum_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  _gt?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  _gte?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  _in?: InputMaybe<Array<Scalars['config_reply_boost_timer_heatertype_enum']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  _lte?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  _neq?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  _nin?: InputMaybe<Array<Scalars['config_reply_boost_timer_heatertype_enum']>>;
-};
-
-/** input type for incrementing numeric columns in table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Inc_Input = {
-  duration?: InputMaybe<Scalars['smallint']>;
-  eddiconfigreplydataid?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  slot?: InputMaybe<Scalars['smallint']>;
-  starthour?: InputMaybe<Scalars['smallint']>;
-  startminute?: InputMaybe<Scalars['smallint']>;
-  temperature?: InputMaybe<Scalars['smallint']>;
-  zappi1configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappi2configreplydataid?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Insert_Input = {
-  duration?: InputMaybe<Scalars['smallint']>;
-  economy?: InputMaybe<Scalars['Boolean']>;
-  eddi_config_reply_datum?: InputMaybe<Eddi_Config_Reply_Data_Obj_Rel_Insert_Input>;
-  eddiconfigreplydataid?: InputMaybe<Scalars['Int']>;
-  fridayon?: InputMaybe<Scalars['Boolean']>;
-  heatertype?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  id?: InputMaybe<Scalars['Int']>;
-  mondayon?: InputMaybe<Scalars['Boolean']>;
-  saturdayon?: InputMaybe<Scalars['Boolean']>;
-  slot?: InputMaybe<Scalars['smallint']>;
-  starthour?: InputMaybe<Scalars['smallint']>;
-  startminute?: InputMaybe<Scalars['smallint']>;
-  sundayon?: InputMaybe<Scalars['Boolean']>;
-  temperature?: InputMaybe<Scalars['smallint']>;
-  thursdayon?: InputMaybe<Scalars['Boolean']>;
-  tuesdayon?: InputMaybe<Scalars['Boolean']>;
-  wednesdayon?: InputMaybe<Scalars['Boolean']>;
-  zappi1_config_reply_datum?: InputMaybe<Zappi1_Config_Reply_Data_Obj_Rel_Insert_Input>;
-  zappi1configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappi2_config_reply_datum?: InputMaybe<Zappi2_Config_Reply_Data_Obj_Rel_Insert_Input>;
-  zappi2configreplydataid?: InputMaybe<Scalars['Int']>;
-};
-
-/** aggregate max on columns */
-export type Config_Reply_Boost_Timer_Max_Fields = {
-  __typename?: 'config_reply_boost_timer_max_fields';
-  duration?: Maybe<Scalars['smallint']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  slot?: Maybe<Scalars['smallint']>;
-  starthour?: Maybe<Scalars['smallint']>;
-  startminute?: Maybe<Scalars['smallint']>;
-  temperature?: Maybe<Scalars['smallint']>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-};
-
-/** order by max() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Max_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Config_Reply_Boost_Timer_Min_Fields = {
-  __typename?: 'config_reply_boost_timer_min_fields';
-  duration?: Maybe<Scalars['smallint']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  slot?: Maybe<Scalars['smallint']>;
-  starthour?: Maybe<Scalars['smallint']>;
-  startminute?: Maybe<Scalars['smallint']>;
-  temperature?: Maybe<Scalars['smallint']>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-};
-
-/** order by min() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Min_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Mutation_Response = {
-  __typename?: 'config_reply_boost_timer_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Config_Reply_Boost_Timer>;
-};
-
-/** on_conflict condition type for table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_On_Conflict = {
-  constraint: Config_Reply_Boost_Timer_Constraint;
-  update_columns?: Array<Config_Reply_Boost_Timer_Update_Column>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "config_reply_boost_timer". */
-export type Config_Reply_Boost_Timer_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  economy?: InputMaybe<Order_By>;
-  eddi_config_reply_datum?: InputMaybe<Eddi_Config_Reply_Data_Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  fridayon?: InputMaybe<Order_By>;
-  heatertype?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  mondayon?: InputMaybe<Order_By>;
-  saturdayon?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  sundayon?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  thursdayon?: InputMaybe<Order_By>;
-  tuesdayon?: InputMaybe<Order_By>;
-  wednesdayon?: InputMaybe<Order_By>;
-  zappi1_config_reply_datum?: InputMaybe<Zappi1_Config_Reply_Data_Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2_config_reply_datum?: InputMaybe<Zappi2_Config_Reply_Data_Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: config_reply_boost_timer */
-export type Config_Reply_Boost_Timer_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "config_reply_boost_timer" */
-export enum Config_Reply_Boost_Timer_Select_Column {
-  /** column name */
-  Duration = 'duration',
-  /** column name */
-  Economy = 'economy',
-  /** column name */
-  Eddiconfigreplydataid = 'eddiconfigreplydataid',
-  /** column name */
-  Fridayon = 'fridayon',
-  /** column name */
-  Heatertype = 'heatertype',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Mondayon = 'mondayon',
-  /** column name */
-  Saturdayon = 'saturdayon',
-  /** column name */
-  Slot = 'slot',
-  /** column name */
-  Starthour = 'starthour',
-  /** column name */
-  Startminute = 'startminute',
-  /** column name */
-  Sundayon = 'sundayon',
-  /** column name */
-  Temperature = 'temperature',
-  /** column name */
-  Thursdayon = 'thursdayon',
-  /** column name */
-  Tuesdayon = 'tuesdayon',
-  /** column name */
-  Wednesdayon = 'wednesdayon',
-  /** column name */
-  Zappi1configreplydataid = 'zappi1configreplydataid',
-  /** column name */
-  Zappi2configreplydataid = 'zappi2configreplydataid',
-}
-
-/** input type for updating data in table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Set_Input = {
-  duration?: InputMaybe<Scalars['smallint']>;
-  economy?: InputMaybe<Scalars['Boolean']>;
-  eddiconfigreplydataid?: InputMaybe<Scalars['Int']>;
-  fridayon?: InputMaybe<Scalars['Boolean']>;
-  heatertype?: InputMaybe<Scalars['config_reply_boost_timer_heatertype_enum']>;
-  id?: InputMaybe<Scalars['Int']>;
-  mondayon?: InputMaybe<Scalars['Boolean']>;
-  saturdayon?: InputMaybe<Scalars['Boolean']>;
-  slot?: InputMaybe<Scalars['smallint']>;
-  starthour?: InputMaybe<Scalars['smallint']>;
-  startminute?: InputMaybe<Scalars['smallint']>;
-  sundayon?: InputMaybe<Scalars['Boolean']>;
-  temperature?: InputMaybe<Scalars['smallint']>;
-  thursdayon?: InputMaybe<Scalars['Boolean']>;
-  tuesdayon?: InputMaybe<Scalars['Boolean']>;
-  wednesdayon?: InputMaybe<Scalars['Boolean']>;
-  zappi1configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappi2configreplydataid?: InputMaybe<Scalars['Int']>;
-};
-
-/** aggregate stddev on columns */
-export type Config_Reply_Boost_Timer_Stddev_Fields = {
-  __typename?: 'config_reply_boost_timer_stddev_fields';
-  duration?: Maybe<Scalars['Float']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  slot?: Maybe<Scalars['Float']>;
-  starthour?: Maybe<Scalars['Float']>;
-  startminute?: Maybe<Scalars['Float']>;
-  temperature?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Stddev_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Config_Reply_Boost_Timer_Stddev_Pop_Fields = {
-  __typename?: 'config_reply_boost_timer_stddev_pop_fields';
-  duration?: Maybe<Scalars['Float']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  slot?: Maybe<Scalars['Float']>;
-  starthour?: Maybe<Scalars['Float']>;
-  startminute?: Maybe<Scalars['Float']>;
-  temperature?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Stddev_Pop_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Config_Reply_Boost_Timer_Stddev_Samp_Fields = {
-  __typename?: 'config_reply_boost_timer_stddev_samp_fields';
-  duration?: Maybe<Scalars['Float']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  slot?: Maybe<Scalars['Float']>;
-  starthour?: Maybe<Scalars['Float']>;
-  startminute?: Maybe<Scalars['Float']>;
-  temperature?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_samp() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Stddev_Samp_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** aggregate sum on columns */
-export type Config_Reply_Boost_Timer_Sum_Fields = {
-  __typename?: 'config_reply_boost_timer_sum_fields';
-  duration?: Maybe<Scalars['smallint']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  slot?: Maybe<Scalars['smallint']>;
-  starthour?: Maybe<Scalars['smallint']>;
-  startminute?: Maybe<Scalars['smallint']>;
-  temperature?: Maybe<Scalars['smallint']>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Sum_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** update columns of table "config_reply_boost_timer" */
-export enum Config_Reply_Boost_Timer_Update_Column {
-  /** column name */
-  Duration = 'duration',
-  /** column name */
-  Economy = 'economy',
-  /** column name */
-  Eddiconfigreplydataid = 'eddiconfigreplydataid',
-  /** column name */
-  Fridayon = 'fridayon',
-  /** column name */
-  Heatertype = 'heatertype',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Mondayon = 'mondayon',
-  /** column name */
-  Saturdayon = 'saturdayon',
-  /** column name */
-  Slot = 'slot',
-  /** column name */
-  Starthour = 'starthour',
-  /** column name */
-  Startminute = 'startminute',
-  /** column name */
-  Sundayon = 'sundayon',
-  /** column name */
-  Temperature = 'temperature',
-  /** column name */
-  Thursdayon = 'thursdayon',
-  /** column name */
-  Tuesdayon = 'tuesdayon',
-  /** column name */
-  Wednesdayon = 'wednesdayon',
-  /** column name */
-  Zappi1configreplydataid = 'zappi1configreplydataid',
-  /** column name */
-  Zappi2configreplydataid = 'zappi2configreplydataid',
-}
-
-/** aggregate var_pop on columns */
-export type Config_Reply_Boost_Timer_Var_Pop_Fields = {
-  __typename?: 'config_reply_boost_timer_var_pop_fields';
-  duration?: Maybe<Scalars['Float']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  slot?: Maybe<Scalars['Float']>;
-  starthour?: Maybe<Scalars['Float']>;
-  startminute?: Maybe<Scalars['Float']>;
-  temperature?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_pop() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Var_Pop_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** aggregate var_samp on columns */
-export type Config_Reply_Boost_Timer_Var_Samp_Fields = {
-  __typename?: 'config_reply_boost_timer_var_samp_fields';
-  duration?: Maybe<Scalars['Float']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  slot?: Maybe<Scalars['Float']>;
-  starthour?: Maybe<Scalars['Float']>;
-  startminute?: Maybe<Scalars['Float']>;
-  temperature?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_samp() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Var_Samp_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** aggregate variance on columns */
-export type Config_Reply_Boost_Timer_Variance_Fields = {
-  __typename?: 'config_reply_boost_timer_variance_fields';
-  duration?: Maybe<Scalars['Float']>;
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  slot?: Maybe<Scalars['Float']>;
-  starthour?: Maybe<Scalars['Float']>;
-  startminute?: Maybe<Scalars['Float']>;
-  temperature?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "config_reply_boost_timer" */
-export type Config_Reply_Boost_Timer_Variance_Order_By = {
-  duration?: InputMaybe<Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  slot?: InputMaybe<Order_By>;
-  starthour?: InputMaybe<Order_By>;
-  startminute?: InputMaybe<Order_By>;
-  temperature?: InputMaybe<Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-};
-
-/** unique or primary key constraints on table "config_reply" */
-export enum Config_Reply_Constraint {
-  /** unique or primary key constraint */
-  PkC3a4c701c6296e447ec4d22f3f6 = 'PK_c3a4c701c6296e447ec4d22f3f6',
-  /** unique or primary key constraint */
-  Rel_3baf65bb45ce2859ac32735a67 = 'REL_3baf65bb45ce2859ac32735a67',
-  /** unique or primary key constraint */
-  Rel_73a000c058e740c918ea5671d4 = 'REL_73a000c058e740c918ea5671d4',
-  /** unique or primary key constraint */
-  Rel_6044c3432d62fa5e6e4137a854 = 'REL_6044c3432d62fa5e6e4137a854',
-  /** unique or primary key constraint */
-  Uq_9d8a1f5e661cd00e338b9186741 = 'UQ_9d8a1f5e661cd00e338b9186741',
-  /** unique or primary key constraint */
-  UqA1d9b6c8b6ebcadb725553aa5f4 = 'UQ_a1d9b6c8b6ebcadb725553aa5f4',
-}
-
-/** input type for incrementing numeric columns in table "config_reply" */
-export type Config_Reply_Inc_Input = {
-  eddiconfigreplydataid?: InputMaybe<Scalars['Int']>;
-  eddiserialno?: InputMaybe<Scalars['bigint']>;
-  id?: InputMaybe<Scalars['Int']>;
-  serialno?: InputMaybe<Scalars['bigint']>;
-  structure?: InputMaybe<Scalars['smallint']>;
-  zappi1configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappi2configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappiserialno?: InputMaybe<Scalars['bigint']>;
-};
-
-/** input type for inserting data into table "config_reply" */
-export type Config_Reply_Insert_Input = {
-  eddi?: InputMaybe<Eddi_Obj_Rel_Insert_Input>;
-  eddi_config_reply_datum?: InputMaybe<Eddi_Config_Reply_Data_Obj_Rel_Insert_Input>;
-  eddiconfigreplydataid?: InputMaybe<Scalars['Int']>;
-  eddiserialno?: InputMaybe<Scalars['bigint']>;
-  id?: InputMaybe<Scalars['Int']>;
-  serialno?: InputMaybe<Scalars['bigint']>;
-  structure?: InputMaybe<Scalars['smallint']>;
-  updatedat?: InputMaybe<Scalars['timestamptz']>;
-  zappi?: InputMaybe<Zappi_Obj_Rel_Insert_Input>;
-  zappi1_config_reply_datum?: InputMaybe<Zappi1_Config_Reply_Data_Obj_Rel_Insert_Input>;
-  zappi1configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappi2_config_reply_datum?: InputMaybe<Zappi2_Config_Reply_Data_Obj_Rel_Insert_Input>;
-  zappi2configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappiserialno?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate max on columns */
-export type Config_Reply_Max_Fields = {
-  __typename?: 'config_reply_max_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  eddiserialno?: Maybe<Scalars['bigint']>;
-  id?: Maybe<Scalars['Int']>;
-  serialno?: Maybe<Scalars['bigint']>;
-  structure?: Maybe<Scalars['smallint']>;
-  updatedat?: Maybe<Scalars['timestamptz']>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-  zappiserialno?: Maybe<Scalars['bigint']>;
-};
-
-/** aggregate min on columns */
-export type Config_Reply_Min_Fields = {
-  __typename?: 'config_reply_min_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  eddiserialno?: Maybe<Scalars['bigint']>;
-  id?: Maybe<Scalars['Int']>;
-  serialno?: Maybe<Scalars['bigint']>;
-  structure?: Maybe<Scalars['smallint']>;
-  updatedat?: Maybe<Scalars['timestamptz']>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-  zappiserialno?: Maybe<Scalars['bigint']>;
-};
-
-/** response of any mutation on the table "config_reply" */
-export type Config_Reply_Mutation_Response = {
-  __typename?: 'config_reply_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Config_Reply>;
-};
-
-/** input type for inserting object relation for remote table "config_reply" */
-export type Config_Reply_Obj_Rel_Insert_Input = {
-  data: Config_Reply_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Config_Reply_On_Conflict>;
-};
-
-/** on_conflict condition type for table "config_reply" */
-export type Config_Reply_On_Conflict = {
-  constraint: Config_Reply_Constraint;
-  update_columns?: Array<Config_Reply_Update_Column>;
-  where?: InputMaybe<Config_Reply_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "config_reply". */
-export type Config_Reply_Order_By = {
-  eddi?: InputMaybe<Eddi_Order_By>;
-  eddi_config_reply_datum?: InputMaybe<Eddi_Config_Reply_Data_Order_By>;
-  eddiconfigreplydataid?: InputMaybe<Order_By>;
-  eddiserialno?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  structure?: InputMaybe<Order_By>;
-  updatedat?: InputMaybe<Order_By>;
-  zappi?: InputMaybe<Zappi_Order_By>;
-  zappi1_config_reply_datum?: InputMaybe<Zappi1_Config_Reply_Data_Order_By>;
-  zappi1configreplydataid?: InputMaybe<Order_By>;
-  zappi2_config_reply_datum?: InputMaybe<Zappi2_Config_Reply_Data_Order_By>;
-  zappi2configreplydataid?: InputMaybe<Order_By>;
-  zappiserialno?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: config_reply */
-export type Config_Reply_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "config_reply" */
-export enum Config_Reply_Select_Column {
-  /** column name */
-  Eddiconfigreplydataid = 'eddiconfigreplydataid',
-  /** column name */
-  Eddiserialno = 'eddiserialno',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Serialno = 'serialno',
-  /** column name */
-  Structure = 'structure',
-  /** column name */
-  Updatedat = 'updatedat',
-  /** column name */
-  Zappi1configreplydataid = 'zappi1configreplydataid',
-  /** column name */
-  Zappi2configreplydataid = 'zappi2configreplydataid',
-  /** column name */
-  Zappiserialno = 'zappiserialno',
-}
-
-/** input type for updating data in table "config_reply" */
-export type Config_Reply_Set_Input = {
-  eddiconfigreplydataid?: InputMaybe<Scalars['Int']>;
-  eddiserialno?: InputMaybe<Scalars['bigint']>;
-  id?: InputMaybe<Scalars['Int']>;
-  serialno?: InputMaybe<Scalars['bigint']>;
-  structure?: InputMaybe<Scalars['smallint']>;
-  updatedat?: InputMaybe<Scalars['timestamptz']>;
-  zappi1configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappi2configreplydataid?: InputMaybe<Scalars['Int']>;
-  zappiserialno?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate stddev on columns */
-export type Config_Reply_Stddev_Fields = {
-  __typename?: 'config_reply_stddev_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  eddiserialno?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-  structure?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-  zappiserialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Config_Reply_Stddev_Pop_Fields = {
-  __typename?: 'config_reply_stddev_pop_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  eddiserialno?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-  structure?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-  zappiserialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Config_Reply_Stddev_Samp_Fields = {
-  __typename?: 'config_reply_stddev_samp_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  eddiserialno?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-  structure?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-  zappiserialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Config_Reply_Sum_Fields = {
-  __typename?: 'config_reply_sum_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Int']>;
-  eddiserialno?: Maybe<Scalars['bigint']>;
-  id?: Maybe<Scalars['Int']>;
-  serialno?: Maybe<Scalars['bigint']>;
-  structure?: Maybe<Scalars['smallint']>;
-  zappi1configreplydataid?: Maybe<Scalars['Int']>;
-  zappi2configreplydataid?: Maybe<Scalars['Int']>;
-  zappiserialno?: Maybe<Scalars['bigint']>;
-};
-
-/** update columns of table "config_reply" */
-export enum Config_Reply_Update_Column {
-  /** column name */
-  Eddiconfigreplydataid = 'eddiconfigreplydataid',
-  /** column name */
-  Eddiserialno = 'eddiserialno',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Serialno = 'serialno',
-  /** column name */
-  Structure = 'structure',
-  /** column name */
-  Updatedat = 'updatedat',
-  /** column name */
-  Zappi1configreplydataid = 'zappi1configreplydataid',
-  /** column name */
-  Zappi2configreplydataid = 'zappi2configreplydataid',
-  /** column name */
-  Zappiserialno = 'zappiserialno',
-}
-
-/** aggregate var_pop on columns */
-export type Config_Reply_Var_Pop_Fields = {
-  __typename?: 'config_reply_var_pop_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  eddiserialno?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-  structure?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-  zappiserialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Config_Reply_Var_Samp_Fields = {
-  __typename?: 'config_reply_var_samp_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  eddiserialno?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-  structure?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-  zappiserialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Config_Reply_Variance_Fields = {
-  __typename?: 'config_reply_variance_fields';
-  eddiconfigreplydataid?: Maybe<Scalars['Float']>;
-  eddiserialno?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-  structure?: Maybe<Scalars['Float']>;
-  zappi1configreplydataid?: Maybe<Scalars['Float']>;
-  zappi2configreplydataid?: Maybe<Scalars['Float']>;
-  zappiserialno?: Maybe<Scalars['Float']>;
-};
-
 /** columns and relationships of "eddi" */
 export type Eddi = {
   __typename?: 'eddi';
@@ -3023,8 +1184,6 @@ export type Eddi = {
   chargeenergy?: Maybe<Scalars['Float']>;
   checkperiod?: Maybe<Scalars['smallint']>;
   commandseqno: Scalars['smallint'];
-  /** An object relationship */
-  config_reply?: Maybe<Config_Reply>;
   configappdata?: Maybe<Scalars['bytea']>;
   configappdone: Scalars['Boolean'];
   configbootdata?: Maybe<Scalars['bytea']>;
@@ -3368,7 +1527,6 @@ export type Eddi_Bool_Exp = {
   chargeenergy?: InputMaybe<Float_Comparison_Exp>;
   checkperiod?: InputMaybe<Smallint_Comparison_Exp>;
   commandseqno?: InputMaybe<Smallint_Comparison_Exp>;
-  config_reply?: InputMaybe<Config_Reply_Bool_Exp>;
   configappdata?: InputMaybe<Bytea_Comparison_Exp>;
   configappdone?: InputMaybe<Boolean_Comparison_Exp>;
   configbootdata?: InputMaybe<Bytea_Comparison_Exp>;
@@ -3447,1259 +1605,6 @@ export type Eddi_Bool_Exp = {
   stubloaderversion?: InputMaybe<Int_Comparison_Exp>;
   updatedat?: InputMaybe<Timestamptz_Comparison_Exp>;
   voltage?: InputMaybe<Smallint_Comparison_Exp>;
-};
-
-/** columns and relationships of "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data = {
-  __typename?: 'eddi_config_reply_data';
-  autosettimefromclouddone: Scalars['Boolean'];
-  backlight: Scalars['smallint'];
-  batterymode?: Maybe<Scalars['String']>;
-  boosthotcanceldelay: Scalars['smallint'];
-  calibration: Scalars['bytea'];
-  /** An object relationship */
-  config_reply?: Maybe<Config_Reply>;
-  /** An array relationship */
-  config_reply_boost_timers: Array<Config_Reply_Boost_Timer>;
-  /** An aggregate relationship */
-  config_reply_boost_timers_aggregate: Config_Reply_Boost_Timer_Aggregate;
-  contrast: Scalars['smallint'];
-  ct1group: Scalars['smallint'];
-  ct1grouplimit: Scalars['smallint'];
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group: Scalars['smallint'];
-  ct2grouplimit: Scalars['smallint'];
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group: Scalars['smallint'];
-  ct3grouplimit: Scalars['smallint'];
-  dateformat?: Maybe<Scalars['String']>;
-  deviceconfigtime: Scalars['bigint'];
-  devicelimit: Scalars['smallint'];
-  dston: Scalars['Boolean'];
-  esenseboostenablemode?: Maybe<Scalars['String']>;
-  esenseboostmode?: Maybe<Scalars['String']>;
-  esenseheaterenablemode?: Maybe<Scalars['String']>;
-  esensehysteresis1: Scalars['smallint'];
-  esensehysteresis2: Scalars['smallint'];
-  esensemode?: Maybe<Scalars['String']>;
-  esenserelaycontrolmode?: Maybe<Scalars['String']>;
-  esensesetpoints1: Scalars['smallint'];
-  esensesetpoints2: Scalars['smallint'];
-  exportmargin: Scalars['Int'];
-  exprelay1boosttype: Scalars['smallint'];
-  exprelay1heating?: Maybe<Scalars['String']>;
-  exprelay1includediverted: Scalars['Boolean'];
-  exprelay1minimumofftime: Scalars['smallint'];
-  exprelay1minimumontime: Scalars['smallint'];
-  exprelay1mode?: Maybe<Scalars['String']>;
-  exprelay1offthreshold: Scalars['Int'];
-  exprelay1onthreshold: Scalars['Int'];
-  exprelay2boosttype: Scalars['smallint'];
-  exprelay2heating?: Maybe<Scalars['String']>;
-  exprelay2includediverted: Scalars['Boolean'];
-  exprelay2minimumofftime: Scalars['smallint'];
-  exprelay2minimumontime: Scalars['smallint'];
-  exprelay2mode?: Maybe<Scalars['String']>;
-  exprelay2offthreshold: Scalars['Int'];
-  exprelay2onthreshold: Scalars['Int'];
-  gridlimit: Scalars['smallint'];
-  heaterpriority: Scalars['smallint'];
-  heatertype1?: Maybe<Scalars['String']>;
-  heatertype2?: Maybe<Scalars['String']>;
-  hottime: Scalars['smallint'];
-  icons?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
-  language?: Maybe<Scalars['String']>;
-  maxgridlimit: Scalars['smallint'];
-  minimumexport: Scalars['Int'];
-  minimumexporttime: Scalars['smallint'];
-  passcode: Scalars['smallint'];
-  prioritycheckperiod: Scalars['smallint'];
-  savingskeepversion: Scalars['smallint'];
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature: Scalars['bigint'];
-  sparewasconfigversion: Scalars['smallint'];
-  sparewasnetphasemetering: Scalars['smallint'];
-  timezone?: Maybe<Scalars['String']>;
-  updatefromcloud: Scalars['Boolean'];
-};
-
-/** columns and relationships of "eddi_config_reply_data" */
-export type Eddi_Config_Reply_DataConfig_Reply_Boost_TimersArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-/** columns and relationships of "eddi_config_reply_data" */
-export type Eddi_Config_Reply_DataConfig_Reply_Boost_Timers_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-/** aggregated selection of "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Aggregate = {
-  __typename?: 'eddi_config_reply_data_aggregate';
-  aggregate?: Maybe<Eddi_Config_Reply_Data_Aggregate_Fields>;
-  nodes: Array<Eddi_Config_Reply_Data>;
-};
-
-/** aggregate fields of "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Aggregate_Fields = {
-  __typename?: 'eddi_config_reply_data_aggregate_fields';
-  avg?: Maybe<Eddi_Config_Reply_Data_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Eddi_Config_Reply_Data_Max_Fields>;
-  min?: Maybe<Eddi_Config_Reply_Data_Min_Fields>;
-  stddev?: Maybe<Eddi_Config_Reply_Data_Stddev_Fields>;
-  stddev_pop?: Maybe<Eddi_Config_Reply_Data_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Eddi_Config_Reply_Data_Stddev_Samp_Fields>;
-  sum?: Maybe<Eddi_Config_Reply_Data_Sum_Fields>;
-  var_pop?: Maybe<Eddi_Config_Reply_Data_Var_Pop_Fields>;
-  var_samp?: Maybe<Eddi_Config_Reply_Data_Var_Samp_Fields>;
-  variance?: Maybe<Eddi_Config_Reply_Data_Variance_Fields>;
-};
-
-/** aggregate fields of "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Eddi_Config_Reply_Data_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Eddi_Config_Reply_Data_Avg_Fields = {
-  __typename?: 'eddi_config_reply_data_avg_fields';
-  backlight?: Maybe<Scalars['Float']>;
-  boosthotcanceldelay?: Maybe<Scalars['Float']>;
-  contrast?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esensehysteresis1?: Maybe<Scalars['Float']>;
-  esensehysteresis2?: Maybe<Scalars['Float']>;
-  esensesetpoints1?: Maybe<Scalars['Float']>;
-  esensesetpoints2?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  exprelay1boosttype?: Maybe<Scalars['Float']>;
-  exprelay1minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay1minimumontime?: Maybe<Scalars['Float']>;
-  exprelay1offthreshold?: Maybe<Scalars['Float']>;
-  exprelay1onthreshold?: Maybe<Scalars['Float']>;
-  exprelay2boosttype?: Maybe<Scalars['Float']>;
-  exprelay2minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay2minimumontime?: Maybe<Scalars['Float']>;
-  exprelay2offthreshold?: Maybe<Scalars['Float']>;
-  exprelay2onthreshold?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  heaterpriority?: Maybe<Scalars['Float']>;
-  hottime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  minimumexport?: Maybe<Scalars['Float']>;
-  minimumexporttime?: Maybe<Scalars['Float']>;
-  passcode?: Maybe<Scalars['Float']>;
-  prioritycheckperiod?: Maybe<Scalars['Float']>;
-  savingskeepversion?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  sparewasconfigversion?: Maybe<Scalars['Float']>;
-  sparewasnetphasemetering?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "eddi_config_reply_data". All fields are combined with a logical 'AND'. */
-export type Eddi_Config_Reply_Data_Bool_Exp = {
-  _and?: InputMaybe<Array<Eddi_Config_Reply_Data_Bool_Exp>>;
-  _not?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-  _or?: InputMaybe<Array<Eddi_Config_Reply_Data_Bool_Exp>>;
-  autosettimefromclouddone?: InputMaybe<Boolean_Comparison_Exp>;
-  backlight?: InputMaybe<Smallint_Comparison_Exp>;
-  batterymode?: InputMaybe<String_Comparison_Exp>;
-  boosthotcanceldelay?: InputMaybe<Smallint_Comparison_Exp>;
-  calibration?: InputMaybe<Bytea_Comparison_Exp>;
-  config_reply?: InputMaybe<Config_Reply_Bool_Exp>;
-  config_reply_boost_timers?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-  contrast?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1subtype?: InputMaybe<String_Comparison_Exp>;
-  ct1type?: InputMaybe<String_Comparison_Exp>;
-  ct2group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct2grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ct2subtype?: InputMaybe<String_Comparison_Exp>;
-  ct2type?: InputMaybe<String_Comparison_Exp>;
-  ct3group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct3grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  dateformat?: InputMaybe<String_Comparison_Exp>;
-  deviceconfigtime?: InputMaybe<Bigint_Comparison_Exp>;
-  devicelimit?: InputMaybe<Smallint_Comparison_Exp>;
-  dston?: InputMaybe<Boolean_Comparison_Exp>;
-  esenseboostenablemode?: InputMaybe<String_Comparison_Exp>;
-  esenseboostmode?: InputMaybe<String_Comparison_Exp>;
-  esenseheaterenablemode?: InputMaybe<String_Comparison_Exp>;
-  esensehysteresis1?: InputMaybe<Smallint_Comparison_Exp>;
-  esensehysteresis2?: InputMaybe<Smallint_Comparison_Exp>;
-  esensemode?: InputMaybe<String_Comparison_Exp>;
-  esenserelaycontrolmode?: InputMaybe<String_Comparison_Exp>;
-  esensesetpoints1?: InputMaybe<Smallint_Comparison_Exp>;
-  esensesetpoints2?: InputMaybe<Smallint_Comparison_Exp>;
-  exportmargin?: InputMaybe<Int_Comparison_Exp>;
-  exprelay1boosttype?: InputMaybe<Smallint_Comparison_Exp>;
-  exprelay1heating?: InputMaybe<String_Comparison_Exp>;
-  exprelay1includediverted?: InputMaybe<Boolean_Comparison_Exp>;
-  exprelay1minimumofftime?: InputMaybe<Smallint_Comparison_Exp>;
-  exprelay1minimumontime?: InputMaybe<Smallint_Comparison_Exp>;
-  exprelay1mode?: InputMaybe<String_Comparison_Exp>;
-  exprelay1offthreshold?: InputMaybe<Int_Comparison_Exp>;
-  exprelay1onthreshold?: InputMaybe<Int_Comparison_Exp>;
-  exprelay2boosttype?: InputMaybe<Smallint_Comparison_Exp>;
-  exprelay2heating?: InputMaybe<String_Comparison_Exp>;
-  exprelay2includediverted?: InputMaybe<Boolean_Comparison_Exp>;
-  exprelay2minimumofftime?: InputMaybe<Smallint_Comparison_Exp>;
-  exprelay2minimumontime?: InputMaybe<Smallint_Comparison_Exp>;
-  exprelay2mode?: InputMaybe<String_Comparison_Exp>;
-  exprelay2offthreshold?: InputMaybe<Int_Comparison_Exp>;
-  exprelay2onthreshold?: InputMaybe<Int_Comparison_Exp>;
-  gridlimit?: InputMaybe<Smallint_Comparison_Exp>;
-  heaterpriority?: InputMaybe<Smallint_Comparison_Exp>;
-  heatertype1?: InputMaybe<String_Comparison_Exp>;
-  heatertype2?: InputMaybe<String_Comparison_Exp>;
-  hottime?: InputMaybe<Smallint_Comparison_Exp>;
-  icons?: InputMaybe<String_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  language?: InputMaybe<String_Comparison_Exp>;
-  maxgridlimit?: InputMaybe<Smallint_Comparison_Exp>;
-  minimumexport?: InputMaybe<Int_Comparison_Exp>;
-  minimumexporttime?: InputMaybe<Smallint_Comparison_Exp>;
-  passcode?: InputMaybe<Smallint_Comparison_Exp>;
-  prioritycheckperiod?: InputMaybe<Smallint_Comparison_Exp>;
-  savingskeepversion?: InputMaybe<Smallint_Comparison_Exp>;
-  serverconfigtime?: InputMaybe<Int_Comparison_Exp>;
-  signature?: InputMaybe<Bigint_Comparison_Exp>;
-  sparewasconfigversion?: InputMaybe<Smallint_Comparison_Exp>;
-  sparewasnetphasemetering?: InputMaybe<Smallint_Comparison_Exp>;
-  timezone?: InputMaybe<String_Comparison_Exp>;
-  updatefromcloud?: InputMaybe<Boolean_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "eddi_config_reply_data" */
-export enum Eddi_Config_Reply_Data_Constraint {
-  /** unique or primary key constraint */
-  Pk_2635a0f6eeef3b81fd097be627f = 'PK_2635a0f6eeef3b81fd097be627f',
-}
-
-/** input type for incrementing numeric columns in table "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Inc_Input = {
-  backlight?: InputMaybe<Scalars['smallint']>;
-  boosthotcanceldelay?: InputMaybe<Scalars['smallint']>;
-  contrast?: InputMaybe<Scalars['smallint']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['smallint']>;
-  esensehysteresis1?: InputMaybe<Scalars['smallint']>;
-  esensehysteresis2?: InputMaybe<Scalars['smallint']>;
-  esensesetpoints1?: InputMaybe<Scalars['smallint']>;
-  esensesetpoints2?: InputMaybe<Scalars['smallint']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  exprelay1boosttype?: InputMaybe<Scalars['smallint']>;
-  exprelay1minimumofftime?: InputMaybe<Scalars['smallint']>;
-  exprelay1minimumontime?: InputMaybe<Scalars['smallint']>;
-  exprelay1offthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay1onthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay2boosttype?: InputMaybe<Scalars['smallint']>;
-  exprelay2minimumofftime?: InputMaybe<Scalars['smallint']>;
-  exprelay2minimumontime?: InputMaybe<Scalars['smallint']>;
-  exprelay2offthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay2onthreshold?: InputMaybe<Scalars['Int']>;
-  gridlimit?: InputMaybe<Scalars['smallint']>;
-  heaterpriority?: InputMaybe<Scalars['smallint']>;
-  hottime?: InputMaybe<Scalars['smallint']>;
-  id?: InputMaybe<Scalars['Int']>;
-  maxgridlimit?: InputMaybe<Scalars['smallint']>;
-  minimumexport?: InputMaybe<Scalars['Int']>;
-  minimumexporttime?: InputMaybe<Scalars['smallint']>;
-  passcode?: InputMaybe<Scalars['smallint']>;
-  prioritycheckperiod?: InputMaybe<Scalars['smallint']>;
-  savingskeepversion?: InputMaybe<Scalars['smallint']>;
-  serverconfigtime?: InputMaybe<Scalars['Int']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  sparewasconfigversion?: InputMaybe<Scalars['smallint']>;
-  sparewasnetphasemetering?: InputMaybe<Scalars['smallint']>;
-};
-
-/** input type for inserting data into table "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Insert_Input = {
-  autosettimefromclouddone?: InputMaybe<Scalars['Boolean']>;
-  backlight?: InputMaybe<Scalars['smallint']>;
-  batterymode?: InputMaybe<Scalars['String']>;
-  boosthotcanceldelay?: InputMaybe<Scalars['smallint']>;
-  calibration?: InputMaybe<Scalars['bytea']>;
-  config_reply?: InputMaybe<Config_Reply_Obj_Rel_Insert_Input>;
-  config_reply_boost_timers?: InputMaybe<Config_Reply_Boost_Timer_Arr_Rel_Insert_Input>;
-  contrast?: InputMaybe<Scalars['smallint']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct1subtype?: InputMaybe<Scalars['String']>;
-  ct1type?: InputMaybe<Scalars['String']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2subtype?: InputMaybe<Scalars['String']>;
-  ct2type?: InputMaybe<Scalars['String']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  dateformat?: InputMaybe<Scalars['String']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['smallint']>;
-  dston?: InputMaybe<Scalars['Boolean']>;
-  esenseboostenablemode?: InputMaybe<Scalars['String']>;
-  esenseboostmode?: InputMaybe<Scalars['String']>;
-  esenseheaterenablemode?: InputMaybe<Scalars['String']>;
-  esensehysteresis1?: InputMaybe<Scalars['smallint']>;
-  esensehysteresis2?: InputMaybe<Scalars['smallint']>;
-  esensemode?: InputMaybe<Scalars['String']>;
-  esenserelaycontrolmode?: InputMaybe<Scalars['String']>;
-  esensesetpoints1?: InputMaybe<Scalars['smallint']>;
-  esensesetpoints2?: InputMaybe<Scalars['smallint']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  exprelay1boosttype?: InputMaybe<Scalars['smallint']>;
-  exprelay1heating?: InputMaybe<Scalars['String']>;
-  exprelay1includediverted?: InputMaybe<Scalars['Boolean']>;
-  exprelay1minimumofftime?: InputMaybe<Scalars['smallint']>;
-  exprelay1minimumontime?: InputMaybe<Scalars['smallint']>;
-  exprelay1mode?: InputMaybe<Scalars['String']>;
-  exprelay1offthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay1onthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay2boosttype?: InputMaybe<Scalars['smallint']>;
-  exprelay2heating?: InputMaybe<Scalars['String']>;
-  exprelay2includediverted?: InputMaybe<Scalars['Boolean']>;
-  exprelay2minimumofftime?: InputMaybe<Scalars['smallint']>;
-  exprelay2minimumontime?: InputMaybe<Scalars['smallint']>;
-  exprelay2mode?: InputMaybe<Scalars['String']>;
-  exprelay2offthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay2onthreshold?: InputMaybe<Scalars['Int']>;
-  gridlimit?: InputMaybe<Scalars['smallint']>;
-  heaterpriority?: InputMaybe<Scalars['smallint']>;
-  heatertype1?: InputMaybe<Scalars['String']>;
-  heatertype2?: InputMaybe<Scalars['String']>;
-  hottime?: InputMaybe<Scalars['smallint']>;
-  icons?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
-  language?: InputMaybe<Scalars['String']>;
-  maxgridlimit?: InputMaybe<Scalars['smallint']>;
-  minimumexport?: InputMaybe<Scalars['Int']>;
-  minimumexporttime?: InputMaybe<Scalars['smallint']>;
-  passcode?: InputMaybe<Scalars['smallint']>;
-  prioritycheckperiod?: InputMaybe<Scalars['smallint']>;
-  savingskeepversion?: InputMaybe<Scalars['smallint']>;
-  serverconfigtime?: InputMaybe<Scalars['Int']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  sparewasconfigversion?: InputMaybe<Scalars['smallint']>;
-  sparewasnetphasemetering?: InputMaybe<Scalars['smallint']>;
-  timezone?: InputMaybe<Scalars['String']>;
-  updatefromcloud?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate max on columns */
-export type Eddi_Config_Reply_Data_Max_Fields = {
-  __typename?: 'eddi_config_reply_data_max_fields';
-  backlight?: Maybe<Scalars['smallint']>;
-  batterymode?: Maybe<Scalars['String']>;
-  boosthotcanceldelay?: Maybe<Scalars['smallint']>;
-  contrast?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  dateformat?: Maybe<Scalars['String']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['smallint']>;
-  esenseboostenablemode?: Maybe<Scalars['String']>;
-  esenseboostmode?: Maybe<Scalars['String']>;
-  esenseheaterenablemode?: Maybe<Scalars['String']>;
-  esensehysteresis1?: Maybe<Scalars['smallint']>;
-  esensehysteresis2?: Maybe<Scalars['smallint']>;
-  esensemode?: Maybe<Scalars['String']>;
-  esenserelaycontrolmode?: Maybe<Scalars['String']>;
-  esensesetpoints1?: Maybe<Scalars['smallint']>;
-  esensesetpoints2?: Maybe<Scalars['smallint']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  exprelay1boosttype?: Maybe<Scalars['smallint']>;
-  exprelay1heating?: Maybe<Scalars['String']>;
-  exprelay1minimumofftime?: Maybe<Scalars['smallint']>;
-  exprelay1minimumontime?: Maybe<Scalars['smallint']>;
-  exprelay1mode?: Maybe<Scalars['String']>;
-  exprelay1offthreshold?: Maybe<Scalars['Int']>;
-  exprelay1onthreshold?: Maybe<Scalars['Int']>;
-  exprelay2boosttype?: Maybe<Scalars['smallint']>;
-  exprelay2heating?: Maybe<Scalars['String']>;
-  exprelay2minimumofftime?: Maybe<Scalars['smallint']>;
-  exprelay2minimumontime?: Maybe<Scalars['smallint']>;
-  exprelay2mode?: Maybe<Scalars['String']>;
-  exprelay2offthreshold?: Maybe<Scalars['Int']>;
-  exprelay2onthreshold?: Maybe<Scalars['Int']>;
-  gridlimit?: Maybe<Scalars['smallint']>;
-  heaterpriority?: Maybe<Scalars['smallint']>;
-  heatertype1?: Maybe<Scalars['String']>;
-  heatertype2?: Maybe<Scalars['String']>;
-  hottime?: Maybe<Scalars['smallint']>;
-  icons?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  language?: Maybe<Scalars['String']>;
-  maxgridlimit?: Maybe<Scalars['smallint']>;
-  minimumexport?: Maybe<Scalars['Int']>;
-  minimumexporttime?: Maybe<Scalars['smallint']>;
-  passcode?: Maybe<Scalars['smallint']>;
-  prioritycheckperiod?: Maybe<Scalars['smallint']>;
-  savingskeepversion?: Maybe<Scalars['smallint']>;
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature?: Maybe<Scalars['bigint']>;
-  sparewasconfigversion?: Maybe<Scalars['smallint']>;
-  sparewasnetphasemetering?: Maybe<Scalars['smallint']>;
-  timezone?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Eddi_Config_Reply_Data_Min_Fields = {
-  __typename?: 'eddi_config_reply_data_min_fields';
-  backlight?: Maybe<Scalars['smallint']>;
-  batterymode?: Maybe<Scalars['String']>;
-  boosthotcanceldelay?: Maybe<Scalars['smallint']>;
-  contrast?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  dateformat?: Maybe<Scalars['String']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['smallint']>;
-  esenseboostenablemode?: Maybe<Scalars['String']>;
-  esenseboostmode?: Maybe<Scalars['String']>;
-  esenseheaterenablemode?: Maybe<Scalars['String']>;
-  esensehysteresis1?: Maybe<Scalars['smallint']>;
-  esensehysteresis2?: Maybe<Scalars['smallint']>;
-  esensemode?: Maybe<Scalars['String']>;
-  esenserelaycontrolmode?: Maybe<Scalars['String']>;
-  esensesetpoints1?: Maybe<Scalars['smallint']>;
-  esensesetpoints2?: Maybe<Scalars['smallint']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  exprelay1boosttype?: Maybe<Scalars['smallint']>;
-  exprelay1heating?: Maybe<Scalars['String']>;
-  exprelay1minimumofftime?: Maybe<Scalars['smallint']>;
-  exprelay1minimumontime?: Maybe<Scalars['smallint']>;
-  exprelay1mode?: Maybe<Scalars['String']>;
-  exprelay1offthreshold?: Maybe<Scalars['Int']>;
-  exprelay1onthreshold?: Maybe<Scalars['Int']>;
-  exprelay2boosttype?: Maybe<Scalars['smallint']>;
-  exprelay2heating?: Maybe<Scalars['String']>;
-  exprelay2minimumofftime?: Maybe<Scalars['smallint']>;
-  exprelay2minimumontime?: Maybe<Scalars['smallint']>;
-  exprelay2mode?: Maybe<Scalars['String']>;
-  exprelay2offthreshold?: Maybe<Scalars['Int']>;
-  exprelay2onthreshold?: Maybe<Scalars['Int']>;
-  gridlimit?: Maybe<Scalars['smallint']>;
-  heaterpriority?: Maybe<Scalars['smallint']>;
-  heatertype1?: Maybe<Scalars['String']>;
-  heatertype2?: Maybe<Scalars['String']>;
-  hottime?: Maybe<Scalars['smallint']>;
-  icons?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  language?: Maybe<Scalars['String']>;
-  maxgridlimit?: Maybe<Scalars['smallint']>;
-  minimumexport?: Maybe<Scalars['Int']>;
-  minimumexporttime?: Maybe<Scalars['smallint']>;
-  passcode?: Maybe<Scalars['smallint']>;
-  prioritycheckperiod?: Maybe<Scalars['smallint']>;
-  savingskeepversion?: Maybe<Scalars['smallint']>;
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature?: Maybe<Scalars['bigint']>;
-  sparewasconfigversion?: Maybe<Scalars['smallint']>;
-  sparewasnetphasemetering?: Maybe<Scalars['smallint']>;
-  timezone?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Mutation_Response = {
-  __typename?: 'eddi_config_reply_data_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Eddi_Config_Reply_Data>;
-};
-
-/** input type for inserting object relation for remote table "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Obj_Rel_Insert_Input = {
-  data: Eddi_Config_Reply_Data_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Eddi_Config_Reply_Data_On_Conflict>;
-};
-
-/** on_conflict condition type for table "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_On_Conflict = {
-  constraint: Eddi_Config_Reply_Data_Constraint;
-  update_columns?: Array<Eddi_Config_Reply_Data_Update_Column>;
-  where?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "eddi_config_reply_data". */
-export type Eddi_Config_Reply_Data_Order_By = {
-  autosettimefromclouddone?: InputMaybe<Order_By>;
-  backlight?: InputMaybe<Order_By>;
-  batterymode?: InputMaybe<Order_By>;
-  boosthotcanceldelay?: InputMaybe<Order_By>;
-  calibration?: InputMaybe<Order_By>;
-  config_reply?: InputMaybe<Config_Reply_Order_By>;
-  config_reply_boost_timers_aggregate?: InputMaybe<Config_Reply_Boost_Timer_Aggregate_Order_By>;
-  contrast?: InputMaybe<Order_By>;
-  ct1group?: InputMaybe<Order_By>;
-  ct1grouplimit?: InputMaybe<Order_By>;
-  ct1subtype?: InputMaybe<Order_By>;
-  ct1type?: InputMaybe<Order_By>;
-  ct2group?: InputMaybe<Order_By>;
-  ct2grouplimit?: InputMaybe<Order_By>;
-  ct2subtype?: InputMaybe<Order_By>;
-  ct2type?: InputMaybe<Order_By>;
-  ct3group?: InputMaybe<Order_By>;
-  ct3grouplimit?: InputMaybe<Order_By>;
-  dateformat?: InputMaybe<Order_By>;
-  deviceconfigtime?: InputMaybe<Order_By>;
-  devicelimit?: InputMaybe<Order_By>;
-  dston?: InputMaybe<Order_By>;
-  esenseboostenablemode?: InputMaybe<Order_By>;
-  esenseboostmode?: InputMaybe<Order_By>;
-  esenseheaterenablemode?: InputMaybe<Order_By>;
-  esensehysteresis1?: InputMaybe<Order_By>;
-  esensehysteresis2?: InputMaybe<Order_By>;
-  esensemode?: InputMaybe<Order_By>;
-  esenserelaycontrolmode?: InputMaybe<Order_By>;
-  esensesetpoints1?: InputMaybe<Order_By>;
-  esensesetpoints2?: InputMaybe<Order_By>;
-  exportmargin?: InputMaybe<Order_By>;
-  exprelay1boosttype?: InputMaybe<Order_By>;
-  exprelay1heating?: InputMaybe<Order_By>;
-  exprelay1includediverted?: InputMaybe<Order_By>;
-  exprelay1minimumofftime?: InputMaybe<Order_By>;
-  exprelay1minimumontime?: InputMaybe<Order_By>;
-  exprelay1mode?: InputMaybe<Order_By>;
-  exprelay1offthreshold?: InputMaybe<Order_By>;
-  exprelay1onthreshold?: InputMaybe<Order_By>;
-  exprelay2boosttype?: InputMaybe<Order_By>;
-  exprelay2heating?: InputMaybe<Order_By>;
-  exprelay2includediverted?: InputMaybe<Order_By>;
-  exprelay2minimumofftime?: InputMaybe<Order_By>;
-  exprelay2minimumontime?: InputMaybe<Order_By>;
-  exprelay2mode?: InputMaybe<Order_By>;
-  exprelay2offthreshold?: InputMaybe<Order_By>;
-  exprelay2onthreshold?: InputMaybe<Order_By>;
-  gridlimit?: InputMaybe<Order_By>;
-  heaterpriority?: InputMaybe<Order_By>;
-  heatertype1?: InputMaybe<Order_By>;
-  heatertype2?: InputMaybe<Order_By>;
-  hottime?: InputMaybe<Order_By>;
-  icons?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  language?: InputMaybe<Order_By>;
-  maxgridlimit?: InputMaybe<Order_By>;
-  minimumexport?: InputMaybe<Order_By>;
-  minimumexporttime?: InputMaybe<Order_By>;
-  passcode?: InputMaybe<Order_By>;
-  prioritycheckperiod?: InputMaybe<Order_By>;
-  savingskeepversion?: InputMaybe<Order_By>;
-  serverconfigtime?: InputMaybe<Order_By>;
-  signature?: InputMaybe<Order_By>;
-  sparewasconfigversion?: InputMaybe<Order_By>;
-  sparewasnetphasemetering?: InputMaybe<Order_By>;
-  timezone?: InputMaybe<Order_By>;
-  updatefromcloud?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: eddi_config_reply_data */
-export type Eddi_Config_Reply_Data_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "eddi_config_reply_data" */
-export enum Eddi_Config_Reply_Data_Select_Column {
-  /** column name */
-  Autosettimefromclouddone = 'autosettimefromclouddone',
-  /** column name */
-  Backlight = 'backlight',
-  /** column name */
-  Batterymode = 'batterymode',
-  /** column name */
-  Boosthotcanceldelay = 'boosthotcanceldelay',
-  /** column name */
-  Calibration = 'calibration',
-  /** column name */
-  Contrast = 'contrast',
-  /** column name */
-  Ct1group = 'ct1group',
-  /** column name */
-  Ct1grouplimit = 'ct1grouplimit',
-  /** column name */
-  Ct1subtype = 'ct1subtype',
-  /** column name */
-  Ct1type = 'ct1type',
-  /** column name */
-  Ct2group = 'ct2group',
-  /** column name */
-  Ct2grouplimit = 'ct2grouplimit',
-  /** column name */
-  Ct2subtype = 'ct2subtype',
-  /** column name */
-  Ct2type = 'ct2type',
-  /** column name */
-  Ct3group = 'ct3group',
-  /** column name */
-  Ct3grouplimit = 'ct3grouplimit',
-  /** column name */
-  Dateformat = 'dateformat',
-  /** column name */
-  Deviceconfigtime = 'deviceconfigtime',
-  /** column name */
-  Devicelimit = 'devicelimit',
-  /** column name */
-  Dston = 'dston',
-  /** column name */
-  Esenseboostenablemode = 'esenseboostenablemode',
-  /** column name */
-  Esenseboostmode = 'esenseboostmode',
-  /** column name */
-  Esenseheaterenablemode = 'esenseheaterenablemode',
-  /** column name */
-  Esensehysteresis1 = 'esensehysteresis1',
-  /** column name */
-  Esensehysteresis2 = 'esensehysteresis2',
-  /** column name */
-  Esensemode = 'esensemode',
-  /** column name */
-  Esenserelaycontrolmode = 'esenserelaycontrolmode',
-  /** column name */
-  Esensesetpoints1 = 'esensesetpoints1',
-  /** column name */
-  Esensesetpoints2 = 'esensesetpoints2',
-  /** column name */
-  Exportmargin = 'exportmargin',
-  /** column name */
-  Exprelay1boosttype = 'exprelay1boosttype',
-  /** column name */
-  Exprelay1heating = 'exprelay1heating',
-  /** column name */
-  Exprelay1includediverted = 'exprelay1includediverted',
-  /** column name */
-  Exprelay1minimumofftime = 'exprelay1minimumofftime',
-  /** column name */
-  Exprelay1minimumontime = 'exprelay1minimumontime',
-  /** column name */
-  Exprelay1mode = 'exprelay1mode',
-  /** column name */
-  Exprelay1offthreshold = 'exprelay1offthreshold',
-  /** column name */
-  Exprelay1onthreshold = 'exprelay1onthreshold',
-  /** column name */
-  Exprelay2boosttype = 'exprelay2boosttype',
-  /** column name */
-  Exprelay2heating = 'exprelay2heating',
-  /** column name */
-  Exprelay2includediverted = 'exprelay2includediverted',
-  /** column name */
-  Exprelay2minimumofftime = 'exprelay2minimumofftime',
-  /** column name */
-  Exprelay2minimumontime = 'exprelay2minimumontime',
-  /** column name */
-  Exprelay2mode = 'exprelay2mode',
-  /** column name */
-  Exprelay2offthreshold = 'exprelay2offthreshold',
-  /** column name */
-  Exprelay2onthreshold = 'exprelay2onthreshold',
-  /** column name */
-  Gridlimit = 'gridlimit',
-  /** column name */
-  Heaterpriority = 'heaterpriority',
-  /** column name */
-  Heatertype1 = 'heatertype1',
-  /** column name */
-  Heatertype2 = 'heatertype2',
-  /** column name */
-  Hottime = 'hottime',
-  /** column name */
-  Icons = 'icons',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Language = 'language',
-  /** column name */
-  Maxgridlimit = 'maxgridlimit',
-  /** column name */
-  Minimumexport = 'minimumexport',
-  /** column name */
-  Minimumexporttime = 'minimumexporttime',
-  /** column name */
-  Passcode = 'passcode',
-  /** column name */
-  Prioritycheckperiod = 'prioritycheckperiod',
-  /** column name */
-  Savingskeepversion = 'savingskeepversion',
-  /** column name */
-  Serverconfigtime = 'serverconfigtime',
-  /** column name */
-  Signature = 'signature',
-  /** column name */
-  Sparewasconfigversion = 'sparewasconfigversion',
-  /** column name */
-  Sparewasnetphasemetering = 'sparewasnetphasemetering',
-  /** column name */
-  Timezone = 'timezone',
-  /** column name */
-  Updatefromcloud = 'updatefromcloud',
-}
-
-/** input type for updating data in table "eddi_config_reply_data" */
-export type Eddi_Config_Reply_Data_Set_Input = {
-  autosettimefromclouddone?: InputMaybe<Scalars['Boolean']>;
-  backlight?: InputMaybe<Scalars['smallint']>;
-  batterymode?: InputMaybe<Scalars['String']>;
-  boosthotcanceldelay?: InputMaybe<Scalars['smallint']>;
-  calibration?: InputMaybe<Scalars['bytea']>;
-  contrast?: InputMaybe<Scalars['smallint']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct1subtype?: InputMaybe<Scalars['String']>;
-  ct1type?: InputMaybe<Scalars['String']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2subtype?: InputMaybe<Scalars['String']>;
-  ct2type?: InputMaybe<Scalars['String']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  dateformat?: InputMaybe<Scalars['String']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['smallint']>;
-  dston?: InputMaybe<Scalars['Boolean']>;
-  esenseboostenablemode?: InputMaybe<Scalars['String']>;
-  esenseboostmode?: InputMaybe<Scalars['String']>;
-  esenseheaterenablemode?: InputMaybe<Scalars['String']>;
-  esensehysteresis1?: InputMaybe<Scalars['smallint']>;
-  esensehysteresis2?: InputMaybe<Scalars['smallint']>;
-  esensemode?: InputMaybe<Scalars['String']>;
-  esenserelaycontrolmode?: InputMaybe<Scalars['String']>;
-  esensesetpoints1?: InputMaybe<Scalars['smallint']>;
-  esensesetpoints2?: InputMaybe<Scalars['smallint']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  exprelay1boosttype?: InputMaybe<Scalars['smallint']>;
-  exprelay1heating?: InputMaybe<Scalars['String']>;
-  exprelay1includediverted?: InputMaybe<Scalars['Boolean']>;
-  exprelay1minimumofftime?: InputMaybe<Scalars['smallint']>;
-  exprelay1minimumontime?: InputMaybe<Scalars['smallint']>;
-  exprelay1mode?: InputMaybe<Scalars['String']>;
-  exprelay1offthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay1onthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay2boosttype?: InputMaybe<Scalars['smallint']>;
-  exprelay2heating?: InputMaybe<Scalars['String']>;
-  exprelay2includediverted?: InputMaybe<Scalars['Boolean']>;
-  exprelay2minimumofftime?: InputMaybe<Scalars['smallint']>;
-  exprelay2minimumontime?: InputMaybe<Scalars['smallint']>;
-  exprelay2mode?: InputMaybe<Scalars['String']>;
-  exprelay2offthreshold?: InputMaybe<Scalars['Int']>;
-  exprelay2onthreshold?: InputMaybe<Scalars['Int']>;
-  gridlimit?: InputMaybe<Scalars['smallint']>;
-  heaterpriority?: InputMaybe<Scalars['smallint']>;
-  heatertype1?: InputMaybe<Scalars['String']>;
-  heatertype2?: InputMaybe<Scalars['String']>;
-  hottime?: InputMaybe<Scalars['smallint']>;
-  icons?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
-  language?: InputMaybe<Scalars['String']>;
-  maxgridlimit?: InputMaybe<Scalars['smallint']>;
-  minimumexport?: InputMaybe<Scalars['Int']>;
-  minimumexporttime?: InputMaybe<Scalars['smallint']>;
-  passcode?: InputMaybe<Scalars['smallint']>;
-  prioritycheckperiod?: InputMaybe<Scalars['smallint']>;
-  savingskeepversion?: InputMaybe<Scalars['smallint']>;
-  serverconfigtime?: InputMaybe<Scalars['Int']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  sparewasconfigversion?: InputMaybe<Scalars['smallint']>;
-  sparewasnetphasemetering?: InputMaybe<Scalars['smallint']>;
-  timezone?: InputMaybe<Scalars['String']>;
-  updatefromcloud?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate stddev on columns */
-export type Eddi_Config_Reply_Data_Stddev_Fields = {
-  __typename?: 'eddi_config_reply_data_stddev_fields';
-  backlight?: Maybe<Scalars['Float']>;
-  boosthotcanceldelay?: Maybe<Scalars['Float']>;
-  contrast?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esensehysteresis1?: Maybe<Scalars['Float']>;
-  esensehysteresis2?: Maybe<Scalars['Float']>;
-  esensesetpoints1?: Maybe<Scalars['Float']>;
-  esensesetpoints2?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  exprelay1boosttype?: Maybe<Scalars['Float']>;
-  exprelay1minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay1minimumontime?: Maybe<Scalars['Float']>;
-  exprelay1offthreshold?: Maybe<Scalars['Float']>;
-  exprelay1onthreshold?: Maybe<Scalars['Float']>;
-  exprelay2boosttype?: Maybe<Scalars['Float']>;
-  exprelay2minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay2minimumontime?: Maybe<Scalars['Float']>;
-  exprelay2offthreshold?: Maybe<Scalars['Float']>;
-  exprelay2onthreshold?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  heaterpriority?: Maybe<Scalars['Float']>;
-  hottime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  minimumexport?: Maybe<Scalars['Float']>;
-  minimumexporttime?: Maybe<Scalars['Float']>;
-  passcode?: Maybe<Scalars['Float']>;
-  prioritycheckperiod?: Maybe<Scalars['Float']>;
-  savingskeepversion?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  sparewasconfigversion?: Maybe<Scalars['Float']>;
-  sparewasnetphasemetering?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Eddi_Config_Reply_Data_Stddev_Pop_Fields = {
-  __typename?: 'eddi_config_reply_data_stddev_pop_fields';
-  backlight?: Maybe<Scalars['Float']>;
-  boosthotcanceldelay?: Maybe<Scalars['Float']>;
-  contrast?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esensehysteresis1?: Maybe<Scalars['Float']>;
-  esensehysteresis2?: Maybe<Scalars['Float']>;
-  esensesetpoints1?: Maybe<Scalars['Float']>;
-  esensesetpoints2?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  exprelay1boosttype?: Maybe<Scalars['Float']>;
-  exprelay1minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay1minimumontime?: Maybe<Scalars['Float']>;
-  exprelay1offthreshold?: Maybe<Scalars['Float']>;
-  exprelay1onthreshold?: Maybe<Scalars['Float']>;
-  exprelay2boosttype?: Maybe<Scalars['Float']>;
-  exprelay2minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay2minimumontime?: Maybe<Scalars['Float']>;
-  exprelay2offthreshold?: Maybe<Scalars['Float']>;
-  exprelay2onthreshold?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  heaterpriority?: Maybe<Scalars['Float']>;
-  hottime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  minimumexport?: Maybe<Scalars['Float']>;
-  minimumexporttime?: Maybe<Scalars['Float']>;
-  passcode?: Maybe<Scalars['Float']>;
-  prioritycheckperiod?: Maybe<Scalars['Float']>;
-  savingskeepversion?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  sparewasconfigversion?: Maybe<Scalars['Float']>;
-  sparewasnetphasemetering?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Eddi_Config_Reply_Data_Stddev_Samp_Fields = {
-  __typename?: 'eddi_config_reply_data_stddev_samp_fields';
-  backlight?: Maybe<Scalars['Float']>;
-  boosthotcanceldelay?: Maybe<Scalars['Float']>;
-  contrast?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esensehysteresis1?: Maybe<Scalars['Float']>;
-  esensehysteresis2?: Maybe<Scalars['Float']>;
-  esensesetpoints1?: Maybe<Scalars['Float']>;
-  esensesetpoints2?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  exprelay1boosttype?: Maybe<Scalars['Float']>;
-  exprelay1minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay1minimumontime?: Maybe<Scalars['Float']>;
-  exprelay1offthreshold?: Maybe<Scalars['Float']>;
-  exprelay1onthreshold?: Maybe<Scalars['Float']>;
-  exprelay2boosttype?: Maybe<Scalars['Float']>;
-  exprelay2minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay2minimumontime?: Maybe<Scalars['Float']>;
-  exprelay2offthreshold?: Maybe<Scalars['Float']>;
-  exprelay2onthreshold?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  heaterpriority?: Maybe<Scalars['Float']>;
-  hottime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  minimumexport?: Maybe<Scalars['Float']>;
-  minimumexporttime?: Maybe<Scalars['Float']>;
-  passcode?: Maybe<Scalars['Float']>;
-  prioritycheckperiod?: Maybe<Scalars['Float']>;
-  savingskeepversion?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  sparewasconfigversion?: Maybe<Scalars['Float']>;
-  sparewasnetphasemetering?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Eddi_Config_Reply_Data_Sum_Fields = {
-  __typename?: 'eddi_config_reply_data_sum_fields';
-  backlight?: Maybe<Scalars['smallint']>;
-  boosthotcanceldelay?: Maybe<Scalars['smallint']>;
-  contrast?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['smallint']>;
-  esensehysteresis1?: Maybe<Scalars['smallint']>;
-  esensehysteresis2?: Maybe<Scalars['smallint']>;
-  esensesetpoints1?: Maybe<Scalars['smallint']>;
-  esensesetpoints2?: Maybe<Scalars['smallint']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  exprelay1boosttype?: Maybe<Scalars['smallint']>;
-  exprelay1minimumofftime?: Maybe<Scalars['smallint']>;
-  exprelay1minimumontime?: Maybe<Scalars['smallint']>;
-  exprelay1offthreshold?: Maybe<Scalars['Int']>;
-  exprelay1onthreshold?: Maybe<Scalars['Int']>;
-  exprelay2boosttype?: Maybe<Scalars['smallint']>;
-  exprelay2minimumofftime?: Maybe<Scalars['smallint']>;
-  exprelay2minimumontime?: Maybe<Scalars['smallint']>;
-  exprelay2offthreshold?: Maybe<Scalars['Int']>;
-  exprelay2onthreshold?: Maybe<Scalars['Int']>;
-  gridlimit?: Maybe<Scalars['smallint']>;
-  heaterpriority?: Maybe<Scalars['smallint']>;
-  hottime?: Maybe<Scalars['smallint']>;
-  id?: Maybe<Scalars['Int']>;
-  maxgridlimit?: Maybe<Scalars['smallint']>;
-  minimumexport?: Maybe<Scalars['Int']>;
-  minimumexporttime?: Maybe<Scalars['smallint']>;
-  passcode?: Maybe<Scalars['smallint']>;
-  prioritycheckperiod?: Maybe<Scalars['smallint']>;
-  savingskeepversion?: Maybe<Scalars['smallint']>;
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature?: Maybe<Scalars['bigint']>;
-  sparewasconfigversion?: Maybe<Scalars['smallint']>;
-  sparewasnetphasemetering?: Maybe<Scalars['smallint']>;
-};
-
-/** update columns of table "eddi_config_reply_data" */
-export enum Eddi_Config_Reply_Data_Update_Column {
-  /** column name */
-  Autosettimefromclouddone = 'autosettimefromclouddone',
-  /** column name */
-  Backlight = 'backlight',
-  /** column name */
-  Batterymode = 'batterymode',
-  /** column name */
-  Boosthotcanceldelay = 'boosthotcanceldelay',
-  /** column name */
-  Calibration = 'calibration',
-  /** column name */
-  Contrast = 'contrast',
-  /** column name */
-  Ct1group = 'ct1group',
-  /** column name */
-  Ct1grouplimit = 'ct1grouplimit',
-  /** column name */
-  Ct1subtype = 'ct1subtype',
-  /** column name */
-  Ct1type = 'ct1type',
-  /** column name */
-  Ct2group = 'ct2group',
-  /** column name */
-  Ct2grouplimit = 'ct2grouplimit',
-  /** column name */
-  Ct2subtype = 'ct2subtype',
-  /** column name */
-  Ct2type = 'ct2type',
-  /** column name */
-  Ct3group = 'ct3group',
-  /** column name */
-  Ct3grouplimit = 'ct3grouplimit',
-  /** column name */
-  Dateformat = 'dateformat',
-  /** column name */
-  Deviceconfigtime = 'deviceconfigtime',
-  /** column name */
-  Devicelimit = 'devicelimit',
-  /** column name */
-  Dston = 'dston',
-  /** column name */
-  Esenseboostenablemode = 'esenseboostenablemode',
-  /** column name */
-  Esenseboostmode = 'esenseboostmode',
-  /** column name */
-  Esenseheaterenablemode = 'esenseheaterenablemode',
-  /** column name */
-  Esensehysteresis1 = 'esensehysteresis1',
-  /** column name */
-  Esensehysteresis2 = 'esensehysteresis2',
-  /** column name */
-  Esensemode = 'esensemode',
-  /** column name */
-  Esenserelaycontrolmode = 'esenserelaycontrolmode',
-  /** column name */
-  Esensesetpoints1 = 'esensesetpoints1',
-  /** column name */
-  Esensesetpoints2 = 'esensesetpoints2',
-  /** column name */
-  Exportmargin = 'exportmargin',
-  /** column name */
-  Exprelay1boosttype = 'exprelay1boosttype',
-  /** column name */
-  Exprelay1heating = 'exprelay1heating',
-  /** column name */
-  Exprelay1includediverted = 'exprelay1includediverted',
-  /** column name */
-  Exprelay1minimumofftime = 'exprelay1minimumofftime',
-  /** column name */
-  Exprelay1minimumontime = 'exprelay1minimumontime',
-  /** column name */
-  Exprelay1mode = 'exprelay1mode',
-  /** column name */
-  Exprelay1offthreshold = 'exprelay1offthreshold',
-  /** column name */
-  Exprelay1onthreshold = 'exprelay1onthreshold',
-  /** column name */
-  Exprelay2boosttype = 'exprelay2boosttype',
-  /** column name */
-  Exprelay2heating = 'exprelay2heating',
-  /** column name */
-  Exprelay2includediverted = 'exprelay2includediverted',
-  /** column name */
-  Exprelay2minimumofftime = 'exprelay2minimumofftime',
-  /** column name */
-  Exprelay2minimumontime = 'exprelay2minimumontime',
-  /** column name */
-  Exprelay2mode = 'exprelay2mode',
-  /** column name */
-  Exprelay2offthreshold = 'exprelay2offthreshold',
-  /** column name */
-  Exprelay2onthreshold = 'exprelay2onthreshold',
-  /** column name */
-  Gridlimit = 'gridlimit',
-  /** column name */
-  Heaterpriority = 'heaterpriority',
-  /** column name */
-  Heatertype1 = 'heatertype1',
-  /** column name */
-  Heatertype2 = 'heatertype2',
-  /** column name */
-  Hottime = 'hottime',
-  /** column name */
-  Icons = 'icons',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Language = 'language',
-  /** column name */
-  Maxgridlimit = 'maxgridlimit',
-  /** column name */
-  Minimumexport = 'minimumexport',
-  /** column name */
-  Minimumexporttime = 'minimumexporttime',
-  /** column name */
-  Passcode = 'passcode',
-  /** column name */
-  Prioritycheckperiod = 'prioritycheckperiod',
-  /** column name */
-  Savingskeepversion = 'savingskeepversion',
-  /** column name */
-  Serverconfigtime = 'serverconfigtime',
-  /** column name */
-  Signature = 'signature',
-  /** column name */
-  Sparewasconfigversion = 'sparewasconfigversion',
-  /** column name */
-  Sparewasnetphasemetering = 'sparewasnetphasemetering',
-  /** column name */
-  Timezone = 'timezone',
-  /** column name */
-  Updatefromcloud = 'updatefromcloud',
-}
-
-/** aggregate var_pop on columns */
-export type Eddi_Config_Reply_Data_Var_Pop_Fields = {
-  __typename?: 'eddi_config_reply_data_var_pop_fields';
-  backlight?: Maybe<Scalars['Float']>;
-  boosthotcanceldelay?: Maybe<Scalars['Float']>;
-  contrast?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esensehysteresis1?: Maybe<Scalars['Float']>;
-  esensehysteresis2?: Maybe<Scalars['Float']>;
-  esensesetpoints1?: Maybe<Scalars['Float']>;
-  esensesetpoints2?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  exprelay1boosttype?: Maybe<Scalars['Float']>;
-  exprelay1minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay1minimumontime?: Maybe<Scalars['Float']>;
-  exprelay1offthreshold?: Maybe<Scalars['Float']>;
-  exprelay1onthreshold?: Maybe<Scalars['Float']>;
-  exprelay2boosttype?: Maybe<Scalars['Float']>;
-  exprelay2minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay2minimumontime?: Maybe<Scalars['Float']>;
-  exprelay2offthreshold?: Maybe<Scalars['Float']>;
-  exprelay2onthreshold?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  heaterpriority?: Maybe<Scalars['Float']>;
-  hottime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  minimumexport?: Maybe<Scalars['Float']>;
-  minimumexporttime?: Maybe<Scalars['Float']>;
-  passcode?: Maybe<Scalars['Float']>;
-  prioritycheckperiod?: Maybe<Scalars['Float']>;
-  savingskeepversion?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  sparewasconfigversion?: Maybe<Scalars['Float']>;
-  sparewasnetphasemetering?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Eddi_Config_Reply_Data_Var_Samp_Fields = {
-  __typename?: 'eddi_config_reply_data_var_samp_fields';
-  backlight?: Maybe<Scalars['Float']>;
-  boosthotcanceldelay?: Maybe<Scalars['Float']>;
-  contrast?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esensehysteresis1?: Maybe<Scalars['Float']>;
-  esensehysteresis2?: Maybe<Scalars['Float']>;
-  esensesetpoints1?: Maybe<Scalars['Float']>;
-  esensesetpoints2?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  exprelay1boosttype?: Maybe<Scalars['Float']>;
-  exprelay1minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay1minimumontime?: Maybe<Scalars['Float']>;
-  exprelay1offthreshold?: Maybe<Scalars['Float']>;
-  exprelay1onthreshold?: Maybe<Scalars['Float']>;
-  exprelay2boosttype?: Maybe<Scalars['Float']>;
-  exprelay2minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay2minimumontime?: Maybe<Scalars['Float']>;
-  exprelay2offthreshold?: Maybe<Scalars['Float']>;
-  exprelay2onthreshold?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  heaterpriority?: Maybe<Scalars['Float']>;
-  hottime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  minimumexport?: Maybe<Scalars['Float']>;
-  minimumexporttime?: Maybe<Scalars['Float']>;
-  passcode?: Maybe<Scalars['Float']>;
-  prioritycheckperiod?: Maybe<Scalars['Float']>;
-  savingskeepversion?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  sparewasconfigversion?: Maybe<Scalars['Float']>;
-  sparewasnetphasemetering?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Eddi_Config_Reply_Data_Variance_Fields = {
-  __typename?: 'eddi_config_reply_data_variance_fields';
-  backlight?: Maybe<Scalars['Float']>;
-  boosthotcanceldelay?: Maybe<Scalars['Float']>;
-  contrast?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esensehysteresis1?: Maybe<Scalars['Float']>;
-  esensehysteresis2?: Maybe<Scalars['Float']>;
-  esensesetpoints1?: Maybe<Scalars['Float']>;
-  esensesetpoints2?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  exprelay1boosttype?: Maybe<Scalars['Float']>;
-  exprelay1minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay1minimumontime?: Maybe<Scalars['Float']>;
-  exprelay1offthreshold?: Maybe<Scalars['Float']>;
-  exprelay1onthreshold?: Maybe<Scalars['Float']>;
-  exprelay2boosttype?: Maybe<Scalars['Float']>;
-  exprelay2minimumofftime?: Maybe<Scalars['Float']>;
-  exprelay2minimumontime?: Maybe<Scalars['Float']>;
-  exprelay2offthreshold?: Maybe<Scalars['Float']>;
-  exprelay2onthreshold?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  heaterpriority?: Maybe<Scalars['Float']>;
-  hottime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  minimumexport?: Maybe<Scalars['Float']>;
-  minimumexporttime?: Maybe<Scalars['Float']>;
-  passcode?: Maybe<Scalars['Float']>;
-  prioritycheckperiod?: Maybe<Scalars['Float']>;
-  savingskeepversion?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  sparewasconfigversion?: Maybe<Scalars['Float']>;
-  sparewasnetphasemetering?: Maybe<Scalars['Float']>;
 };
 
 /** unique or primary key constraints on table "eddi" */
@@ -4830,7 +1735,6 @@ export type Eddi_Insert_Input = {
   chargeenergy?: InputMaybe<Scalars['Float']>;
   checkperiod?: InputMaybe<Scalars['smallint']>;
   commandseqno?: InputMaybe<Scalars['smallint']>;
-  config_reply?: InputMaybe<Config_Reply_Obj_Rel_Insert_Input>;
   configappdata?: InputMaybe<Scalars['bytea']>;
   configappdone?: InputMaybe<Scalars['Boolean']>;
   configbootdata?: InputMaybe<Scalars['bytea']>;
@@ -5727,7 +2631,6 @@ export type Eddi_Order_By = {
   chargeenergy?: InputMaybe<Order_By>;
   checkperiod?: InputMaybe<Order_By>;
   commandseqno?: InputMaybe<Order_By>;
-  config_reply?: InputMaybe<Config_Reply_Order_By>;
   configappdata?: InputMaybe<Order_By>;
   configappdone?: InputMaybe<Order_By>;
   configbootdata?: InputMaybe<Order_By>;
@@ -7463,210 +4366,6 @@ export type Event_Variance_Fields = {
   zappistate?: Maybe<Scalars['Float']>;
 };
 
-/** columns and relationships of "foal_session" */
-export type Foal_Session = {
-  __typename?: 'foal_session';
-  created_at: Scalars['bigint'];
-  session_content: Scalars['String'];
-  session_id: Scalars['String'];
-  updated_at: Scalars['bigint'];
-};
-
-/** aggregated selection of "foal_session" */
-export type Foal_Session_Aggregate = {
-  __typename?: 'foal_session_aggregate';
-  aggregate?: Maybe<Foal_Session_Aggregate_Fields>;
-  nodes: Array<Foal_Session>;
-};
-
-/** aggregate fields of "foal_session" */
-export type Foal_Session_Aggregate_Fields = {
-  __typename?: 'foal_session_aggregate_fields';
-  avg?: Maybe<Foal_Session_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Foal_Session_Max_Fields>;
-  min?: Maybe<Foal_Session_Min_Fields>;
-  stddev?: Maybe<Foal_Session_Stddev_Fields>;
-  stddev_pop?: Maybe<Foal_Session_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Foal_Session_Stddev_Samp_Fields>;
-  sum?: Maybe<Foal_Session_Sum_Fields>;
-  var_pop?: Maybe<Foal_Session_Var_Pop_Fields>;
-  var_samp?: Maybe<Foal_Session_Var_Samp_Fields>;
-  variance?: Maybe<Foal_Session_Variance_Fields>;
-};
-
-/** aggregate fields of "foal_session" */
-export type Foal_Session_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Foal_Session_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Foal_Session_Avg_Fields = {
-  __typename?: 'foal_session_avg_fields';
-  created_at?: Maybe<Scalars['Float']>;
-  updated_at?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "foal_session". All fields are combined with a logical 'AND'. */
-export type Foal_Session_Bool_Exp = {
-  _and?: InputMaybe<Array<Foal_Session_Bool_Exp>>;
-  _not?: InputMaybe<Foal_Session_Bool_Exp>;
-  _or?: InputMaybe<Array<Foal_Session_Bool_Exp>>;
-  created_at?: InputMaybe<Bigint_Comparison_Exp>;
-  session_content?: InputMaybe<String_Comparison_Exp>;
-  session_id?: InputMaybe<String_Comparison_Exp>;
-  updated_at?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "foal_session" */
-export enum Foal_Session_Constraint {
-  /** unique or primary key constraint */
-  Pk_9e23333fee454aa1884ba8e0af7 = 'PK_9e23333fee454aa1884ba8e0af7',
-}
-
-/** input type for incrementing numeric columns in table "foal_session" */
-export type Foal_Session_Inc_Input = {
-  created_at?: InputMaybe<Scalars['bigint']>;
-  updated_at?: InputMaybe<Scalars['bigint']>;
-};
-
-/** input type for inserting data into table "foal_session" */
-export type Foal_Session_Insert_Input = {
-  created_at?: InputMaybe<Scalars['bigint']>;
-  session_content?: InputMaybe<Scalars['String']>;
-  session_id?: InputMaybe<Scalars['String']>;
-  updated_at?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate max on columns */
-export type Foal_Session_Max_Fields = {
-  __typename?: 'foal_session_max_fields';
-  created_at?: Maybe<Scalars['bigint']>;
-  session_content?: Maybe<Scalars['String']>;
-  session_id?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['bigint']>;
-};
-
-/** aggregate min on columns */
-export type Foal_Session_Min_Fields = {
-  __typename?: 'foal_session_min_fields';
-  created_at?: Maybe<Scalars['bigint']>;
-  session_content?: Maybe<Scalars['String']>;
-  session_id?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['bigint']>;
-};
-
-/** response of any mutation on the table "foal_session" */
-export type Foal_Session_Mutation_Response = {
-  __typename?: 'foal_session_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Foal_Session>;
-};
-
-/** on_conflict condition type for table "foal_session" */
-export type Foal_Session_On_Conflict = {
-  constraint: Foal_Session_Constraint;
-  update_columns?: Array<Foal_Session_Update_Column>;
-  where?: InputMaybe<Foal_Session_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "foal_session". */
-export type Foal_Session_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  session_content?: InputMaybe<Order_By>;
-  session_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: foal_session */
-export type Foal_Session_Pk_Columns_Input = {
-  session_id: Scalars['String'];
-};
-
-/** select columns of table "foal_session" */
-export enum Foal_Session_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  SessionContent = 'session_content',
-  /** column name */
-  SessionId = 'session_id',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** input type for updating data in table "foal_session" */
-export type Foal_Session_Set_Input = {
-  created_at?: InputMaybe<Scalars['bigint']>;
-  session_content?: InputMaybe<Scalars['String']>;
-  session_id?: InputMaybe<Scalars['String']>;
-  updated_at?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate stddev on columns */
-export type Foal_Session_Stddev_Fields = {
-  __typename?: 'foal_session_stddev_fields';
-  created_at?: Maybe<Scalars['Float']>;
-  updated_at?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Foal_Session_Stddev_Pop_Fields = {
-  __typename?: 'foal_session_stddev_pop_fields';
-  created_at?: Maybe<Scalars['Float']>;
-  updated_at?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Foal_Session_Stddev_Samp_Fields = {
-  __typename?: 'foal_session_stddev_samp_fields';
-  created_at?: Maybe<Scalars['Float']>;
-  updated_at?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Foal_Session_Sum_Fields = {
-  __typename?: 'foal_session_sum_fields';
-  created_at?: Maybe<Scalars['bigint']>;
-  updated_at?: Maybe<Scalars['bigint']>;
-};
-
-/** update columns of table "foal_session" */
-export enum Foal_Session_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  SessionContent = 'session_content',
-  /** column name */
-  SessionId = 'session_id',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** aggregate var_pop on columns */
-export type Foal_Session_Var_Pop_Fields = {
-  __typename?: 'foal_session_var_pop_fields';
-  created_at?: Maybe<Scalars['Float']>;
-  updated_at?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Foal_Session_Var_Samp_Fields = {
-  __typename?: 'foal_session_var_samp_fields';
-  created_at?: Maybe<Scalars['Float']>;
-  updated_at?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Foal_Session_Variance_Fields = {
-  __typename?: 'foal_session_variance_fields';
-  created_at?: Maybe<Scalars['Float']>;
-  updated_at?: Maybe<Scalars['Float']>;
-};
-
 /** columns and relationships of "harvi" */
 export type Harvi = {
   __typename?: 'harvi';
@@ -8364,8 +5063,6 @@ export type Hub = {
   registrationdate?: Maybe<Scalars['timestamptz']>;
   regpassword: Scalars['String'];
   serialno: Scalars['bigint'];
-  /** An object relationship */
-  server?: Maybe<Server>;
   serverlastheard?: Maybe<Scalars['Int']>;
   updatedat: Scalars['timestamptz'];
   uptime?: Maybe<Scalars['Int']>;
@@ -8463,31 +5160,9 @@ export type Hub_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "hub" */
-export type Hub_Aggregate_Order_By = {
-  avg?: InputMaybe<Hub_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Hub_Max_Order_By>;
-  min?: InputMaybe<Hub_Min_Order_By>;
-  stddev?: InputMaybe<Hub_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Hub_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Hub_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Hub_Sum_Order_By>;
-  var_pop?: InputMaybe<Hub_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Hub_Var_Samp_Order_By>;
-  variance?: InputMaybe<Hub_Variance_Order_By>;
-};
-
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Hub_Append_Input = {
   keyvaluestore?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** input type for inserting array relation for remote table "hub" */
-export type Hub_Arr_Rel_Insert_Input = {
-  data: Array<Hub_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Hub_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -8518,35 +5193,6 @@ export type Hub_Avg_Fields = {
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "hub" */
-export type Hub_Avg_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "hub". All fields are combined with a logical 'AND'. */
@@ -8593,7 +5239,6 @@ export type Hub_Bool_Exp = {
   registrationdate?: InputMaybe<Timestamptz_Comparison_Exp>;
   regpassword?: InputMaybe<String_Comparison_Exp>;
   serialno?: InputMaybe<Bigint_Comparison_Exp>;
-  server?: InputMaybe<Server_Bool_Exp>;
   serverlastheard?: InputMaybe<Int_Comparison_Exp>;
   updatedat?: InputMaybe<Timestamptz_Comparison_Exp>;
   uptime?: InputMaybe<Int_Comparison_Exp>;
@@ -8691,7 +5336,6 @@ export type Hub_Insert_Input = {
   registrationdate?: InputMaybe<Scalars['timestamptz']>;
   regpassword?: InputMaybe<Scalars['String']>;
   serialno?: InputMaybe<Scalars['bigint']>;
-  server?: InputMaybe<Server_Obj_Rel_Insert_Input>;
   serverlastheard?: InputMaybe<Scalars['Int']>;
   updatedat?: InputMaybe<Scalars['timestamptz']>;
   uptime?: InputMaybe<Scalars['Int']>;
@@ -8736,43 +5380,6 @@ export type Hub_Max_Fields = {
   uptime?: Maybe<Scalars['Int']>;
 };
 
-/** order by max() on columns of table "hub" */
-export type Hub_Max_Order_By = {
-  apppassword?: InputMaybe<Order_By>;
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  deviceclass?: InputMaybe<Order_By>;
-  ipaddress?: InputMaybe<Order_By>;
-  lastauth?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceclass?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  registrationdate?: InputMaybe<Order_By>;
-  regpassword?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  updatedat?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
-};
-
 /** aggregate min on columns */
 export type Hub_Min_Fields = {
   __typename?: 'hub_min_fields';
@@ -8809,43 +5416,6 @@ export type Hub_Min_Fields = {
   serverlastheard?: Maybe<Scalars['Int']>;
   updatedat?: Maybe<Scalars['timestamptz']>;
   uptime?: Maybe<Scalars['Int']>;
-};
-
-/** order by min() on columns of table "hub" */
-export type Hub_Min_Order_By = {
-  apppassword?: InputMaybe<Order_By>;
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  deviceclass?: InputMaybe<Order_By>;
-  ipaddress?: InputMaybe<Order_By>;
-  lastauth?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceclass?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  registrationdate?: InputMaybe<Order_By>;
-  regpassword?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  updatedat?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "hub" */
@@ -8912,7 +5482,6 @@ export type Hub_Order_By = {
   registrationdate?: InputMaybe<Order_By>;
   regpassword?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
-  server?: InputMaybe<Server_Order_By>;
   serverlastheard?: InputMaybe<Order_By>;
   updatedat?: InputMaybe<Order_By>;
   uptime?: InputMaybe<Order_By>;
@@ -9087,35 +5656,6 @@ export type Hub_Stddev_Fields = {
   uptime?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev() on columns of table "hub" */
-export type Hub_Stddev_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_pop on columns */
 export type Hub_Stddev_Pop_Fields = {
   __typename?: 'hub_stddev_pop_fields';
@@ -9144,35 +5684,6 @@ export type Hub_Stddev_Pop_Fields = {
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "hub" */
-export type Hub_Stddev_Pop_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -9205,35 +5716,6 @@ export type Hub_Stddev_Samp_Fields = {
   uptime?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_samp() on columns of table "hub" */
-export type Hub_Stddev_Samp_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
-};
-
 /** aggregate sum on columns */
 export type Hub_Sum_Fields = {
   __typename?: 'hub_sum_fields';
@@ -9262,35 +5744,6 @@ export type Hub_Sum_Fields = {
   serialno?: Maybe<Scalars['bigint']>;
   serverlastheard?: Maybe<Scalars['Int']>;
   uptime?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "hub" */
-export type Hub_Sum_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "hub" */
@@ -9407,35 +5860,6 @@ export type Hub_Var_Pop_Fields = {
   uptime?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_pop() on columns of table "hub" */
-export type Hub_Var_Pop_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
-};
-
 /** aggregate var_samp on columns */
 export type Hub_Var_Samp_Fields = {
   __typename?: 'hub_var_samp_fields';
@@ -9466,35 +5890,6 @@ export type Hub_Var_Samp_Fields = {
   uptime?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_samp() on columns of table "hub" */
-export type Hub_Var_Samp_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
-};
-
 /** aggregate variance on columns */
 export type Hub_Variance_Fields = {
   __typename?: 'hub_variance_fields';
@@ -9523,35 +5918,6 @@ export type Hub_Variance_Fields = {
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "hub" */
-export type Hub_Variance_Order_By = {
-  cloudipoverrideserverid?: InputMaybe<Order_By>;
-  currentversion?: InputMaybe<Order_By>;
-  loadcontroldevicedata1serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata1setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata2serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata2setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata3serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata3setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata4serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata4setload?: InputMaybe<Order_By>;
-  loadcontroldevicedata5serialno?: InputMaybe<Order_By>;
-  loadcontroldevicedata5setload?: InputMaybe<Order_By>;
-  loadcontrolgeneration?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase1?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase2?: InputMaybe<Order_By>;
-  loadcontrolgridcurrentshundredthsphase3?: InputMaybe<Order_By>;
-  loadcontrolgridimportexport?: InputMaybe<Order_By>;
-  masterdeviceinstance?: InputMaybe<Order_By>;
-  masterdevicerawaddress?: InputMaybe<Order_By>;
-  networkid?: InputMaybe<Order_By>;
-  nodevices?: InputMaybe<Order_By>;
-  port?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  serverlastheard?: InputMaybe<Order_By>;
-  uptime?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
@@ -9590,199 +5956,6 @@ export type Macaddr_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['macaddr']>>;
 };
 
-/** columns and relationships of "migrations" */
-export type Migrations = {
-  __typename?: 'migrations';
-  id: Scalars['Int'];
-  name: Scalars['String'];
-  timestamp: Scalars['bigint'];
-};
-
-/** aggregated selection of "migrations" */
-export type Migrations_Aggregate = {
-  __typename?: 'migrations_aggregate';
-  aggregate?: Maybe<Migrations_Aggregate_Fields>;
-  nodes: Array<Migrations>;
-};
-
-/** aggregate fields of "migrations" */
-export type Migrations_Aggregate_Fields = {
-  __typename?: 'migrations_aggregate_fields';
-  avg?: Maybe<Migrations_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Migrations_Max_Fields>;
-  min?: Maybe<Migrations_Min_Fields>;
-  stddev?: Maybe<Migrations_Stddev_Fields>;
-  stddev_pop?: Maybe<Migrations_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Migrations_Stddev_Samp_Fields>;
-  sum?: Maybe<Migrations_Sum_Fields>;
-  var_pop?: Maybe<Migrations_Var_Pop_Fields>;
-  var_samp?: Maybe<Migrations_Var_Samp_Fields>;
-  variance?: Maybe<Migrations_Variance_Fields>;
-};
-
-/** aggregate fields of "migrations" */
-export type Migrations_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Migrations_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Migrations_Avg_Fields = {
-  __typename?: 'migrations_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-  timestamp?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "migrations". All fields are combined with a logical 'AND'. */
-export type Migrations_Bool_Exp = {
-  _and?: InputMaybe<Array<Migrations_Bool_Exp>>;
-  _not?: InputMaybe<Migrations_Bool_Exp>;
-  _or?: InputMaybe<Array<Migrations_Bool_Exp>>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  name?: InputMaybe<String_Comparison_Exp>;
-  timestamp?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "migrations" */
-export enum Migrations_Constraint {
-  /** unique or primary key constraint */
-  Pk_8c82d7f526340ab734260ea46be = 'PK_8c82d7f526340ab734260ea46be',
-}
-
-/** input type for incrementing numeric columns in table "migrations" */
-export type Migrations_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-  timestamp?: InputMaybe<Scalars['bigint']>;
-};
-
-/** input type for inserting data into table "migrations" */
-export type Migrations_Insert_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-  name?: InputMaybe<Scalars['String']>;
-  timestamp?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate max on columns */
-export type Migrations_Max_Fields = {
-  __typename?: 'migrations_max_fields';
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  timestamp?: Maybe<Scalars['bigint']>;
-};
-
-/** aggregate min on columns */
-export type Migrations_Min_Fields = {
-  __typename?: 'migrations_min_fields';
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  timestamp?: Maybe<Scalars['bigint']>;
-};
-
-/** response of any mutation on the table "migrations" */
-export type Migrations_Mutation_Response = {
-  __typename?: 'migrations_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Migrations>;
-};
-
-/** on_conflict condition type for table "migrations" */
-export type Migrations_On_Conflict = {
-  constraint: Migrations_Constraint;
-  update_columns?: Array<Migrations_Update_Column>;
-  where?: InputMaybe<Migrations_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "migrations". */
-export type Migrations_Order_By = {
-  id?: InputMaybe<Order_By>;
-  name?: InputMaybe<Order_By>;
-  timestamp?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: migrations */
-export type Migrations_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "migrations" */
-export enum Migrations_Select_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  Timestamp = 'timestamp',
-}
-
-/** input type for updating data in table "migrations" */
-export type Migrations_Set_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-  name?: InputMaybe<Scalars['String']>;
-  timestamp?: InputMaybe<Scalars['bigint']>;
-};
-
-/** aggregate stddev on columns */
-export type Migrations_Stddev_Fields = {
-  __typename?: 'migrations_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-  timestamp?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Migrations_Stddev_Pop_Fields = {
-  __typename?: 'migrations_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  timestamp?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Migrations_Stddev_Samp_Fields = {
-  __typename?: 'migrations_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  timestamp?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Migrations_Sum_Fields = {
-  __typename?: 'migrations_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-  timestamp?: Maybe<Scalars['bigint']>;
-};
-
-/** update columns of table "migrations" */
-export enum Migrations_Update_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  Timestamp = 'timestamp',
-}
-
-/** aggregate var_pop on columns */
-export type Migrations_Var_Pop_Fields = {
-  __typename?: 'migrations_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  timestamp?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Migrations_Var_Samp_Fields = {
-  __typename?: 'migrations_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  timestamp?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Migrations_Variance_Fields = {
-  __typename?: 'migrations_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-  timestamp?: Maybe<Scalars['Float']>;
-};
-
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
@@ -9790,34 +5963,14 @@ export type Mutation_Root = {
   delete_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** delete single row from the table: "aggregation_data" */
   delete_aggregation_data_by_pk?: Maybe<Aggregation_Data>;
-  /** delete data from the table: "alternate_servers" */
-  delete_alternate_servers?: Maybe<Alternate_Servers_Mutation_Response>;
-  /** delete single row from the table: "alternate_servers" */
-  delete_alternate_servers_by_pk?: Maybe<Alternate_Servers>;
   /** delete data from the table: "command" */
   delete_command?: Maybe<Command_Mutation_Response>;
-  /** delete data from the table: "command_backup" */
-  delete_command_backup?: Maybe<Command_Backup_Mutation_Response>;
-  /** delete data from the table: "command_backup2" */
-  delete_command_backup2?: Maybe<Command_Backup2_Mutation_Response>;
   /** delete single row from the table: "command" */
   delete_command_by_pk?: Maybe<Command>;
-  /** delete data from the table: "config_reply" */
-  delete_config_reply?: Maybe<Config_Reply_Mutation_Response>;
-  /** delete data from the table: "config_reply_boost_timer" */
-  delete_config_reply_boost_timer?: Maybe<Config_Reply_Boost_Timer_Mutation_Response>;
-  /** delete single row from the table: "config_reply_boost_timer" */
-  delete_config_reply_boost_timer_by_pk?: Maybe<Config_Reply_Boost_Timer>;
-  /** delete single row from the table: "config_reply" */
-  delete_config_reply_by_pk?: Maybe<Config_Reply>;
   /** delete data from the table: "eddi" */
   delete_eddi?: Maybe<Eddi_Mutation_Response>;
   /** delete single row from the table: "eddi" */
   delete_eddi_by_pk?: Maybe<Eddi>;
-  /** delete data from the table: "eddi_config_reply_data" */
-  delete_eddi_config_reply_data?: Maybe<Eddi_Config_Reply_Data_Mutation_Response>;
-  /** delete single row from the table: "eddi_config_reply_data" */
-  delete_eddi_config_reply_data_by_pk?: Maybe<Eddi_Config_Reply_Data>;
   /** delete data from the table: "eddi_minute" */
   delete_eddi_minute?: Maybe<Eddi_Minute_Mutation_Response>;
   /** delete single row from the table: "eddi_minute" */
@@ -9826,10 +5979,6 @@ export type Mutation_Root = {
   delete_event?: Maybe<Event_Mutation_Response>;
   /** delete single row from the table: "event" */
   delete_event_by_pk?: Maybe<Event>;
-  /** delete data from the table: "foal_session" */
-  delete_foal_session?: Maybe<Foal_Session_Mutation_Response>;
-  /** delete single row from the table: "foal_session" */
-  delete_foal_session_by_pk?: Maybe<Foal_Session>;
   /** delete data from the table: "harvi" */
   delete_harvi?: Maybe<Harvi_Mutation_Response>;
   /** delete single row from the table: "harvi" */
@@ -9838,18 +5987,6 @@ export type Mutation_Root = {
   delete_hub?: Maybe<Hub_Mutation_Response>;
   /** delete single row from the table: "hub" */
   delete_hub_by_pk?: Maybe<Hub>;
-  /** delete data from the table: "migrations" */
-  delete_migrations?: Maybe<Migrations_Mutation_Response>;
-  /** delete single row from the table: "migrations" */
-  delete_migrations_by_pk?: Maybe<Migrations>;
-  /** delete data from the table: "server" */
-  delete_server?: Maybe<Server_Mutation_Response>;
-  /** delete single row from the table: "server" */
-  delete_server_by_pk?: Maybe<Server>;
-  /** delete data from the table: "update_box" */
-  delete_update_box?: Maybe<Update_Box_Mutation_Response>;
-  /** delete single row from the table: "update_box" */
-  delete_update_box_by_pk?: Maybe<Update_Box>;
   /** delete data from the table: "user" */
   delete_user?: Maybe<User_Mutation_Response>;
   /** delete data from the table: "user_access" */
@@ -9860,14 +5997,6 @@ export type Mutation_Root = {
   delete_user_by_pk?: Maybe<User>;
   /** delete data from the table: "zappi" */
   delete_zappi?: Maybe<Zappi_Mutation_Response>;
-  /** delete data from the table: "zappi1_config_reply_data" */
-  delete_zappi1_config_reply_data?: Maybe<Zappi1_Config_Reply_Data_Mutation_Response>;
-  /** delete single row from the table: "zappi1_config_reply_data" */
-  delete_zappi1_config_reply_data_by_pk?: Maybe<Zappi1_Config_Reply_Data>;
-  /** delete data from the table: "zappi2_config_reply_data" */
-  delete_zappi2_config_reply_data?: Maybe<Zappi2_Config_Reply_Data_Mutation_Response>;
-  /** delete single row from the table: "zappi2_config_reply_data" */
-  delete_zappi2_config_reply_data_by_pk?: Maybe<Zappi2_Config_Reply_Data>;
   /** delete single row from the table: "zappi" */
   delete_zappi_by_pk?: Maybe<Zappi>;
   /** delete data from the table: "zappi_minute" */
@@ -9878,36 +6007,12 @@ export type Mutation_Root = {
   insert_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** insert a single row into the table: "aggregation_data" */
   insert_aggregation_data_one?: Maybe<Aggregation_Data>;
-  /** insert data into the table: "alternate_servers" */
-  insert_alternate_servers?: Maybe<Alternate_Servers_Mutation_Response>;
-  /** insert a single row into the table: "alternate_servers" */
-  insert_alternate_servers_one?: Maybe<Alternate_Servers>;
   /** insert data into the table: "command" */
   insert_command?: Maybe<Command_Mutation_Response>;
-  /** insert data into the table: "command_backup" */
-  insert_command_backup?: Maybe<Command_Backup_Mutation_Response>;
-  /** insert data into the table: "command_backup2" */
-  insert_command_backup2?: Maybe<Command_Backup2_Mutation_Response>;
-  /** insert a single row into the table: "command_backup2" */
-  insert_command_backup2_one?: Maybe<Command_Backup2>;
-  /** insert a single row into the table: "command_backup" */
-  insert_command_backup_one?: Maybe<Command_Backup>;
   /** insert a single row into the table: "command" */
   insert_command_one?: Maybe<Command>;
-  /** insert data into the table: "config_reply" */
-  insert_config_reply?: Maybe<Config_Reply_Mutation_Response>;
-  /** insert data into the table: "config_reply_boost_timer" */
-  insert_config_reply_boost_timer?: Maybe<Config_Reply_Boost_Timer_Mutation_Response>;
-  /** insert a single row into the table: "config_reply_boost_timer" */
-  insert_config_reply_boost_timer_one?: Maybe<Config_Reply_Boost_Timer>;
-  /** insert a single row into the table: "config_reply" */
-  insert_config_reply_one?: Maybe<Config_Reply>;
   /** insert data into the table: "eddi" */
   insert_eddi?: Maybe<Eddi_Mutation_Response>;
-  /** insert data into the table: "eddi_config_reply_data" */
-  insert_eddi_config_reply_data?: Maybe<Eddi_Config_Reply_Data_Mutation_Response>;
-  /** insert a single row into the table: "eddi_config_reply_data" */
-  insert_eddi_config_reply_data_one?: Maybe<Eddi_Config_Reply_Data>;
   /** insert data into the table: "eddi_minute" */
   insert_eddi_minute?: Maybe<Eddi_Minute_Mutation_Response>;
   /** insert a single row into the table: "eddi_minute" */
@@ -9918,10 +6023,6 @@ export type Mutation_Root = {
   insert_event?: Maybe<Event_Mutation_Response>;
   /** insert a single row into the table: "event" */
   insert_event_one?: Maybe<Event>;
-  /** insert data into the table: "foal_session" */
-  insert_foal_session?: Maybe<Foal_Session_Mutation_Response>;
-  /** insert a single row into the table: "foal_session" */
-  insert_foal_session_one?: Maybe<Foal_Session>;
   /** insert data into the table: "harvi" */
   insert_harvi?: Maybe<Harvi_Mutation_Response>;
   /** insert a single row into the table: "harvi" */
@@ -9930,18 +6031,6 @@ export type Mutation_Root = {
   insert_hub?: Maybe<Hub_Mutation_Response>;
   /** insert a single row into the table: "hub" */
   insert_hub_one?: Maybe<Hub>;
-  /** insert data into the table: "migrations" */
-  insert_migrations?: Maybe<Migrations_Mutation_Response>;
-  /** insert a single row into the table: "migrations" */
-  insert_migrations_one?: Maybe<Migrations>;
-  /** insert data into the table: "server" */
-  insert_server?: Maybe<Server_Mutation_Response>;
-  /** insert a single row into the table: "server" */
-  insert_server_one?: Maybe<Server>;
-  /** insert data into the table: "update_box" */
-  insert_update_box?: Maybe<Update_Box_Mutation_Response>;
-  /** insert a single row into the table: "update_box" */
-  insert_update_box_one?: Maybe<Update_Box>;
   /** insert data into the table: "user" */
   insert_user?: Maybe<User_Mutation_Response>;
   /** insert data into the table: "user_access" */
@@ -9952,14 +6041,6 @@ export type Mutation_Root = {
   insert_user_one?: Maybe<User>;
   /** insert data into the table: "zappi" */
   insert_zappi?: Maybe<Zappi_Mutation_Response>;
-  /** insert data into the table: "zappi1_config_reply_data" */
-  insert_zappi1_config_reply_data?: Maybe<Zappi1_Config_Reply_Data_Mutation_Response>;
-  /** insert a single row into the table: "zappi1_config_reply_data" */
-  insert_zappi1_config_reply_data_one?: Maybe<Zappi1_Config_Reply_Data>;
-  /** insert data into the table: "zappi2_config_reply_data" */
-  insert_zappi2_config_reply_data?: Maybe<Zappi2_Config_Reply_Data_Mutation_Response>;
-  /** insert a single row into the table: "zappi2_config_reply_data" */
-  insert_zappi2_config_reply_data_one?: Maybe<Zappi2_Config_Reply_Data>;
   /** insert data into the table: "zappi_minute" */
   insert_zappi_minute?: Maybe<Zappi_Minute_Mutation_Response>;
   /** insert a single row into the table: "zappi_minute" */
@@ -9970,34 +6051,14 @@ export type Mutation_Root = {
   update_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** update single row of the table: "aggregation_data" */
   update_aggregation_data_by_pk?: Maybe<Aggregation_Data>;
-  /** update data of the table: "alternate_servers" */
-  update_alternate_servers?: Maybe<Alternate_Servers_Mutation_Response>;
-  /** update single row of the table: "alternate_servers" */
-  update_alternate_servers_by_pk?: Maybe<Alternate_Servers>;
   /** update data of the table: "command" */
   update_command?: Maybe<Command_Mutation_Response>;
-  /** update data of the table: "command_backup" */
-  update_command_backup?: Maybe<Command_Backup_Mutation_Response>;
-  /** update data of the table: "command_backup2" */
-  update_command_backup2?: Maybe<Command_Backup2_Mutation_Response>;
   /** update single row of the table: "command" */
   update_command_by_pk?: Maybe<Command>;
-  /** update data of the table: "config_reply" */
-  update_config_reply?: Maybe<Config_Reply_Mutation_Response>;
-  /** update data of the table: "config_reply_boost_timer" */
-  update_config_reply_boost_timer?: Maybe<Config_Reply_Boost_Timer_Mutation_Response>;
-  /** update single row of the table: "config_reply_boost_timer" */
-  update_config_reply_boost_timer_by_pk?: Maybe<Config_Reply_Boost_Timer>;
-  /** update single row of the table: "config_reply" */
-  update_config_reply_by_pk?: Maybe<Config_Reply>;
   /** update data of the table: "eddi" */
   update_eddi?: Maybe<Eddi_Mutation_Response>;
   /** update single row of the table: "eddi" */
   update_eddi_by_pk?: Maybe<Eddi>;
-  /** update data of the table: "eddi_config_reply_data" */
-  update_eddi_config_reply_data?: Maybe<Eddi_Config_Reply_Data_Mutation_Response>;
-  /** update single row of the table: "eddi_config_reply_data" */
-  update_eddi_config_reply_data_by_pk?: Maybe<Eddi_Config_Reply_Data>;
   /** update data of the table: "eddi_minute" */
   update_eddi_minute?: Maybe<Eddi_Minute_Mutation_Response>;
   /** update single row of the table: "eddi_minute" */
@@ -10006,10 +6067,6 @@ export type Mutation_Root = {
   update_event?: Maybe<Event_Mutation_Response>;
   /** update single row of the table: "event" */
   update_event_by_pk?: Maybe<Event>;
-  /** update data of the table: "foal_session" */
-  update_foal_session?: Maybe<Foal_Session_Mutation_Response>;
-  /** update single row of the table: "foal_session" */
-  update_foal_session_by_pk?: Maybe<Foal_Session>;
   /** update data of the table: "harvi" */
   update_harvi?: Maybe<Harvi_Mutation_Response>;
   /** update single row of the table: "harvi" */
@@ -10018,18 +6075,6 @@ export type Mutation_Root = {
   update_hub?: Maybe<Hub_Mutation_Response>;
   /** update single row of the table: "hub" */
   update_hub_by_pk?: Maybe<Hub>;
-  /** update data of the table: "migrations" */
-  update_migrations?: Maybe<Migrations_Mutation_Response>;
-  /** update single row of the table: "migrations" */
-  update_migrations_by_pk?: Maybe<Migrations>;
-  /** update data of the table: "server" */
-  update_server?: Maybe<Server_Mutation_Response>;
-  /** update single row of the table: "server" */
-  update_server_by_pk?: Maybe<Server>;
-  /** update data of the table: "update_box" */
-  update_update_box?: Maybe<Update_Box_Mutation_Response>;
-  /** update single row of the table: "update_box" */
-  update_update_box_by_pk?: Maybe<Update_Box>;
   /** update data of the table: "user" */
   update_user?: Maybe<User_Mutation_Response>;
   /** update data of the table: "user_access" */
@@ -10040,14 +6085,6 @@ export type Mutation_Root = {
   update_user_by_pk?: Maybe<User>;
   /** update data of the table: "zappi" */
   update_zappi?: Maybe<Zappi_Mutation_Response>;
-  /** update data of the table: "zappi1_config_reply_data" */
-  update_zappi1_config_reply_data?: Maybe<Zappi1_Config_Reply_Data_Mutation_Response>;
-  /** update single row of the table: "zappi1_config_reply_data" */
-  update_zappi1_config_reply_data_by_pk?: Maybe<Zappi1_Config_Reply_Data>;
-  /** update data of the table: "zappi2_config_reply_data" */
-  update_zappi2_config_reply_data?: Maybe<Zappi2_Config_Reply_Data_Mutation_Response>;
-  /** update single row of the table: "zappi2_config_reply_data" */
-  update_zappi2_config_reply_data_by_pk?: Maybe<Zappi2_Config_Reply_Data>;
   /** update single row of the table: "zappi" */
   update_zappi_by_pk?: Maybe<Zappi>;
   /** update data of the table: "zappi_minute" */
@@ -10067,53 +6104,13 @@ export type Mutation_RootDelete_Aggregation_Data_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Alternate_ServersArgs = {
-  where: Alternate_Servers_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Alternate_Servers_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-/** mutation root */
 export type Mutation_RootDelete_CommandArgs = {
   where: Command_Bool_Exp;
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Command_BackupArgs = {
-  where: Command_Backup_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Command_Backup2Args = {
-  where: Command_Backup2_Bool_Exp;
-};
-
-/** mutation root */
 export type Mutation_RootDelete_Command_By_PkArgs = {
   id: Scalars['uuid'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Config_ReplyArgs = {
-  where: Config_Reply_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Config_Reply_Boost_TimerArgs = {
-  where: Config_Reply_Boost_Timer_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Config_Reply_Boost_Timer_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Config_Reply_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 /** mutation root */
@@ -10124,16 +6121,6 @@ export type Mutation_RootDelete_EddiArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Eddi_By_PkArgs = {
   serialno: Scalars['bigint'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Eddi_Config_Reply_DataArgs = {
-  where: Eddi_Config_Reply_Data_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Eddi_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 /** mutation root */
@@ -10160,16 +6147,6 @@ export type Mutation_RootDelete_Event_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Foal_SessionArgs = {
-  where: Foal_Session_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Foal_Session_By_PkArgs = {
-  session_id: Scalars['String'];
-};
-
-/** mutation root */
 export type Mutation_RootDelete_HarviArgs = {
   where: Harvi_Bool_Exp;
 };
@@ -10187,36 +6164,6 @@ export type Mutation_RootDelete_HubArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Hub_By_PkArgs = {
   serialno: Scalars['bigint'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_MigrationsArgs = {
-  where: Migrations_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Migrations_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_ServerArgs = {
-  where: Server_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Server_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Update_BoxArgs = {
-  where: Update_Box_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Update_Box_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 /** mutation root */
@@ -10242,26 +6189,6 @@ export type Mutation_RootDelete_User_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootDelete_ZappiArgs = {
   where: Zappi_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Zappi1_Config_Reply_DataArgs = {
-  where: Zappi1_Config_Reply_Data_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Zappi1_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Zappi2_Config_Reply_DataArgs = {
-  where: Zappi2_Config_Reply_Data_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Zappi2_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 /** mutation root */
@@ -10293,41 +6220,9 @@ export type Mutation_RootInsert_Aggregation_Data_OneArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInsert_Alternate_ServersArgs = {
-  objects: Array<Alternate_Servers_Insert_Input>;
-  on_conflict?: InputMaybe<Alternate_Servers_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Alternate_Servers_OneArgs = {
-  object: Alternate_Servers_Insert_Input;
-  on_conflict?: InputMaybe<Alternate_Servers_On_Conflict>;
-};
-
-/** mutation root */
 export type Mutation_RootInsert_CommandArgs = {
   objects: Array<Command_Insert_Input>;
   on_conflict?: InputMaybe<Command_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Command_BackupArgs = {
-  objects: Array<Command_Backup_Insert_Input>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Command_Backup2Args = {
-  objects: Array<Command_Backup2_Insert_Input>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Command_Backup2_OneArgs = {
-  object: Command_Backup2_Insert_Input;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Command_Backup_OneArgs = {
-  object: Command_Backup_Insert_Input;
 };
 
 /** mutation root */
@@ -10337,45 +6232,9 @@ export type Mutation_RootInsert_Command_OneArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInsert_Config_ReplyArgs = {
-  objects: Array<Config_Reply_Insert_Input>;
-  on_conflict?: InputMaybe<Config_Reply_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Config_Reply_Boost_TimerArgs = {
-  objects: Array<Config_Reply_Boost_Timer_Insert_Input>;
-  on_conflict?: InputMaybe<Config_Reply_Boost_Timer_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Config_Reply_Boost_Timer_OneArgs = {
-  object: Config_Reply_Boost_Timer_Insert_Input;
-  on_conflict?: InputMaybe<Config_Reply_Boost_Timer_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Config_Reply_OneArgs = {
-  object: Config_Reply_Insert_Input;
-  on_conflict?: InputMaybe<Config_Reply_On_Conflict>;
-};
-
-/** mutation root */
 export type Mutation_RootInsert_EddiArgs = {
   objects: Array<Eddi_Insert_Input>;
   on_conflict?: InputMaybe<Eddi_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Eddi_Config_Reply_DataArgs = {
-  objects: Array<Eddi_Config_Reply_Data_Insert_Input>;
-  on_conflict?: InputMaybe<Eddi_Config_Reply_Data_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Eddi_Config_Reply_Data_OneArgs = {
-  object: Eddi_Config_Reply_Data_Insert_Input;
-  on_conflict?: InputMaybe<Eddi_Config_Reply_Data_On_Conflict>;
 };
 
 /** mutation root */
@@ -10409,18 +6268,6 @@ export type Mutation_RootInsert_Event_OneArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInsert_Foal_SessionArgs = {
-  objects: Array<Foal_Session_Insert_Input>;
-  on_conflict?: InputMaybe<Foal_Session_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Foal_Session_OneArgs = {
-  object: Foal_Session_Insert_Input;
-  on_conflict?: InputMaybe<Foal_Session_On_Conflict>;
-};
-
-/** mutation root */
 export type Mutation_RootInsert_HarviArgs = {
   objects: Array<Harvi_Insert_Input>;
   on_conflict?: InputMaybe<Harvi_On_Conflict>;
@@ -10442,42 +6289,6 @@ export type Mutation_RootInsert_HubArgs = {
 export type Mutation_RootInsert_Hub_OneArgs = {
   object: Hub_Insert_Input;
   on_conflict?: InputMaybe<Hub_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_MigrationsArgs = {
-  objects: Array<Migrations_Insert_Input>;
-  on_conflict?: InputMaybe<Migrations_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Migrations_OneArgs = {
-  object: Migrations_Insert_Input;
-  on_conflict?: InputMaybe<Migrations_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_ServerArgs = {
-  objects: Array<Server_Insert_Input>;
-  on_conflict?: InputMaybe<Server_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Server_OneArgs = {
-  object: Server_Insert_Input;
-  on_conflict?: InputMaybe<Server_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Update_BoxArgs = {
-  objects: Array<Update_Box_Insert_Input>;
-  on_conflict?: InputMaybe<Update_Box_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Update_Box_OneArgs = {
-  object: Update_Box_Insert_Input;
-  on_conflict?: InputMaybe<Update_Box_On_Conflict>;
 };
 
 /** mutation root */
@@ -10508,30 +6319,6 @@ export type Mutation_RootInsert_User_OneArgs = {
 export type Mutation_RootInsert_ZappiArgs = {
   objects: Array<Zappi_Insert_Input>;
   on_conflict?: InputMaybe<Zappi_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Zappi1_Config_Reply_DataArgs = {
-  objects: Array<Zappi1_Config_Reply_Data_Insert_Input>;
-  on_conflict?: InputMaybe<Zappi1_Config_Reply_Data_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Zappi1_Config_Reply_Data_OneArgs = {
-  object: Zappi1_Config_Reply_Data_Insert_Input;
-  on_conflict?: InputMaybe<Zappi1_Config_Reply_Data_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Zappi2_Config_Reply_DataArgs = {
-  objects: Array<Zappi2_Config_Reply_Data_Insert_Input>;
-  on_conflict?: InputMaybe<Zappi2_Config_Reply_Data_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Zappi2_Config_Reply_Data_OneArgs = {
-  object: Zappi2_Config_Reply_Data_Insert_Input;
-  on_conflict?: InputMaybe<Zappi2_Config_Reply_Data_On_Conflict>;
 };
 
 /** mutation root */
@@ -10567,20 +6354,6 @@ export type Mutation_RootUpdate_Aggregation_Data_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Alternate_ServersArgs = {
-  _inc?: InputMaybe<Alternate_Servers_Inc_Input>;
-  _set?: InputMaybe<Alternate_Servers_Set_Input>;
-  where: Alternate_Servers_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Alternate_Servers_By_PkArgs = {
-  _inc?: InputMaybe<Alternate_Servers_Inc_Input>;
-  _set?: InputMaybe<Alternate_Servers_Set_Input>;
-  pk_columns: Alternate_Servers_Pk_Columns_Input;
-};
-
-/** mutation root */
 export type Mutation_RootUpdate_CommandArgs = {
   _append?: InputMaybe<Command_Append_Input>;
   _delete_at_path?: InputMaybe<Command_Delete_At_Path_Input>;
@@ -10593,30 +6366,6 @@ export type Mutation_RootUpdate_CommandArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Command_BackupArgs = {
-  _append?: InputMaybe<Command_Backup_Append_Input>;
-  _delete_at_path?: InputMaybe<Command_Backup_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Command_Backup_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Command_Backup_Delete_Key_Input>;
-  _inc?: InputMaybe<Command_Backup_Inc_Input>;
-  _prepend?: InputMaybe<Command_Backup_Prepend_Input>;
-  _set?: InputMaybe<Command_Backup_Set_Input>;
-  where: Command_Backup_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Command_Backup2Args = {
-  _append?: InputMaybe<Command_Backup2_Append_Input>;
-  _delete_at_path?: InputMaybe<Command_Backup2_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Command_Backup2_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Command_Backup2_Delete_Key_Input>;
-  _inc?: InputMaybe<Command_Backup2_Inc_Input>;
-  _prepend?: InputMaybe<Command_Backup2_Prepend_Input>;
-  _set?: InputMaybe<Command_Backup2_Set_Input>;
-  where: Command_Backup2_Bool_Exp;
-};
-
-/** mutation root */
 export type Mutation_RootUpdate_Command_By_PkArgs = {
   _append?: InputMaybe<Command_Append_Input>;
   _delete_at_path?: InputMaybe<Command_Delete_At_Path_Input>;
@@ -10626,34 +6375,6 @@ export type Mutation_RootUpdate_Command_By_PkArgs = {
   _prepend?: InputMaybe<Command_Prepend_Input>;
   _set?: InputMaybe<Command_Set_Input>;
   pk_columns: Command_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Config_ReplyArgs = {
-  _inc?: InputMaybe<Config_Reply_Inc_Input>;
-  _set?: InputMaybe<Config_Reply_Set_Input>;
-  where: Config_Reply_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Config_Reply_Boost_TimerArgs = {
-  _inc?: InputMaybe<Config_Reply_Boost_Timer_Inc_Input>;
-  _set?: InputMaybe<Config_Reply_Boost_Timer_Set_Input>;
-  where: Config_Reply_Boost_Timer_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Config_Reply_Boost_Timer_By_PkArgs = {
-  _inc?: InputMaybe<Config_Reply_Boost_Timer_Inc_Input>;
-  _set?: InputMaybe<Config_Reply_Boost_Timer_Set_Input>;
-  pk_columns: Config_Reply_Boost_Timer_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Config_Reply_By_PkArgs = {
-  _inc?: InputMaybe<Config_Reply_Inc_Input>;
-  _set?: InputMaybe<Config_Reply_Set_Input>;
-  pk_columns: Config_Reply_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -10678,20 +6399,6 @@ export type Mutation_RootUpdate_Eddi_By_PkArgs = {
   _prepend?: InputMaybe<Eddi_Prepend_Input>;
   _set?: InputMaybe<Eddi_Set_Input>;
   pk_columns: Eddi_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Eddi_Config_Reply_DataArgs = {
-  _inc?: InputMaybe<Eddi_Config_Reply_Data_Inc_Input>;
-  _set?: InputMaybe<Eddi_Config_Reply_Data_Set_Input>;
-  where: Eddi_Config_Reply_Data_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Eddi_Config_Reply_Data_By_PkArgs = {
-  _inc?: InputMaybe<Eddi_Config_Reply_Data_Inc_Input>;
-  _set?: InputMaybe<Eddi_Config_Reply_Data_Set_Input>;
-  pk_columns: Eddi_Config_Reply_Data_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -10720,20 +6427,6 @@ export type Mutation_RootUpdate_Event_By_PkArgs = {
   _inc?: InputMaybe<Event_Inc_Input>;
   _set?: InputMaybe<Event_Set_Input>;
   pk_columns: Event_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Foal_SessionArgs = {
-  _inc?: InputMaybe<Foal_Session_Inc_Input>;
-  _set?: InputMaybe<Foal_Session_Set_Input>;
-  where: Foal_Session_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Foal_Session_By_PkArgs = {
-  _inc?: InputMaybe<Foal_Session_Inc_Input>;
-  _set?: InputMaybe<Foal_Session_Set_Input>;
-  pk_columns: Foal_Session_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -10782,46 +6475,6 @@ export type Mutation_RootUpdate_Hub_By_PkArgs = {
   _prepend?: InputMaybe<Hub_Prepend_Input>;
   _set?: InputMaybe<Hub_Set_Input>;
   pk_columns: Hub_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_MigrationsArgs = {
-  _inc?: InputMaybe<Migrations_Inc_Input>;
-  _set?: InputMaybe<Migrations_Set_Input>;
-  where: Migrations_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Migrations_By_PkArgs = {
-  _inc?: InputMaybe<Migrations_Inc_Input>;
-  _set?: InputMaybe<Migrations_Set_Input>;
-  pk_columns: Migrations_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_ServerArgs = {
-  _inc?: InputMaybe<Server_Inc_Input>;
-  _set?: InputMaybe<Server_Set_Input>;
-  where: Server_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Server_By_PkArgs = {
-  _inc?: InputMaybe<Server_Inc_Input>;
-  _set?: InputMaybe<Server_Set_Input>;
-  pk_columns: Server_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Update_BoxArgs = {
-  _set?: InputMaybe<Update_Box_Set_Input>;
-  where: Update_Box_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Update_Box_By_PkArgs = {
-  _set?: InputMaybe<Update_Box_Set_Input>;
-  pk_columns: Update_Box_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -10875,44 +6528,6 @@ export type Mutation_RootUpdate_ZappiArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Zappi1_Config_Reply_DataArgs = {
-  _inc?: InputMaybe<Zappi1_Config_Reply_Data_Inc_Input>;
-  _set?: InputMaybe<Zappi1_Config_Reply_Data_Set_Input>;
-  where: Zappi1_Config_Reply_Data_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Zappi1_Config_Reply_Data_By_PkArgs = {
-  _inc?: InputMaybe<Zappi1_Config_Reply_Data_Inc_Input>;
-  _set?: InputMaybe<Zappi1_Config_Reply_Data_Set_Input>;
-  pk_columns: Zappi1_Config_Reply_Data_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Zappi2_Config_Reply_DataArgs = {
-  _append?: InputMaybe<Zappi2_Config_Reply_Data_Append_Input>;
-  _delete_at_path?: InputMaybe<Zappi2_Config_Reply_Data_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Zappi2_Config_Reply_Data_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Zappi2_Config_Reply_Data_Delete_Key_Input>;
-  _inc?: InputMaybe<Zappi2_Config_Reply_Data_Inc_Input>;
-  _prepend?: InputMaybe<Zappi2_Config_Reply_Data_Prepend_Input>;
-  _set?: InputMaybe<Zappi2_Config_Reply_Data_Set_Input>;
-  where: Zappi2_Config_Reply_Data_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Zappi2_Config_Reply_Data_By_PkArgs = {
-  _append?: InputMaybe<Zappi2_Config_Reply_Data_Append_Input>;
-  _delete_at_path?: InputMaybe<Zappi2_Config_Reply_Data_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Zappi2_Config_Reply_Data_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Zappi2_Config_Reply_Data_Delete_Key_Input>;
-  _inc?: InputMaybe<Zappi2_Config_Reply_Data_Inc_Input>;
-  _prepend?: InputMaybe<Zappi2_Config_Reply_Data_Prepend_Input>;
-  _set?: InputMaybe<Zappi2_Config_Reply_Data_Set_Input>;
-  pk_columns: Zappi2_Config_Reply_Data_Pk_Columns_Input;
-};
-
-/** mutation root */
 export type Mutation_RootUpdate_Zappi_By_PkArgs = {
   _append?: InputMaybe<Zappi_Append_Input>;
   _delete_at_path?: InputMaybe<Zappi_Delete_At_Path_Input>;
@@ -10962,50 +6577,18 @@ export type Query_Root = {
   aggregation_data_aggregate: Aggregation_Data_Aggregate;
   /** fetch data from the table: "aggregation_data" using primary key columns */
   aggregation_data_by_pk?: Maybe<Aggregation_Data>;
-  /** fetch data from the table: "alternate_servers" */
-  alternate_servers: Array<Alternate_Servers>;
-  /** fetch aggregated fields from the table: "alternate_servers" */
-  alternate_servers_aggregate: Alternate_Servers_Aggregate;
-  /** fetch data from the table: "alternate_servers" using primary key columns */
-  alternate_servers_by_pk?: Maybe<Alternate_Servers>;
   /** fetch data from the table: "command" */
   command: Array<Command>;
   /** fetch aggregated fields from the table: "command" */
   command_aggregate: Command_Aggregate;
-  /** fetch data from the table: "command_backup" */
-  command_backup: Array<Command_Backup>;
-  /** fetch data from the table: "command_backup2" */
-  command_backup2: Array<Command_Backup2>;
-  /** fetch aggregated fields from the table: "command_backup2" */
-  command_backup2_aggregate: Command_Backup2_Aggregate;
-  /** fetch aggregated fields from the table: "command_backup" */
-  command_backup_aggregate: Command_Backup_Aggregate;
   /** fetch data from the table: "command" using primary key columns */
   command_by_pk?: Maybe<Command>;
-  /** fetch data from the table: "config_reply" */
-  config_reply: Array<Config_Reply>;
-  /** fetch aggregated fields from the table: "config_reply" */
-  config_reply_aggregate: Config_Reply_Aggregate;
-  /** fetch data from the table: "config_reply_boost_timer" */
-  config_reply_boost_timer: Array<Config_Reply_Boost_Timer>;
-  /** fetch aggregated fields from the table: "config_reply_boost_timer" */
-  config_reply_boost_timer_aggregate: Config_Reply_Boost_Timer_Aggregate;
-  /** fetch data from the table: "config_reply_boost_timer" using primary key columns */
-  config_reply_boost_timer_by_pk?: Maybe<Config_Reply_Boost_Timer>;
-  /** fetch data from the table: "config_reply" using primary key columns */
-  config_reply_by_pk?: Maybe<Config_Reply>;
   /** fetch data from the table: "eddi" */
   eddi: Array<Eddi>;
   /** fetch aggregated fields from the table: "eddi" */
   eddi_aggregate: Eddi_Aggregate;
   /** fetch data from the table: "eddi" using primary key columns */
   eddi_by_pk?: Maybe<Eddi>;
-  /** fetch data from the table: "eddi_config_reply_data" */
-  eddi_config_reply_data: Array<Eddi_Config_Reply_Data>;
-  /** fetch aggregated fields from the table: "eddi_config_reply_data" */
-  eddi_config_reply_data_aggregate: Eddi_Config_Reply_Data_Aggregate;
-  /** fetch data from the table: "eddi_config_reply_data" using primary key columns */
-  eddi_config_reply_data_by_pk?: Maybe<Eddi_Config_Reply_Data>;
   /** fetch data from the table: "eddi_minute" */
   eddi_minute: Array<Eddi_Minute>;
   /** fetch aggregated fields from the table: "eddi_minute" */
@@ -11018,12 +6601,6 @@ export type Query_Root = {
   event_aggregate: Event_Aggregate;
   /** fetch data from the table: "event" using primary key columns */
   event_by_pk?: Maybe<Event>;
-  /** fetch data from the table: "foal_session" */
-  foal_session: Array<Foal_Session>;
-  /** fetch aggregated fields from the table: "foal_session" */
-  foal_session_aggregate: Foal_Session_Aggregate;
-  /** fetch data from the table: "foal_session" using primary key columns */
-  foal_session_by_pk?: Maybe<Foal_Session>;
   /** fetch data from the table: "harvi" */
   harvi: Array<Harvi>;
   /** fetch aggregated fields from the table: "harvi" */
@@ -11036,24 +6613,6 @@ export type Query_Root = {
   hub_aggregate: Hub_Aggregate;
   /** fetch data from the table: "hub" using primary key columns */
   hub_by_pk?: Maybe<Hub>;
-  /** fetch data from the table: "migrations" */
-  migrations: Array<Migrations>;
-  /** fetch aggregated fields from the table: "migrations" */
-  migrations_aggregate: Migrations_Aggregate;
-  /** fetch data from the table: "migrations" using primary key columns */
-  migrations_by_pk?: Maybe<Migrations>;
-  /** fetch data from the table: "server" */
-  server: Array<Server>;
-  /** fetch aggregated fields from the table: "server" */
-  server_aggregate: Server_Aggregate;
-  /** fetch data from the table: "server" using primary key columns */
-  server_by_pk?: Maybe<Server>;
-  /** fetch data from the table: "update_box" */
-  update_box: Array<Update_Box>;
-  /** fetch aggregated fields from the table: "update_box" */
-  update_box_aggregate: Update_Box_Aggregate;
-  /** fetch data from the table: "update_box" using primary key columns */
-  update_box_by_pk?: Maybe<Update_Box>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch data from the table: "user_access" */
@@ -11068,18 +6627,6 @@ export type Query_Root = {
   user_by_pk?: Maybe<User>;
   /** fetch data from the table: "zappi" */
   zappi: Array<Zappi>;
-  /** fetch data from the table: "zappi1_config_reply_data" */
-  zappi1_config_reply_data: Array<Zappi1_Config_Reply_Data>;
-  /** fetch aggregated fields from the table: "zappi1_config_reply_data" */
-  zappi1_config_reply_data_aggregate: Zappi1_Config_Reply_Data_Aggregate;
-  /** fetch data from the table: "zappi1_config_reply_data" using primary key columns */
-  zappi1_config_reply_data_by_pk?: Maybe<Zappi1_Config_Reply_Data>;
-  /** fetch data from the table: "zappi2_config_reply_data" */
-  zappi2_config_reply_data: Array<Zappi2_Config_Reply_Data>;
-  /** fetch aggregated fields from the table: "zappi2_config_reply_data" */
-  zappi2_config_reply_data_aggregate: Zappi2_Config_Reply_Data_Aggregate;
-  /** fetch data from the table: "zappi2_config_reply_data" using primary key columns */
-  zappi2_config_reply_data_by_pk?: Maybe<Zappi2_Config_Reply_Data>;
   /** fetch aggregated fields from the table: "zappi" */
   zappi_aggregate: Zappi_Aggregate;
   /** fetch data from the table: "zappi" using primary key columns */
@@ -11112,26 +6659,6 @@ export type Query_RootAggregation_Data_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type Query_RootAlternate_ServersArgs = {
-  distinct_on?: InputMaybe<Array<Alternate_Servers_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Alternate_Servers_Order_By>>;
-  where?: InputMaybe<Alternate_Servers_Bool_Exp>;
-};
-
-export type Query_RootAlternate_Servers_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Alternate_Servers_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Alternate_Servers_Order_By>>;
-  where?: InputMaybe<Alternate_Servers_Bool_Exp>;
-};
-
-export type Query_RootAlternate_Servers_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
 export type Query_RootCommandArgs = {
   distinct_on?: InputMaybe<Array<Command_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11148,80 +6675,8 @@ export type Query_RootCommand_AggregateArgs = {
   where?: InputMaybe<Command_Bool_Exp>;
 };
 
-export type Query_RootCommand_BackupArgs = {
-  distinct_on?: InputMaybe<Array<Command_Backup_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup_Order_By>>;
-  where?: InputMaybe<Command_Backup_Bool_Exp>;
-};
-
-export type Query_RootCommand_Backup2Args = {
-  distinct_on?: InputMaybe<Array<Command_Backup2_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup2_Order_By>>;
-  where?: InputMaybe<Command_Backup2_Bool_Exp>;
-};
-
-export type Query_RootCommand_Backup2_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Command_Backup2_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup2_Order_By>>;
-  where?: InputMaybe<Command_Backup2_Bool_Exp>;
-};
-
-export type Query_RootCommand_Backup_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Command_Backup_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup_Order_By>>;
-  where?: InputMaybe<Command_Backup_Bool_Exp>;
-};
-
 export type Query_RootCommand_By_PkArgs = {
   id: Scalars['uuid'];
-};
-
-export type Query_RootConfig_ReplyArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Order_By>>;
-  where?: InputMaybe<Config_Reply_Bool_Exp>;
-};
-
-export type Query_RootConfig_Reply_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Order_By>>;
-  where?: InputMaybe<Config_Reply_Bool_Exp>;
-};
-
-export type Query_RootConfig_Reply_Boost_TimerArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-export type Query_RootConfig_Reply_Boost_Timer_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-export type Query_RootConfig_Reply_Boost_Timer_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Query_RootConfig_Reply_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 export type Query_RootEddiArgs = {
@@ -11242,26 +6697,6 @@ export type Query_RootEddi_AggregateArgs = {
 
 export type Query_RootEddi_By_PkArgs = {
   serialno: Scalars['bigint'];
-};
-
-export type Query_RootEddi_Config_Reply_DataArgs = {
-  distinct_on?: InputMaybe<Array<Eddi_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Eddi_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Query_RootEddi_Config_Reply_Data_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Eddi_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Eddi_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Query_RootEddi_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 export type Query_RootEddi_MinuteArgs = {
@@ -11307,26 +6742,6 @@ export type Query_RootEvent_By_PkArgs = {
   serialno: Scalars['bigint'];
 };
 
-export type Query_RootFoal_SessionArgs = {
-  distinct_on?: InputMaybe<Array<Foal_Session_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Foal_Session_Order_By>>;
-  where?: InputMaybe<Foal_Session_Bool_Exp>;
-};
-
-export type Query_RootFoal_Session_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Foal_Session_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Foal_Session_Order_By>>;
-  where?: InputMaybe<Foal_Session_Bool_Exp>;
-};
-
-export type Query_RootFoal_Session_By_PkArgs = {
-  session_id: Scalars['String'];
-};
-
 export type Query_RootHarviArgs = {
   distinct_on?: InputMaybe<Array<Harvi_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11365,66 +6780,6 @@ export type Query_RootHub_AggregateArgs = {
 
 export type Query_RootHub_By_PkArgs = {
   serialno: Scalars['bigint'];
-};
-
-export type Query_RootMigrationsArgs = {
-  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Migrations_Order_By>>;
-  where?: InputMaybe<Migrations_Bool_Exp>;
-};
-
-export type Query_RootMigrations_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Migrations_Order_By>>;
-  where?: InputMaybe<Migrations_Bool_Exp>;
-};
-
-export type Query_RootMigrations_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Query_RootServerArgs = {
-  distinct_on?: InputMaybe<Array<Server_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Server_Order_By>>;
-  where?: InputMaybe<Server_Bool_Exp>;
-};
-
-export type Query_RootServer_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Server_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Server_Order_By>>;
-  where?: InputMaybe<Server_Bool_Exp>;
-};
-
-export type Query_RootServer_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Query_RootUpdate_BoxArgs = {
-  distinct_on?: InputMaybe<Array<Update_Box_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Update_Box_Order_By>>;
-  where?: InputMaybe<Update_Box_Bool_Exp>;
-};
-
-export type Query_RootUpdate_Box_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Update_Box_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Update_Box_Order_By>>;
-  where?: InputMaybe<Update_Box_Bool_Exp>;
-};
-
-export type Query_RootUpdate_Box_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 export type Query_RootUserArgs = {
@@ -11475,46 +6830,6 @@ export type Query_RootZappiArgs = {
   where?: InputMaybe<Zappi_Bool_Exp>;
 };
 
-export type Query_RootZappi1_Config_Reply_DataArgs = {
-  distinct_on?: InputMaybe<Array<Zappi1_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi1_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Query_RootZappi1_Config_Reply_Data_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Zappi1_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi1_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Query_RootZappi1_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Query_RootZappi2_Config_Reply_DataArgs = {
-  distinct_on?: InputMaybe<Array<Zappi2_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi2_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Query_RootZappi2_Config_Reply_Data_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Zappi2_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi2_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Query_RootZappi2_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
 export type Query_RootZappi_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Zappi_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11548,274 +6863,6 @@ export type Query_RootZappi_Minute_By_PkArgs = {
   timestamp: Scalars['timestamp'];
 };
 
-/** columns and relationships of "server" */
-export type Server = {
-  __typename?: 'server';
-  /** An object relationship */
-  alternateServerById?: Maybe<Alternate_Servers>;
-  /** An object relationship */
-  alternate_server?: Maybe<Alternate_Servers>;
-  /** An array relationship */
-  hubs: Array<Hub>;
-  /** An aggregate relationship */
-  hubs_aggregate: Hub_Aggregate;
-  id: Scalars['Int'];
-  ip: Scalars['String'];
-  isactive: Scalars['Boolean'];
-  isdefault: Scalars['Boolean'];
-  name: Scalars['String'];
-  shard?: Maybe<Scalars['String']>;
-  url: Scalars['String'];
-};
-
-/** columns and relationships of "server" */
-export type ServerHubsArgs = {
-  distinct_on?: InputMaybe<Array<Hub_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Hub_Order_By>>;
-  where?: InputMaybe<Hub_Bool_Exp>;
-};
-
-/** columns and relationships of "server" */
-export type ServerHubs_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Hub_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Hub_Order_By>>;
-  where?: InputMaybe<Hub_Bool_Exp>;
-};
-
-/** aggregated selection of "server" */
-export type Server_Aggregate = {
-  __typename?: 'server_aggregate';
-  aggregate?: Maybe<Server_Aggregate_Fields>;
-  nodes: Array<Server>;
-};
-
-/** aggregate fields of "server" */
-export type Server_Aggregate_Fields = {
-  __typename?: 'server_aggregate_fields';
-  avg?: Maybe<Server_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Server_Max_Fields>;
-  min?: Maybe<Server_Min_Fields>;
-  stddev?: Maybe<Server_Stddev_Fields>;
-  stddev_pop?: Maybe<Server_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Server_Stddev_Samp_Fields>;
-  sum?: Maybe<Server_Sum_Fields>;
-  var_pop?: Maybe<Server_Var_Pop_Fields>;
-  var_samp?: Maybe<Server_Var_Samp_Fields>;
-  variance?: Maybe<Server_Variance_Fields>;
-};
-
-/** aggregate fields of "server" */
-export type Server_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Server_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Server_Avg_Fields = {
-  __typename?: 'server_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "server". All fields are combined with a logical 'AND'. */
-export type Server_Bool_Exp = {
-  _and?: InputMaybe<Array<Server_Bool_Exp>>;
-  _not?: InputMaybe<Server_Bool_Exp>;
-  _or?: InputMaybe<Array<Server_Bool_Exp>>;
-  alternateServerById?: InputMaybe<Alternate_Servers_Bool_Exp>;
-  alternate_server?: InputMaybe<Alternate_Servers_Bool_Exp>;
-  hubs?: InputMaybe<Hub_Bool_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  ip?: InputMaybe<String_Comparison_Exp>;
-  isactive?: InputMaybe<Boolean_Comparison_Exp>;
-  isdefault?: InputMaybe<Boolean_Comparison_Exp>;
-  name?: InputMaybe<String_Comparison_Exp>;
-  shard?: InputMaybe<String_Comparison_Exp>;
-  url?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "server" */
-export enum Server_Constraint {
-  /** unique or primary key constraint */
-  PkF8b8af38bdc23b447c0a57c7937 = 'PK_f8b8af38bdc23b447c0a57c7937',
-  /** unique or primary key constraint */
-  UqE16254733ff2264f94f856316ee = 'UQ_e16254733ff2264f94f856316ee',
-}
-
-/** input type for incrementing numeric columns in table "server" */
-export type Server_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "server" */
-export type Server_Insert_Input = {
-  alternateServerById?: InputMaybe<Alternate_Servers_Obj_Rel_Insert_Input>;
-  alternate_server?: InputMaybe<Alternate_Servers_Obj_Rel_Insert_Input>;
-  hubs?: InputMaybe<Hub_Arr_Rel_Insert_Input>;
-  id?: InputMaybe<Scalars['Int']>;
-  ip?: InputMaybe<Scalars['String']>;
-  isactive?: InputMaybe<Scalars['Boolean']>;
-  isdefault?: InputMaybe<Scalars['Boolean']>;
-  name?: InputMaybe<Scalars['String']>;
-  shard?: InputMaybe<Scalars['String']>;
-  url?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Server_Max_Fields = {
-  __typename?: 'server_max_fields';
-  id?: Maybe<Scalars['Int']>;
-  ip?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  shard?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Server_Min_Fields = {
-  __typename?: 'server_min_fields';
-  id?: Maybe<Scalars['Int']>;
-  ip?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  shard?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "server" */
-export type Server_Mutation_Response = {
-  __typename?: 'server_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Server>;
-};
-
-/** input type for inserting object relation for remote table "server" */
-export type Server_Obj_Rel_Insert_Input = {
-  data: Server_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Server_On_Conflict>;
-};
-
-/** on_conflict condition type for table "server" */
-export type Server_On_Conflict = {
-  constraint: Server_Constraint;
-  update_columns?: Array<Server_Update_Column>;
-  where?: InputMaybe<Server_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "server". */
-export type Server_Order_By = {
-  alternateServerById?: InputMaybe<Alternate_Servers_Order_By>;
-  alternate_server?: InputMaybe<Alternate_Servers_Order_By>;
-  hubs_aggregate?: InputMaybe<Hub_Aggregate_Order_By>;
-  id?: InputMaybe<Order_By>;
-  ip?: InputMaybe<Order_By>;
-  isactive?: InputMaybe<Order_By>;
-  isdefault?: InputMaybe<Order_By>;
-  name?: InputMaybe<Order_By>;
-  shard?: InputMaybe<Order_By>;
-  url?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: server */
-export type Server_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "server" */
-export enum Server_Select_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Ip = 'ip',
-  /** column name */
-  Isactive = 'isactive',
-  /** column name */
-  Isdefault = 'isdefault',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  Shard = 'shard',
-  /** column name */
-  Url = 'url',
-}
-
-/** input type for updating data in table "server" */
-export type Server_Set_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-  ip?: InputMaybe<Scalars['String']>;
-  isactive?: InputMaybe<Scalars['Boolean']>;
-  isdefault?: InputMaybe<Scalars['Boolean']>;
-  name?: InputMaybe<Scalars['String']>;
-  shard?: InputMaybe<Scalars['String']>;
-  url?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate stddev on columns */
-export type Server_Stddev_Fields = {
-  __typename?: 'server_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Server_Stddev_Pop_Fields = {
-  __typename?: 'server_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Server_Stddev_Samp_Fields = {
-  __typename?: 'server_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Server_Sum_Fields = {
-  __typename?: 'server_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "server" */
-export enum Server_Update_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Ip = 'ip',
-  /** column name */
-  Isactive = 'isactive',
-  /** column name */
-  Isdefault = 'isdefault',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  Shard = 'shard',
-  /** column name */
-  Url = 'url',
-}
-
-/** aggregate var_pop on columns */
-export type Server_Var_Pop_Fields = {
-  __typename?: 'server_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Server_Var_Samp_Fields = {
-  __typename?: 'server_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Server_Variance_Fields = {
-  __typename?: 'server_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
 /** Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'. */
 export type Smallint_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['smallint']>;
@@ -11837,50 +6884,18 @@ export type Subscription_Root = {
   aggregation_data_aggregate: Aggregation_Data_Aggregate;
   /** fetch data from the table: "aggregation_data" using primary key columns */
   aggregation_data_by_pk?: Maybe<Aggregation_Data>;
-  /** fetch data from the table: "alternate_servers" */
-  alternate_servers: Array<Alternate_Servers>;
-  /** fetch aggregated fields from the table: "alternate_servers" */
-  alternate_servers_aggregate: Alternate_Servers_Aggregate;
-  /** fetch data from the table: "alternate_servers" using primary key columns */
-  alternate_servers_by_pk?: Maybe<Alternate_Servers>;
   /** fetch data from the table: "command" */
   command: Array<Command>;
   /** fetch aggregated fields from the table: "command" */
   command_aggregate: Command_Aggregate;
-  /** fetch data from the table: "command_backup" */
-  command_backup: Array<Command_Backup>;
-  /** fetch data from the table: "command_backup2" */
-  command_backup2: Array<Command_Backup2>;
-  /** fetch aggregated fields from the table: "command_backup2" */
-  command_backup2_aggregate: Command_Backup2_Aggregate;
-  /** fetch aggregated fields from the table: "command_backup" */
-  command_backup_aggregate: Command_Backup_Aggregate;
   /** fetch data from the table: "command" using primary key columns */
   command_by_pk?: Maybe<Command>;
-  /** fetch data from the table: "config_reply" */
-  config_reply: Array<Config_Reply>;
-  /** fetch aggregated fields from the table: "config_reply" */
-  config_reply_aggregate: Config_Reply_Aggregate;
-  /** fetch data from the table: "config_reply_boost_timer" */
-  config_reply_boost_timer: Array<Config_Reply_Boost_Timer>;
-  /** fetch aggregated fields from the table: "config_reply_boost_timer" */
-  config_reply_boost_timer_aggregate: Config_Reply_Boost_Timer_Aggregate;
-  /** fetch data from the table: "config_reply_boost_timer" using primary key columns */
-  config_reply_boost_timer_by_pk?: Maybe<Config_Reply_Boost_Timer>;
-  /** fetch data from the table: "config_reply" using primary key columns */
-  config_reply_by_pk?: Maybe<Config_Reply>;
   /** fetch data from the table: "eddi" */
   eddi: Array<Eddi>;
   /** fetch aggregated fields from the table: "eddi" */
   eddi_aggregate: Eddi_Aggregate;
   /** fetch data from the table: "eddi" using primary key columns */
   eddi_by_pk?: Maybe<Eddi>;
-  /** fetch data from the table: "eddi_config_reply_data" */
-  eddi_config_reply_data: Array<Eddi_Config_Reply_Data>;
-  /** fetch aggregated fields from the table: "eddi_config_reply_data" */
-  eddi_config_reply_data_aggregate: Eddi_Config_Reply_Data_Aggregate;
-  /** fetch data from the table: "eddi_config_reply_data" using primary key columns */
-  eddi_config_reply_data_by_pk?: Maybe<Eddi_Config_Reply_Data>;
   /** fetch data from the table: "eddi_minute" */
   eddi_minute: Array<Eddi_Minute>;
   /** fetch aggregated fields from the table: "eddi_minute" */
@@ -11893,12 +6908,6 @@ export type Subscription_Root = {
   event_aggregate: Event_Aggregate;
   /** fetch data from the table: "event" using primary key columns */
   event_by_pk?: Maybe<Event>;
-  /** fetch data from the table: "foal_session" */
-  foal_session: Array<Foal_Session>;
-  /** fetch aggregated fields from the table: "foal_session" */
-  foal_session_aggregate: Foal_Session_Aggregate;
-  /** fetch data from the table: "foal_session" using primary key columns */
-  foal_session_by_pk?: Maybe<Foal_Session>;
   /** fetch data from the table: "harvi" */
   harvi: Array<Harvi>;
   /** fetch aggregated fields from the table: "harvi" */
@@ -11911,24 +6920,6 @@ export type Subscription_Root = {
   hub_aggregate: Hub_Aggregate;
   /** fetch data from the table: "hub" using primary key columns */
   hub_by_pk?: Maybe<Hub>;
-  /** fetch data from the table: "migrations" */
-  migrations: Array<Migrations>;
-  /** fetch aggregated fields from the table: "migrations" */
-  migrations_aggregate: Migrations_Aggregate;
-  /** fetch data from the table: "migrations" using primary key columns */
-  migrations_by_pk?: Maybe<Migrations>;
-  /** fetch data from the table: "server" */
-  server: Array<Server>;
-  /** fetch aggregated fields from the table: "server" */
-  server_aggregate: Server_Aggregate;
-  /** fetch data from the table: "server" using primary key columns */
-  server_by_pk?: Maybe<Server>;
-  /** fetch data from the table: "update_box" */
-  update_box: Array<Update_Box>;
-  /** fetch aggregated fields from the table: "update_box" */
-  update_box_aggregate: Update_Box_Aggregate;
-  /** fetch data from the table: "update_box" using primary key columns */
-  update_box_by_pk?: Maybe<Update_Box>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch data from the table: "user_access" */
@@ -11943,18 +6934,6 @@ export type Subscription_Root = {
   user_by_pk?: Maybe<User>;
   /** fetch data from the table: "zappi" */
   zappi: Array<Zappi>;
-  /** fetch data from the table: "zappi1_config_reply_data" */
-  zappi1_config_reply_data: Array<Zappi1_Config_Reply_Data>;
-  /** fetch aggregated fields from the table: "zappi1_config_reply_data" */
-  zappi1_config_reply_data_aggregate: Zappi1_Config_Reply_Data_Aggregate;
-  /** fetch data from the table: "zappi1_config_reply_data" using primary key columns */
-  zappi1_config_reply_data_by_pk?: Maybe<Zappi1_Config_Reply_Data>;
-  /** fetch data from the table: "zappi2_config_reply_data" */
-  zappi2_config_reply_data: Array<Zappi2_Config_Reply_Data>;
-  /** fetch aggregated fields from the table: "zappi2_config_reply_data" */
-  zappi2_config_reply_data_aggregate: Zappi2_Config_Reply_Data_Aggregate;
-  /** fetch data from the table: "zappi2_config_reply_data" using primary key columns */
-  zappi2_config_reply_data_by_pk?: Maybe<Zappi2_Config_Reply_Data>;
   /** fetch aggregated fields from the table: "zappi" */
   zappi_aggregate: Zappi_Aggregate;
   /** fetch data from the table: "zappi" using primary key columns */
@@ -11987,26 +6966,6 @@ export type Subscription_RootAggregation_Data_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type Subscription_RootAlternate_ServersArgs = {
-  distinct_on?: InputMaybe<Array<Alternate_Servers_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Alternate_Servers_Order_By>>;
-  where?: InputMaybe<Alternate_Servers_Bool_Exp>;
-};
-
-export type Subscription_RootAlternate_Servers_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Alternate_Servers_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Alternate_Servers_Order_By>>;
-  where?: InputMaybe<Alternate_Servers_Bool_Exp>;
-};
-
-export type Subscription_RootAlternate_Servers_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
 export type Subscription_RootCommandArgs = {
   distinct_on?: InputMaybe<Array<Command_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12023,80 +6982,8 @@ export type Subscription_RootCommand_AggregateArgs = {
   where?: InputMaybe<Command_Bool_Exp>;
 };
 
-export type Subscription_RootCommand_BackupArgs = {
-  distinct_on?: InputMaybe<Array<Command_Backup_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup_Order_By>>;
-  where?: InputMaybe<Command_Backup_Bool_Exp>;
-};
-
-export type Subscription_RootCommand_Backup2Args = {
-  distinct_on?: InputMaybe<Array<Command_Backup2_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup2_Order_By>>;
-  where?: InputMaybe<Command_Backup2_Bool_Exp>;
-};
-
-export type Subscription_RootCommand_Backup2_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Command_Backup2_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup2_Order_By>>;
-  where?: InputMaybe<Command_Backup2_Bool_Exp>;
-};
-
-export type Subscription_RootCommand_Backup_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Command_Backup_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Command_Backup_Order_By>>;
-  where?: InputMaybe<Command_Backup_Bool_Exp>;
-};
-
 export type Subscription_RootCommand_By_PkArgs = {
   id: Scalars['uuid'];
-};
-
-export type Subscription_RootConfig_ReplyArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Order_By>>;
-  where?: InputMaybe<Config_Reply_Bool_Exp>;
-};
-
-export type Subscription_RootConfig_Reply_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Order_By>>;
-  where?: InputMaybe<Config_Reply_Bool_Exp>;
-};
-
-export type Subscription_RootConfig_Reply_Boost_TimerArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-export type Subscription_RootConfig_Reply_Boost_Timer_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-export type Subscription_RootConfig_Reply_Boost_Timer_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Subscription_RootConfig_Reply_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 export type Subscription_RootEddiArgs = {
@@ -12117,26 +7004,6 @@ export type Subscription_RootEddi_AggregateArgs = {
 
 export type Subscription_RootEddi_By_PkArgs = {
   serialno: Scalars['bigint'];
-};
-
-export type Subscription_RootEddi_Config_Reply_DataArgs = {
-  distinct_on?: InputMaybe<Array<Eddi_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Eddi_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Subscription_RootEddi_Config_Reply_Data_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Eddi_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Eddi_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Eddi_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Subscription_RootEddi_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 export type Subscription_RootEddi_MinuteArgs = {
@@ -12182,26 +7049,6 @@ export type Subscription_RootEvent_By_PkArgs = {
   serialno: Scalars['bigint'];
 };
 
-export type Subscription_RootFoal_SessionArgs = {
-  distinct_on?: InputMaybe<Array<Foal_Session_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Foal_Session_Order_By>>;
-  where?: InputMaybe<Foal_Session_Bool_Exp>;
-};
-
-export type Subscription_RootFoal_Session_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Foal_Session_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Foal_Session_Order_By>>;
-  where?: InputMaybe<Foal_Session_Bool_Exp>;
-};
-
-export type Subscription_RootFoal_Session_By_PkArgs = {
-  session_id: Scalars['String'];
-};
-
 export type Subscription_RootHarviArgs = {
   distinct_on?: InputMaybe<Array<Harvi_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12240,66 +7087,6 @@ export type Subscription_RootHub_AggregateArgs = {
 
 export type Subscription_RootHub_By_PkArgs = {
   serialno: Scalars['bigint'];
-};
-
-export type Subscription_RootMigrationsArgs = {
-  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Migrations_Order_By>>;
-  where?: InputMaybe<Migrations_Bool_Exp>;
-};
-
-export type Subscription_RootMigrations_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Migrations_Order_By>>;
-  where?: InputMaybe<Migrations_Bool_Exp>;
-};
-
-export type Subscription_RootMigrations_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Subscription_RootServerArgs = {
-  distinct_on?: InputMaybe<Array<Server_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Server_Order_By>>;
-  where?: InputMaybe<Server_Bool_Exp>;
-};
-
-export type Subscription_RootServer_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Server_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Server_Order_By>>;
-  where?: InputMaybe<Server_Bool_Exp>;
-};
-
-export type Subscription_RootServer_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Subscription_RootUpdate_BoxArgs = {
-  distinct_on?: InputMaybe<Array<Update_Box_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Update_Box_Order_By>>;
-  where?: InputMaybe<Update_Box_Bool_Exp>;
-};
-
-export type Subscription_RootUpdate_Box_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Update_Box_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Update_Box_Order_By>>;
-  where?: InputMaybe<Update_Box_Bool_Exp>;
-};
-
-export type Subscription_RootUpdate_Box_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 export type Subscription_RootUserArgs = {
@@ -12348,46 +7135,6 @@ export type Subscription_RootZappiArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Zappi_Order_By>>;
   where?: InputMaybe<Zappi_Bool_Exp>;
-};
-
-export type Subscription_RootZappi1_Config_Reply_DataArgs = {
-  distinct_on?: InputMaybe<Array<Zappi1_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi1_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Subscription_RootZappi1_Config_Reply_Data_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Zappi1_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi1_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Subscription_RootZappi1_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-export type Subscription_RootZappi2_Config_Reply_DataArgs = {
-  distinct_on?: InputMaybe<Array<Zappi2_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi2_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Subscription_RootZappi2_Config_Reply_Data_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Zappi2_Config_Reply_Data_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Zappi2_Config_Reply_Data_Order_By>>;
-  where?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-};
-
-export type Subscription_RootZappi2_Config_Reply_Data_By_PkArgs = {
-  id: Scalars['Int'];
 };
 
 export type Subscription_RootZappi_AggregateArgs = {
@@ -12447,184 +7194,6 @@ export type Timestamptz_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['timestamptz']>;
   _neq?: InputMaybe<Scalars['timestamptz']>;
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
-};
-
-/** columns and relationships of "update_box" */
-export type Update_Box = {
-  __typename?: 'update_box';
-  description?: Maybe<Scalars['String']>;
-  displaydatetime: Scalars['timestamptz'];
-  id: Scalars['uuid'];
-  leftcolor: Scalars['String'];
-  rightcolor: Scalars['String'];
-  title: Scalars['String'];
-  updateboxicontype?: Maybe<Scalars['update_box_updateboxicontype_enum']>;
-};
-
-/** aggregated selection of "update_box" */
-export type Update_Box_Aggregate = {
-  __typename?: 'update_box_aggregate';
-  aggregate?: Maybe<Update_Box_Aggregate_Fields>;
-  nodes: Array<Update_Box>;
-};
-
-/** aggregate fields of "update_box" */
-export type Update_Box_Aggregate_Fields = {
-  __typename?: 'update_box_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Update_Box_Max_Fields>;
-  min?: Maybe<Update_Box_Min_Fields>;
-};
-
-/** aggregate fields of "update_box" */
-export type Update_Box_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Update_Box_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "update_box". All fields are combined with a logical 'AND'. */
-export type Update_Box_Bool_Exp = {
-  _and?: InputMaybe<Array<Update_Box_Bool_Exp>>;
-  _not?: InputMaybe<Update_Box_Bool_Exp>;
-  _or?: InputMaybe<Array<Update_Box_Bool_Exp>>;
-  description?: InputMaybe<String_Comparison_Exp>;
-  displaydatetime?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  leftcolor?: InputMaybe<String_Comparison_Exp>;
-  rightcolor?: InputMaybe<String_Comparison_Exp>;
-  title?: InputMaybe<String_Comparison_Exp>;
-  updateboxicontype?: InputMaybe<Update_Box_Updateboxicontype_Enum_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "update_box" */
-export enum Update_Box_Constraint {
-  /** unique or primary key constraint */
-  PkE310121e9dabb97a8dae3e9e285 = 'PK_e310121e9dabb97a8dae3e9e285',
-}
-
-/** input type for inserting data into table "update_box" */
-export type Update_Box_Insert_Input = {
-  description?: InputMaybe<Scalars['String']>;
-  displaydatetime?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  leftcolor?: InputMaybe<Scalars['String']>;
-  rightcolor?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  updateboxicontype?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-};
-
-/** aggregate max on columns */
-export type Update_Box_Max_Fields = {
-  __typename?: 'update_box_max_fields';
-  description?: Maybe<Scalars['String']>;
-  displaydatetime?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  leftcolor?: Maybe<Scalars['String']>;
-  rightcolor?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Update_Box_Min_Fields = {
-  __typename?: 'update_box_min_fields';
-  description?: Maybe<Scalars['String']>;
-  displaydatetime?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  leftcolor?: Maybe<Scalars['String']>;
-  rightcolor?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "update_box" */
-export type Update_Box_Mutation_Response = {
-  __typename?: 'update_box_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Update_Box>;
-};
-
-/** on_conflict condition type for table "update_box" */
-export type Update_Box_On_Conflict = {
-  constraint: Update_Box_Constraint;
-  update_columns?: Array<Update_Box_Update_Column>;
-  where?: InputMaybe<Update_Box_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "update_box". */
-export type Update_Box_Order_By = {
-  description?: InputMaybe<Order_By>;
-  displaydatetime?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  leftcolor?: InputMaybe<Order_By>;
-  rightcolor?: InputMaybe<Order_By>;
-  title?: InputMaybe<Order_By>;
-  updateboxicontype?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: update_box */
-export type Update_Box_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** select columns of table "update_box" */
-export enum Update_Box_Select_Column {
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Displaydatetime = 'displaydatetime',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Leftcolor = 'leftcolor',
-  /** column name */
-  Rightcolor = 'rightcolor',
-  /** column name */
-  Title = 'title',
-  /** column name */
-  Updateboxicontype = 'updateboxicontype',
-}
-
-/** input type for updating data in table "update_box" */
-export type Update_Box_Set_Input = {
-  description?: InputMaybe<Scalars['String']>;
-  displaydatetime?: InputMaybe<Scalars['timestamptz']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  leftcolor?: InputMaybe<Scalars['String']>;
-  rightcolor?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  updateboxicontype?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-};
-
-/** update columns of table "update_box" */
-export enum Update_Box_Update_Column {
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Displaydatetime = 'displaydatetime',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Leftcolor = 'leftcolor',
-  /** column name */
-  Rightcolor = 'rightcolor',
-  /** column name */
-  Title = 'title',
-  /** column name */
-  Updateboxicontype = 'updateboxicontype',
-}
-
-/** Boolean expression to compare columns of type "update_box_updateboxicontype_enum". All fields are combined with logical 'AND'. */
-export type Update_Box_Updateboxicontype_Enum_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-  _gt?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-  _gte?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-  _in?: InputMaybe<Array<Scalars['update_box_updateboxicontype_enum']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-  _lte?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-  _neq?: InputMaybe<Scalars['update_box_updateboxicontype_enum']>;
-  _nin?: InputMaybe<Array<Scalars['update_box_updateboxicontype_enum']>>;
 };
 
 /** columns and relationships of "user" */
@@ -13255,8 +7824,6 @@ export type Zappi = {
   bootloaderversion?: Maybe<Scalars['Int']>;
   chargeenergy?: Maybe<Scalars['Float']>;
   commandseqno: Scalars['smallint'];
-  /** An object relationship */
-  config_reply?: Maybe<Config_Reply>;
   configappdata?: Maybe<Scalars['bytea']>;
   configappdone: Scalars['Boolean'];
   configbootdata?: Maybe<Scalars['bytea']>;
@@ -13421,2469 +7988,6 @@ export type ZappiCt15Args = {
 /** columns and relationships of "zappi" */
 export type ZappiCt16Args = {
   path?: InputMaybe<Scalars['String']>;
-};
-
-/** columns and relationships of "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data = {
-  __typename?: 'zappi1_config_reply_data';
-  autosettimefromclouddone: Scalars['Boolean'];
-  backlightontime: Scalars['smallint'];
-  batterymode?: Maybe<Scalars['String']>;
-  boostingenergy: Scalars['smallint'];
-  buzzeron: Scalars['Boolean'];
-  chargecompletedelay: Scalars['Int'];
-  compatibilitymodeactive: Scalars['Boolean'];
-  compatibilitymodeinfinitepwm: Scalars['Boolean'];
-  compatibilitymodeminpwm: Scalars['Float'];
-  compatibilitymodepowerfactor: Scalars['Float'];
-  /** An object relationship */
-  config_reply?: Maybe<Config_Reply>;
-  /** An array relationship */
-  config_reply_boost_timers: Array<Config_Reply_Boost_Timer>;
-  /** An aggregate relationship */
-  config_reply_boost_timers_aggregate: Config_Reply_Boost_Timer_Aggregate;
-  contrastlevel: Scalars['smallint'];
-  ct1group: Scalars['smallint'];
-  ct1grouplimit: Scalars['smallint'];
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group: Scalars['smallint'];
-  ct2grouplimit: Scalars['smallint'];
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group: Scalars['smallint'];
-  ct3grouplimit: Scalars['smallint'];
-  dateformat?: Maybe<Scalars['String']>;
-  defaultmode?: Maybe<Scalars['String']>;
-  deviceconfigtime: Scalars['bigint'];
-  devicelimit: Scalars['Float'];
-  dston: Scalars['Boolean'];
-  esenseinput?: Maybe<Scalars['String']>;
-  exportmargin: Scalars['Int'];
-  gentypeicon?: Maybe<Scalars['String']>;
-  gridlimit: Scalars['Int'];
-  id: Scalars['Int'];
-  language?: Maybe<Scalars['String']>;
-  lockcode: Scalars['Int'];
-  lockevplugged: Scalars['Boolean'];
-  lockevunplugged: Scalars['Boolean'];
-  lockhidereadings: Scalars['Boolean'];
-  locktimeout: Scalars['smallint'];
-  maxgridlimit: Scalars['smallint'];
-  mingreenlevel: Scalars['smallint'];
-  monitoringstatus: Scalars['Boolean'];
-  password: Scalars['Int'];
-  phaseorphaserotation?: Maybe<Scalars['String']>;
-  plugincharge: Scalars['smallint'];
-  preconditioning?: Maybe<Scalars['String']>;
-  signature: Scalars['bigint'];
-  smartboostenergy: Scalars['smallint'];
-  smartboosthour: Scalars['smallint'];
-  smartboostminute: Scalars['smallint'];
-  startstoptimer: Scalars['smallint'];
-  timefromcloud: Scalars['Boolean'];
-  timezone?: Maybe<Scalars['String']>;
-  triphaseon: Scalars['Boolean'];
-};
-
-/** columns and relationships of "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_DataConfig_Reply_Boost_TimersArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-/** columns and relationships of "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_DataConfig_Reply_Boost_Timers_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-/** aggregated selection of "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Aggregate = {
-  __typename?: 'zappi1_config_reply_data_aggregate';
-  aggregate?: Maybe<Zappi1_Config_Reply_Data_Aggregate_Fields>;
-  nodes: Array<Zappi1_Config_Reply_Data>;
-};
-
-/** aggregate fields of "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Aggregate_Fields = {
-  __typename?: 'zappi1_config_reply_data_aggregate_fields';
-  avg?: Maybe<Zappi1_Config_Reply_Data_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Zappi1_Config_Reply_Data_Max_Fields>;
-  min?: Maybe<Zappi1_Config_Reply_Data_Min_Fields>;
-  stddev?: Maybe<Zappi1_Config_Reply_Data_Stddev_Fields>;
-  stddev_pop?: Maybe<Zappi1_Config_Reply_Data_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Zappi1_Config_Reply_Data_Stddev_Samp_Fields>;
-  sum?: Maybe<Zappi1_Config_Reply_Data_Sum_Fields>;
-  var_pop?: Maybe<Zappi1_Config_Reply_Data_Var_Pop_Fields>;
-  var_samp?: Maybe<Zappi1_Config_Reply_Data_Var_Samp_Fields>;
-  variance?: Maybe<Zappi1_Config_Reply_Data_Variance_Fields>;
-};
-
-/** aggregate fields of "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Zappi1_Config_Reply_Data_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Zappi1_Config_Reply_Data_Avg_Fields = {
-  __typename?: 'zappi1_config_reply_data_avg_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  plugincharge?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "zappi1_config_reply_data". All fields are combined with a logical 'AND'. */
-export type Zappi1_Config_Reply_Data_Bool_Exp = {
-  _and?: InputMaybe<Array<Zappi1_Config_Reply_Data_Bool_Exp>>;
-  _not?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-  _or?: InputMaybe<Array<Zappi1_Config_Reply_Data_Bool_Exp>>;
-  autosettimefromclouddone?: InputMaybe<Boolean_Comparison_Exp>;
-  backlightontime?: InputMaybe<Smallint_Comparison_Exp>;
-  batterymode?: InputMaybe<String_Comparison_Exp>;
-  boostingenergy?: InputMaybe<Smallint_Comparison_Exp>;
-  buzzeron?: InputMaybe<Boolean_Comparison_Exp>;
-  chargecompletedelay?: InputMaybe<Int_Comparison_Exp>;
-  compatibilitymodeactive?: InputMaybe<Boolean_Comparison_Exp>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Boolean_Comparison_Exp>;
-  compatibilitymodeminpwm?: InputMaybe<Float_Comparison_Exp>;
-  compatibilitymodepowerfactor?: InputMaybe<Float_Comparison_Exp>;
-  config_reply?: InputMaybe<Config_Reply_Bool_Exp>;
-  config_reply_boost_timers?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-  contrastlevel?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1subtype?: InputMaybe<String_Comparison_Exp>;
-  ct1type?: InputMaybe<String_Comparison_Exp>;
-  ct2group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct2grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ct2subtype?: InputMaybe<String_Comparison_Exp>;
-  ct2type?: InputMaybe<String_Comparison_Exp>;
-  ct3group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct3grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  dateformat?: InputMaybe<String_Comparison_Exp>;
-  defaultmode?: InputMaybe<String_Comparison_Exp>;
-  deviceconfigtime?: InputMaybe<Bigint_Comparison_Exp>;
-  devicelimit?: InputMaybe<Float_Comparison_Exp>;
-  dston?: InputMaybe<Boolean_Comparison_Exp>;
-  esenseinput?: InputMaybe<String_Comparison_Exp>;
-  exportmargin?: InputMaybe<Int_Comparison_Exp>;
-  gentypeicon?: InputMaybe<String_Comparison_Exp>;
-  gridlimit?: InputMaybe<Int_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  language?: InputMaybe<String_Comparison_Exp>;
-  lockcode?: InputMaybe<Int_Comparison_Exp>;
-  lockevplugged?: InputMaybe<Boolean_Comparison_Exp>;
-  lockevunplugged?: InputMaybe<Boolean_Comparison_Exp>;
-  lockhidereadings?: InputMaybe<Boolean_Comparison_Exp>;
-  locktimeout?: InputMaybe<Smallint_Comparison_Exp>;
-  maxgridlimit?: InputMaybe<Smallint_Comparison_Exp>;
-  mingreenlevel?: InputMaybe<Smallint_Comparison_Exp>;
-  monitoringstatus?: InputMaybe<Boolean_Comparison_Exp>;
-  password?: InputMaybe<Int_Comparison_Exp>;
-  phaseorphaserotation?: InputMaybe<String_Comparison_Exp>;
-  plugincharge?: InputMaybe<Smallint_Comparison_Exp>;
-  preconditioning?: InputMaybe<String_Comparison_Exp>;
-  signature?: InputMaybe<Bigint_Comparison_Exp>;
-  smartboostenergy?: InputMaybe<Smallint_Comparison_Exp>;
-  smartboosthour?: InputMaybe<Smallint_Comparison_Exp>;
-  smartboostminute?: InputMaybe<Smallint_Comparison_Exp>;
-  startstoptimer?: InputMaybe<Smallint_Comparison_Exp>;
-  timefromcloud?: InputMaybe<Boolean_Comparison_Exp>;
-  timezone?: InputMaybe<String_Comparison_Exp>;
-  triphaseon?: InputMaybe<Boolean_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "zappi1_config_reply_data" */
-export enum Zappi1_Config_Reply_Data_Constraint {
-  /** unique or primary key constraint */
-  Pk_085dc1f7ec451606b70e1765ff6 = 'PK_085dc1f7ec451606b70e1765ff6',
-}
-
-/** input type for incrementing numeric columns in table "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Inc_Input = {
-  backlightontime?: InputMaybe<Scalars['smallint']>;
-  boostingenergy?: InputMaybe<Scalars['smallint']>;
-  chargecompletedelay?: InputMaybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: InputMaybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: InputMaybe<Scalars['Float']>;
-  contrastlevel?: InputMaybe<Scalars['smallint']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['Float']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  gridlimit?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  lockcode?: InputMaybe<Scalars['Int']>;
-  locktimeout?: InputMaybe<Scalars['smallint']>;
-  maxgridlimit?: InputMaybe<Scalars['smallint']>;
-  mingreenlevel?: InputMaybe<Scalars['smallint']>;
-  password?: InputMaybe<Scalars['Int']>;
-  plugincharge?: InputMaybe<Scalars['smallint']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  smartboostenergy?: InputMaybe<Scalars['smallint']>;
-  smartboosthour?: InputMaybe<Scalars['smallint']>;
-  smartboostminute?: InputMaybe<Scalars['smallint']>;
-  startstoptimer?: InputMaybe<Scalars['smallint']>;
-};
-
-/** input type for inserting data into table "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Insert_Input = {
-  autosettimefromclouddone?: InputMaybe<Scalars['Boolean']>;
-  backlightontime?: InputMaybe<Scalars['smallint']>;
-  batterymode?: InputMaybe<Scalars['String']>;
-  boostingenergy?: InputMaybe<Scalars['smallint']>;
-  buzzeron?: InputMaybe<Scalars['Boolean']>;
-  chargecompletedelay?: InputMaybe<Scalars['Int']>;
-  compatibilitymodeactive?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeminpwm?: InputMaybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: InputMaybe<Scalars['Float']>;
-  config_reply?: InputMaybe<Config_Reply_Obj_Rel_Insert_Input>;
-  config_reply_boost_timers?: InputMaybe<Config_Reply_Boost_Timer_Arr_Rel_Insert_Input>;
-  contrastlevel?: InputMaybe<Scalars['smallint']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct1subtype?: InputMaybe<Scalars['String']>;
-  ct1type?: InputMaybe<Scalars['String']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2subtype?: InputMaybe<Scalars['String']>;
-  ct2type?: InputMaybe<Scalars['String']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  dateformat?: InputMaybe<Scalars['String']>;
-  defaultmode?: InputMaybe<Scalars['String']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['Float']>;
-  dston?: InputMaybe<Scalars['Boolean']>;
-  esenseinput?: InputMaybe<Scalars['String']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  gentypeicon?: InputMaybe<Scalars['String']>;
-  gridlimit?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  language?: InputMaybe<Scalars['String']>;
-  lockcode?: InputMaybe<Scalars['Int']>;
-  lockevplugged?: InputMaybe<Scalars['Boolean']>;
-  lockevunplugged?: InputMaybe<Scalars['Boolean']>;
-  lockhidereadings?: InputMaybe<Scalars['Boolean']>;
-  locktimeout?: InputMaybe<Scalars['smallint']>;
-  maxgridlimit?: InputMaybe<Scalars['smallint']>;
-  mingreenlevel?: InputMaybe<Scalars['smallint']>;
-  monitoringstatus?: InputMaybe<Scalars['Boolean']>;
-  password?: InputMaybe<Scalars['Int']>;
-  phaseorphaserotation?: InputMaybe<Scalars['String']>;
-  plugincharge?: InputMaybe<Scalars['smallint']>;
-  preconditioning?: InputMaybe<Scalars['String']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  smartboostenergy?: InputMaybe<Scalars['smallint']>;
-  smartboosthour?: InputMaybe<Scalars['smallint']>;
-  smartboostminute?: InputMaybe<Scalars['smallint']>;
-  startstoptimer?: InputMaybe<Scalars['smallint']>;
-  timefromcloud?: InputMaybe<Scalars['Boolean']>;
-  timezone?: InputMaybe<Scalars['String']>;
-  triphaseon?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate max on columns */
-export type Zappi1_Config_Reply_Data_Max_Fields = {
-  __typename?: 'zappi1_config_reply_data_max_fields';
-  backlightontime?: Maybe<Scalars['smallint']>;
-  batterymode?: Maybe<Scalars['String']>;
-  boostingenergy?: Maybe<Scalars['smallint']>;
-  chargecompletedelay?: Maybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  dateformat?: Maybe<Scalars['String']>;
-  defaultmode?: Maybe<Scalars['String']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esenseinput?: Maybe<Scalars['String']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  gentypeicon?: Maybe<Scalars['String']>;
-  gridlimit?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  language?: Maybe<Scalars['String']>;
-  lockcode?: Maybe<Scalars['Int']>;
-  locktimeout?: Maybe<Scalars['smallint']>;
-  maxgridlimit?: Maybe<Scalars['smallint']>;
-  mingreenlevel?: Maybe<Scalars['smallint']>;
-  password?: Maybe<Scalars['Int']>;
-  phaseorphaserotation?: Maybe<Scalars['String']>;
-  plugincharge?: Maybe<Scalars['smallint']>;
-  preconditioning?: Maybe<Scalars['String']>;
-  signature?: Maybe<Scalars['bigint']>;
-  smartboostenergy?: Maybe<Scalars['smallint']>;
-  smartboosthour?: Maybe<Scalars['smallint']>;
-  smartboostminute?: Maybe<Scalars['smallint']>;
-  startstoptimer?: Maybe<Scalars['smallint']>;
-  timezone?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Zappi1_Config_Reply_Data_Min_Fields = {
-  __typename?: 'zappi1_config_reply_data_min_fields';
-  backlightontime?: Maybe<Scalars['smallint']>;
-  batterymode?: Maybe<Scalars['String']>;
-  boostingenergy?: Maybe<Scalars['smallint']>;
-  chargecompletedelay?: Maybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  dateformat?: Maybe<Scalars['String']>;
-  defaultmode?: Maybe<Scalars['String']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  esenseinput?: Maybe<Scalars['String']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  gentypeicon?: Maybe<Scalars['String']>;
-  gridlimit?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  language?: Maybe<Scalars['String']>;
-  lockcode?: Maybe<Scalars['Int']>;
-  locktimeout?: Maybe<Scalars['smallint']>;
-  maxgridlimit?: Maybe<Scalars['smallint']>;
-  mingreenlevel?: Maybe<Scalars['smallint']>;
-  password?: Maybe<Scalars['Int']>;
-  phaseorphaserotation?: Maybe<Scalars['String']>;
-  plugincharge?: Maybe<Scalars['smallint']>;
-  preconditioning?: Maybe<Scalars['String']>;
-  signature?: Maybe<Scalars['bigint']>;
-  smartboostenergy?: Maybe<Scalars['smallint']>;
-  smartboosthour?: Maybe<Scalars['smallint']>;
-  smartboostminute?: Maybe<Scalars['smallint']>;
-  startstoptimer?: Maybe<Scalars['smallint']>;
-  timezone?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Mutation_Response = {
-  __typename?: 'zappi1_config_reply_data_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Zappi1_Config_Reply_Data>;
-};
-
-/** input type for inserting object relation for remote table "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Obj_Rel_Insert_Input = {
-  data: Zappi1_Config_Reply_Data_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Zappi1_Config_Reply_Data_On_Conflict>;
-};
-
-/** on_conflict condition type for table "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_On_Conflict = {
-  constraint: Zappi1_Config_Reply_Data_Constraint;
-  update_columns?: Array<Zappi1_Config_Reply_Data_Update_Column>;
-  where?: InputMaybe<Zappi1_Config_Reply_Data_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "zappi1_config_reply_data". */
-export type Zappi1_Config_Reply_Data_Order_By = {
-  autosettimefromclouddone?: InputMaybe<Order_By>;
-  backlightontime?: InputMaybe<Order_By>;
-  batterymode?: InputMaybe<Order_By>;
-  boostingenergy?: InputMaybe<Order_By>;
-  buzzeron?: InputMaybe<Order_By>;
-  chargecompletedelay?: InputMaybe<Order_By>;
-  compatibilitymodeactive?: InputMaybe<Order_By>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Order_By>;
-  compatibilitymodeminpwm?: InputMaybe<Order_By>;
-  compatibilitymodepowerfactor?: InputMaybe<Order_By>;
-  config_reply?: InputMaybe<Config_Reply_Order_By>;
-  config_reply_boost_timers_aggregate?: InputMaybe<Config_Reply_Boost_Timer_Aggregate_Order_By>;
-  contrastlevel?: InputMaybe<Order_By>;
-  ct1group?: InputMaybe<Order_By>;
-  ct1grouplimit?: InputMaybe<Order_By>;
-  ct1subtype?: InputMaybe<Order_By>;
-  ct1type?: InputMaybe<Order_By>;
-  ct2group?: InputMaybe<Order_By>;
-  ct2grouplimit?: InputMaybe<Order_By>;
-  ct2subtype?: InputMaybe<Order_By>;
-  ct2type?: InputMaybe<Order_By>;
-  ct3group?: InputMaybe<Order_By>;
-  ct3grouplimit?: InputMaybe<Order_By>;
-  dateformat?: InputMaybe<Order_By>;
-  defaultmode?: InputMaybe<Order_By>;
-  deviceconfigtime?: InputMaybe<Order_By>;
-  devicelimit?: InputMaybe<Order_By>;
-  dston?: InputMaybe<Order_By>;
-  esenseinput?: InputMaybe<Order_By>;
-  exportmargin?: InputMaybe<Order_By>;
-  gentypeicon?: InputMaybe<Order_By>;
-  gridlimit?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  language?: InputMaybe<Order_By>;
-  lockcode?: InputMaybe<Order_By>;
-  lockevplugged?: InputMaybe<Order_By>;
-  lockevunplugged?: InputMaybe<Order_By>;
-  lockhidereadings?: InputMaybe<Order_By>;
-  locktimeout?: InputMaybe<Order_By>;
-  maxgridlimit?: InputMaybe<Order_By>;
-  mingreenlevel?: InputMaybe<Order_By>;
-  monitoringstatus?: InputMaybe<Order_By>;
-  password?: InputMaybe<Order_By>;
-  phaseorphaserotation?: InputMaybe<Order_By>;
-  plugincharge?: InputMaybe<Order_By>;
-  preconditioning?: InputMaybe<Order_By>;
-  signature?: InputMaybe<Order_By>;
-  smartboostenergy?: InputMaybe<Order_By>;
-  smartboosthour?: InputMaybe<Order_By>;
-  smartboostminute?: InputMaybe<Order_By>;
-  startstoptimer?: InputMaybe<Order_By>;
-  timefromcloud?: InputMaybe<Order_By>;
-  timezone?: InputMaybe<Order_By>;
-  triphaseon?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: zappi1_config_reply_data */
-export type Zappi1_Config_Reply_Data_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "zappi1_config_reply_data" */
-export enum Zappi1_Config_Reply_Data_Select_Column {
-  /** column name */
-  Autosettimefromclouddone = 'autosettimefromclouddone',
-  /** column name */
-  Backlightontime = 'backlightontime',
-  /** column name */
-  Batterymode = 'batterymode',
-  /** column name */
-  Boostingenergy = 'boostingenergy',
-  /** column name */
-  Buzzeron = 'buzzeron',
-  /** column name */
-  Chargecompletedelay = 'chargecompletedelay',
-  /** column name */
-  Compatibilitymodeactive = 'compatibilitymodeactive',
-  /** column name */
-  Compatibilitymodeinfinitepwm = 'compatibilitymodeinfinitepwm',
-  /** column name */
-  Compatibilitymodeminpwm = 'compatibilitymodeminpwm',
-  /** column name */
-  Compatibilitymodepowerfactor = 'compatibilitymodepowerfactor',
-  /** column name */
-  Contrastlevel = 'contrastlevel',
-  /** column name */
-  Ct1group = 'ct1group',
-  /** column name */
-  Ct1grouplimit = 'ct1grouplimit',
-  /** column name */
-  Ct1subtype = 'ct1subtype',
-  /** column name */
-  Ct1type = 'ct1type',
-  /** column name */
-  Ct2group = 'ct2group',
-  /** column name */
-  Ct2grouplimit = 'ct2grouplimit',
-  /** column name */
-  Ct2subtype = 'ct2subtype',
-  /** column name */
-  Ct2type = 'ct2type',
-  /** column name */
-  Ct3group = 'ct3group',
-  /** column name */
-  Ct3grouplimit = 'ct3grouplimit',
-  /** column name */
-  Dateformat = 'dateformat',
-  /** column name */
-  Defaultmode = 'defaultmode',
-  /** column name */
-  Deviceconfigtime = 'deviceconfigtime',
-  /** column name */
-  Devicelimit = 'devicelimit',
-  /** column name */
-  Dston = 'dston',
-  /** column name */
-  Esenseinput = 'esenseinput',
-  /** column name */
-  Exportmargin = 'exportmargin',
-  /** column name */
-  Gentypeicon = 'gentypeicon',
-  /** column name */
-  Gridlimit = 'gridlimit',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Language = 'language',
-  /** column name */
-  Lockcode = 'lockcode',
-  /** column name */
-  Lockevplugged = 'lockevplugged',
-  /** column name */
-  Lockevunplugged = 'lockevunplugged',
-  /** column name */
-  Lockhidereadings = 'lockhidereadings',
-  /** column name */
-  Locktimeout = 'locktimeout',
-  /** column name */
-  Maxgridlimit = 'maxgridlimit',
-  /** column name */
-  Mingreenlevel = 'mingreenlevel',
-  /** column name */
-  Monitoringstatus = 'monitoringstatus',
-  /** column name */
-  Password = 'password',
-  /** column name */
-  Phaseorphaserotation = 'phaseorphaserotation',
-  /** column name */
-  Plugincharge = 'plugincharge',
-  /** column name */
-  Preconditioning = 'preconditioning',
-  /** column name */
-  Signature = 'signature',
-  /** column name */
-  Smartboostenergy = 'smartboostenergy',
-  /** column name */
-  Smartboosthour = 'smartboosthour',
-  /** column name */
-  Smartboostminute = 'smartboostminute',
-  /** column name */
-  Startstoptimer = 'startstoptimer',
-  /** column name */
-  Timefromcloud = 'timefromcloud',
-  /** column name */
-  Timezone = 'timezone',
-  /** column name */
-  Triphaseon = 'triphaseon',
-}
-
-/** input type for updating data in table "zappi1_config_reply_data" */
-export type Zappi1_Config_Reply_Data_Set_Input = {
-  autosettimefromclouddone?: InputMaybe<Scalars['Boolean']>;
-  backlightontime?: InputMaybe<Scalars['smallint']>;
-  batterymode?: InputMaybe<Scalars['String']>;
-  boostingenergy?: InputMaybe<Scalars['smallint']>;
-  buzzeron?: InputMaybe<Scalars['Boolean']>;
-  chargecompletedelay?: InputMaybe<Scalars['Int']>;
-  compatibilitymodeactive?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeminpwm?: InputMaybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: InputMaybe<Scalars['Float']>;
-  contrastlevel?: InputMaybe<Scalars['smallint']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct1subtype?: InputMaybe<Scalars['String']>;
-  ct1type?: InputMaybe<Scalars['String']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2subtype?: InputMaybe<Scalars['String']>;
-  ct2type?: InputMaybe<Scalars['String']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  dateformat?: InputMaybe<Scalars['String']>;
-  defaultmode?: InputMaybe<Scalars['String']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['Float']>;
-  dston?: InputMaybe<Scalars['Boolean']>;
-  esenseinput?: InputMaybe<Scalars['String']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  gentypeicon?: InputMaybe<Scalars['String']>;
-  gridlimit?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  language?: InputMaybe<Scalars['String']>;
-  lockcode?: InputMaybe<Scalars['Int']>;
-  lockevplugged?: InputMaybe<Scalars['Boolean']>;
-  lockevunplugged?: InputMaybe<Scalars['Boolean']>;
-  lockhidereadings?: InputMaybe<Scalars['Boolean']>;
-  locktimeout?: InputMaybe<Scalars['smallint']>;
-  maxgridlimit?: InputMaybe<Scalars['smallint']>;
-  mingreenlevel?: InputMaybe<Scalars['smallint']>;
-  monitoringstatus?: InputMaybe<Scalars['Boolean']>;
-  password?: InputMaybe<Scalars['Int']>;
-  phaseorphaserotation?: InputMaybe<Scalars['String']>;
-  plugincharge?: InputMaybe<Scalars['smallint']>;
-  preconditioning?: InputMaybe<Scalars['String']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  smartboostenergy?: InputMaybe<Scalars['smallint']>;
-  smartboosthour?: InputMaybe<Scalars['smallint']>;
-  smartboostminute?: InputMaybe<Scalars['smallint']>;
-  startstoptimer?: InputMaybe<Scalars['smallint']>;
-  timefromcloud?: InputMaybe<Scalars['Boolean']>;
-  timezone?: InputMaybe<Scalars['String']>;
-  triphaseon?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate stddev on columns */
-export type Zappi1_Config_Reply_Data_Stddev_Fields = {
-  __typename?: 'zappi1_config_reply_data_stddev_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  plugincharge?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Zappi1_Config_Reply_Data_Stddev_Pop_Fields = {
-  __typename?: 'zappi1_config_reply_data_stddev_pop_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  plugincharge?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Zappi1_Config_Reply_Data_Stddev_Samp_Fields = {
-  __typename?: 'zappi1_config_reply_data_stddev_samp_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  plugincharge?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Zappi1_Config_Reply_Data_Sum_Fields = {
-  __typename?: 'zappi1_config_reply_data_sum_fields';
-  backlightontime?: Maybe<Scalars['smallint']>;
-  boostingenergy?: Maybe<Scalars['smallint']>;
-  chargecompletedelay?: Maybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  gridlimit?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  lockcode?: Maybe<Scalars['Int']>;
-  locktimeout?: Maybe<Scalars['smallint']>;
-  maxgridlimit?: Maybe<Scalars['smallint']>;
-  mingreenlevel?: Maybe<Scalars['smallint']>;
-  password?: Maybe<Scalars['Int']>;
-  plugincharge?: Maybe<Scalars['smallint']>;
-  signature?: Maybe<Scalars['bigint']>;
-  smartboostenergy?: Maybe<Scalars['smallint']>;
-  smartboosthour?: Maybe<Scalars['smallint']>;
-  smartboostminute?: Maybe<Scalars['smallint']>;
-  startstoptimer?: Maybe<Scalars['smallint']>;
-};
-
-/** update columns of table "zappi1_config_reply_data" */
-export enum Zappi1_Config_Reply_Data_Update_Column {
-  /** column name */
-  Autosettimefromclouddone = 'autosettimefromclouddone',
-  /** column name */
-  Backlightontime = 'backlightontime',
-  /** column name */
-  Batterymode = 'batterymode',
-  /** column name */
-  Boostingenergy = 'boostingenergy',
-  /** column name */
-  Buzzeron = 'buzzeron',
-  /** column name */
-  Chargecompletedelay = 'chargecompletedelay',
-  /** column name */
-  Compatibilitymodeactive = 'compatibilitymodeactive',
-  /** column name */
-  Compatibilitymodeinfinitepwm = 'compatibilitymodeinfinitepwm',
-  /** column name */
-  Compatibilitymodeminpwm = 'compatibilitymodeminpwm',
-  /** column name */
-  Compatibilitymodepowerfactor = 'compatibilitymodepowerfactor',
-  /** column name */
-  Contrastlevel = 'contrastlevel',
-  /** column name */
-  Ct1group = 'ct1group',
-  /** column name */
-  Ct1grouplimit = 'ct1grouplimit',
-  /** column name */
-  Ct1subtype = 'ct1subtype',
-  /** column name */
-  Ct1type = 'ct1type',
-  /** column name */
-  Ct2group = 'ct2group',
-  /** column name */
-  Ct2grouplimit = 'ct2grouplimit',
-  /** column name */
-  Ct2subtype = 'ct2subtype',
-  /** column name */
-  Ct2type = 'ct2type',
-  /** column name */
-  Ct3group = 'ct3group',
-  /** column name */
-  Ct3grouplimit = 'ct3grouplimit',
-  /** column name */
-  Dateformat = 'dateformat',
-  /** column name */
-  Defaultmode = 'defaultmode',
-  /** column name */
-  Deviceconfigtime = 'deviceconfigtime',
-  /** column name */
-  Devicelimit = 'devicelimit',
-  /** column name */
-  Dston = 'dston',
-  /** column name */
-  Esenseinput = 'esenseinput',
-  /** column name */
-  Exportmargin = 'exportmargin',
-  /** column name */
-  Gentypeicon = 'gentypeicon',
-  /** column name */
-  Gridlimit = 'gridlimit',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Language = 'language',
-  /** column name */
-  Lockcode = 'lockcode',
-  /** column name */
-  Lockevplugged = 'lockevplugged',
-  /** column name */
-  Lockevunplugged = 'lockevunplugged',
-  /** column name */
-  Lockhidereadings = 'lockhidereadings',
-  /** column name */
-  Locktimeout = 'locktimeout',
-  /** column name */
-  Maxgridlimit = 'maxgridlimit',
-  /** column name */
-  Mingreenlevel = 'mingreenlevel',
-  /** column name */
-  Monitoringstatus = 'monitoringstatus',
-  /** column name */
-  Password = 'password',
-  /** column name */
-  Phaseorphaserotation = 'phaseorphaserotation',
-  /** column name */
-  Plugincharge = 'plugincharge',
-  /** column name */
-  Preconditioning = 'preconditioning',
-  /** column name */
-  Signature = 'signature',
-  /** column name */
-  Smartboostenergy = 'smartboostenergy',
-  /** column name */
-  Smartboosthour = 'smartboosthour',
-  /** column name */
-  Smartboostminute = 'smartboostminute',
-  /** column name */
-  Startstoptimer = 'startstoptimer',
-  /** column name */
-  Timefromcloud = 'timefromcloud',
-  /** column name */
-  Timezone = 'timezone',
-  /** column name */
-  Triphaseon = 'triphaseon',
-}
-
-/** aggregate var_pop on columns */
-export type Zappi1_Config_Reply_Data_Var_Pop_Fields = {
-  __typename?: 'zappi1_config_reply_data_var_pop_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  plugincharge?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Zappi1_Config_Reply_Data_Var_Samp_Fields = {
-  __typename?: 'zappi1_config_reply_data_var_samp_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  plugincharge?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Zappi1_Config_Reply_Data_Variance_Fields = {
-  __typename?: 'zappi1_config_reply_data_variance_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  maxgridlimit?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  plugincharge?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data = {
-  __typename?: 'zappi2_config_reply_data';
-  backlightontime: Scalars['smallint'];
-  batterymode?: Maybe<Scalars['String']>;
-  boostingenergy: Scalars['smallint'];
-  buzzeron: Scalars['Boolean'];
-  chargecompletedelay: Scalars['Int'];
-  chargein3phase: Scalars['Boolean'];
-  chargewhenpinlocked: Scalars['Boolean'];
-  compatibilitymodeactive: Scalars['Boolean'];
-  compatibilitymodeinfinitepwm: Scalars['Boolean'];
-  compatibilitymodeminpwm: Scalars['Float'];
-  compatibilitymodepowerfactor: Scalars['Float'];
-  /** An object relationship */
-  config_reply?: Maybe<Config_Reply>;
-  /** An array relationship */
-  config_reply_boost_timers: Array<Config_Reply_Boost_Timer>;
-  /** An aggregate relationship */
-  config_reply_boost_timers_aggregate: Config_Reply_Boost_Timer_Aggregate;
-  contrastlevel: Scalars['smallint'];
-  ct1g100: Scalars['Boolean'];
-  ct1group: Scalars['smallint'];
-  ct1grouplimit: Scalars['smallint'];
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2g100: Scalars['Boolean'];
-  ct2group: Scalars['smallint'];
-  ct2grouplimit: Scalars['smallint'];
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3g100: Scalars['Boolean'];
-  ct3group: Scalars['smallint'];
-  ct3grouplimit: Scalars['smallint'];
-  ct3subtype?: Maybe<Scalars['String']>;
-  ct3type?: Maybe<Scalars['String']>;
-  ct4grouplimit: Scalars['smallint'];
-  ctinternalgroup: Scalars['smallint'];
-  ctprimary: Scalars['smallint'];
-  dateformat?: Maybe<Scalars['String']>;
-  defaultmode?: Maybe<Scalars['String']>;
-  deviceconfigtime: Scalars['bigint'];
-  devicelimit: Scalars['Float'];
-  dston: Scalars['Boolean'];
-  earthing?: Maybe<Scalars['String']>;
-  ecopstopdelay: Scalars['smallint'];
-  esenseinput?: Maybe<Scalars['String']>;
-  esenselimitpwm: Scalars['smallint'];
-  exportmargin: Scalars['Int'];
-  gentypeicon?: Maybe<Scalars['String']>;
-  gridlimit: Scalars['Int'];
-  gridpowerlimit: Scalars['Int'];
-  id: Scalars['Int'];
-  language?: Maybe<Scalars['String']>;
-  ledbrightness: Scalars['smallint'];
-  ledchargecomplete: Scalars['jsonb'];
-  leddirtycharging: Scalars['jsonb'];
-  ledfault: Scalars['jsonb'];
-  ledgreencharging: Scalars['jsonb'];
-  ledmixcharging: Scalars['jsonb'];
-  ledstateb: Scalars['jsonb'];
-  lockcode: Scalars['Int'];
-  lockevplugged: Scalars['Boolean'];
-  lockevunplugged: Scalars['Boolean'];
-  lockhidereadings: Scalars['Boolean'];
-  locksolenoidpwm: Scalars['Int'];
-  locktimeout: Scalars['smallint'];
-  mainswitchpwm: Scalars['Int'];
-  mingreenlevel: Scalars['smallint'];
-  monitoringstatus: Scalars['Boolean'];
-  neutrallimit: Scalars['Int'];
-  password: Scalars['Int'];
-  perelaypwm: Scalars['Int'];
-  phasereturn?: Maybe<Scalars['String']>;
-  plugincharge: Scalars['Boolean'];
-  preconenergy: Scalars['smallint'];
-  preconon: Scalars['Boolean'];
-  randomdelaystart: Scalars['smallint'];
-  relay1pwm: Scalars['Int'];
-  relay2pwm: Scalars['Int'];
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature: Scalars['bigint'];
-  smartboostenergy: Scalars['smallint'];
-  smartboosthour: Scalars['smallint'];
-  smartboostminute: Scalars['smallint'];
-  startstoptimer: Scalars['smallint'];
-  timefromcloud: Scalars['Boolean'];
-  timezone?: Maybe<Scalars['String']>;
-  weldedrelaycheckdelay: Scalars['Int'];
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataConfig_Reply_Boost_TimersArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataConfig_Reply_Boost_Timers_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Config_Reply_Boost_Timer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Config_Reply_Boost_Timer_Order_By>>;
-  where?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataLedchargecompleteArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataLeddirtychargingArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataLedfaultArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataLedgreenchargingArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataLedmixchargingArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** columns and relationships of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_DataLedstatebArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregated selection of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Aggregate = {
-  __typename?: 'zappi2_config_reply_data_aggregate';
-  aggregate?: Maybe<Zappi2_Config_Reply_Data_Aggregate_Fields>;
-  nodes: Array<Zappi2_Config_Reply_Data>;
-};
-
-/** aggregate fields of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Aggregate_Fields = {
-  __typename?: 'zappi2_config_reply_data_aggregate_fields';
-  avg?: Maybe<Zappi2_Config_Reply_Data_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Zappi2_Config_Reply_Data_Max_Fields>;
-  min?: Maybe<Zappi2_Config_Reply_Data_Min_Fields>;
-  stddev?: Maybe<Zappi2_Config_Reply_Data_Stddev_Fields>;
-  stddev_pop?: Maybe<Zappi2_Config_Reply_Data_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Zappi2_Config_Reply_Data_Stddev_Samp_Fields>;
-  sum?: Maybe<Zappi2_Config_Reply_Data_Sum_Fields>;
-  var_pop?: Maybe<Zappi2_Config_Reply_Data_Var_Pop_Fields>;
-  var_samp?: Maybe<Zappi2_Config_Reply_Data_Var_Samp_Fields>;
-  variance?: Maybe<Zappi2_Config_Reply_Data_Variance_Fields>;
-};
-
-/** aggregate fields of "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Zappi2_Config_Reply_Data_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** append existing jsonb value of filtered columns with new jsonb value */
-export type Zappi2_Config_Reply_Data_Append_Input = {
-  ledchargecomplete?: InputMaybe<Scalars['jsonb']>;
-  leddirtycharging?: InputMaybe<Scalars['jsonb']>;
-  ledfault?: InputMaybe<Scalars['jsonb']>;
-  ledgreencharging?: InputMaybe<Scalars['jsonb']>;
-  ledmixcharging?: InputMaybe<Scalars['jsonb']>;
-  ledstateb?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** aggregate avg on columns */
-export type Zappi2_Config_Reply_Data_Avg_Fields = {
-  __typename?: 'zappi2_config_reply_data_avg_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  ct4grouplimit?: Maybe<Scalars['Float']>;
-  ctinternalgroup?: Maybe<Scalars['Float']>;
-  ctprimary?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['Float']>;
-  esenselimitpwm?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  gridpowerlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  ledbrightness?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locksolenoidpwm?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  mainswitchpwm?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  neutrallimit?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  perelaypwm?: Maybe<Scalars['Float']>;
-  preconenergy?: Maybe<Scalars['Float']>;
-  randomdelaystart?: Maybe<Scalars['Float']>;
-  relay1pwm?: Maybe<Scalars['Float']>;
-  relay2pwm?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "zappi2_config_reply_data". All fields are combined with a logical 'AND'. */
-export type Zappi2_Config_Reply_Data_Bool_Exp = {
-  _and?: InputMaybe<Array<Zappi2_Config_Reply_Data_Bool_Exp>>;
-  _not?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-  _or?: InputMaybe<Array<Zappi2_Config_Reply_Data_Bool_Exp>>;
-  backlightontime?: InputMaybe<Smallint_Comparison_Exp>;
-  batterymode?: InputMaybe<String_Comparison_Exp>;
-  boostingenergy?: InputMaybe<Smallint_Comparison_Exp>;
-  buzzeron?: InputMaybe<Boolean_Comparison_Exp>;
-  chargecompletedelay?: InputMaybe<Int_Comparison_Exp>;
-  chargein3phase?: InputMaybe<Boolean_Comparison_Exp>;
-  chargewhenpinlocked?: InputMaybe<Boolean_Comparison_Exp>;
-  compatibilitymodeactive?: InputMaybe<Boolean_Comparison_Exp>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Boolean_Comparison_Exp>;
-  compatibilitymodeminpwm?: InputMaybe<Float_Comparison_Exp>;
-  compatibilitymodepowerfactor?: InputMaybe<Float_Comparison_Exp>;
-  config_reply?: InputMaybe<Config_Reply_Bool_Exp>;
-  config_reply_boost_timers?: InputMaybe<Config_Reply_Boost_Timer_Bool_Exp>;
-  contrastlevel?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1g100?: InputMaybe<Boolean_Comparison_Exp>;
-  ct1group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ct1subtype?: InputMaybe<String_Comparison_Exp>;
-  ct1type?: InputMaybe<String_Comparison_Exp>;
-  ct2g100?: InputMaybe<Boolean_Comparison_Exp>;
-  ct2group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct2grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ct2subtype?: InputMaybe<String_Comparison_Exp>;
-  ct2type?: InputMaybe<String_Comparison_Exp>;
-  ct3g100?: InputMaybe<Boolean_Comparison_Exp>;
-  ct3group?: InputMaybe<Smallint_Comparison_Exp>;
-  ct3grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ct3subtype?: InputMaybe<String_Comparison_Exp>;
-  ct3type?: InputMaybe<String_Comparison_Exp>;
-  ct4grouplimit?: InputMaybe<Smallint_Comparison_Exp>;
-  ctinternalgroup?: InputMaybe<Smallint_Comparison_Exp>;
-  ctprimary?: InputMaybe<Smallint_Comparison_Exp>;
-  dateformat?: InputMaybe<String_Comparison_Exp>;
-  defaultmode?: InputMaybe<String_Comparison_Exp>;
-  deviceconfigtime?: InputMaybe<Bigint_Comparison_Exp>;
-  devicelimit?: InputMaybe<Float_Comparison_Exp>;
-  dston?: InputMaybe<Boolean_Comparison_Exp>;
-  earthing?: InputMaybe<String_Comparison_Exp>;
-  ecopstopdelay?: InputMaybe<Smallint_Comparison_Exp>;
-  esenseinput?: InputMaybe<String_Comparison_Exp>;
-  esenselimitpwm?: InputMaybe<Smallint_Comparison_Exp>;
-  exportmargin?: InputMaybe<Int_Comparison_Exp>;
-  gentypeicon?: InputMaybe<String_Comparison_Exp>;
-  gridlimit?: InputMaybe<Int_Comparison_Exp>;
-  gridpowerlimit?: InputMaybe<Int_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  language?: InputMaybe<String_Comparison_Exp>;
-  ledbrightness?: InputMaybe<Smallint_Comparison_Exp>;
-  ledchargecomplete?: InputMaybe<Jsonb_Comparison_Exp>;
-  leddirtycharging?: InputMaybe<Jsonb_Comparison_Exp>;
-  ledfault?: InputMaybe<Jsonb_Comparison_Exp>;
-  ledgreencharging?: InputMaybe<Jsonb_Comparison_Exp>;
-  ledmixcharging?: InputMaybe<Jsonb_Comparison_Exp>;
-  ledstateb?: InputMaybe<Jsonb_Comparison_Exp>;
-  lockcode?: InputMaybe<Int_Comparison_Exp>;
-  lockevplugged?: InputMaybe<Boolean_Comparison_Exp>;
-  lockevunplugged?: InputMaybe<Boolean_Comparison_Exp>;
-  lockhidereadings?: InputMaybe<Boolean_Comparison_Exp>;
-  locksolenoidpwm?: InputMaybe<Int_Comparison_Exp>;
-  locktimeout?: InputMaybe<Smallint_Comparison_Exp>;
-  mainswitchpwm?: InputMaybe<Int_Comparison_Exp>;
-  mingreenlevel?: InputMaybe<Smallint_Comparison_Exp>;
-  monitoringstatus?: InputMaybe<Boolean_Comparison_Exp>;
-  neutrallimit?: InputMaybe<Int_Comparison_Exp>;
-  password?: InputMaybe<Int_Comparison_Exp>;
-  perelaypwm?: InputMaybe<Int_Comparison_Exp>;
-  phasereturn?: InputMaybe<String_Comparison_Exp>;
-  plugincharge?: InputMaybe<Boolean_Comparison_Exp>;
-  preconenergy?: InputMaybe<Smallint_Comparison_Exp>;
-  preconon?: InputMaybe<Boolean_Comparison_Exp>;
-  randomdelaystart?: InputMaybe<Smallint_Comparison_Exp>;
-  relay1pwm?: InputMaybe<Int_Comparison_Exp>;
-  relay2pwm?: InputMaybe<Int_Comparison_Exp>;
-  serverconfigtime?: InputMaybe<Int_Comparison_Exp>;
-  signature?: InputMaybe<Bigint_Comparison_Exp>;
-  smartboostenergy?: InputMaybe<Smallint_Comparison_Exp>;
-  smartboosthour?: InputMaybe<Smallint_Comparison_Exp>;
-  smartboostminute?: InputMaybe<Smallint_Comparison_Exp>;
-  startstoptimer?: InputMaybe<Smallint_Comparison_Exp>;
-  timefromcloud?: InputMaybe<Boolean_Comparison_Exp>;
-  timezone?: InputMaybe<String_Comparison_Exp>;
-  weldedrelaycheckdelay?: InputMaybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "zappi2_config_reply_data" */
-export enum Zappi2_Config_Reply_Data_Constraint {
-  /** unique or primary key constraint */
-  PkF5da991768799f1efbc44fe7daf = 'PK_f5da991768799f1efbc44fe7daf',
-}
-
-/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-export type Zappi2_Config_Reply_Data_Delete_At_Path_Input = {
-  ledchargecomplete?: InputMaybe<Array<Scalars['String']>>;
-  leddirtycharging?: InputMaybe<Array<Scalars['String']>>;
-  ledfault?: InputMaybe<Array<Scalars['String']>>;
-  ledgreencharging?: InputMaybe<Array<Scalars['String']>>;
-  ledmixcharging?: InputMaybe<Array<Scalars['String']>>;
-  ledstateb?: InputMaybe<Array<Scalars['String']>>;
-};
-
-/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-export type Zappi2_Config_Reply_Data_Delete_Elem_Input = {
-  ledchargecomplete?: InputMaybe<Scalars['Int']>;
-  leddirtycharging?: InputMaybe<Scalars['Int']>;
-  ledfault?: InputMaybe<Scalars['Int']>;
-  ledgreencharging?: InputMaybe<Scalars['Int']>;
-  ledmixcharging?: InputMaybe<Scalars['Int']>;
-  ledstateb?: InputMaybe<Scalars['Int']>;
-};
-
-/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-export type Zappi2_Config_Reply_Data_Delete_Key_Input = {
-  ledchargecomplete?: InputMaybe<Scalars['String']>;
-  leddirtycharging?: InputMaybe<Scalars['String']>;
-  ledfault?: InputMaybe<Scalars['String']>;
-  ledgreencharging?: InputMaybe<Scalars['String']>;
-  ledmixcharging?: InputMaybe<Scalars['String']>;
-  ledstateb?: InputMaybe<Scalars['String']>;
-};
-
-/** input type for incrementing numeric columns in table "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Inc_Input = {
-  backlightontime?: InputMaybe<Scalars['smallint']>;
-  boostingenergy?: InputMaybe<Scalars['smallint']>;
-  chargecompletedelay?: InputMaybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: InputMaybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: InputMaybe<Scalars['Float']>;
-  contrastlevel?: InputMaybe<Scalars['smallint']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct4grouplimit?: InputMaybe<Scalars['smallint']>;
-  ctinternalgroup?: InputMaybe<Scalars['smallint']>;
-  ctprimary?: InputMaybe<Scalars['smallint']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['Float']>;
-  ecopstopdelay?: InputMaybe<Scalars['smallint']>;
-  esenselimitpwm?: InputMaybe<Scalars['smallint']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  gridlimit?: InputMaybe<Scalars['Int']>;
-  gridpowerlimit?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  ledbrightness?: InputMaybe<Scalars['smallint']>;
-  lockcode?: InputMaybe<Scalars['Int']>;
-  locksolenoidpwm?: InputMaybe<Scalars['Int']>;
-  locktimeout?: InputMaybe<Scalars['smallint']>;
-  mainswitchpwm?: InputMaybe<Scalars['Int']>;
-  mingreenlevel?: InputMaybe<Scalars['smallint']>;
-  neutrallimit?: InputMaybe<Scalars['Int']>;
-  password?: InputMaybe<Scalars['Int']>;
-  perelaypwm?: InputMaybe<Scalars['Int']>;
-  preconenergy?: InputMaybe<Scalars['smallint']>;
-  randomdelaystart?: InputMaybe<Scalars['smallint']>;
-  relay1pwm?: InputMaybe<Scalars['Int']>;
-  relay2pwm?: InputMaybe<Scalars['Int']>;
-  serverconfigtime?: InputMaybe<Scalars['Int']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  smartboostenergy?: InputMaybe<Scalars['smallint']>;
-  smartboosthour?: InputMaybe<Scalars['smallint']>;
-  smartboostminute?: InputMaybe<Scalars['smallint']>;
-  startstoptimer?: InputMaybe<Scalars['smallint']>;
-  weldedrelaycheckdelay?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Insert_Input = {
-  backlightontime?: InputMaybe<Scalars['smallint']>;
-  batterymode?: InputMaybe<Scalars['String']>;
-  boostingenergy?: InputMaybe<Scalars['smallint']>;
-  buzzeron?: InputMaybe<Scalars['Boolean']>;
-  chargecompletedelay?: InputMaybe<Scalars['Int']>;
-  chargein3phase?: InputMaybe<Scalars['Boolean']>;
-  chargewhenpinlocked?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeactive?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeminpwm?: InputMaybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: InputMaybe<Scalars['Float']>;
-  config_reply?: InputMaybe<Config_Reply_Obj_Rel_Insert_Input>;
-  config_reply_boost_timers?: InputMaybe<Config_Reply_Boost_Timer_Arr_Rel_Insert_Input>;
-  contrastlevel?: InputMaybe<Scalars['smallint']>;
-  ct1g100?: InputMaybe<Scalars['Boolean']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct1subtype?: InputMaybe<Scalars['String']>;
-  ct1type?: InputMaybe<Scalars['String']>;
-  ct2g100?: InputMaybe<Scalars['Boolean']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2subtype?: InputMaybe<Scalars['String']>;
-  ct2type?: InputMaybe<Scalars['String']>;
-  ct3g100?: InputMaybe<Scalars['Boolean']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct3subtype?: InputMaybe<Scalars['String']>;
-  ct3type?: InputMaybe<Scalars['String']>;
-  ct4grouplimit?: InputMaybe<Scalars['smallint']>;
-  ctinternalgroup?: InputMaybe<Scalars['smallint']>;
-  ctprimary?: InputMaybe<Scalars['smallint']>;
-  dateformat?: InputMaybe<Scalars['String']>;
-  defaultmode?: InputMaybe<Scalars['String']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['Float']>;
-  dston?: InputMaybe<Scalars['Boolean']>;
-  earthing?: InputMaybe<Scalars['String']>;
-  ecopstopdelay?: InputMaybe<Scalars['smallint']>;
-  esenseinput?: InputMaybe<Scalars['String']>;
-  esenselimitpwm?: InputMaybe<Scalars['smallint']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  gentypeicon?: InputMaybe<Scalars['String']>;
-  gridlimit?: InputMaybe<Scalars['Int']>;
-  gridpowerlimit?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  language?: InputMaybe<Scalars['String']>;
-  ledbrightness?: InputMaybe<Scalars['smallint']>;
-  ledchargecomplete?: InputMaybe<Scalars['jsonb']>;
-  leddirtycharging?: InputMaybe<Scalars['jsonb']>;
-  ledfault?: InputMaybe<Scalars['jsonb']>;
-  ledgreencharging?: InputMaybe<Scalars['jsonb']>;
-  ledmixcharging?: InputMaybe<Scalars['jsonb']>;
-  ledstateb?: InputMaybe<Scalars['jsonb']>;
-  lockcode?: InputMaybe<Scalars['Int']>;
-  lockevplugged?: InputMaybe<Scalars['Boolean']>;
-  lockevunplugged?: InputMaybe<Scalars['Boolean']>;
-  lockhidereadings?: InputMaybe<Scalars['Boolean']>;
-  locksolenoidpwm?: InputMaybe<Scalars['Int']>;
-  locktimeout?: InputMaybe<Scalars['smallint']>;
-  mainswitchpwm?: InputMaybe<Scalars['Int']>;
-  mingreenlevel?: InputMaybe<Scalars['smallint']>;
-  monitoringstatus?: InputMaybe<Scalars['Boolean']>;
-  neutrallimit?: InputMaybe<Scalars['Int']>;
-  password?: InputMaybe<Scalars['Int']>;
-  perelaypwm?: InputMaybe<Scalars['Int']>;
-  phasereturn?: InputMaybe<Scalars['String']>;
-  plugincharge?: InputMaybe<Scalars['Boolean']>;
-  preconenergy?: InputMaybe<Scalars['smallint']>;
-  preconon?: InputMaybe<Scalars['Boolean']>;
-  randomdelaystart?: InputMaybe<Scalars['smallint']>;
-  relay1pwm?: InputMaybe<Scalars['Int']>;
-  relay2pwm?: InputMaybe<Scalars['Int']>;
-  serverconfigtime?: InputMaybe<Scalars['Int']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  smartboostenergy?: InputMaybe<Scalars['smallint']>;
-  smartboosthour?: InputMaybe<Scalars['smallint']>;
-  smartboostminute?: InputMaybe<Scalars['smallint']>;
-  startstoptimer?: InputMaybe<Scalars['smallint']>;
-  timefromcloud?: InputMaybe<Scalars['Boolean']>;
-  timezone?: InputMaybe<Scalars['String']>;
-  weldedrelaycheckdelay?: InputMaybe<Scalars['Int']>;
-};
-
-/** aggregate max on columns */
-export type Zappi2_Config_Reply_Data_Max_Fields = {
-  __typename?: 'zappi2_config_reply_data_max_fields';
-  backlightontime?: Maybe<Scalars['smallint']>;
-  batterymode?: Maybe<Scalars['String']>;
-  boostingenergy?: Maybe<Scalars['smallint']>;
-  chargecompletedelay?: Maybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  ct3subtype?: Maybe<Scalars['String']>;
-  ct3type?: Maybe<Scalars['String']>;
-  ct4grouplimit?: Maybe<Scalars['smallint']>;
-  ctinternalgroup?: Maybe<Scalars['smallint']>;
-  ctprimary?: Maybe<Scalars['smallint']>;
-  dateformat?: Maybe<Scalars['String']>;
-  defaultmode?: Maybe<Scalars['String']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  earthing?: Maybe<Scalars['String']>;
-  ecopstopdelay?: Maybe<Scalars['smallint']>;
-  esenseinput?: Maybe<Scalars['String']>;
-  esenselimitpwm?: Maybe<Scalars['smallint']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  gentypeicon?: Maybe<Scalars['String']>;
-  gridlimit?: Maybe<Scalars['Int']>;
-  gridpowerlimit?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  language?: Maybe<Scalars['String']>;
-  ledbrightness?: Maybe<Scalars['smallint']>;
-  lockcode?: Maybe<Scalars['Int']>;
-  locksolenoidpwm?: Maybe<Scalars['Int']>;
-  locktimeout?: Maybe<Scalars['smallint']>;
-  mainswitchpwm?: Maybe<Scalars['Int']>;
-  mingreenlevel?: Maybe<Scalars['smallint']>;
-  neutrallimit?: Maybe<Scalars['Int']>;
-  password?: Maybe<Scalars['Int']>;
-  perelaypwm?: Maybe<Scalars['Int']>;
-  phasereturn?: Maybe<Scalars['String']>;
-  preconenergy?: Maybe<Scalars['smallint']>;
-  randomdelaystart?: Maybe<Scalars['smallint']>;
-  relay1pwm?: Maybe<Scalars['Int']>;
-  relay2pwm?: Maybe<Scalars['Int']>;
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature?: Maybe<Scalars['bigint']>;
-  smartboostenergy?: Maybe<Scalars['smallint']>;
-  smartboosthour?: Maybe<Scalars['smallint']>;
-  smartboostminute?: Maybe<Scalars['smallint']>;
-  startstoptimer?: Maybe<Scalars['smallint']>;
-  timezone?: Maybe<Scalars['String']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate min on columns */
-export type Zappi2_Config_Reply_Data_Min_Fields = {
-  __typename?: 'zappi2_config_reply_data_min_fields';
-  backlightontime?: Maybe<Scalars['smallint']>;
-  batterymode?: Maybe<Scalars['String']>;
-  boostingenergy?: Maybe<Scalars['smallint']>;
-  chargecompletedelay?: Maybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct1subtype?: Maybe<Scalars['String']>;
-  ct1type?: Maybe<Scalars['String']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct2subtype?: Maybe<Scalars['String']>;
-  ct2type?: Maybe<Scalars['String']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  ct3subtype?: Maybe<Scalars['String']>;
-  ct3type?: Maybe<Scalars['String']>;
-  ct4grouplimit?: Maybe<Scalars['smallint']>;
-  ctinternalgroup?: Maybe<Scalars['smallint']>;
-  ctprimary?: Maybe<Scalars['smallint']>;
-  dateformat?: Maybe<Scalars['String']>;
-  defaultmode?: Maybe<Scalars['String']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  earthing?: Maybe<Scalars['String']>;
-  ecopstopdelay?: Maybe<Scalars['smallint']>;
-  esenseinput?: Maybe<Scalars['String']>;
-  esenselimitpwm?: Maybe<Scalars['smallint']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  gentypeicon?: Maybe<Scalars['String']>;
-  gridlimit?: Maybe<Scalars['Int']>;
-  gridpowerlimit?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  language?: Maybe<Scalars['String']>;
-  ledbrightness?: Maybe<Scalars['smallint']>;
-  lockcode?: Maybe<Scalars['Int']>;
-  locksolenoidpwm?: Maybe<Scalars['Int']>;
-  locktimeout?: Maybe<Scalars['smallint']>;
-  mainswitchpwm?: Maybe<Scalars['Int']>;
-  mingreenlevel?: Maybe<Scalars['smallint']>;
-  neutrallimit?: Maybe<Scalars['Int']>;
-  password?: Maybe<Scalars['Int']>;
-  perelaypwm?: Maybe<Scalars['Int']>;
-  phasereturn?: Maybe<Scalars['String']>;
-  preconenergy?: Maybe<Scalars['smallint']>;
-  randomdelaystart?: Maybe<Scalars['smallint']>;
-  relay1pwm?: Maybe<Scalars['Int']>;
-  relay2pwm?: Maybe<Scalars['Int']>;
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature?: Maybe<Scalars['bigint']>;
-  smartboostenergy?: Maybe<Scalars['smallint']>;
-  smartboosthour?: Maybe<Scalars['smallint']>;
-  smartboostminute?: Maybe<Scalars['smallint']>;
-  startstoptimer?: Maybe<Scalars['smallint']>;
-  timezone?: Maybe<Scalars['String']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Int']>;
-};
-
-/** response of any mutation on the table "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Mutation_Response = {
-  __typename?: 'zappi2_config_reply_data_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Zappi2_Config_Reply_Data>;
-};
-
-/** input type for inserting object relation for remote table "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Obj_Rel_Insert_Input = {
-  data: Zappi2_Config_Reply_Data_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Zappi2_Config_Reply_Data_On_Conflict>;
-};
-
-/** on_conflict condition type for table "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_On_Conflict = {
-  constraint: Zappi2_Config_Reply_Data_Constraint;
-  update_columns?: Array<Zappi2_Config_Reply_Data_Update_Column>;
-  where?: InputMaybe<Zappi2_Config_Reply_Data_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "zappi2_config_reply_data". */
-export type Zappi2_Config_Reply_Data_Order_By = {
-  backlightontime?: InputMaybe<Order_By>;
-  batterymode?: InputMaybe<Order_By>;
-  boostingenergy?: InputMaybe<Order_By>;
-  buzzeron?: InputMaybe<Order_By>;
-  chargecompletedelay?: InputMaybe<Order_By>;
-  chargein3phase?: InputMaybe<Order_By>;
-  chargewhenpinlocked?: InputMaybe<Order_By>;
-  compatibilitymodeactive?: InputMaybe<Order_By>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Order_By>;
-  compatibilitymodeminpwm?: InputMaybe<Order_By>;
-  compatibilitymodepowerfactor?: InputMaybe<Order_By>;
-  config_reply?: InputMaybe<Config_Reply_Order_By>;
-  config_reply_boost_timers_aggregate?: InputMaybe<Config_Reply_Boost_Timer_Aggregate_Order_By>;
-  contrastlevel?: InputMaybe<Order_By>;
-  ct1g100?: InputMaybe<Order_By>;
-  ct1group?: InputMaybe<Order_By>;
-  ct1grouplimit?: InputMaybe<Order_By>;
-  ct1subtype?: InputMaybe<Order_By>;
-  ct1type?: InputMaybe<Order_By>;
-  ct2g100?: InputMaybe<Order_By>;
-  ct2group?: InputMaybe<Order_By>;
-  ct2grouplimit?: InputMaybe<Order_By>;
-  ct2subtype?: InputMaybe<Order_By>;
-  ct2type?: InputMaybe<Order_By>;
-  ct3g100?: InputMaybe<Order_By>;
-  ct3group?: InputMaybe<Order_By>;
-  ct3grouplimit?: InputMaybe<Order_By>;
-  ct3subtype?: InputMaybe<Order_By>;
-  ct3type?: InputMaybe<Order_By>;
-  ct4grouplimit?: InputMaybe<Order_By>;
-  ctinternalgroup?: InputMaybe<Order_By>;
-  ctprimary?: InputMaybe<Order_By>;
-  dateformat?: InputMaybe<Order_By>;
-  defaultmode?: InputMaybe<Order_By>;
-  deviceconfigtime?: InputMaybe<Order_By>;
-  devicelimit?: InputMaybe<Order_By>;
-  dston?: InputMaybe<Order_By>;
-  earthing?: InputMaybe<Order_By>;
-  ecopstopdelay?: InputMaybe<Order_By>;
-  esenseinput?: InputMaybe<Order_By>;
-  esenselimitpwm?: InputMaybe<Order_By>;
-  exportmargin?: InputMaybe<Order_By>;
-  gentypeicon?: InputMaybe<Order_By>;
-  gridlimit?: InputMaybe<Order_By>;
-  gridpowerlimit?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  language?: InputMaybe<Order_By>;
-  ledbrightness?: InputMaybe<Order_By>;
-  ledchargecomplete?: InputMaybe<Order_By>;
-  leddirtycharging?: InputMaybe<Order_By>;
-  ledfault?: InputMaybe<Order_By>;
-  ledgreencharging?: InputMaybe<Order_By>;
-  ledmixcharging?: InputMaybe<Order_By>;
-  ledstateb?: InputMaybe<Order_By>;
-  lockcode?: InputMaybe<Order_By>;
-  lockevplugged?: InputMaybe<Order_By>;
-  lockevunplugged?: InputMaybe<Order_By>;
-  lockhidereadings?: InputMaybe<Order_By>;
-  locksolenoidpwm?: InputMaybe<Order_By>;
-  locktimeout?: InputMaybe<Order_By>;
-  mainswitchpwm?: InputMaybe<Order_By>;
-  mingreenlevel?: InputMaybe<Order_By>;
-  monitoringstatus?: InputMaybe<Order_By>;
-  neutrallimit?: InputMaybe<Order_By>;
-  password?: InputMaybe<Order_By>;
-  perelaypwm?: InputMaybe<Order_By>;
-  phasereturn?: InputMaybe<Order_By>;
-  plugincharge?: InputMaybe<Order_By>;
-  preconenergy?: InputMaybe<Order_By>;
-  preconon?: InputMaybe<Order_By>;
-  randomdelaystart?: InputMaybe<Order_By>;
-  relay1pwm?: InputMaybe<Order_By>;
-  relay2pwm?: InputMaybe<Order_By>;
-  serverconfigtime?: InputMaybe<Order_By>;
-  signature?: InputMaybe<Order_By>;
-  smartboostenergy?: InputMaybe<Order_By>;
-  smartboosthour?: InputMaybe<Order_By>;
-  smartboostminute?: InputMaybe<Order_By>;
-  startstoptimer?: InputMaybe<Order_By>;
-  timefromcloud?: InputMaybe<Order_By>;
-  timezone?: InputMaybe<Order_By>;
-  weldedrelaycheckdelay?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: zappi2_config_reply_data */
-export type Zappi2_Config_Reply_Data_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** prepend existing jsonb value of filtered columns with new jsonb value */
-export type Zappi2_Config_Reply_Data_Prepend_Input = {
-  ledchargecomplete?: InputMaybe<Scalars['jsonb']>;
-  leddirtycharging?: InputMaybe<Scalars['jsonb']>;
-  ledfault?: InputMaybe<Scalars['jsonb']>;
-  ledgreencharging?: InputMaybe<Scalars['jsonb']>;
-  ledmixcharging?: InputMaybe<Scalars['jsonb']>;
-  ledstateb?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** select columns of table "zappi2_config_reply_data" */
-export enum Zappi2_Config_Reply_Data_Select_Column {
-  /** column name */
-  Backlightontime = 'backlightontime',
-  /** column name */
-  Batterymode = 'batterymode',
-  /** column name */
-  Boostingenergy = 'boostingenergy',
-  /** column name */
-  Buzzeron = 'buzzeron',
-  /** column name */
-  Chargecompletedelay = 'chargecompletedelay',
-  /** column name */
-  Chargein3phase = 'chargein3phase',
-  /** column name */
-  Chargewhenpinlocked = 'chargewhenpinlocked',
-  /** column name */
-  Compatibilitymodeactive = 'compatibilitymodeactive',
-  /** column name */
-  Compatibilitymodeinfinitepwm = 'compatibilitymodeinfinitepwm',
-  /** column name */
-  Compatibilitymodeminpwm = 'compatibilitymodeminpwm',
-  /** column name */
-  Compatibilitymodepowerfactor = 'compatibilitymodepowerfactor',
-  /** column name */
-  Contrastlevel = 'contrastlevel',
-  /** column name */
-  Ct1g100 = 'ct1g100',
-  /** column name */
-  Ct1group = 'ct1group',
-  /** column name */
-  Ct1grouplimit = 'ct1grouplimit',
-  /** column name */
-  Ct1subtype = 'ct1subtype',
-  /** column name */
-  Ct1type = 'ct1type',
-  /** column name */
-  Ct2g100 = 'ct2g100',
-  /** column name */
-  Ct2group = 'ct2group',
-  /** column name */
-  Ct2grouplimit = 'ct2grouplimit',
-  /** column name */
-  Ct2subtype = 'ct2subtype',
-  /** column name */
-  Ct2type = 'ct2type',
-  /** column name */
-  Ct3g100 = 'ct3g100',
-  /** column name */
-  Ct3group = 'ct3group',
-  /** column name */
-  Ct3grouplimit = 'ct3grouplimit',
-  /** column name */
-  Ct3subtype = 'ct3subtype',
-  /** column name */
-  Ct3type = 'ct3type',
-  /** column name */
-  Ct4grouplimit = 'ct4grouplimit',
-  /** column name */
-  Ctinternalgroup = 'ctinternalgroup',
-  /** column name */
-  Ctprimary = 'ctprimary',
-  /** column name */
-  Dateformat = 'dateformat',
-  /** column name */
-  Defaultmode = 'defaultmode',
-  /** column name */
-  Deviceconfigtime = 'deviceconfigtime',
-  /** column name */
-  Devicelimit = 'devicelimit',
-  /** column name */
-  Dston = 'dston',
-  /** column name */
-  Earthing = 'earthing',
-  /** column name */
-  Ecopstopdelay = 'ecopstopdelay',
-  /** column name */
-  Esenseinput = 'esenseinput',
-  /** column name */
-  Esenselimitpwm = 'esenselimitpwm',
-  /** column name */
-  Exportmargin = 'exportmargin',
-  /** column name */
-  Gentypeicon = 'gentypeicon',
-  /** column name */
-  Gridlimit = 'gridlimit',
-  /** column name */
-  Gridpowerlimit = 'gridpowerlimit',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Language = 'language',
-  /** column name */
-  Ledbrightness = 'ledbrightness',
-  /** column name */
-  Ledchargecomplete = 'ledchargecomplete',
-  /** column name */
-  Leddirtycharging = 'leddirtycharging',
-  /** column name */
-  Ledfault = 'ledfault',
-  /** column name */
-  Ledgreencharging = 'ledgreencharging',
-  /** column name */
-  Ledmixcharging = 'ledmixcharging',
-  /** column name */
-  Ledstateb = 'ledstateb',
-  /** column name */
-  Lockcode = 'lockcode',
-  /** column name */
-  Lockevplugged = 'lockevplugged',
-  /** column name */
-  Lockevunplugged = 'lockevunplugged',
-  /** column name */
-  Lockhidereadings = 'lockhidereadings',
-  /** column name */
-  Locksolenoidpwm = 'locksolenoidpwm',
-  /** column name */
-  Locktimeout = 'locktimeout',
-  /** column name */
-  Mainswitchpwm = 'mainswitchpwm',
-  /** column name */
-  Mingreenlevel = 'mingreenlevel',
-  /** column name */
-  Monitoringstatus = 'monitoringstatus',
-  /** column name */
-  Neutrallimit = 'neutrallimit',
-  /** column name */
-  Password = 'password',
-  /** column name */
-  Perelaypwm = 'perelaypwm',
-  /** column name */
-  Phasereturn = 'phasereturn',
-  /** column name */
-  Plugincharge = 'plugincharge',
-  /** column name */
-  Preconenergy = 'preconenergy',
-  /** column name */
-  Preconon = 'preconon',
-  /** column name */
-  Randomdelaystart = 'randomdelaystart',
-  /** column name */
-  Relay1pwm = 'relay1pwm',
-  /** column name */
-  Relay2pwm = 'relay2pwm',
-  /** column name */
-  Serverconfigtime = 'serverconfigtime',
-  /** column name */
-  Signature = 'signature',
-  /** column name */
-  Smartboostenergy = 'smartboostenergy',
-  /** column name */
-  Smartboosthour = 'smartboosthour',
-  /** column name */
-  Smartboostminute = 'smartboostminute',
-  /** column name */
-  Startstoptimer = 'startstoptimer',
-  /** column name */
-  Timefromcloud = 'timefromcloud',
-  /** column name */
-  Timezone = 'timezone',
-  /** column name */
-  Weldedrelaycheckdelay = 'weldedrelaycheckdelay',
-}
-
-/** input type for updating data in table "zappi2_config_reply_data" */
-export type Zappi2_Config_Reply_Data_Set_Input = {
-  backlightontime?: InputMaybe<Scalars['smallint']>;
-  batterymode?: InputMaybe<Scalars['String']>;
-  boostingenergy?: InputMaybe<Scalars['smallint']>;
-  buzzeron?: InputMaybe<Scalars['Boolean']>;
-  chargecompletedelay?: InputMaybe<Scalars['Int']>;
-  chargein3phase?: InputMaybe<Scalars['Boolean']>;
-  chargewhenpinlocked?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeactive?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeinfinitepwm?: InputMaybe<Scalars['Boolean']>;
-  compatibilitymodeminpwm?: InputMaybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: InputMaybe<Scalars['Float']>;
-  contrastlevel?: InputMaybe<Scalars['smallint']>;
-  ct1g100?: InputMaybe<Scalars['Boolean']>;
-  ct1group?: InputMaybe<Scalars['smallint']>;
-  ct1grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct1subtype?: InputMaybe<Scalars['String']>;
-  ct1type?: InputMaybe<Scalars['String']>;
-  ct2g100?: InputMaybe<Scalars['Boolean']>;
-  ct2group?: InputMaybe<Scalars['smallint']>;
-  ct2grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct2subtype?: InputMaybe<Scalars['String']>;
-  ct2type?: InputMaybe<Scalars['String']>;
-  ct3g100?: InputMaybe<Scalars['Boolean']>;
-  ct3group?: InputMaybe<Scalars['smallint']>;
-  ct3grouplimit?: InputMaybe<Scalars['smallint']>;
-  ct3subtype?: InputMaybe<Scalars['String']>;
-  ct3type?: InputMaybe<Scalars['String']>;
-  ct4grouplimit?: InputMaybe<Scalars['smallint']>;
-  ctinternalgroup?: InputMaybe<Scalars['smallint']>;
-  ctprimary?: InputMaybe<Scalars['smallint']>;
-  dateformat?: InputMaybe<Scalars['String']>;
-  defaultmode?: InputMaybe<Scalars['String']>;
-  deviceconfigtime?: InputMaybe<Scalars['bigint']>;
-  devicelimit?: InputMaybe<Scalars['Float']>;
-  dston?: InputMaybe<Scalars['Boolean']>;
-  earthing?: InputMaybe<Scalars['String']>;
-  ecopstopdelay?: InputMaybe<Scalars['smallint']>;
-  esenseinput?: InputMaybe<Scalars['String']>;
-  esenselimitpwm?: InputMaybe<Scalars['smallint']>;
-  exportmargin?: InputMaybe<Scalars['Int']>;
-  gentypeicon?: InputMaybe<Scalars['String']>;
-  gridlimit?: InputMaybe<Scalars['Int']>;
-  gridpowerlimit?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  language?: InputMaybe<Scalars['String']>;
-  ledbrightness?: InputMaybe<Scalars['smallint']>;
-  ledchargecomplete?: InputMaybe<Scalars['jsonb']>;
-  leddirtycharging?: InputMaybe<Scalars['jsonb']>;
-  ledfault?: InputMaybe<Scalars['jsonb']>;
-  ledgreencharging?: InputMaybe<Scalars['jsonb']>;
-  ledmixcharging?: InputMaybe<Scalars['jsonb']>;
-  ledstateb?: InputMaybe<Scalars['jsonb']>;
-  lockcode?: InputMaybe<Scalars['Int']>;
-  lockevplugged?: InputMaybe<Scalars['Boolean']>;
-  lockevunplugged?: InputMaybe<Scalars['Boolean']>;
-  lockhidereadings?: InputMaybe<Scalars['Boolean']>;
-  locksolenoidpwm?: InputMaybe<Scalars['Int']>;
-  locktimeout?: InputMaybe<Scalars['smallint']>;
-  mainswitchpwm?: InputMaybe<Scalars['Int']>;
-  mingreenlevel?: InputMaybe<Scalars['smallint']>;
-  monitoringstatus?: InputMaybe<Scalars['Boolean']>;
-  neutrallimit?: InputMaybe<Scalars['Int']>;
-  password?: InputMaybe<Scalars['Int']>;
-  perelaypwm?: InputMaybe<Scalars['Int']>;
-  phasereturn?: InputMaybe<Scalars['String']>;
-  plugincharge?: InputMaybe<Scalars['Boolean']>;
-  preconenergy?: InputMaybe<Scalars['smallint']>;
-  preconon?: InputMaybe<Scalars['Boolean']>;
-  randomdelaystart?: InputMaybe<Scalars['smallint']>;
-  relay1pwm?: InputMaybe<Scalars['Int']>;
-  relay2pwm?: InputMaybe<Scalars['Int']>;
-  serverconfigtime?: InputMaybe<Scalars['Int']>;
-  signature?: InputMaybe<Scalars['bigint']>;
-  smartboostenergy?: InputMaybe<Scalars['smallint']>;
-  smartboosthour?: InputMaybe<Scalars['smallint']>;
-  smartboostminute?: InputMaybe<Scalars['smallint']>;
-  startstoptimer?: InputMaybe<Scalars['smallint']>;
-  timefromcloud?: InputMaybe<Scalars['Boolean']>;
-  timezone?: InputMaybe<Scalars['String']>;
-  weldedrelaycheckdelay?: InputMaybe<Scalars['Int']>;
-};
-
-/** aggregate stddev on columns */
-export type Zappi2_Config_Reply_Data_Stddev_Fields = {
-  __typename?: 'zappi2_config_reply_data_stddev_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  ct4grouplimit?: Maybe<Scalars['Float']>;
-  ctinternalgroup?: Maybe<Scalars['Float']>;
-  ctprimary?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['Float']>;
-  esenselimitpwm?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  gridpowerlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  ledbrightness?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locksolenoidpwm?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  mainswitchpwm?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  neutrallimit?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  perelaypwm?: Maybe<Scalars['Float']>;
-  preconenergy?: Maybe<Scalars['Float']>;
-  randomdelaystart?: Maybe<Scalars['Float']>;
-  relay1pwm?: Maybe<Scalars['Float']>;
-  relay2pwm?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Zappi2_Config_Reply_Data_Stddev_Pop_Fields = {
-  __typename?: 'zappi2_config_reply_data_stddev_pop_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  ct4grouplimit?: Maybe<Scalars['Float']>;
-  ctinternalgroup?: Maybe<Scalars['Float']>;
-  ctprimary?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['Float']>;
-  esenselimitpwm?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  gridpowerlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  ledbrightness?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locksolenoidpwm?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  mainswitchpwm?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  neutrallimit?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  perelaypwm?: Maybe<Scalars['Float']>;
-  preconenergy?: Maybe<Scalars['Float']>;
-  randomdelaystart?: Maybe<Scalars['Float']>;
-  relay1pwm?: Maybe<Scalars['Float']>;
-  relay2pwm?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Zappi2_Config_Reply_Data_Stddev_Samp_Fields = {
-  __typename?: 'zappi2_config_reply_data_stddev_samp_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  ct4grouplimit?: Maybe<Scalars['Float']>;
-  ctinternalgroup?: Maybe<Scalars['Float']>;
-  ctprimary?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['Float']>;
-  esenselimitpwm?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  gridpowerlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  ledbrightness?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locksolenoidpwm?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  mainswitchpwm?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  neutrallimit?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  perelaypwm?: Maybe<Scalars['Float']>;
-  preconenergy?: Maybe<Scalars['Float']>;
-  randomdelaystart?: Maybe<Scalars['Float']>;
-  relay1pwm?: Maybe<Scalars['Float']>;
-  relay2pwm?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Zappi2_Config_Reply_Data_Sum_Fields = {
-  __typename?: 'zappi2_config_reply_data_sum_fields';
-  backlightontime?: Maybe<Scalars['smallint']>;
-  boostingenergy?: Maybe<Scalars['smallint']>;
-  chargecompletedelay?: Maybe<Scalars['Int']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['smallint']>;
-  ct1group?: Maybe<Scalars['smallint']>;
-  ct1grouplimit?: Maybe<Scalars['smallint']>;
-  ct2group?: Maybe<Scalars['smallint']>;
-  ct2grouplimit?: Maybe<Scalars['smallint']>;
-  ct3group?: Maybe<Scalars['smallint']>;
-  ct3grouplimit?: Maybe<Scalars['smallint']>;
-  ct4grouplimit?: Maybe<Scalars['smallint']>;
-  ctinternalgroup?: Maybe<Scalars['smallint']>;
-  ctprimary?: Maybe<Scalars['smallint']>;
-  deviceconfigtime?: Maybe<Scalars['bigint']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['smallint']>;
-  esenselimitpwm?: Maybe<Scalars['smallint']>;
-  exportmargin?: Maybe<Scalars['Int']>;
-  gridlimit?: Maybe<Scalars['Int']>;
-  gridpowerlimit?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  ledbrightness?: Maybe<Scalars['smallint']>;
-  lockcode?: Maybe<Scalars['Int']>;
-  locksolenoidpwm?: Maybe<Scalars['Int']>;
-  locktimeout?: Maybe<Scalars['smallint']>;
-  mainswitchpwm?: Maybe<Scalars['Int']>;
-  mingreenlevel?: Maybe<Scalars['smallint']>;
-  neutrallimit?: Maybe<Scalars['Int']>;
-  password?: Maybe<Scalars['Int']>;
-  perelaypwm?: Maybe<Scalars['Int']>;
-  preconenergy?: Maybe<Scalars['smallint']>;
-  randomdelaystart?: Maybe<Scalars['smallint']>;
-  relay1pwm?: Maybe<Scalars['Int']>;
-  relay2pwm?: Maybe<Scalars['Int']>;
-  serverconfigtime?: Maybe<Scalars['Int']>;
-  signature?: Maybe<Scalars['bigint']>;
-  smartboostenergy?: Maybe<Scalars['smallint']>;
-  smartboosthour?: Maybe<Scalars['smallint']>;
-  smartboostminute?: Maybe<Scalars['smallint']>;
-  startstoptimer?: Maybe<Scalars['smallint']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "zappi2_config_reply_data" */
-export enum Zappi2_Config_Reply_Data_Update_Column {
-  /** column name */
-  Backlightontime = 'backlightontime',
-  /** column name */
-  Batterymode = 'batterymode',
-  /** column name */
-  Boostingenergy = 'boostingenergy',
-  /** column name */
-  Buzzeron = 'buzzeron',
-  /** column name */
-  Chargecompletedelay = 'chargecompletedelay',
-  /** column name */
-  Chargein3phase = 'chargein3phase',
-  /** column name */
-  Chargewhenpinlocked = 'chargewhenpinlocked',
-  /** column name */
-  Compatibilitymodeactive = 'compatibilitymodeactive',
-  /** column name */
-  Compatibilitymodeinfinitepwm = 'compatibilitymodeinfinitepwm',
-  /** column name */
-  Compatibilitymodeminpwm = 'compatibilitymodeminpwm',
-  /** column name */
-  Compatibilitymodepowerfactor = 'compatibilitymodepowerfactor',
-  /** column name */
-  Contrastlevel = 'contrastlevel',
-  /** column name */
-  Ct1g100 = 'ct1g100',
-  /** column name */
-  Ct1group = 'ct1group',
-  /** column name */
-  Ct1grouplimit = 'ct1grouplimit',
-  /** column name */
-  Ct1subtype = 'ct1subtype',
-  /** column name */
-  Ct1type = 'ct1type',
-  /** column name */
-  Ct2g100 = 'ct2g100',
-  /** column name */
-  Ct2group = 'ct2group',
-  /** column name */
-  Ct2grouplimit = 'ct2grouplimit',
-  /** column name */
-  Ct2subtype = 'ct2subtype',
-  /** column name */
-  Ct2type = 'ct2type',
-  /** column name */
-  Ct3g100 = 'ct3g100',
-  /** column name */
-  Ct3group = 'ct3group',
-  /** column name */
-  Ct3grouplimit = 'ct3grouplimit',
-  /** column name */
-  Ct3subtype = 'ct3subtype',
-  /** column name */
-  Ct3type = 'ct3type',
-  /** column name */
-  Ct4grouplimit = 'ct4grouplimit',
-  /** column name */
-  Ctinternalgroup = 'ctinternalgroup',
-  /** column name */
-  Ctprimary = 'ctprimary',
-  /** column name */
-  Dateformat = 'dateformat',
-  /** column name */
-  Defaultmode = 'defaultmode',
-  /** column name */
-  Deviceconfigtime = 'deviceconfigtime',
-  /** column name */
-  Devicelimit = 'devicelimit',
-  /** column name */
-  Dston = 'dston',
-  /** column name */
-  Earthing = 'earthing',
-  /** column name */
-  Ecopstopdelay = 'ecopstopdelay',
-  /** column name */
-  Esenseinput = 'esenseinput',
-  /** column name */
-  Esenselimitpwm = 'esenselimitpwm',
-  /** column name */
-  Exportmargin = 'exportmargin',
-  /** column name */
-  Gentypeicon = 'gentypeicon',
-  /** column name */
-  Gridlimit = 'gridlimit',
-  /** column name */
-  Gridpowerlimit = 'gridpowerlimit',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Language = 'language',
-  /** column name */
-  Ledbrightness = 'ledbrightness',
-  /** column name */
-  Ledchargecomplete = 'ledchargecomplete',
-  /** column name */
-  Leddirtycharging = 'leddirtycharging',
-  /** column name */
-  Ledfault = 'ledfault',
-  /** column name */
-  Ledgreencharging = 'ledgreencharging',
-  /** column name */
-  Ledmixcharging = 'ledmixcharging',
-  /** column name */
-  Ledstateb = 'ledstateb',
-  /** column name */
-  Lockcode = 'lockcode',
-  /** column name */
-  Lockevplugged = 'lockevplugged',
-  /** column name */
-  Lockevunplugged = 'lockevunplugged',
-  /** column name */
-  Lockhidereadings = 'lockhidereadings',
-  /** column name */
-  Locksolenoidpwm = 'locksolenoidpwm',
-  /** column name */
-  Locktimeout = 'locktimeout',
-  /** column name */
-  Mainswitchpwm = 'mainswitchpwm',
-  /** column name */
-  Mingreenlevel = 'mingreenlevel',
-  /** column name */
-  Monitoringstatus = 'monitoringstatus',
-  /** column name */
-  Neutrallimit = 'neutrallimit',
-  /** column name */
-  Password = 'password',
-  /** column name */
-  Perelaypwm = 'perelaypwm',
-  /** column name */
-  Phasereturn = 'phasereturn',
-  /** column name */
-  Plugincharge = 'plugincharge',
-  /** column name */
-  Preconenergy = 'preconenergy',
-  /** column name */
-  Preconon = 'preconon',
-  /** column name */
-  Randomdelaystart = 'randomdelaystart',
-  /** column name */
-  Relay1pwm = 'relay1pwm',
-  /** column name */
-  Relay2pwm = 'relay2pwm',
-  /** column name */
-  Serverconfigtime = 'serverconfigtime',
-  /** column name */
-  Signature = 'signature',
-  /** column name */
-  Smartboostenergy = 'smartboostenergy',
-  /** column name */
-  Smartboosthour = 'smartboosthour',
-  /** column name */
-  Smartboostminute = 'smartboostminute',
-  /** column name */
-  Startstoptimer = 'startstoptimer',
-  /** column name */
-  Timefromcloud = 'timefromcloud',
-  /** column name */
-  Timezone = 'timezone',
-  /** column name */
-  Weldedrelaycheckdelay = 'weldedrelaycheckdelay',
-}
-
-/** aggregate var_pop on columns */
-export type Zappi2_Config_Reply_Data_Var_Pop_Fields = {
-  __typename?: 'zappi2_config_reply_data_var_pop_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  ct4grouplimit?: Maybe<Scalars['Float']>;
-  ctinternalgroup?: Maybe<Scalars['Float']>;
-  ctprimary?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['Float']>;
-  esenselimitpwm?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  gridpowerlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  ledbrightness?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locksolenoidpwm?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  mainswitchpwm?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  neutrallimit?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  perelaypwm?: Maybe<Scalars['Float']>;
-  preconenergy?: Maybe<Scalars['Float']>;
-  randomdelaystart?: Maybe<Scalars['Float']>;
-  relay1pwm?: Maybe<Scalars['Float']>;
-  relay2pwm?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Zappi2_Config_Reply_Data_Var_Samp_Fields = {
-  __typename?: 'zappi2_config_reply_data_var_samp_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  ct4grouplimit?: Maybe<Scalars['Float']>;
-  ctinternalgroup?: Maybe<Scalars['Float']>;
-  ctprimary?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['Float']>;
-  esenselimitpwm?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  gridpowerlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  ledbrightness?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locksolenoidpwm?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  mainswitchpwm?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  neutrallimit?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  perelaypwm?: Maybe<Scalars['Float']>;
-  preconenergy?: Maybe<Scalars['Float']>;
-  randomdelaystart?: Maybe<Scalars['Float']>;
-  relay1pwm?: Maybe<Scalars['Float']>;
-  relay2pwm?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Zappi2_Config_Reply_Data_Variance_Fields = {
-  __typename?: 'zappi2_config_reply_data_variance_fields';
-  backlightontime?: Maybe<Scalars['Float']>;
-  boostingenergy?: Maybe<Scalars['Float']>;
-  chargecompletedelay?: Maybe<Scalars['Float']>;
-  compatibilitymodeminpwm?: Maybe<Scalars['Float']>;
-  compatibilitymodepowerfactor?: Maybe<Scalars['Float']>;
-  contrastlevel?: Maybe<Scalars['Float']>;
-  ct1group?: Maybe<Scalars['Float']>;
-  ct1grouplimit?: Maybe<Scalars['Float']>;
-  ct2group?: Maybe<Scalars['Float']>;
-  ct2grouplimit?: Maybe<Scalars['Float']>;
-  ct3group?: Maybe<Scalars['Float']>;
-  ct3grouplimit?: Maybe<Scalars['Float']>;
-  ct4grouplimit?: Maybe<Scalars['Float']>;
-  ctinternalgroup?: Maybe<Scalars['Float']>;
-  ctprimary?: Maybe<Scalars['Float']>;
-  deviceconfigtime?: Maybe<Scalars['Float']>;
-  devicelimit?: Maybe<Scalars['Float']>;
-  ecopstopdelay?: Maybe<Scalars['Float']>;
-  esenselimitpwm?: Maybe<Scalars['Float']>;
-  exportmargin?: Maybe<Scalars['Float']>;
-  gridlimit?: Maybe<Scalars['Float']>;
-  gridpowerlimit?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  ledbrightness?: Maybe<Scalars['Float']>;
-  lockcode?: Maybe<Scalars['Float']>;
-  locksolenoidpwm?: Maybe<Scalars['Float']>;
-  locktimeout?: Maybe<Scalars['Float']>;
-  mainswitchpwm?: Maybe<Scalars['Float']>;
-  mingreenlevel?: Maybe<Scalars['Float']>;
-  neutrallimit?: Maybe<Scalars['Float']>;
-  password?: Maybe<Scalars['Float']>;
-  perelaypwm?: Maybe<Scalars['Float']>;
-  preconenergy?: Maybe<Scalars['Float']>;
-  randomdelaystart?: Maybe<Scalars['Float']>;
-  relay1pwm?: Maybe<Scalars['Float']>;
-  relay2pwm?: Maybe<Scalars['Float']>;
-  serverconfigtime?: Maybe<Scalars['Float']>;
-  signature?: Maybe<Scalars['Float']>;
-  smartboostenergy?: Maybe<Scalars['Float']>;
-  smartboosthour?: Maybe<Scalars['Float']>;
-  smartboostminute?: Maybe<Scalars['Float']>;
-  startstoptimer?: Maybe<Scalars['Float']>;
-  weldedrelaycheckdelay?: Maybe<Scalars['Float']>;
 };
 
 /** aggregated selection of "zappi" */
@@ -16071,7 +8175,6 @@ export type Zappi_Bool_Exp = {
   bootloaderversion?: InputMaybe<Int_Comparison_Exp>;
   chargeenergy?: InputMaybe<Float_Comparison_Exp>;
   commandseqno?: InputMaybe<Smallint_Comparison_Exp>;
-  config_reply?: InputMaybe<Config_Reply_Bool_Exp>;
   configappdata?: InputMaybe<Bytea_Comparison_Exp>;
   configappdone?: InputMaybe<Boolean_Comparison_Exp>;
   configbootdata?: InputMaybe<Bytea_Comparison_Exp>;
@@ -16286,7 +8389,6 @@ export type Zappi_Insert_Input = {
   bootloaderversion?: InputMaybe<Scalars['Int']>;
   chargeenergy?: InputMaybe<Scalars['Float']>;
   commandseqno?: InputMaybe<Scalars['smallint']>;
-  config_reply?: InputMaybe<Config_Reply_Obj_Rel_Insert_Input>;
   configappdata?: InputMaybe<Scalars['bytea']>;
   configappdone?: InputMaybe<Scalars['Boolean']>;
   configbootdata?: InputMaybe<Scalars['bytea']>;
@@ -17303,7 +9405,6 @@ export type Zappi_Order_By = {
   bootloaderversion?: InputMaybe<Order_By>;
   chargeenergy?: InputMaybe<Order_By>;
   commandseqno?: InputMaybe<Order_By>;
-  config_reply?: InputMaybe<Config_Reply_Order_By>;
   configappdata?: InputMaybe<Order_By>;
   configappdone?: InputMaybe<Order_By>;
   configbootdata?: InputMaybe<Order_By>;
@@ -18581,37 +10682,169 @@ export type DevicesQueryVariables = Exact<{
 
 export type DevicesQuery = {
   __typename?: 'query_root';
-  zappis: Array<{ __typename?: 'zappi'; serialNo: any; deviceClass: string; productCode?: any | null }>;
-  eddis: Array<{ __typename?: 'eddi'; serialNo: any; deviceClass: string; productCode?: any | null }>;
+  zappis: Array<{ __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null }>;
+  eddis: Array<{ __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null }>;
 };
 
 export type DeviceQueryVariables = Exact<{
-  id: Scalars['bigint'];
+  serialNo: Scalars['bigint'];
 }>;
 
 export type DeviceQuery = {
   __typename?: 'query_root';
-  zappi?: { __typename?: 'zappi'; serialNo: any; deviceClass: string; productCode?: any | null } | null;
-  eddi?: { __typename?: 'eddi'; serialNo: any; deviceClass: string; productCode?: any | null } | null;
+  zappi?: { __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
+  eddi?: { __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
 };
 
 export type DeviceStatusQueryVariables = Exact<{
-  id: Scalars['bigint'];
+  serialNo: Scalars['bigint'];
 }>;
 
 export type DeviceStatusQuery = {
   __typename?: 'query_root';
-  zappi?: { __typename?: 'zappi'; voltage?: any | null; frequency?: any | null; serialNo: any } | null;
-  eddi?: { __typename?: 'eddi'; voltage?: any | null; frequency?: any | null; serialNo: any } | null;
+  zappi?: {
+    __typename?: 'zappi';
+    voltage?: number | null;
+    frequency?: number | null;
+    serialNo: number;
+    updateDate: string;
+    chargeEnergy?: number | null;
+  } | null;
+  eddi?: {
+    __typename?: 'eddi';
+    voltage?: number | null;
+    frequency?: number | null;
+    serialNo: number;
+    updateDate: string;
+    chargeEnergy?: number | null;
+  } | null;
 };
 
-export type ZappiDataFragment = { __typename?: 'zappi'; serialNo: any; deviceClass: string; productCode?: any | null };
+export type ZappiDataFragment = {
+  __typename?: 'zappi';
+  serialNo: number;
+  deviceClass: string;
+  productCode?: number | null;
+};
 
-export type EddiDataFragment = { __typename?: 'eddi'; serialNo: any; deviceClass: string; productCode?: any | null };
+export type EddiDataFragment = {
+  __typename?: 'eddi';
+  serialNo: number;
+  deviceClass: string;
+  productCode?: number | null;
+};
 
-export type ZappiStatusFragment = { __typename?: 'zappi'; voltage?: any | null; frequency?: any | null; serialNo: any };
+export type ZappiStatusFragment = {
+  __typename?: 'zappi';
+  voltage?: number | null;
+  frequency?: number | null;
+  serialNo: number;
+  updateDate: string;
+  chargeEnergy?: number | null;
+};
 
-export type EddiStatusFragment = { __typename?: 'eddi'; voltage?: any | null; frequency?: any | null; serialNo: any };
+export type EddiStatusFragment = {
+  __typename?: 'eddi';
+  voltage?: number | null;
+  frequency?: number | null;
+  serialNo: number;
+  updateDate: string;
+  chargeEnergy?: number | null;
+};
+
+export type DeviceHistoryQueryVariables = Exact<{
+  serialNo: Scalars['bigint'];
+  timestampGte?: InputMaybe<Scalars['timestamp']>;
+  timestampLte?: InputMaybe<Scalars['timestamp']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+}>;
+
+export type DeviceHistoryQuery = {
+  __typename?: 'query_root';
+  zappiMinutes: Array<{
+    __typename?: 'zappi_minute';
+    voltage1?: number | null;
+    voltage2?: number | null;
+    voltage3?: number | null;
+    frequency?: number | null;
+    timestamp: string;
+    serialNo: number;
+    importPower?: number | null;
+    exportPower?: number | null;
+    externalCtPositivePower1?: number | null;
+    externalCtPositivePower2?: number | null;
+    externalCtPositivePower3?: number | null;
+    externalCtNegativePower1?: number | null;
+    externalCtNegativePower2?: number | null;
+    externalCtNegativePower3?: number | null;
+    divertedLoadPower1?: number | null;
+    divertedLoadPower2?: number | null;
+    divertedLoadPower3?: number | null;
+    boostLoadPower1?: number | null;
+    boostLoadPower2?: number | null;
+    boostLoadPower3?: number | null;
+  }>;
+  eddiMinutes: Array<{
+    __typename?: 'eddi_minute';
+    frequency?: number | null;
+    timestamp: string;
+    serialNo: number;
+    importPower?: number | null;
+    exportPower?: number | null;
+    externalCtPositivePower1?: number | null;
+    externalCtPositivePower2?: number | null;
+    externalCtNegativePower1?: number | null;
+    externalCtNegativePower2?: number | null;
+    divertedLoadPower1?: number | null;
+    divertedLoadPower2?: number | null;
+    boostLoadPower1?: number | null;
+    boostLoadPower2?: number | null;
+    voltage1?: number | null;
+  }>;
+};
+
+export type ZappiHistoryFragment = {
+  __typename?: 'zappi_minute';
+  voltage1?: number | null;
+  voltage2?: number | null;
+  voltage3?: number | null;
+  frequency?: number | null;
+  timestamp: string;
+  serialNo: number;
+  importPower?: number | null;
+  exportPower?: number | null;
+  externalCtPositivePower1?: number | null;
+  externalCtPositivePower2?: number | null;
+  externalCtPositivePower3?: number | null;
+  externalCtNegativePower1?: number | null;
+  externalCtNegativePower2?: number | null;
+  externalCtNegativePower3?: number | null;
+  divertedLoadPower1?: number | null;
+  divertedLoadPower2?: number | null;
+  divertedLoadPower3?: number | null;
+  boostLoadPower1?: number | null;
+  boostLoadPower2?: number | null;
+  boostLoadPower3?: number | null;
+};
+
+export type EddiHistoryFragment = {
+  __typename?: 'eddi_minute';
+  frequency?: number | null;
+  timestamp: string;
+  serialNo: number;
+  importPower?: number | null;
+  exportPower?: number | null;
+  externalCtPositivePower1?: number | null;
+  externalCtPositivePower2?: number | null;
+  externalCtNegativePower1?: number | null;
+  externalCtNegativePower2?: number | null;
+  divertedLoadPower1?: number | null;
+  divertedLoadPower2?: number | null;
+  boostLoadPower1?: number | null;
+  boostLoadPower2?: number | null;
+  voltage1?: number | null;
+};
 
 export const ZappiDataFragmentDoc = gql`
   fragment ZappiData on zappi {
@@ -18630,6 +10863,8 @@ export const EddiDataFragmentDoc = gql`
 export const ZappiStatusFragmentDoc = gql`
   fragment ZappiStatus on zappi {
     serialNo: serialno
+    updateDate: updatedat
+    chargeEnergy: chargeenergy
     voltage
     frequency
   }
@@ -18637,8 +10872,52 @@ export const ZappiStatusFragmentDoc = gql`
 export const EddiStatusFragmentDoc = gql`
   fragment EddiStatus on eddi {
     serialNo: serialno
+    updateDate: updatedat
+    chargeEnergy: chargeenergy
     voltage
     frequency
+  }
+`;
+export const ZappiHistoryFragmentDoc = gql`
+  fragment ZappiHistory on zappi_minute {
+    serialNo: serialno
+    importPower: importpower
+    exportPower: exportpower
+    externalCtPositivePower1: externalctpospower1
+    externalCtPositivePower2: externalctpospower2
+    externalCtPositivePower3: externalctpospower3
+    externalCtNegativePower1: externalctnegpower1
+    externalCtNegativePower2: externalctnegpower2
+    externalCtNegativePower3: externalctnegpower3
+    divertedLoadPower1: divloadpower1
+    divertedLoadPower2: divloadpower2
+    divertedLoadPower3: divloadpower3
+    boostLoadPower1: boostloadpower1
+    boostLoadPower2: boostloadpower2
+    boostLoadPower3: boostloadpower3
+    voltage1
+    voltage2
+    voltage3
+    frequency
+    timestamp
+  }
+`;
+export const EddiHistoryFragmentDoc = gql`
+  fragment EddiHistory on eddi_minute {
+    serialNo: serialno
+    importPower: importpower
+    exportPower: exportpower
+    externalCtPositivePower1: externalctpospower1
+    externalCtPositivePower2: externalctpospower2
+    externalCtNegativePower1: externalctnegpower1
+    externalCtNegativePower2: externalctnegpower2
+    divertedLoadPower1: divloadpower1
+    divertedLoadPower2: divloadpower2
+    boostLoadPower1: boostloadpower1
+    boostLoadPower2: boostloadpower2
+    voltage1: voltage
+    frequency
+    timestamp
   }
 `;
 export const DevicesDocument = gql`
@@ -18654,11 +10933,11 @@ export const DevicesDocument = gql`
   ${EddiDataFragmentDoc}
 `;
 export const DeviceDocument = gql`
-  query Device($id: bigint!) {
-    zappi: zappi_by_pk(serialno: $id) {
+  query Device($serialNo: bigint!) {
+    zappi: zappi_by_pk(serialno: $serialNo) {
       ...ZappiData
     }
-    eddi: eddi_by_pk(serialno: $id) {
+    eddi: eddi_by_pk(serialno: $serialNo) {
       ...EddiData
     }
   }
@@ -18666,16 +10945,42 @@ export const DeviceDocument = gql`
   ${EddiDataFragmentDoc}
 `;
 export const DeviceStatusDocument = gql`
-  query DeviceStatus($id: bigint!) {
-    zappi: zappi_by_pk(serialno: $id) {
+  query DeviceStatus($serialNo: bigint!) {
+    zappi: zappi_by_pk(serialno: $serialNo) {
       ...ZappiStatus
     }
-    eddi: eddi_by_pk(serialno: $id) {
+    eddi: eddi_by_pk(serialno: $serialNo) {
       ...EddiStatus
     }
   }
   ${ZappiStatusFragmentDoc}
   ${EddiStatusFragmentDoc}
+`;
+export const DeviceHistoryDocument = gql`
+  query DeviceHistory(
+    $serialNo: bigint!
+    $timestampGte: timestamp
+    $timestampLte: timestamp
+    $offset: Int
+    $limit: Int
+  ) {
+    zappiMinutes: zappi_minute(
+      offset: $offset
+      limit: $limit
+      where: { _and: { timestamp: { _gte: $timestampGte, _lt: $timestampLte }, serialno: { _eq: $serialNo } } }
+    ) {
+      ...ZappiHistory
+    }
+    eddiMinutes: eddi_minute(
+      offset: $offset
+      limit: $limit
+      where: { _and: { timestamp: { _gte: $timestampGte, _lt: $timestampLte }, serialno: { _eq: $serialNo } } }
+    ) {
+      ...EddiHistory
+    }
+  }
+  ${ZappiHistoryFragmentDoc}
+  ${EddiHistoryFragmentDoc}
 `;
 
 export type SdkFunctionWrapper = <T>(
@@ -18712,6 +11017,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'DeviceStatus'
+      );
+    },
+    DeviceHistory(
+      variables: DeviceHistoryQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<DeviceHistoryQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<DeviceHistoryQuery>(DeviceHistoryDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'DeviceHistory'
       );
     },
   };
