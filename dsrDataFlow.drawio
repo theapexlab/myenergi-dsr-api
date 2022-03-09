@@ -1,0 +1,188 @@
+<mxfile host="65bd71144e">
+    <diagram id="dQMccBRjsphbR2wMLusg" name="Page-1">
+        <mxGraphModel dx="4240" dy="2347" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="11" style="edgeStyle=none;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="2" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=none;html=1;entryX=1.017;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2" target="17" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-10" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" style="edgeStyle=none;html=1;" parent="1" source="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-10" y="380" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="HUB" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="195" width="90" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" style="edgeStyle=none;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="3" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" style="edgeStyle=none;html=1;startArrow=none;exitX=0.48;exitY=1.016;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="37" target="29" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="HUB-SERVER" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="570" y="205" width="100" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="5" target="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="260" y="320" as="targetPoint"/>
+                        <mxPoint x="300" y="350" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="&lt;span&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;Hub Command Packet&amp;nbsp; of type &lt;/span&gt;&lt;br&gt;&lt;br&gt;HUB_COMMAND_DSR&amp;nbsp;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-weight: 400&quot;&gt;&lt;br&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;Extra Data:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;HUB_DSR /&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(79 , 193 , 255) ; background-color: rgb(30 , 30 , 30) ; font-size: 14px&quot;&gt;DSR_CONTROL&lt;/span&gt;&lt;span&gt;&amp;nbsp;record&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;div&gt;&lt;ul style=&quot;font-weight: 400&quot;&gt;&lt;li style=&quot;text-align: left&quot;&gt;&lt;b&gt;Description&lt;/b&gt;: This can be used to set load. The Hub device sends this record to inform other devices of an active DSR instruction.&lt;/li&gt;&lt;li style=&quot;text-align: left&quot;&gt;Update: based on code (HubDSR.ts) this can we used both for load and frequency settings.&lt;/li&gt;&lt;li style=&quot;text-align: left&quot;&gt;&lt;b&gt;Status&lt;/b&gt;: implemented ✅&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;div style=&quot;background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;font color=&quot;#ffffff&quot;&gt;[OUTDATED] HUB_COMMAND_SET_MINUTE&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;background-color: rgb(30 , 30 , 30) ; line-height: 19px&quot;&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left&quot;&gt;&lt;font color=&quot;#d4d4d4&quot;&gt;&lt;span style=&quot;font-size: 14px ; font-weight: 400&quot;&gt;Description: This can be used to set frequency.&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;&lt;font color=&quot;#d4d4d4&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;This message is sent to the hub regularly. It sets the time and date,&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;font color=&quot;#d4d4d4&quot;&gt;&lt;span style=&quot;font-size: 14px&quot;&gt;the server IP addresses and the&amp;nbsp;&lt;/span&gt;&lt;/font&gt;frequency response settings for the whole radio network.&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left&quot;&gt;&lt;span style=&quot;font-weight: normal&quot;&gt;Status: frequency related part not implemented ⚠️&lt;br&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div style=&quot;font-weight: 400 ; color: rgb(212 , 212 , 212) ; background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;span style=&quot;color: #6a9955&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="220" y="410" width="410" height="410" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" style="edgeStyle=none;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" source="8" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="DSR API" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="700" width="130" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=none;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;" parent="1" source="10" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;div&gt;&lt;span&gt;(sent every second)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;b&gt;&lt;div&gt;&lt;b&gt;Device Status packet&lt;/b&gt;&lt;/div&gt;&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;Extra Data:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;span&gt;ACTIVE_DSR record:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left&quot;&gt;&lt;b&gt;Desciprtion&lt;/b&gt;: This record effectively echoes the settings the device received in a HUB DSR packet and reports if any DSR is active.&lt;/li&gt;&lt;li style=&quot;text-align: left&quot;&gt;I&lt;b&gt;n code&lt;/b&gt;: upserted to eddi / zappi tables with dsrdata... prefix&lt;/li&gt;&lt;li style=&quot;text-align: left&quot;&gt;&lt;b&gt;Status&lt;/b&gt;: Implemented&amp;nbsp;✅&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="150" y="-210" width="400" height="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" style="edgeStyle=none;html=1;" parent="1" source="13" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Aggregator" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="-220" width="180" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Control group #1 &lt;br&gt;“Set load minimum”." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="850" y="-55" width="130" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Eddi" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" parent="1" vertex="1">
+                    <mxGeometry x="-80" y="350" width="60" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Zappi" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" parent="1" vertex="1">
+                    <mxGeometry x="-160" y="195" width="60" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="HUB DSR record" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="-30" y="240" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="HUB DSR record" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-45;" parent="1" vertex="1">
+                    <mxGeometry y="320" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" style="edgeStyle=none;html=1;startArrow=none;exitX=0.583;exitY=-0.033;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="27" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="145.4545454545455" y="280" as="targetPoint"/>
+                        <mxPoint x="100" y="420" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="130" y="370"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="Am I included?&lt;br&gt;If yes than I try to obey the command" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=0;" parent="1" vertex="1">
+                    <mxGeometry x="-180" y="390" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="Am I included?&lt;br&gt;If yes than I try to obey the command" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=0;" parent="1" vertex="1">
+                    <mxGeometry x="-280" y="200" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="Dsr status report&lt;br&gt;ACTIVE DSR" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="450" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="" style="edgeStyle=none;html=1;endArrow=none;" parent="1" source="22" target="27" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="135.4545454545455" y="330" as="targetPoint"/>
+                        <mxPoint x="-83.15789473684208" y="460" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="-70" y="490"/>
+                            <mxPoint x="-20" y="520"/>
+                            <mxPoint x="40" y="510"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="29" value="Main DB&lt;br&gt;&lt;br&gt;zappi / eddi&lt;br&gt;&lt;br&gt;command" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+                    <mxGeometry x="830" y="280" width="100" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" style="edgeStyle=none;html=1;entryX=1;entryY=0;entryDx=0;entryDy=52.5;entryPerimeter=0;startArrow=none;" parent="1" source="39" target="29" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="APPLICATION-SERVER" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="950" y="100" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" style="edgeStyle=none;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="33" target="31" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shadow=0;dashed=0;strokeWidth=1;shape=mxgraph.android.phone2;strokeColor=#c0c0c0;" parent="1" vertex="1">
+                    <mxGeometry x="1150" y="-20" width="100" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="Mobile-app&lt;br&gt;can send&lt;br&gt;commands" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1165" y="30" width="70" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="upsert device status to eddi/zappi tables&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="590" y="310" width="230" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="" style="edgeStyle=none;html=1;endArrow=none;" parent="1" source="3" target="37" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="670" y="270" as="sourcePoint"/>
+                        <mxPoint x="830" y="346.9230769230767" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" value="write command to db" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="225" width="130" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="" style="edgeStyle=none;html=1;endArrow=none;" parent="1" source="31" target="39" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="987.5949367088606" y="170" as="sourcePoint"/>
+                        <mxPoint x="930" y="332.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="43" style="edgeStyle=none;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;" parent="1" source="42" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="QUESTION:&lt;br&gt;&lt;br&gt;&lt;div style=&quot;color: rgb(212 , 212 , 212) ; background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;span style=&quot;color: #dcdcaa&quot;&gt;processMelTelemetry2Packet&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;font color=&quot;#dcdcaa&quot;&gt;also uses&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;color: rgb(156 , 220 , 254)&quot;&gt;handleCommandSending&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;whats the use-case for this?&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="600" width="230" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" style="edgeStyle=none;html=1;entryX=1;entryY=0;entryDx=0;entryDy=52.5;entryPerimeter=0;" parent="1" source="44" target="29" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="QUESTION:&lt;br&gt;&lt;br&gt;&lt;div style=&quot;color: rgb(212 , 212 , 212) ; background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;span style=&quot;color: rgb(240 , 240 , 240) ; font-size: 12px ; background-color: rgb(42 , 42 , 42)&quot;&gt;How are these commands handled?&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(212 , 212 , 212) ; background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;span style=&quot;color: rgb(240 , 240 , 240) ; font-size: 12px ; background-color: rgb(42 , 42 , 42)&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(212 , 212 , 212) ; background-color: rgb(30 , 30 , 30) ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;span style=&quot;color: rgb(240 , 240 , 240) ; font-size: 12px ; background-color: rgb(42 , 42 , 42)&quot;&gt;REDIS /&amp;nbsp; lib/feature/commands&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1100" y="450" width="230" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="&lt;h1&gt;About Commands&lt;/h1&gt;&lt;p&gt;- The&amp;nbsp;&lt;span&gt;server only allows one command per device to be in progress.&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;- The command is made up of a&amp;nbsp;&lt;/span&gt;&lt;span&gt;Command Code and Command Parameters.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;-&amp;nbsp;&lt;/span&gt;&lt;span&gt;The server scans the EDDI and ZAPPI tables for pending commands and builds&amp;nbsp;&lt;/span&gt;&lt;span&gt;hub control packets to send commands to hubs.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;-&amp;nbsp;&lt;/span&gt;&lt;span&gt;The hub simply forwards the command packet to&amp;nbsp;&lt;/span&gt;&lt;span&gt;the appropriate device.&lt;/span&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="780" width="445.5" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="&lt;h1&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;About ACTIVE DSR record&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;-&amp;nbsp;&lt;span&gt;Extra Record Type 0x6C Active DSR Record&lt;/span&gt;&lt;/p&gt;&lt;p&gt;- The ActiveDSR record is sent by an EDDI or ZAPPI to report it’s DSR status.&amp;nbsp;&lt;/p&gt;&lt;p&gt;- FR means&amp;nbsp;&lt;span&gt;“Frequency Response”. This record effectively echoes the settings the device received in a HUB&amp;nbsp;&lt;/span&gt;&lt;span&gt;DSR packet and reports if any DSR is active.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;- The devices report their DSR status in a DSR record sent with&amp;nbsp; device status packets.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="-480" y="710" width="425" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="&lt;h1&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;PACKETS to DATA&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;- The hub receives radio packets and concatenates&amp;nbsp;&lt;span&gt;them into one UDP packet.&lt;/span&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="-250" y="-160" width="220" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="&lt;h1&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;Server Packet Signatures&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;Each packet sent or received by the server is identified by a signature value in the first four bytes of&amp;nbsp;&lt;span&gt;UDP payload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;0xAB1234D1 -&amp;gt;&amp;nbsp;Hub control packet&lt;br&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;this packet goes from Server -&amp;gt;&amp;nbsp;to -&amp;gt; Hub" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="-470" width="250" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;fontSize=14;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0.114;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="2" target="50" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="90" y="190" as="sourcePoint"/>
+                        <mxPoint x="20" y="20" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="54" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;fontSize=14;" parent="1" source="49" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-30" y="500" as="sourcePoint"/>
+                        <mxPoint x="-50" y="510" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="55" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;fontSize=18;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="3" target="51" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="610" y="300" as="sourcePoint"/>
+                        <mxPoint x="660" y="250" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
