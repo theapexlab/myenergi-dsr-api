@@ -44,6 +44,7 @@
 - Sofa
 - TypeGraphQL
 - Circleci
+- Hasura
 
 ## What gets provisioned? 🔍
 
@@ -57,3 +58,35 @@
 
 - Deployment is done via circleci, to see how the workflow is contructed check-out the [config](./.circleci/config.yml) file
 - Also we made a [drawio](./deployment.drawio) diagram to show the proccess overview
+
+## Hasura
+
+- [read docs here](https://hasura.io/docs/latest/graphql/core/index.html)
+
+### Basics
+
+- Manages database connections (`histrory`, `main`, `default`)
+- Hasura provides GraphQL API based on database schemas
+- `default` database and its migrations are exclusively by hasura
+  - `history`, `main` databases are used only for CRUD operations
+- Interaction with hasura are excecuted via `hasura-cli`
+  - hasura related metadata / migration and config file are located `./hasura` folder
+  - `hasura-cli` is added to package json as dev dependency
+
+### Console
+
+- Hasura console can be used to access Graphql API or to modify database rows & schema
+- To start console run: `yarn hasura:console`
+
+### Migrations
+
+#### Add changes to database
+
+1.  open hasura console with`yarn hasura:console`
+2.  add changes on the console GUI, this will generate new migration / metadata files in this repo
+3.  to apply new migration run `yarn hasura:apply --version <migration-version>`
+
+#### Squash migation
+
+1.  To squash migration files run `yarn hasura:squash --name <feature-name> --from <start-migration-version>`
+2.  To mark the squashed migration as applied on this server `yarn hasura:mark:squash --version <squash-migration-version>`

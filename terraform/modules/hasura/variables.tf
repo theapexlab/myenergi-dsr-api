@@ -42,12 +42,10 @@ variable "hasura_jwt_secret_key" {
 
 variable "hasura_jwt_secret_algo" {
   description = "The algorithm for JWT verification (HS256 or RS256)"
-  default     = "HS256"
 }
 
 variable "hasura_console_enabled" {
   description = "Should the Hasura Console web interface be enabled?"
-  default     = "true"
 }
 
 variable "rds_username" {

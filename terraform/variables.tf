@@ -83,7 +83,7 @@ variable "hasura_jwt_secret_algo" {
 variable "hasura_console_enabled" {
   description = "Should the Hasura Console web interface be enabled?"
   type        = string
-  default     = "true"
+  default     = "false"
 }
 
 variable "rds_username" {

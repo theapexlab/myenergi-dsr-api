@@ -1,0 +1,7 @@
+table:
+  name: control_group_device
+  schema: public
+object_relationships:
+- name: control_group
+  using:
+    foreign_key_constraint_on: control_group_id

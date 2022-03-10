@@ -1,0 +1,3 @@
+table:
+  name: zappi_minute
+  schema: public

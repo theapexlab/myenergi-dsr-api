@@ -1,0 +1,10 @@
+table:
+  name: eddi
+  schema: public
+object_relationships:
+- name: aggregation_datum
+  using:
+    foreign_key_constraint_on: aggregationdataid
+- name: hub
+  using:
+    foreign_key_constraint_on: hubserialno

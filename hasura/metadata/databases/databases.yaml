@@ -1,0 +1,30 @@
+- name: default
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: HASURA_GRAPHQL_DATABASE_URL
+      isolation_level: read-committed
+      pool_settings:
+        connection_lifetime: 600
+        idle_timeout: 180
+        max_connections: 100
+        retries: 1
+      use_prepared_statements: true
+  tables: "!include default/tables/tables.yaml"
+- name: history-db
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url: postgresql://myenergi:myenergi@history-db.myenergi-dev.zoosh.ie:5432/myenergi
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include history-db/tables/tables.yaml"
+- name: main-db
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url: postgresql://myenergi:myenergi@main-db.myenergi-dev.zoosh.ie:5432/myenergi
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include main-db/tables/tables.yaml"
