@@ -1,3 +1,5 @@
+
+
 SET check_function_bodies = false;
 
 CREATE TABLE "public"."control_group" ("id" serial NOT NULL, "name" text, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , UNIQUE ("id"));
@@ -35,3 +37,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
 COMMENT ON TRIGGER "set_public_control_group_device_updated_at" ON "public"."control_group_device" 
 IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+
+alter table "public"."control_group" alter column "name" set not null;
+
+alter table "public"."control_group_device" rename column "serial_no" to "serialno";

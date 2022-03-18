@@ -4,6 +4,8 @@ import { Device, DevicesArgs } from '../device';
 import { DeviceStatus } from '../device-status';
 import { getSdk } from '../generated/graphql';
 import { logger } from '../utils/logger';
+import { ControlGroup } from '../control-group';
+import { GraphQLError } from 'graphql';
 
 export class DeviceAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;
@@ -29,16 +31,36 @@ export class DeviceAPI extends RESTDataSource {
   }
 
   async getDevice(serialNo: number): Promise<Device> {
-    const { zappi, eddi } = await this.sdk.Device({
-      serialNo,
-    });
-    return zappi || eddi;
+    try {
+      const { zappi, eddi } = await this.sdk.Device({
+        serialNo,
+      });
+      return zappi || eddi;
+    } catch (err) {
+      throw new GraphQLError('Get Device query error');
+    }
   }
+
   async getDeviceStatus(serialNo: number): Promise<DeviceStatus> {
-    const { zappi, eddi } = await this.sdk.DeviceStatus({
-      serialNo,
-    });
-    const { updateDate, ...device } = zappi || eddi;
-    return { ...device, updateDate: new Date(updateDate) };
+    try {
+      const { zappi, eddi } = await this.sdk.DeviceStatus({
+        serialNo,
+      });
+      const { updateDate, ...device } = zappi || eddi;
+      return { ...device, updateDate: new Date(updateDate) };
+    } catch (err) {
+      logger.error(err);
+      throw new GraphQLError('Device status error');
+    }
+  }
+
+  async getDeviceControlGroup(serialNo: number): Promise<ControlGroup | null> {
+    try {
+      const { zappi, eddi } = await this.sdk.DeviceControlGroup({ serialNo });
+      return zappi?.controlGroupDevice?.controlGroup ?? eddi?.controlGroupDevice?.controlGroup ?? null;
+    } catch (err) {
+      logger.error(err);
+      throw new GraphQLError('Device control group error');
+    }
   }
 }

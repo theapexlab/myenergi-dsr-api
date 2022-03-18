@@ -1,0 +1,47 @@
+mutation CreateControlGroup($name: String!) {
+  controlGroup: insert_control_group_one(object: { name: $name }) {
+    ...ControlGroupFields
+  }
+}
+
+mutation AddDevice($objects: [control_group_device_insert_input!]!) {
+  response: insert_control_group_device(objects: $objects) {
+    affectedRows: affected_rows
+  }
+}
+
+mutation RemoveDevice($controlGroupId: Int!, $serialNos: [Int!]!) {
+  response: delete_control_group_device(where: {control_group_id: {_eq: $controlGroupId }, serialno: {_in: $serialNos}}) {
+    affectedRows: affected_rows
+  }
+}
+
+
+query ControlGroup($id: Int!) {
+  controlGroup: control_group_by_pk(id: $id) {
+    ...ControlGroupFields
+  }
+}
+
+query ControlGroupDevices($controlGroupId: Int!) {
+  controlGroupDevices: control_group_device(where: {control_group_id: {_eq: $controlGroupId}}) {
+    serialNo: serialno
+    zappi: control_group_device_zappi {
+      ... ZappiData
+    }
+    eddi: control_group_device_eddi {
+      ... EddiData
+    }
+  }
+}
+
+query ControlGroups($limit: Int, $offset: Int) {
+  controlGroups: control_group(limit: $limit, offset: $offset) {
+    ...ControlGroupFields
+  }
+}
+
+fragment ControlGroupFields on control_group {
+  id
+  name
+}

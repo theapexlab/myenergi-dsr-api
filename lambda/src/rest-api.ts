@@ -3,6 +3,7 @@ import { OpenAPI, useSofa } from 'sofa-api';
 import swaggerUi from 'swagger-ui-express';
 import { getAPIs } from './data-sources';
 import { schema } from './schema';
+import bodyParser from 'body-parser';
 
 const basePath = '/api';
 
@@ -38,11 +39,30 @@ const restMiddleware = useSofa({
     'Query.device': {
       path: '/devices/:serialNo',
     },
+    'Query.deviceControlGroup': {
+      path: '/devices/:serialNo/control-group',
+    },
+    'Query.controlGroupDevices': {
+      path: '/control-groups/:id/devices',
+    },
+    'Mutation.createControlGroup': {
+      path: '/control-groups',
+      method: 'POST',
+    },
+    'Mutation.addDeviceToControlGroup': {
+      path: '/control-groups/:id/add-device',
+      method: 'PUT',
+    },
+    'Mutation.removeDeviceToControlGroup': {
+      path: '/control-groups/:id/remove-device',
+      method: 'PUT',
+    },
   },
 });
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use('/api', restMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApi.get()));
 

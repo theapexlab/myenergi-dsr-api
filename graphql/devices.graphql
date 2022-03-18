@@ -16,12 +16,30 @@ query Device($serialNo: bigint!) {
         ... EddiData
     }
 }
+
 query DeviceStatus($serialNo: bigint!) {
     zappi: zappi_by_pk(serialno: $serialNo) {
         ... ZappiStatus
     }
     eddi: eddi_by_pk(serialno: $serialNo) {
         ... EddiStatus
+    }
+}
+
+query DeviceControlGroup($serialNo: bigint!) {
+    zappi: zappi_by_pk(serialno: $serialNo) {
+        controlGroupDevice: zappi_control_group_device {
+            controlGroup: control_group {
+                ...ControlGroupFields
+            }
+        }
+    }
+    eddi: eddi_by_pk(serialno: $serialNo) {
+        controlGroupDevice: eddi_control_group_device {
+            controlGroup: control_group {
+                ...ControlGroupFields
+            }
+        }
     }
 }
 
