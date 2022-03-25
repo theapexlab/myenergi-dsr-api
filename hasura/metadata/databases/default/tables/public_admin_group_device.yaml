@@ -1,15 +1,18 @@
 table:
-  name: control_group
+  name: admin_group_device
   schema: public
 object_relationships:
 - name: admin_group
   using:
     foreign_key_constraint_on: admin_group_id
+- name: deviceTypeByDeviceType
+  using:
+    foreign_key_constraint_on: device_type
 array_relationships:
-- name: devices
+- name: control_group_devices
   using:
     foreign_key_constraint_on:
-      column: control_group_id
+      column: serialno
       table:
         name: control_group_device
         schema: public

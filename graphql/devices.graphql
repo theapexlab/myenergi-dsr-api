@@ -8,6 +8,15 @@ query Devices($limit: Int, $offset: Int) {
     } 
 }
 
+query DevicesBySerialNos($serialNos: [bigint!]) {
+    zappis: zappi(where: {serialno: {_in: $serialNos}}) {
+        serialNo: serialno
+    }
+    eddis: eddi(where: {serialno: {_in: $serialNos}}) {
+        serialNo: serialno
+    } 
+}
+
 query Device($serialNo: bigint!) {
     zappi: zappi_by_pk(serialno: $serialNo) {
         ... ZappiData

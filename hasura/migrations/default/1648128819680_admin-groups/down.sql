@@ -1,4 +1,18 @@
 
+alter table "public"."control_group" drop constraint "control_group_admin_group_id_fkey";
+
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- alter table "public"."control_group" add column "admin_group_id" integer
+--  not null;
+
+alter table "public"."control_group_device" drop constraint "control_group_device_serialno_fkey";
+
+alter table "public"."admin_group_device" drop constraint "admin_group_device_serialno_key";
+
+alter table "public"."admin_group_device" rename to "adming_group_device";
+
+
 DROP TABLE "public"."adming_group_device";
 
 alter table "public"."control_group_device" rename column "device_type" to "deviceType";

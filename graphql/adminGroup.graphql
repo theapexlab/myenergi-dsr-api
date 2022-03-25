@@ -1,0 +1,7 @@
+query AdminGroupDevicesNotInControllGroup($id: Int = 10) {
+  admin_group_by_pk(id: $id) {
+    admin_group_devices(where: {control_group_devices: {control_group_id: {_is_null: true}}}) {
+      serialno
+    }
+  }
+}

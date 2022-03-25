@@ -1,11 +1,11 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
+import { GraphQLError } from 'graphql';
 import { getGraphqlSdk } from '.';
+import { ControlGroup } from '../control-group';
 import { Device, DevicesArgs } from '../device';
 import { DeviceStatus } from '../device-status';
 import { getSdk } from '../generated/graphql';
 import { logger } from '../utils/logger';
-import { ControlGroup } from '../control-group';
-import { GraphQLError } from 'graphql';
 
 export class DeviceAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;

@@ -1,4 +1,5 @@
 
+
 CREATE TABLE "public"."admin_group" ("id" serial NOT NULL, "name" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") );
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
@@ -51,3 +52,22 @@ FOR EACH ROW
 EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
 COMMENT ON TRIGGER "set_public_adming_group_device_updated_at" ON "public"."adming_group_device" 
 IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+
+alter table "public"."adming_group_device" rename to "admin_group_device";
+
+alter table "public"."admin_group_device" add constraint "admin_group_device_serialno_key" unique ("serialno");
+
+alter table "public"."control_group_device"
+  add constraint "control_group_device_serialno_fkey"
+  foreign key ("serialno")
+  references "public"."admin_group_device"
+  ("serialno") on update cascade on delete cascade;
+
+alter table "public"."control_group" add column "admin_group_id" integer
+ not null;
+
+alter table "public"."control_group"
+  add constraint "control_group_admin_group_id_fkey"
+  foreign key ("admin_group_id")
+  references "public"."admin_group"
+  ("id") on update cascade on delete cascade;

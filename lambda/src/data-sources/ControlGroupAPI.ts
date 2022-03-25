@@ -1,12 +1,15 @@
 import { RESTDataSource } from 'apollo-datasource-rest/dist/RESTDataSource';
-import { ControlGroup } from '../control-group';
-import { getSdk } from '../generated/graphql';
-import { logger } from '../utils/logger';
-import { getGraphqlSdk } from './getGraphqlSdk';
 import { GraphQLError } from 'graphql';
-import { MutateControlGroupArgs, ControlGroupsArgs } from '../control-group/controlGroup.args';
-import { AffectedResponse } from '../shared';
+import { ControlGroup } from '../control-group';
+import { ControlGroupsArgs, MutateControlGroupArgs } from '../control-group/controlGroup.args';
 import { Device } from '../device';
+import { DeviceHistory } from '../device-history';
+import { DeviceStatus } from '../device-status';
+import { getSdk } from '../generated/graphql';
+import { AffectedResponse } from '../shared';
+import { logger } from '../utils/logger';
+import { mapHistoryFragmentToDeviceHistory } from '../utils/maps';
+import { getGraphqlSdk } from './getGraphqlSdk';
 
 export class ControlGroupAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;
@@ -50,12 +53,14 @@ export class ControlGroupAPI extends RESTDataSource {
   async addDevice(args: MutateControlGroupArgs): Promise<AffectedResponse> {
     const { id: control_group_id, serialNos } = args;
     try {
-      /*const { zappi, eddi } = await this.sdk.Device({ serialNo });
+      const { zappis, eddis } = await this.sdk.DevicesBySerialNos({ serialNos });
+      const devices = [...zappis, ...eddis];
 
-      if (!zappi && !eddi) {
-        throw new Error(`Not found device (serialNo: ${serialNo})`);
-      }*/
-      const objects = serialNos.map((serialno) => ({ control_group_id, serialno }));
+      if (!devices.length) {
+        throw new Error(`No devices was found`);
+      }
+
+      const objects = devices.map(({ serialNo }) => ({ control_group_id, serialno: serialNo }));
       const { response } = await this.sdk.AddDevice({ objects });
       return {
         affectedRows: response?.affectedRows ?? 0,
@@ -81,8 +86,42 @@ export class ControlGroupAPI extends RESTDataSource {
 
   async getControlGroupDevices(id: number): Promise<Device[]> {
     try {
-      const { controlGroupDevices } = await this.sdk.ControlGroupDevices({ controlGroupId: id });
-      return controlGroupDevices.flatMap(({ zappi, eddi }) => [zappi, eddi]).filter((item) => !!item);
+      const {
+        controlGroupDevices: { devices },
+      } = await this.sdk.ControlGroupDevices({ controlGroupId: id });
+      return devices.flatMap(({ zappi, eddi }) => [zappi, eddi]).filter((item) => !!item);
+    } catch (err) {
+      logger.error(err.toString());
+      throw new GraphQLError('Control group query failed');
+    }
+  }
+
+  async getControlGroupStatus(id: number): Promise<DeviceStatus[]> {
+    try {
+      const { controlGroupHistory } = await this.sdk.ControlGroupStatus({ controlGroupId: id });
+      return controlGroupHistory.devices
+        .flatMap(({ zappi, eddi }) => [zappi, eddi])
+        .filter((item) => !!item)
+        .map(({ updateDate, ...device }) => ({
+          updateDate: new Date(updateDate),
+          ...device,
+        }));
+    } catch (err) {
+      logger.error(err.toString());
+      throw new GraphQLError('Control group query failed');
+    }
+  }
+
+  async getControlGroupHistory(id: number): Promise<DeviceHistory[]> {
+    try {
+      const { controlGroupHistory } = await this.sdk.ControlGroupHistory({ controlGroupId: id });
+      if (!controlGroupHistory.devices.length) {
+        throw new GraphQLError('Not found!');
+      }
+      return controlGroupHistory.devices
+        .flatMap(({ zappiMinutes, eddiMinutes }) => [zappiMinutes, eddiMinutes])
+        .filter((item) => !!item)
+        .map(mapHistoryFragmentToDeviceHistory);
     } catch (err) {
       logger.error(err.toString());
       throw new GraphQLError('Control group query failed');

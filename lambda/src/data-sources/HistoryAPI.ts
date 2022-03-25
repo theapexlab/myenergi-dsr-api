@@ -4,6 +4,7 @@ import { getGraphqlSdk } from '.';
 import { DeviceHistory } from '../device-history';
 import { DeviceHistoryArgs } from '../device-history/deviceHistory.args';
 import { getSdk } from '../generated/graphql';
+import { mapHistoryFragmentToDeviceHistory } from '../utils/maps';
 
 export class HistoryAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;
@@ -25,10 +26,7 @@ export class HistoryAPI extends RESTDataSource {
         timestampGte: startDate.toISOString(),
         timestampLte: endDate.toISOString(),
       });
-      return [...eddiMinutes, ...zappiMinutes].map(({ timestamp, ...item }) => ({
-        ...item,
-        timestamp: new Date(timestamp),
-      }));
+      return [...eddiMinutes, ...zappiMinutes].map(mapHistoryFragmentToDeviceHistory);
     } catch (error) {
       throw new GraphQLError(JSON.stringify(error));
     }

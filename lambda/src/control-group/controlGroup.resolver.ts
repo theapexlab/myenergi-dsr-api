@@ -1,10 +1,12 @@
+import { GraphQLError } from 'graphql';
 import { Arg, Args, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
 import { AppContext } from '../context';
-import { ControlGroup } from './controlGroup.type';
-import { MutateControlGroupArgs, ControlGroupsArgs } from './controlGroup.args';
-import { GraphQLError } from 'graphql';
-import { AffectedResponse } from '../shared';
 import { Device } from '../device';
+import { DeviceHistory } from '../device-history';
+import { DeviceStatus } from '../device-status';
+import { AffectedResponse } from '../shared';
+import { ControlGroupsArgs, MutateControlGroupArgs } from './controlGroup.args';
+import { ControlGroup } from './controlGroup.type';
 
 @Resolver(ControlGroup)
 export class ControlGroupResolver {
@@ -34,6 +36,22 @@ export class ControlGroupResolver {
       dataSources: { controlGroupApi },
     } = ctx;
     return controlGroupApi.getControlGroupDevices(id);
+  }
+
+  @Query(() => [Device])
+  controlGroupStatus(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceStatus[]> {
+    const {
+      dataSources: { controlGroupApi },
+    } = ctx;
+    return controlGroupApi.getControlGroupStatus(id);
+  }
+
+  @Query(() => [Device])
+  controlGroupHistory(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceHistory[]> {
+    const {
+      dataSources: { controlGroupApi },
+    } = ctx;
+    return controlGroupApi.getControlGroupHistory(id);
   }
 
   @Mutation(() => ControlGroup)

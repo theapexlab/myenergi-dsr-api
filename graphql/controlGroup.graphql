@@ -16,7 +16,6 @@ mutation RemoveDevice($controlGroupId: Int!, $serialNos: [Int!]!) {
   }
 }
 
-
 query ControlGroup($id: Int!) {
   controlGroup: control_group_by_pk(id: $id) {
     ...ControlGroupFields
@@ -24,14 +23,41 @@ query ControlGroup($id: Int!) {
 }
 
 query ControlGroupDevices($controlGroupId: Int!) {
-  controlGroupDevices: control_group_device(where: {control_group_id: {_eq: $controlGroupId}}) {
-    serialNo: serialno
-    zappi: control_group_device_zappi {
-      ... ZappiData
+  controlGroupDevices: control_group_by_pk(id: $controlGroupId) {
+    devices {
+      zappi: control_group_device_zappi {
+        ...ZappiData
+      }
+      eddi: control_group_device_eddi {
+        ...EddiData
+      }
     }
-    eddi: control_group_device_eddi {
-      ... EddiData
-    }
+  }
+}
+
+query ControlGroupStatus($controlGroupId: Int!) {
+  controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
+      devices {
+        eddi: control_group_device_eddi {
+          ...EddiStatus
+        }
+        zappi: control_group_device_zappi {
+        ...ZappiStatus
+        }
+      }
+  }
+}
+
+query ControlGroupHistory($controlGroupId: Int!) {
+  controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
+      devices {
+        eddiMinutes: control_group_history_eddi {
+          ...EddiHistory
+        }
+        zappiMinutes: control_group_history_zappi {
+        ...ZappiHistory
+        }
+      }
   }
 }
 

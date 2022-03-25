@@ -99,6 +99,445 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** columns and relationships of "admin_group" */
+export type Admin_Group = {
+  __typename?: 'admin_group';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "admin_group" */
+export type Admin_Group_Aggregate = {
+  __typename?: 'admin_group_aggregate';
+  aggregate?: Maybe<Admin_Group_Aggregate_Fields>;
+  nodes: Array<Admin_Group>;
+};
+
+/** aggregate fields of "admin_group" */
+export type Admin_Group_Aggregate_Fields = {
+  __typename?: 'admin_group_aggregate_fields';
+  avg?: Maybe<Admin_Group_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Admin_Group_Max_Fields>;
+  min?: Maybe<Admin_Group_Min_Fields>;
+  stddev?: Maybe<Admin_Group_Stddev_Fields>;
+  stddev_pop?: Maybe<Admin_Group_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Admin_Group_Stddev_Samp_Fields>;
+  sum?: Maybe<Admin_Group_Sum_Fields>;
+  var_pop?: Maybe<Admin_Group_Var_Pop_Fields>;
+  var_samp?: Maybe<Admin_Group_Var_Samp_Fields>;
+  variance?: Maybe<Admin_Group_Variance_Fields>;
+};
+
+/** aggregate fields of "admin_group" */
+export type Admin_Group_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Admin_Group_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Admin_Group_Avg_Fields = {
+  __typename?: 'admin_group_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "admin_group". All fields are combined with a logical 'AND'. */
+export type Admin_Group_Bool_Exp = {
+  _and?: InputMaybe<Array<Admin_Group_Bool_Exp>>;
+  _not?: InputMaybe<Admin_Group_Bool_Exp>;
+  _or?: InputMaybe<Array<Admin_Group_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "admin_group" */
+export enum Admin_Group_Constraint {
+  /** unique or primary key constraint */
+  AdminGroupPkey = 'admin_group_pkey',
+}
+
+/** input type for incrementing numeric columns in table "admin_group" */
+export type Admin_Group_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "admin_group" */
+export type Admin_Group_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Admin_Group_Max_Fields = {
+  __typename?: 'admin_group_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Admin_Group_Min_Fields = {
+  __typename?: 'admin_group_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "admin_group" */
+export type Admin_Group_Mutation_Response = {
+  __typename?: 'admin_group_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Admin_Group>;
+};
+
+/** on_conflict condition type for table "admin_group" */
+export type Admin_Group_On_Conflict = {
+  constraint: Admin_Group_Constraint;
+  update_columns?: Array<Admin_Group_Update_Column>;
+  where?: InputMaybe<Admin_Group_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "admin_group". */
+export type Admin_Group_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: admin_group */
+export type Admin_Group_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "admin_group" */
+export enum Admin_Group_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "admin_group" */
+export type Admin_Group_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Admin_Group_Stddev_Fields = {
+  __typename?: 'admin_group_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Admin_Group_Stddev_Pop_Fields = {
+  __typename?: 'admin_group_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Admin_Group_Stddev_Samp_Fields = {
+  __typename?: 'admin_group_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Admin_Group_Sum_Fields = {
+  __typename?: 'admin_group_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "admin_group" */
+export enum Admin_Group_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** aggregate var_pop on columns */
+export type Admin_Group_Var_Pop_Fields = {
+  __typename?: 'admin_group_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Admin_Group_Var_Samp_Fields = {
+  __typename?: 'admin_group_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Admin_Group_Variance_Fields = {
+  __typename?: 'admin_group_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "adming_group_device" */
+export type Adming_Group_Device = {
+  __typename?: 'adming_group_device';
+  admin_group_id: Scalars['Int'];
+  created_at: Scalars['timestamptz'];
+  device_type: Device_Type_Enum;
+  id: Scalars['Int'];
+  postcode: Scalars['String'];
+  serialno: Scalars['Int'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "adming_group_device" */
+export type Adming_Group_Device_Aggregate = {
+  __typename?: 'adming_group_device_aggregate';
+  aggregate?: Maybe<Adming_Group_Device_Aggregate_Fields>;
+  nodes: Array<Adming_Group_Device>;
+};
+
+/** aggregate fields of "adming_group_device" */
+export type Adming_Group_Device_Aggregate_Fields = {
+  __typename?: 'adming_group_device_aggregate_fields';
+  avg?: Maybe<Adming_Group_Device_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Adming_Group_Device_Max_Fields>;
+  min?: Maybe<Adming_Group_Device_Min_Fields>;
+  stddev?: Maybe<Adming_Group_Device_Stddev_Fields>;
+  stddev_pop?: Maybe<Adming_Group_Device_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Adming_Group_Device_Stddev_Samp_Fields>;
+  sum?: Maybe<Adming_Group_Device_Sum_Fields>;
+  var_pop?: Maybe<Adming_Group_Device_Var_Pop_Fields>;
+  var_samp?: Maybe<Adming_Group_Device_Var_Samp_Fields>;
+  variance?: Maybe<Adming_Group_Device_Variance_Fields>;
+};
+
+/** aggregate fields of "adming_group_device" */
+export type Adming_Group_Device_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Adming_Group_Device_Avg_Fields = {
+  __typename?: 'adming_group_device_avg_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "adming_group_device". All fields are combined with a logical 'AND'. */
+export type Adming_Group_Device_Bool_Exp = {
+  _and?: InputMaybe<Array<Adming_Group_Device_Bool_Exp>>;
+  _not?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+  _or?: InputMaybe<Array<Adming_Group_Device_Bool_Exp>>;
+  admin_group_id?: InputMaybe<Int_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  device_type?: InputMaybe<Device_Type_Enum_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  postcode?: InputMaybe<String_Comparison_Exp>;
+  serialno?: InputMaybe<Int_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "adming_group_device" */
+export enum Adming_Group_Device_Constraint {
+  /** unique or primary key constraint */
+  AdmingGroupDevicePkey = 'adming_group_device_pkey',
+}
+
+/** input type for incrementing numeric columns in table "adming_group_device" */
+export type Adming_Group_Device_Inc_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  serialno?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "adming_group_device" */
+export type Adming_Group_Device_Insert_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  device_type?: InputMaybe<Device_Type_Enum>;
+  id?: InputMaybe<Scalars['Int']>;
+  postcode?: InputMaybe<Scalars['String']>;
+  serialno?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Adming_Group_Device_Max_Fields = {
+  __typename?: 'adming_group_device_max_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  postcode?: Maybe<Scalars['String']>;
+  serialno?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Adming_Group_Device_Min_Fields = {
+  __typename?: 'adming_group_device_min_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  postcode?: Maybe<Scalars['String']>;
+  serialno?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "adming_group_device" */
+export type Adming_Group_Device_Mutation_Response = {
+  __typename?: 'adming_group_device_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Adming_Group_Device>;
+};
+
+/** on_conflict condition type for table "adming_group_device" */
+export type Adming_Group_Device_On_Conflict = {
+  constraint: Adming_Group_Device_Constraint;
+  update_columns?: Array<Adming_Group_Device_Update_Column>;
+  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "adming_group_device". */
+export type Adming_Group_Device_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  device_type?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  postcode?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: adming_group_device */
+export type Adming_Group_Device_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "adming_group_device" */
+export enum Adming_Group_Device_Select_Column {
+  /** column name */
+  AdminGroupId = 'admin_group_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DeviceType = 'device_type',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Postcode = 'postcode',
+  /** column name */
+  Serialno = 'serialno',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "adming_group_device" */
+export type Adming_Group_Device_Set_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  device_type?: InputMaybe<Device_Type_Enum>;
+  id?: InputMaybe<Scalars['Int']>;
+  postcode?: InputMaybe<Scalars['String']>;
+  serialno?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Adming_Group_Device_Stddev_Fields = {
+  __typename?: 'adming_group_device_stddev_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Adming_Group_Device_Stddev_Pop_Fields = {
+  __typename?: 'adming_group_device_stddev_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Adming_Group_Device_Stddev_Samp_Fields = {
+  __typename?: 'adming_group_device_stddev_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Adming_Group_Device_Sum_Fields = {
+  __typename?: 'adming_group_device_sum_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  serialno?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "adming_group_device" */
+export enum Adming_Group_Device_Update_Column {
+  /** column name */
+  AdminGroupId = 'admin_group_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DeviceType = 'device_type',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Postcode = 'postcode',
+  /** column name */
+  Serialno = 'serialno',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** aggregate var_pop on columns */
+export type Adming_Group_Device_Var_Pop_Fields = {
+  __typename?: 'adming_group_device_var_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Adming_Group_Device_Var_Samp_Fields = {
+  __typename?: 'adming_group_device_var_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Adming_Group_Device_Variance_Fields = {
+  __typename?: 'adming_group_device_variance_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
 /** columns and relationships of "aggregation_data" */
 export type Aggregation_Data = {
   __typename?: 'aggregation_data';
@@ -1260,8 +1699,11 @@ export type Control_Group_Device = {
   control_group: Control_Group;
   control_group_device_eddi?: Maybe<Eddi>;
   control_group_device_zappi?: Maybe<Zappi>;
+  control_group_history_eddi?: Maybe<Eddi_Minute>;
+  control_group_history_zappi?: Maybe<Zappi_Minute>;
   control_group_id: Scalars['Int'];
   created_at: Scalars['timestamptz'];
+  device_type?: Maybe<Device_Type_Enum>;
   id: Scalars['Int'];
   serialno: Scalars['Int'];
   updated_at: Scalars['timestamptz'];
@@ -1341,6 +1783,7 @@ export type Control_Group_Device_Bool_Exp = {
   control_group?: InputMaybe<Control_Group_Bool_Exp>;
   control_group_id?: InputMaybe<Int_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  device_type?: InputMaybe<Device_Type_Enum_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   serialno?: InputMaybe<Int_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -1366,6 +1809,7 @@ export type Control_Group_Device_Insert_Input = {
   control_group?: InputMaybe<Control_Group_Obj_Rel_Insert_Input>;
   control_group_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  device_type?: InputMaybe<Device_Type_Enum>;
   id?: InputMaybe<Scalars['Int']>;
   serialno?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -1430,6 +1874,7 @@ export type Control_Group_Device_Order_By = {
   control_group?: InputMaybe<Control_Group_Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  device_type?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -1447,6 +1892,8 @@ export enum Control_Group_Device_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
+  DeviceType = 'device_type',
+  /** column name */
   Id = 'id',
   /** column name */
   Serialno = 'serialno',
@@ -1458,6 +1905,7 @@ export enum Control_Group_Device_Select_Column {
 export type Control_Group_Device_Set_Input = {
   control_group_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  device_type?: InputMaybe<Device_Type_Enum>;
   id?: InputMaybe<Scalars['Int']>;
   serialno?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -1529,6 +1977,8 @@ export enum Control_Group_Device_Update_Column {
   ControlGroupId = 'control_group_id',
   /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  DeviceType = 'device_type',
   /** column name */
   Id = 'id',
   /** column name */
@@ -1724,6 +2174,132 @@ export type Control_Group_Variance_Fields = {
   __typename?: 'control_group_variance_fields';
   id?: Maybe<Scalars['Float']>;
 };
+
+/** columns and relationships of "device_type" */
+export type Device_Type = {
+  __typename?: 'device_type';
+  comment?: Maybe<Scalars['String']>;
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "device_type" */
+export type Device_Type_Aggregate = {
+  __typename?: 'device_type_aggregate';
+  aggregate?: Maybe<Device_Type_Aggregate_Fields>;
+  nodes: Array<Device_Type>;
+};
+
+/** aggregate fields of "device_type" */
+export type Device_Type_Aggregate_Fields = {
+  __typename?: 'device_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Device_Type_Max_Fields>;
+  min?: Maybe<Device_Type_Min_Fields>;
+};
+
+/** aggregate fields of "device_type" */
+export type Device_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Device_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "device_type". All fields are combined with a logical 'AND'. */
+export type Device_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Device_Type_Bool_Exp>>;
+  _not?: InputMaybe<Device_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Device_Type_Bool_Exp>>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "device_type" */
+export enum Device_Type_Constraint {
+  /** unique or primary key constraint */
+  DeviceTypePkey = 'device_type_pkey',
+}
+
+export enum Device_Type_Enum {
+  Eddi = 'eddi',
+  Zappi = 'zappi',
+}
+
+/** Boolean expression to compare columns of type "device_type_enum". All fields are combined with logical 'AND'. */
+export type Device_Type_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Device_Type_Enum>;
+  _in?: InputMaybe<Array<Device_Type_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Device_Type_Enum>;
+  _nin?: InputMaybe<Array<Device_Type_Enum>>;
+};
+
+/** input type for inserting data into table "device_type" */
+export type Device_Type_Insert_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Device_Type_Max_Fields = {
+  __typename?: 'device_type_max_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Device_Type_Min_Fields = {
+  __typename?: 'device_type_min_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "device_type" */
+export type Device_Type_Mutation_Response = {
+  __typename?: 'device_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Device_Type>;
+};
+
+/** on_conflict condition type for table "device_type" */
+export type Device_Type_On_Conflict = {
+  constraint: Device_Type_Constraint;
+  update_columns?: Array<Device_Type_Update_Column>;
+  where?: InputMaybe<Device_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "device_type". */
+export type Device_Type_Order_By = {
+  comment?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: device_type */
+export type Device_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "device_type" */
+export enum Device_Type_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value',
+}
+
+/** input type for updating data in table "device_type" */
+export type Device_Type_Set_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "device_type" */
+export enum Device_Type_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value',
+}
 
 /** columns and relationships of "eddi" */
 export type Eddi = {
@@ -6516,6 +7092,14 @@ export type Macaddr_Comparison_Exp = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "admin_group" */
+  delete_admin_group?: Maybe<Admin_Group_Mutation_Response>;
+  /** delete single row from the table: "admin_group" */
+  delete_admin_group_by_pk?: Maybe<Admin_Group>;
+  /** delete data from the table: "adming_group_device" */
+  delete_adming_group_device?: Maybe<Adming_Group_Device_Mutation_Response>;
+  /** delete single row from the table: "adming_group_device" */
+  delete_adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
   /** delete data from the table: "aggregation_data" */
   delete_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** delete single row from the table: "aggregation_data" */
@@ -6532,6 +7116,10 @@ export type Mutation_Root = {
   delete_control_group_device?: Maybe<Control_Group_Device_Mutation_Response>;
   /** delete single row from the table: "control_group_device" */
   delete_control_group_device_by_pk?: Maybe<Control_Group_Device>;
+  /** delete data from the table: "device_type" */
+  delete_device_type?: Maybe<Device_Type_Mutation_Response>;
+  /** delete single row from the table: "device_type" */
+  delete_device_type_by_pk?: Maybe<Device_Type>;
   /** delete data from the table: "eddi" */
   delete_eddi?: Maybe<Eddi_Mutation_Response>;
   /** delete single row from the table: "eddi" */
@@ -6568,6 +7156,14 @@ export type Mutation_Root = {
   delete_zappi_minute?: Maybe<Zappi_Minute_Mutation_Response>;
   /** delete single row from the table: "zappi_minute" */
   delete_zappi_minute_by_pk?: Maybe<Zappi_Minute>;
+  /** insert data into the table: "admin_group" */
+  insert_admin_group?: Maybe<Admin_Group_Mutation_Response>;
+  /** insert a single row into the table: "admin_group" */
+  insert_admin_group_one?: Maybe<Admin_Group>;
+  /** insert data into the table: "adming_group_device" */
+  insert_adming_group_device?: Maybe<Adming_Group_Device_Mutation_Response>;
+  /** insert a single row into the table: "adming_group_device" */
+  insert_adming_group_device_one?: Maybe<Adming_Group_Device>;
   /** insert data into the table: "aggregation_data" */
   insert_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** insert a single row into the table: "aggregation_data" */
@@ -6584,6 +7180,10 @@ export type Mutation_Root = {
   insert_control_group_device_one?: Maybe<Control_Group_Device>;
   /** insert a single row into the table: "control_group" */
   insert_control_group_one?: Maybe<Control_Group>;
+  /** insert data into the table: "device_type" */
+  insert_device_type?: Maybe<Device_Type_Mutation_Response>;
+  /** insert a single row into the table: "device_type" */
+  insert_device_type_one?: Maybe<Device_Type>;
   /** insert data into the table: "eddi" */
   insert_eddi?: Maybe<Eddi_Mutation_Response>;
   /** insert data into the table: "eddi_minute" */
@@ -6620,6 +7220,14 @@ export type Mutation_Root = {
   insert_zappi_minute_one?: Maybe<Zappi_Minute>;
   /** insert a single row into the table: "zappi" */
   insert_zappi_one?: Maybe<Zappi>;
+  /** update data of the table: "admin_group" */
+  update_admin_group?: Maybe<Admin_Group_Mutation_Response>;
+  /** update single row of the table: "admin_group" */
+  update_admin_group_by_pk?: Maybe<Admin_Group>;
+  /** update data of the table: "adming_group_device" */
+  update_adming_group_device?: Maybe<Adming_Group_Device_Mutation_Response>;
+  /** update single row of the table: "adming_group_device" */
+  update_adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
   /** update data of the table: "aggregation_data" */
   update_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** update single row of the table: "aggregation_data" */
@@ -6636,6 +7244,10 @@ export type Mutation_Root = {
   update_control_group_device?: Maybe<Control_Group_Device_Mutation_Response>;
   /** update single row of the table: "control_group_device" */
   update_control_group_device_by_pk?: Maybe<Control_Group_Device>;
+  /** update data of the table: "device_type" */
+  update_device_type?: Maybe<Device_Type_Mutation_Response>;
+  /** update single row of the table: "device_type" */
+  update_device_type_by_pk?: Maybe<Device_Type>;
   /** update data of the table: "eddi" */
   update_eddi?: Maybe<Eddi_Mutation_Response>;
   /** update single row of the table: "eddi" */
@@ -6672,6 +7284,26 @@ export type Mutation_Root = {
   update_zappi_minute?: Maybe<Zappi_Minute_Mutation_Response>;
   /** update single row of the table: "zappi_minute" */
   update_zappi_minute_by_pk?: Maybe<Zappi_Minute>;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Admin_GroupArgs = {
+  where: Admin_Group_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Admin_Group_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Adming_Group_DeviceArgs = {
+  where: Adming_Group_Device_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Adming_Group_Device_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 /** mutation root */
@@ -6712,6 +7344,16 @@ export type Mutation_RootDelete_Control_Group_DeviceArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Control_Group_Device_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Device_TypeArgs = {
+  where: Device_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Device_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 /** mutation root */
@@ -6809,6 +7451,30 @@ export type Mutation_RootDelete_Zappi_Minute_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_Admin_GroupArgs = {
+  objects: Array<Admin_Group_Insert_Input>;
+  on_conflict?: InputMaybe<Admin_Group_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Admin_Group_OneArgs = {
+  object: Admin_Group_Insert_Input;
+  on_conflict?: InputMaybe<Admin_Group_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Adming_Group_DeviceArgs = {
+  objects: Array<Adming_Group_Device_Insert_Input>;
+  on_conflict?: InputMaybe<Adming_Group_Device_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Adming_Group_Device_OneArgs = {
+  object: Adming_Group_Device_Insert_Input;
+  on_conflict?: InputMaybe<Adming_Group_Device_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_Aggregation_DataArgs = {
   objects: Array<Aggregation_Data_Insert_Input>;
   on_conflict?: InputMaybe<Aggregation_Data_On_Conflict>;
@@ -6854,6 +7520,18 @@ export type Mutation_RootInsert_Control_Group_Device_OneArgs = {
 export type Mutation_RootInsert_Control_Group_OneArgs = {
   object: Control_Group_Insert_Input;
   on_conflict?: InputMaybe<Control_Group_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Device_TypeArgs = {
+  objects: Array<Device_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Device_Type_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Device_Type_OneArgs = {
+  object: Device_Type_Insert_Input;
+  on_conflict?: InputMaybe<Device_Type_On_Conflict>;
 };
 
 /** mutation root */
@@ -6965,6 +7643,34 @@ export type Mutation_RootInsert_Zappi_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdate_Admin_GroupArgs = {
+  _inc?: InputMaybe<Admin_Group_Inc_Input>;
+  _set?: InputMaybe<Admin_Group_Set_Input>;
+  where: Admin_Group_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Admin_Group_By_PkArgs = {
+  _inc?: InputMaybe<Admin_Group_Inc_Input>;
+  _set?: InputMaybe<Admin_Group_Set_Input>;
+  pk_columns: Admin_Group_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Adming_Group_DeviceArgs = {
+  _inc?: InputMaybe<Adming_Group_Device_Inc_Input>;
+  _set?: InputMaybe<Adming_Group_Device_Set_Input>;
+  where: Adming_Group_Device_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Adming_Group_Device_By_PkArgs = {
+  _inc?: InputMaybe<Adming_Group_Device_Inc_Input>;
+  _set?: InputMaybe<Adming_Group_Device_Set_Input>;
+  pk_columns: Adming_Group_Device_Pk_Columns_Input;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_Aggregation_DataArgs = {
   _inc?: InputMaybe<Aggregation_Data_Inc_Input>;
   _set?: InputMaybe<Aggregation_Data_Set_Input>;
@@ -7028,6 +7734,18 @@ export type Mutation_RootUpdate_Control_Group_Device_By_PkArgs = {
   _inc?: InputMaybe<Control_Group_Device_Inc_Input>;
   _set?: InputMaybe<Control_Group_Device_Set_Input>;
   pk_columns: Control_Group_Device_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Device_TypeArgs = {
+  _set?: InputMaybe<Device_Type_Set_Input>;
+  where: Device_Type_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Device_Type_By_PkArgs = {
+  _set?: InputMaybe<Device_Type_Set_Input>;
+  pk_columns: Device_Type_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -7224,6 +7942,18 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "admin_group" */
+  admin_group: Array<Admin_Group>;
+  /** fetch aggregated fields from the table: "admin_group" */
+  admin_group_aggregate: Admin_Group_Aggregate;
+  /** fetch data from the table: "admin_group" using primary key columns */
+  admin_group_by_pk?: Maybe<Admin_Group>;
+  /** fetch data from the table: "adming_group_device" */
+  adming_group_device: Array<Adming_Group_Device>;
+  /** fetch aggregated fields from the table: "adming_group_device" */
+  adming_group_device_aggregate: Adming_Group_Device_Aggregate;
+  /** fetch data from the table: "adming_group_device" using primary key columns */
+  adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
   /** fetch data from the table: "aggregation_data" */
   aggregation_data: Array<Aggregation_Data>;
   /** fetch aggregated fields from the table: "aggregation_data" */
@@ -7248,6 +7978,12 @@ export type Query_Root = {
   control_group_device_aggregate: Control_Group_Device_Aggregate;
   /** fetch data from the table: "control_group_device" using primary key columns */
   control_group_device_by_pk?: Maybe<Control_Group_Device>;
+  /** fetch data from the table: "device_type" */
+  device_type: Array<Device_Type>;
+  /** fetch aggregated fields from the table: "device_type" */
+  device_type_aggregate: Device_Type_Aggregate;
+  /** fetch data from the table: "device_type" using primary key columns */
+  device_type_by_pk?: Maybe<Device_Type>;
   /** fetch data from the table: "eddi" */
   eddi: Array<Eddi>;
   /** fetch aggregated fields from the table: "eddi" */
@@ -7302,6 +8038,46 @@ export type Query_Root = {
   zappi_minute_aggregate: Zappi_Minute_Aggregate;
   /** fetch data from the table: "zappi_minute" using primary key columns */
   zappi_minute_by_pk?: Maybe<Zappi_Minute>;
+};
+
+export type Query_RootAdmin_GroupArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Order_By>>;
+  where?: InputMaybe<Admin_Group_Bool_Exp>;
+};
+
+export type Query_RootAdmin_Group_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Order_By>>;
+  where?: InputMaybe<Admin_Group_Bool_Exp>;
+};
+
+export type Query_RootAdmin_Group_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+export type Query_RootAdming_Group_DeviceArgs = {
+  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
+  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+};
+
+export type Query_RootAdming_Group_Device_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
+  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+};
+
+export type Query_RootAdming_Group_Device_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 export type Query_RootAggregation_DataArgs = {
@@ -7382,6 +8158,26 @@ export type Query_RootControl_Group_Device_AggregateArgs = {
 
 export type Query_RootControl_Group_Device_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+export type Query_RootDevice_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Device_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Device_Type_Order_By>>;
+  where?: InputMaybe<Device_Type_Bool_Exp>;
+};
+
+export type Query_RootDevice_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Device_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Device_Type_Order_By>>;
+  where?: InputMaybe<Device_Type_Bool_Exp>;
+};
+
+export type Query_RootDevice_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 export type Query_RootEddiArgs = {
@@ -7583,6 +8379,18 @@ export type Smallint_Comparison_Exp = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "admin_group" */
+  admin_group: Array<Admin_Group>;
+  /** fetch aggregated fields from the table: "admin_group" */
+  admin_group_aggregate: Admin_Group_Aggregate;
+  /** fetch data from the table: "admin_group" using primary key columns */
+  admin_group_by_pk?: Maybe<Admin_Group>;
+  /** fetch data from the table: "adming_group_device" */
+  adming_group_device: Array<Adming_Group_Device>;
+  /** fetch aggregated fields from the table: "adming_group_device" */
+  adming_group_device_aggregate: Adming_Group_Device_Aggregate;
+  /** fetch data from the table: "adming_group_device" using primary key columns */
+  adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
   /** fetch data from the table: "aggregation_data" */
   aggregation_data: Array<Aggregation_Data>;
   /** fetch aggregated fields from the table: "aggregation_data" */
@@ -7607,6 +8415,12 @@ export type Subscription_Root = {
   control_group_device_aggregate: Control_Group_Device_Aggregate;
   /** fetch data from the table: "control_group_device" using primary key columns */
   control_group_device_by_pk?: Maybe<Control_Group_Device>;
+  /** fetch data from the table: "device_type" */
+  device_type: Array<Device_Type>;
+  /** fetch aggregated fields from the table: "device_type" */
+  device_type_aggregate: Device_Type_Aggregate;
+  /** fetch data from the table: "device_type" using primary key columns */
+  device_type_by_pk?: Maybe<Device_Type>;
   /** fetch data from the table: "eddi" */
   eddi: Array<Eddi>;
   /** fetch aggregated fields from the table: "eddi" */
@@ -7661,6 +8475,46 @@ export type Subscription_Root = {
   zappi_minute_aggregate: Zappi_Minute_Aggregate;
   /** fetch data from the table: "zappi_minute" using primary key columns */
   zappi_minute_by_pk?: Maybe<Zappi_Minute>;
+};
+
+export type Subscription_RootAdmin_GroupArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Order_By>>;
+  where?: InputMaybe<Admin_Group_Bool_Exp>;
+};
+
+export type Subscription_RootAdmin_Group_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Order_By>>;
+  where?: InputMaybe<Admin_Group_Bool_Exp>;
+};
+
+export type Subscription_RootAdmin_Group_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+export type Subscription_RootAdming_Group_DeviceArgs = {
+  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
+  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+};
+
+export type Subscription_RootAdming_Group_Device_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
+  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+};
+
+export type Subscription_RootAdming_Group_Device_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 export type Subscription_RootAggregation_DataArgs = {
@@ -7741,6 +8595,26 @@ export type Subscription_RootControl_Group_Device_AggregateArgs = {
 
 export type Subscription_RootControl_Group_Device_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+export type Subscription_RootDevice_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Device_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Device_Type_Order_By>>;
+  where?: InputMaybe<Device_Type_Bool_Exp>;
+};
+
+export type Subscription_RootDevice_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Device_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Device_Type_Order_By>>;
+  where?: InputMaybe<Device_Type_Bool_Exp>;
+};
+
+export type Subscription_RootDevice_Type_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 export type Subscription_RootEddiArgs = {
@@ -11476,12 +12350,98 @@ export type ControlGroupDevicesQueryVariables = Exact<{
 
 export type ControlGroupDevicesQuery = {
   __typename?: 'query_root';
-  controlGroupDevices: Array<{
-    __typename?: 'control_group_device';
-    serialNo: number;
-    zappi?: { __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
-    eddi?: { __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
-  }>;
+  controlGroupDevices?: {
+    __typename?: 'control_group';
+    devices: Array<{
+      __typename?: 'control_group_device';
+      zappi?: { __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
+      eddi?: { __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
+    }>;
+  } | null;
+};
+
+export type ControlGroupStatusQueryVariables = Exact<{
+  controlGroupId: Scalars['Int'];
+}>;
+
+export type ControlGroupStatusQuery = {
+  __typename?: 'query_root';
+  controlGroupHistory?: {
+    __typename?: 'control_group';
+    devices: Array<{
+      __typename?: 'control_group_device';
+      eddi?: {
+        __typename?: 'eddi';
+        voltage?: number | null;
+        frequency?: number | null;
+        serialNo: number;
+        updateDate: string;
+        chargeEnergy?: number | null;
+      } | null;
+      zappi?: {
+        __typename?: 'zappi';
+        voltage?: number | null;
+        frequency?: number | null;
+        serialNo: number;
+        updateDate: string;
+        chargeEnergy?: number | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type ControlGroupHistoryQueryVariables = Exact<{
+  controlGroupId: Scalars['Int'];
+}>;
+
+export type ControlGroupHistoryQuery = {
+  __typename?: 'query_root';
+  controlGroupHistory?: {
+    __typename?: 'control_group';
+    devices: Array<{
+      __typename?: 'control_group_device';
+      eddiMinutes?: {
+        __typename?: 'eddi_minute';
+        frequency?: number | null;
+        timestamp: string;
+        serialNo: number;
+        importPower?: number | null;
+        exportPower?: number | null;
+        externalCtPositivePower1?: number | null;
+        externalCtPositivePower2?: number | null;
+        externalCtNegativePower1?: number | null;
+        externalCtNegativePower2?: number | null;
+        divertedLoadPower1?: number | null;
+        divertedLoadPower2?: number | null;
+        boostLoadPower1?: number | null;
+        boostLoadPower2?: number | null;
+        voltage1?: number | null;
+      } | null;
+      zappiMinutes?: {
+        __typename?: 'zappi_minute';
+        voltage1?: number | null;
+        voltage2?: number | null;
+        voltage3?: number | null;
+        frequency?: number | null;
+        timestamp: string;
+        serialNo: number;
+        importPower?: number | null;
+        exportPower?: number | null;
+        externalCtPositivePower1?: number | null;
+        externalCtPositivePower2?: number | null;
+        externalCtPositivePower3?: number | null;
+        externalCtNegativePower1?: number | null;
+        externalCtNegativePower2?: number | null;
+        externalCtNegativePower3?: number | null;
+        divertedLoadPower1?: number | null;
+        divertedLoadPower2?: number | null;
+        divertedLoadPower3?: number | null;
+        boostLoadPower1?: number | null;
+        boostLoadPower2?: number | null;
+        boostLoadPower3?: number | null;
+      } | null;
+    }>;
+  } | null;
 };
 
 export type ControlGroupsQueryVariables = Exact<{
@@ -11505,6 +12465,16 @@ export type DevicesQuery = {
   __typename?: 'query_root';
   zappis: Array<{ __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null }>;
   eddis: Array<{ __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null }>;
+};
+
+export type DevicesBySerialNosQueryVariables = Exact<{
+  serialNos?: InputMaybe<Array<Scalars['bigint']> | Scalars['bigint']>;
+}>;
+
+export type DevicesBySerialNosQuery = {
+  __typename?: 'query_root';
+  zappis: Array<{ __typename?: 'zappi'; serialNo: number }>;
+  eddis: Array<{ __typename?: 'eddi'; serialNo: number }>;
 };
 
 export type DeviceQueryVariables = Exact<{
@@ -11803,18 +12773,51 @@ export const ControlGroupDocument = gql`
 `;
 export const ControlGroupDevicesDocument = gql`
   query ControlGroupDevices($controlGroupId: Int!) {
-    controlGroupDevices: control_group_device(where: { control_group_id: { _eq: $controlGroupId } }) {
-      serialNo: serialno
-      zappi: control_group_device_zappi {
-        ...ZappiData
-      }
-      eddi: control_group_device_eddi {
-        ...EddiData
+    controlGroupDevices: control_group_by_pk(id: $controlGroupId) {
+      devices {
+        zappi: control_group_device_zappi {
+          ...ZappiData
+        }
+        eddi: control_group_device_eddi {
+          ...EddiData
+        }
       }
     }
   }
   ${ZappiDataFragmentDoc}
   ${EddiDataFragmentDoc}
+`;
+export const ControlGroupStatusDocument = gql`
+  query ControlGroupStatus($controlGroupId: Int!) {
+    controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
+      devices {
+        eddi: control_group_device_eddi {
+          ...EddiStatus
+        }
+        zappi: control_group_device_zappi {
+          ...ZappiStatus
+        }
+      }
+    }
+  }
+  ${EddiStatusFragmentDoc}
+  ${ZappiStatusFragmentDoc}
+`;
+export const ControlGroupHistoryDocument = gql`
+  query ControlGroupHistory($controlGroupId: Int!) {
+    controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
+      devices {
+        eddiMinutes: control_group_history_eddi {
+          ...EddiHistory
+        }
+        zappiMinutes: control_group_history_zappi {
+          ...ZappiHistory
+        }
+      }
+    }
+  }
+  ${EddiHistoryFragmentDoc}
+  ${ZappiHistoryFragmentDoc}
 `;
 export const ControlGroupsDocument = gql`
   query ControlGroups($limit: Int, $offset: Int) {
@@ -11835,6 +12838,16 @@ export const DevicesDocument = gql`
   }
   ${ZappiDataFragmentDoc}
   ${EddiDataFragmentDoc}
+`;
+export const DevicesBySerialNosDocument = gql`
+  query DevicesBySerialNos($serialNos: [bigint!]) {
+    zappis: zappi(where: { serialno: { _in: $serialNos } }) {
+      serialNo: serialno
+    }
+    eddis: eddi(where: { serialno: { _in: $serialNos } }) {
+      serialNo: serialno
+    }
+  }
 `;
 export const DeviceDocument = gql`
   query Device($serialNo: bigint!) {
@@ -11980,6 +12993,32 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         'ControlGroupDevices'
       );
     },
+    ControlGroupStatus(
+      variables: ControlGroupStatusQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<ControlGroupStatusQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<ControlGroupStatusQuery>(ControlGroupStatusDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'ControlGroupStatus'
+      );
+    },
+    ControlGroupHistory(
+      variables: ControlGroupHistoryQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<ControlGroupHistoryQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<ControlGroupHistoryQuery>(ControlGroupHistoryDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'ControlGroupHistory'
+      );
+    },
     ControlGroups(
       variables?: ControlGroupsQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
@@ -11998,6 +13037,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         (wrappedRequestHeaders) =>
           client.request<DevicesQuery>(DevicesDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
         'Devices'
+      );
+    },
+    DevicesBySerialNos(
+      variables?: DevicesBySerialNosQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<DevicesBySerialNosQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<DevicesBySerialNosQuery>(DevicesBySerialNosDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'DevicesBySerialNos'
       );
     },
     Device(variables: DeviceQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<DeviceQuery> {

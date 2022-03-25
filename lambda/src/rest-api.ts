@@ -1,9 +1,9 @@
+import bodyParser from 'body-parser';
 import express from 'express';
 import { OpenAPI, useSofa } from 'sofa-api';
 import swaggerUi from 'swagger-ui-express';
 import { getAPIs } from './data-sources';
 import { schema } from './schema';
-import bodyParser from 'body-parser';
 
 const basePath = '/api';
 
@@ -45,6 +45,12 @@ const restMiddleware = useSofa({
     'Query.controlGroupDevices': {
       path: '/control-groups/:id/devices',
     },
+    'Query.controlGroupStatus': {
+      path: '/control-groups/:id/status',
+    },
+    'Query.controlGroupHistory': {
+      path: '/control-groups/:id/history',
+    },
     'Mutation.createControlGroup': {
       path: '/control-groups',
       method: 'POST',
@@ -53,7 +59,7 @@ const restMiddleware = useSofa({
       path: '/control-groups/:id/add-device',
       method: 'PUT',
     },
-    'Mutation.removeDeviceToControlGroup': {
+    'Mutation.removeDeviceFromControlGroup': {
       path: '/control-groups/:id/remove-device',
       method: 'PUT',
     },
