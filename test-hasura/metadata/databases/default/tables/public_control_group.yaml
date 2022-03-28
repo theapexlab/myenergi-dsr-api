@@ -1,0 +1,15 @@
+table:
+  name: control_group
+  schema: public
+object_relationships:
+- name: admin_group
+  using:
+    foreign_key_constraint_on: admin_group_id
+array_relationships:
+- name: devices
+  using:
+    foreign_key_constraint_on:
+      column: control_group_id
+      table:
+        name: control_group_device
+        schema: public

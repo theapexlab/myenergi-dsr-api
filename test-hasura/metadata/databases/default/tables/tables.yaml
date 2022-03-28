@@ -1,0 +1,5 @@
+- '!include public_admin_group.yaml'
+- '!include public_admin_group_device.yaml'
+- '!include public_control_group.yaml'
+- '!include public_control_group_device.yaml'
+- '!include public_device_type.yaml'
