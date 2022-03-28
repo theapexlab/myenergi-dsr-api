@@ -3,17 +3,17 @@ table:
   schema: public
 is_enum: true
 array_relationships:
-  - name: admin_group_devices
-    using:
-      foreign_key_constraint_on:
-        column: device_type
-        table:
-          name: admin_group_device
-          schema: public
-  - name: control_group_devices
-    using:
-      foreign_key_constraint_on:
-        column: device_type
-        table:
-          name: control_group_device
-          schema: public
+- name: admin_group_devices
+  using:
+    foreign_key_constraint_on:
+      column: device_type
+      table:
+        name: admin_group_device
+        schema: public
+- name: control_group_devices
+  using:
+    foreign_key_constraint_on:
+      column: device_type
+      table:
+        name: control_group_device
+        schema: public

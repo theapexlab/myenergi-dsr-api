@@ -1,5 +1,6 @@
 import { UserInputError } from 'apollo-server-express';
 import { buildSchemaSync } from 'type-graphql';
+import { AdminGroupResolver } from './admin-group';
 import { ControlGroupResolver } from './control-group';
 import { DeviceResolver } from './device';
 import { DeviceHistoryResolver } from './device-history';
@@ -8,7 +9,7 @@ import { DeviceStatusResolver } from './device-status';
 import { isValidDateOrder, isValidDateRange } from './utils/validateStartEndDate';
 
 const schema = buildSchemaSync({
-  resolvers: [DeviceResolver, DeviceStatusResolver, DeviceHistoryResolver, ControlGroupResolver],
+  resolvers: [AdminGroupResolver, DeviceResolver, DeviceStatusResolver, DeviceHistoryResolver, ControlGroupResolver],
   validate: (argValue, _argType) => {
     if (argValue instanceof DeviceHistoryArgs) {
       const { startDate, endDate } = argValue as DeviceHistoryArgs;
