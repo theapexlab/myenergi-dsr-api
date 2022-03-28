@@ -12,3 +12,12 @@ export class MutateControlGroupArgs {
   @Field(() => [Int])
   serialNos: number[];
 }
+
+@ArgsType()
+export class CreateControlGroupArgs {
+  @Field()
+  name: string;
+
+  @Field(() => Int)
+  adminGroupId: number;
+}

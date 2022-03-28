@@ -1,5 +1,5 @@
-mutation CreateControlGroup($name: String!) {
-  controlGroup: insert_control_group_one(object: { name: $name }) {
+mutation CreateControlGroup($name: String!, $adminGroupId: Int!) {
+  controlGroup: insert_control_group_one(object: { name: $name, admin_group_id: $adminGroupId }) {
     ...ControlGroupFields
   }
 }

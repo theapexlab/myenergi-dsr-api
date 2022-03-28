@@ -102,10 +102,54 @@ export type String_Comparison_Exp = {
 /** columns and relationships of "admin_group" */
 export type Admin_Group = {
   __typename?: 'admin_group';
+  /** An array relationship */
+  admin_group_devices: Array<Admin_Group_Device>;
+  /** An aggregate relationship */
+  admin_group_devices_aggregate: Admin_Group_Device_Aggregate;
+  /** An array relationship */
+  control_groups: Array<Control_Group>;
+  /** An aggregate relationship */
+  control_groups_aggregate: Control_Group_Aggregate;
   created_at: Scalars['timestamptz'];
   id: Scalars['Int'];
   name: Scalars['String'];
   updated_at: Scalars['timestamptz'];
+};
+
+/** columns and relationships of "admin_group" */
+export type Admin_GroupAdmin_Group_DevicesArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+};
+
+/** columns and relationships of "admin_group" */
+export type Admin_GroupAdmin_Group_Devices_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+};
+
+/** columns and relationships of "admin_group" */
+export type Admin_GroupControl_GroupsArgs = {
+  distinct_on?: InputMaybe<Array<Control_Group_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Control_Group_Order_By>>;
+  where?: InputMaybe<Control_Group_Bool_Exp>;
+};
+
+/** columns and relationships of "admin_group" */
+export type Admin_GroupControl_Groups_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Control_Group_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Control_Group_Order_By>>;
+  where?: InputMaybe<Control_Group_Bool_Exp>;
 };
 
 /** aggregated selection of "admin_group" */
@@ -148,6 +192,8 @@ export type Admin_Group_Bool_Exp = {
   _and?: InputMaybe<Array<Admin_Group_Bool_Exp>>;
   _not?: InputMaybe<Admin_Group_Bool_Exp>;
   _or?: InputMaybe<Array<Admin_Group_Bool_Exp>>;
+  admin_group_devices?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+  control_groups?: InputMaybe<Control_Group_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -160,6 +206,394 @@ export enum Admin_Group_Constraint {
   AdminGroupPkey = 'admin_group_pkey',
 }
 
+/** columns and relationships of "admin_group_device" */
+export type Admin_Group_Device = {
+  __typename?: 'admin_group_device';
+  /** An object relationship */
+  admin_group: Admin_Group;
+  admin_group_device_eddi?: Maybe<Eddi>;
+  admin_group_device_zappi?: Maybe<Zappi>;
+  admin_group_id: Scalars['Int'];
+  /** An array relationship */
+  control_group_devices: Array<Control_Group_Device>;
+  /** An aggregate relationship */
+  control_group_devices_aggregate: Control_Group_Device_Aggregate;
+  created_at: Scalars['timestamptz'];
+  /** An object relationship */
+  deviceTypeByDeviceType: Device_Type;
+  device_type: Device_Type_Enum;
+  id: Scalars['Int'];
+  postcode?: Maybe<Scalars['String']>;
+  serialno: Scalars['Int'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** columns and relationships of "admin_group_device" */
+export type Admin_Group_DeviceControl_Group_DevicesArgs = {
+  distinct_on?: InputMaybe<Array<Control_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Control_Group_Device_Order_By>>;
+  where?: InputMaybe<Control_Group_Device_Bool_Exp>;
+};
+
+/** columns and relationships of "admin_group_device" */
+export type Admin_Group_DeviceControl_Group_Devices_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Control_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Control_Group_Device_Order_By>>;
+  where?: InputMaybe<Control_Group_Device_Bool_Exp>;
+};
+
+/** aggregated selection of "admin_group_device" */
+export type Admin_Group_Device_Aggregate = {
+  __typename?: 'admin_group_device_aggregate';
+  aggregate?: Maybe<Admin_Group_Device_Aggregate_Fields>;
+  nodes: Array<Admin_Group_Device>;
+};
+
+/** aggregate fields of "admin_group_device" */
+export type Admin_Group_Device_Aggregate_Fields = {
+  __typename?: 'admin_group_device_aggregate_fields';
+  avg?: Maybe<Admin_Group_Device_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Admin_Group_Device_Max_Fields>;
+  min?: Maybe<Admin_Group_Device_Min_Fields>;
+  stddev?: Maybe<Admin_Group_Device_Stddev_Fields>;
+  stddev_pop?: Maybe<Admin_Group_Device_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Admin_Group_Device_Stddev_Samp_Fields>;
+  sum?: Maybe<Admin_Group_Device_Sum_Fields>;
+  var_pop?: Maybe<Admin_Group_Device_Var_Pop_Fields>;
+  var_samp?: Maybe<Admin_Group_Device_Var_Samp_Fields>;
+  variance?: Maybe<Admin_Group_Device_Variance_Fields>;
+};
+
+/** aggregate fields of "admin_group_device" */
+export type Admin_Group_Device_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "admin_group_device" */
+export type Admin_Group_Device_Aggregate_Order_By = {
+  avg?: InputMaybe<Admin_Group_Device_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Admin_Group_Device_Max_Order_By>;
+  min?: InputMaybe<Admin_Group_Device_Min_Order_By>;
+  stddev?: InputMaybe<Admin_Group_Device_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Admin_Group_Device_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Admin_Group_Device_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Admin_Group_Device_Sum_Order_By>;
+  var_pop?: InputMaybe<Admin_Group_Device_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Admin_Group_Device_Var_Samp_Order_By>;
+  variance?: InputMaybe<Admin_Group_Device_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "admin_group_device" */
+export type Admin_Group_Device_Arr_Rel_Insert_Input = {
+  data: Array<Admin_Group_Device_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Admin_Group_Device_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Admin_Group_Device_Avg_Fields = {
+  __typename?: 'admin_group_device_avg_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Avg_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "admin_group_device". All fields are combined with a logical 'AND'. */
+export type Admin_Group_Device_Bool_Exp = {
+  _and?: InputMaybe<Array<Admin_Group_Device_Bool_Exp>>;
+  _not?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+  _or?: InputMaybe<Array<Admin_Group_Device_Bool_Exp>>;
+  admin_group?: InputMaybe<Admin_Group_Bool_Exp>;
+  admin_group_id?: InputMaybe<Int_Comparison_Exp>;
+  control_group_devices?: InputMaybe<Control_Group_Device_Bool_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  deviceTypeByDeviceType?: InputMaybe<Device_Type_Bool_Exp>;
+  device_type?: InputMaybe<Device_Type_Enum_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  postcode?: InputMaybe<String_Comparison_Exp>;
+  serialno?: InputMaybe<Int_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "admin_group_device" */
+export enum Admin_Group_Device_Constraint {
+  /** unique or primary key constraint */
+  AdminGroupDeviceSerialnoKey = 'admin_group_device_serialno_key',
+  /** unique or primary key constraint */
+  AdmingGroupDevicePkey = 'adming_group_device_pkey',
+}
+
+/** input type for incrementing numeric columns in table "admin_group_device" */
+export type Admin_Group_Device_Inc_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  serialno?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "admin_group_device" */
+export type Admin_Group_Device_Insert_Input = {
+  admin_group?: InputMaybe<Admin_Group_Obj_Rel_Insert_Input>;
+  admin_group_id?: InputMaybe<Scalars['Int']>;
+  control_group_devices?: InputMaybe<Control_Group_Device_Arr_Rel_Insert_Input>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  deviceTypeByDeviceType?: InputMaybe<Device_Type_Obj_Rel_Insert_Input>;
+  device_type?: InputMaybe<Device_Type_Enum>;
+  id?: InputMaybe<Scalars['Int']>;
+  postcode?: InputMaybe<Scalars['String']>;
+  serialno?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Admin_Group_Device_Max_Fields = {
+  __typename?: 'admin_group_device_max_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  postcode?: Maybe<Scalars['String']>;
+  serialno?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Max_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  postcode?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Admin_Group_Device_Min_Fields = {
+  __typename?: 'admin_group_device_min_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  postcode?: Maybe<Scalars['String']>;
+  serialno?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Min_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  postcode?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "admin_group_device" */
+export type Admin_Group_Device_Mutation_Response = {
+  __typename?: 'admin_group_device_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Admin_Group_Device>;
+};
+
+/** input type for inserting object relation for remote table "admin_group_device" */
+export type Admin_Group_Device_Obj_Rel_Insert_Input = {
+  data: Admin_Group_Device_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Admin_Group_Device_On_Conflict>;
+};
+
+/** on_conflict condition type for table "admin_group_device" */
+export type Admin_Group_Device_On_Conflict = {
+  constraint: Admin_Group_Device_Constraint;
+  update_columns?: Array<Admin_Group_Device_Update_Column>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "admin_group_device". */
+export type Admin_Group_Device_Order_By = {
+  admin_group?: InputMaybe<Admin_Group_Order_By>;
+  admin_group_id?: InputMaybe<Order_By>;
+  control_group_devices_aggregate?: InputMaybe<Control_Group_Device_Aggregate_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  deviceTypeByDeviceType?: InputMaybe<Device_Type_Order_By>;
+  device_type?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  postcode?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: admin_group_device */
+export type Admin_Group_Device_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "admin_group_device" */
+export enum Admin_Group_Device_Select_Column {
+  /** column name */
+  AdminGroupId = 'admin_group_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DeviceType = 'device_type',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Postcode = 'postcode',
+  /** column name */
+  Serialno = 'serialno',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "admin_group_device" */
+export type Admin_Group_Device_Set_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  device_type?: InputMaybe<Device_Type_Enum>;
+  id?: InputMaybe<Scalars['Int']>;
+  postcode?: InputMaybe<Scalars['String']>;
+  serialno?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Admin_Group_Device_Stddev_Fields = {
+  __typename?: 'admin_group_device_stddev_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Stddev_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Admin_Group_Device_Stddev_Pop_Fields = {
+  __typename?: 'admin_group_device_stddev_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Stddev_Pop_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Admin_Group_Device_Stddev_Samp_Fields = {
+  __typename?: 'admin_group_device_stddev_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Stddev_Samp_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Admin_Group_Device_Sum_Fields = {
+  __typename?: 'admin_group_device_sum_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  serialno?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Sum_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "admin_group_device" */
+export enum Admin_Group_Device_Update_Column {
+  /** column name */
+  AdminGroupId = 'admin_group_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DeviceType = 'device_type',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Postcode = 'postcode',
+  /** column name */
+  Serialno = 'serialno',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** aggregate var_pop on columns */
+export type Admin_Group_Device_Var_Pop_Fields = {
+  __typename?: 'admin_group_device_var_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Var_Pop_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Admin_Group_Device_Var_Samp_Fields = {
+  __typename?: 'admin_group_device_var_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Var_Samp_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Admin_Group_Device_Variance_Fields = {
+  __typename?: 'admin_group_device_variance_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  serialno?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "admin_group_device" */
+export type Admin_Group_Device_Variance_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  serialno?: InputMaybe<Order_By>;
+};
+
 /** input type for incrementing numeric columns in table "admin_group" */
 export type Admin_Group_Inc_Input = {
   id?: InputMaybe<Scalars['Int']>;
@@ -167,6 +601,8 @@ export type Admin_Group_Inc_Input = {
 
 /** input type for inserting data into table "admin_group" */
 export type Admin_Group_Insert_Input = {
+  admin_group_devices?: InputMaybe<Admin_Group_Device_Arr_Rel_Insert_Input>;
+  control_groups?: InputMaybe<Control_Group_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
   name?: InputMaybe<Scalars['String']>;
@@ -200,6 +636,13 @@ export type Admin_Group_Mutation_Response = {
   returning: Array<Admin_Group>;
 };
 
+/** input type for inserting object relation for remote table "admin_group" */
+export type Admin_Group_Obj_Rel_Insert_Input = {
+  data: Admin_Group_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Admin_Group_On_Conflict>;
+};
+
 /** on_conflict condition type for table "admin_group" */
 export type Admin_Group_On_Conflict = {
   constraint: Admin_Group_Constraint;
@@ -209,6 +652,8 @@ export type Admin_Group_On_Conflict = {
 
 /** Ordering options when selecting data from "admin_group". */
 export type Admin_Group_Order_By = {
+  admin_group_devices_aggregate?: InputMaybe<Admin_Group_Device_Aggregate_Order_By>;
+  control_groups_aggregate?: InputMaybe<Control_Group_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -292,250 +737,6 @@ export type Admin_Group_Var_Samp_Fields = {
 export type Admin_Group_Variance_Fields = {
   __typename?: 'admin_group_variance_fields';
   id?: Maybe<Scalars['Float']>;
-};
-
-/** columns and relationships of "adming_group_device" */
-export type Adming_Group_Device = {
-  __typename?: 'adming_group_device';
-  admin_group_id: Scalars['Int'];
-  created_at: Scalars['timestamptz'];
-  device_type: Device_Type_Enum;
-  id: Scalars['Int'];
-  postcode: Scalars['String'];
-  serialno: Scalars['Int'];
-  updated_at: Scalars['timestamptz'];
-};
-
-/** aggregated selection of "adming_group_device" */
-export type Adming_Group_Device_Aggregate = {
-  __typename?: 'adming_group_device_aggregate';
-  aggregate?: Maybe<Adming_Group_Device_Aggregate_Fields>;
-  nodes: Array<Adming_Group_Device>;
-};
-
-/** aggregate fields of "adming_group_device" */
-export type Adming_Group_Device_Aggregate_Fields = {
-  __typename?: 'adming_group_device_aggregate_fields';
-  avg?: Maybe<Adming_Group_Device_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Adming_Group_Device_Max_Fields>;
-  min?: Maybe<Adming_Group_Device_Min_Fields>;
-  stddev?: Maybe<Adming_Group_Device_Stddev_Fields>;
-  stddev_pop?: Maybe<Adming_Group_Device_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Adming_Group_Device_Stddev_Samp_Fields>;
-  sum?: Maybe<Adming_Group_Device_Sum_Fields>;
-  var_pop?: Maybe<Adming_Group_Device_Var_Pop_Fields>;
-  var_samp?: Maybe<Adming_Group_Device_Var_Samp_Fields>;
-  variance?: Maybe<Adming_Group_Device_Variance_Fields>;
-};
-
-/** aggregate fields of "adming_group_device" */
-export type Adming_Group_Device_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Adming_Group_Device_Avg_Fields = {
-  __typename?: 'adming_group_device_avg_fields';
-  admin_group_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "adming_group_device". All fields are combined with a logical 'AND'. */
-export type Adming_Group_Device_Bool_Exp = {
-  _and?: InputMaybe<Array<Adming_Group_Device_Bool_Exp>>;
-  _not?: InputMaybe<Adming_Group_Device_Bool_Exp>;
-  _or?: InputMaybe<Array<Adming_Group_Device_Bool_Exp>>;
-  admin_group_id?: InputMaybe<Int_Comparison_Exp>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  device_type?: InputMaybe<Device_Type_Enum_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  postcode?: InputMaybe<String_Comparison_Exp>;
-  serialno?: InputMaybe<Int_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "adming_group_device" */
-export enum Adming_Group_Device_Constraint {
-  /** unique or primary key constraint */
-  AdmingGroupDevicePkey = 'adming_group_device_pkey',
-}
-
-/** input type for incrementing numeric columns in table "adming_group_device" */
-export type Adming_Group_Device_Inc_Input = {
-  admin_group_id?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['Int']>;
-  serialno?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "adming_group_device" */
-export type Adming_Group_Device_Insert_Input = {
-  admin_group_id?: InputMaybe<Scalars['Int']>;
-  created_at?: InputMaybe<Scalars['timestamptz']>;
-  device_type?: InputMaybe<Device_Type_Enum>;
-  id?: InputMaybe<Scalars['Int']>;
-  postcode?: InputMaybe<Scalars['String']>;
-  serialno?: InputMaybe<Scalars['Int']>;
-  updated_at?: InputMaybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Adming_Group_Device_Max_Fields = {
-  __typename?: 'adming_group_device_max_fields';
-  admin_group_id?: Maybe<Scalars['Int']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  postcode?: Maybe<Scalars['String']>;
-  serialno?: Maybe<Scalars['Int']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate min on columns */
-export type Adming_Group_Device_Min_Fields = {
-  __typename?: 'adming_group_device_min_fields';
-  admin_group_id?: Maybe<Scalars['Int']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  postcode?: Maybe<Scalars['String']>;
-  serialno?: Maybe<Scalars['Int']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** response of any mutation on the table "adming_group_device" */
-export type Adming_Group_Device_Mutation_Response = {
-  __typename?: 'adming_group_device_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Adming_Group_Device>;
-};
-
-/** on_conflict condition type for table "adming_group_device" */
-export type Adming_Group_Device_On_Conflict = {
-  constraint: Adming_Group_Device_Constraint;
-  update_columns?: Array<Adming_Group_Device_Update_Column>;
-  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "adming_group_device". */
-export type Adming_Group_Device_Order_By = {
-  admin_group_id?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  device_type?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  postcode?: InputMaybe<Order_By>;
-  serialno?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: adming_group_device */
-export type Adming_Group_Device_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "adming_group_device" */
-export enum Adming_Group_Device_Select_Column {
-  /** column name */
-  AdminGroupId = 'admin_group_id',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  DeviceType = 'device_type',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Postcode = 'postcode',
-  /** column name */
-  Serialno = 'serialno',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** input type for updating data in table "adming_group_device" */
-export type Adming_Group_Device_Set_Input = {
-  admin_group_id?: InputMaybe<Scalars['Int']>;
-  created_at?: InputMaybe<Scalars['timestamptz']>;
-  device_type?: InputMaybe<Device_Type_Enum>;
-  id?: InputMaybe<Scalars['Int']>;
-  postcode?: InputMaybe<Scalars['String']>;
-  serialno?: InputMaybe<Scalars['Int']>;
-  updated_at?: InputMaybe<Scalars['timestamptz']>;
-};
-
-/** aggregate stddev on columns */
-export type Adming_Group_Device_Stddev_Fields = {
-  __typename?: 'adming_group_device_stddev_fields';
-  admin_group_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Adming_Group_Device_Stddev_Pop_Fields = {
-  __typename?: 'adming_group_device_stddev_pop_fields';
-  admin_group_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Adming_Group_Device_Stddev_Samp_Fields = {
-  __typename?: 'adming_group_device_stddev_samp_fields';
-  admin_group_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Adming_Group_Device_Sum_Fields = {
-  __typename?: 'adming_group_device_sum_fields';
-  admin_group_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  serialno?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "adming_group_device" */
-export enum Adming_Group_Device_Update_Column {
-  /** column name */
-  AdminGroupId = 'admin_group_id',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  DeviceType = 'device_type',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Postcode = 'postcode',
-  /** column name */
-  Serialno = 'serialno',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** aggregate var_pop on columns */
-export type Adming_Group_Device_Var_Pop_Fields = {
-  __typename?: 'adming_group_device_var_pop_fields';
-  admin_group_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Adming_Group_Device_Var_Samp_Fields = {
-  __typename?: 'adming_group_device_var_samp_fields';
-  admin_group_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Adming_Group_Device_Variance_Fields = {
-  __typename?: 'adming_group_device_variance_fields';
-  admin_group_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  serialno?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "aggregation_data" */
@@ -1611,6 +1812,9 @@ export type Command_Variance_Order_By = {
 /** columns and relationships of "control_group" */
 export type Control_Group = {
   __typename?: 'control_group';
+  /** An object relationship */
+  admin_group: Admin_Group;
+  admin_group_id: Scalars['Int'];
   created_at: Scalars['timestamptz'];
   /** An array relationship */
   devices: Array<Control_Group_Device>;
@@ -1668,10 +1872,39 @@ export type Control_Group_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "control_group" */
+export type Control_Group_Aggregate_Order_By = {
+  avg?: InputMaybe<Control_Group_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Control_Group_Max_Order_By>;
+  min?: InputMaybe<Control_Group_Min_Order_By>;
+  stddev?: InputMaybe<Control_Group_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Control_Group_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Control_Group_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Control_Group_Sum_Order_By>;
+  var_pop?: InputMaybe<Control_Group_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Control_Group_Var_Samp_Order_By>;
+  variance?: InputMaybe<Control_Group_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "control_group" */
+export type Control_Group_Arr_Rel_Insert_Input = {
+  data: Array<Control_Group_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Control_Group_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Control_Group_Avg_Fields = {
   __typename?: 'control_group_avg_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "control_group" */
+export type Control_Group_Avg_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "control_group". All fields are combined with a logical 'AND'. */
@@ -1679,6 +1912,8 @@ export type Control_Group_Bool_Exp = {
   _and?: InputMaybe<Array<Control_Group_Bool_Exp>>;
   _not?: InputMaybe<Control_Group_Bool_Exp>;
   _or?: InputMaybe<Array<Control_Group_Bool_Exp>>;
+  admin_group?: InputMaybe<Admin_Group_Bool_Exp>;
+  admin_group_id?: InputMaybe<Int_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   devices?: InputMaybe<Control_Group_Device_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
@@ -1696,6 +1931,8 @@ export enum Control_Group_Constraint {
 export type Control_Group_Device = {
   __typename?: 'control_group_device';
   /** An object relationship */
+  admin_group_device: Admin_Group_Device;
+  /** An object relationship */
   control_group: Control_Group;
   control_group_device_eddi?: Maybe<Eddi>;
   control_group_device_zappi?: Maybe<Zappi>;
@@ -1703,6 +1940,8 @@ export type Control_Group_Device = {
   control_group_history_zappi?: Maybe<Zappi_Minute>;
   control_group_id: Scalars['Int'];
   created_at: Scalars['timestamptz'];
+  /** An object relationship */
+  deviceTypeByDeviceType?: Maybe<Device_Type>;
   device_type?: Maybe<Device_Type_Enum>;
   id: Scalars['Int'];
   serialno: Scalars['Int'];
@@ -1780,9 +2019,11 @@ export type Control_Group_Device_Bool_Exp = {
   _and?: InputMaybe<Array<Control_Group_Device_Bool_Exp>>;
   _not?: InputMaybe<Control_Group_Device_Bool_Exp>;
   _or?: InputMaybe<Array<Control_Group_Device_Bool_Exp>>;
+  admin_group_device?: InputMaybe<Admin_Group_Device_Bool_Exp>;
   control_group?: InputMaybe<Control_Group_Bool_Exp>;
   control_group_id?: InputMaybe<Int_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  deviceTypeByDeviceType?: InputMaybe<Device_Type_Bool_Exp>;
   device_type?: InputMaybe<Device_Type_Enum_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   serialno?: InputMaybe<Int_Comparison_Exp>;
@@ -1806,9 +2047,11 @@ export type Control_Group_Device_Inc_Input = {
 
 /** input type for inserting data into table "control_group_device" */
 export type Control_Group_Device_Insert_Input = {
+  admin_group_device?: InputMaybe<Admin_Group_Device_Obj_Rel_Insert_Input>;
   control_group?: InputMaybe<Control_Group_Obj_Rel_Insert_Input>;
   control_group_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  deviceTypeByDeviceType?: InputMaybe<Device_Type_Obj_Rel_Insert_Input>;
   device_type?: InputMaybe<Device_Type_Enum>;
   id?: InputMaybe<Scalars['Int']>;
   serialno?: InputMaybe<Scalars['Int']>;
@@ -1871,9 +2114,11 @@ export type Control_Group_Device_On_Conflict = {
 
 /** Ordering options when selecting data from "control_group_device". */
 export type Control_Group_Device_Order_By = {
+  admin_group_device?: InputMaybe<Admin_Group_Device_Order_By>;
   control_group?: InputMaybe<Control_Group_Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  deviceTypeByDeviceType?: InputMaybe<Device_Type_Order_By>;
   device_type?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2034,11 +2279,14 @@ export type Control_Group_Device_Variance_Order_By = {
 
 /** input type for incrementing numeric columns in table "control_group" */
 export type Control_Group_Inc_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "control_group" */
 export type Control_Group_Insert_Input = {
+  admin_group?: InputMaybe<Admin_Group_Obj_Rel_Insert_Input>;
+  admin_group_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   devices?: InputMaybe<Control_Group_Device_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['Int']>;
@@ -2049,19 +2297,39 @@ export type Control_Group_Insert_Input = {
 /** aggregate max on columns */
 export type Control_Group_Max_Fields = {
   __typename?: 'control_group_max_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
+/** order by max() on columns of table "control_group" */
+export type Control_Group_Max_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Control_Group_Min_Fields = {
   __typename?: 'control_group_min_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "control_group" */
+export type Control_Group_Min_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "control_group" */
@@ -2089,6 +2357,8 @@ export type Control_Group_On_Conflict = {
 
 /** Ordering options when selecting data from "control_group". */
 export type Control_Group_Order_By = {
+  admin_group?: InputMaybe<Admin_Group_Order_By>;
+  admin_group_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   devices_aggregate?: InputMaybe<Control_Group_Device_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
@@ -2104,6 +2374,8 @@ export type Control_Group_Pk_Columns_Input = {
 /** select columns of table "control_group" */
 export enum Control_Group_Select_Column {
   /** column name */
+  AdminGroupId = 'admin_group_id',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
@@ -2115,6 +2387,7 @@ export enum Control_Group_Select_Column {
 
 /** input type for updating data in table "control_group" */
 export type Control_Group_Set_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
   name?: InputMaybe<Scalars['String']>;
@@ -2124,29 +2397,59 @@ export type Control_Group_Set_Input = {
 /** aggregate stddev on columns */
 export type Control_Group_Stddev_Fields = {
   __typename?: 'control_group_stddev_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "control_group" */
+export type Control_Group_Stddev_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Control_Group_Stddev_Pop_Fields = {
   __typename?: 'control_group_stddev_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "control_group" */
+export type Control_Group_Stddev_Pop_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Control_Group_Stddev_Samp_Fields = {
   __typename?: 'control_group_stddev_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "control_group" */
+export type Control_Group_Stddev_Samp_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Control_Group_Sum_Fields = {
   __typename?: 'control_group_sum_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "control_group" */
+export type Control_Group_Sum_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "control_group" */
 export enum Control_Group_Update_Column {
+  /** column name */
+  AdminGroupId = 'admin_group_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -2160,26 +2463,91 @@ export enum Control_Group_Update_Column {
 /** aggregate var_pop on columns */
 export type Control_Group_Var_Pop_Fields = {
   __typename?: 'control_group_var_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "control_group" */
+export type Control_Group_Var_Pop_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Control_Group_Var_Samp_Fields = {
   __typename?: 'control_group_var_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "control_group" */
+export type Control_Group_Var_Samp_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Control_Group_Variance_Fields = {
   __typename?: 'control_group_variance_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "control_group" */
+export type Control_Group_Variance_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "device_type" */
 export type Device_Type = {
   __typename?: 'device_type';
+  /** An array relationship */
+  admin_group_devices: Array<Admin_Group_Device>;
+  /** An aggregate relationship */
+  admin_group_devices_aggregate: Admin_Group_Device_Aggregate;
   comment?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  control_group_devices: Array<Control_Group_Device>;
+  /** An aggregate relationship */
+  control_group_devices_aggregate: Control_Group_Device_Aggregate;
   value: Scalars['String'];
+};
+
+/** columns and relationships of "device_type" */
+export type Device_TypeAdmin_Group_DevicesArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+};
+
+/** columns and relationships of "device_type" */
+export type Device_TypeAdmin_Group_Devices_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+};
+
+/** columns and relationships of "device_type" */
+export type Device_TypeControl_Group_DevicesArgs = {
+  distinct_on?: InputMaybe<Array<Control_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Control_Group_Device_Order_By>>;
+  where?: InputMaybe<Control_Group_Device_Bool_Exp>;
+};
+
+/** columns and relationships of "device_type" */
+export type Device_TypeControl_Group_Devices_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Control_Group_Device_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Control_Group_Device_Order_By>>;
+  where?: InputMaybe<Control_Group_Device_Bool_Exp>;
 };
 
 /** aggregated selection of "device_type" */
@@ -2208,7 +2576,9 @@ export type Device_Type_Bool_Exp = {
   _and?: InputMaybe<Array<Device_Type_Bool_Exp>>;
   _not?: InputMaybe<Device_Type_Bool_Exp>;
   _or?: InputMaybe<Array<Device_Type_Bool_Exp>>;
+  admin_group_devices?: InputMaybe<Admin_Group_Device_Bool_Exp>;
   comment?: InputMaybe<String_Comparison_Exp>;
+  control_group_devices?: InputMaybe<Control_Group_Device_Bool_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -2234,7 +2604,9 @@ export type Device_Type_Enum_Comparison_Exp = {
 
 /** input type for inserting data into table "device_type" */
 export type Device_Type_Insert_Input = {
+  admin_group_devices?: InputMaybe<Admin_Group_Device_Arr_Rel_Insert_Input>;
   comment?: InputMaybe<Scalars['String']>;
+  control_group_devices?: InputMaybe<Control_Group_Device_Arr_Rel_Insert_Input>;
   value?: InputMaybe<Scalars['String']>;
 };
 
@@ -2261,6 +2633,13 @@ export type Device_Type_Mutation_Response = {
   returning: Array<Device_Type>;
 };
 
+/** input type for inserting object relation for remote table "device_type" */
+export type Device_Type_Obj_Rel_Insert_Input = {
+  data: Device_Type_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Device_Type_On_Conflict>;
+};
+
 /** on_conflict condition type for table "device_type" */
 export type Device_Type_On_Conflict = {
   constraint: Device_Type_Constraint;
@@ -2270,7 +2649,9 @@ export type Device_Type_On_Conflict = {
 
 /** Ordering options when selecting data from "device_type". */
 export type Device_Type_Order_By = {
+  admin_group_devices_aggregate?: InputMaybe<Admin_Group_Device_Aggregate_Order_By>;
   comment?: InputMaybe<Order_By>;
+  control_group_devices_aggregate?: InputMaybe<Control_Group_Device_Aggregate_Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -7096,10 +7477,10 @@ export type Mutation_Root = {
   delete_admin_group?: Maybe<Admin_Group_Mutation_Response>;
   /** delete single row from the table: "admin_group" */
   delete_admin_group_by_pk?: Maybe<Admin_Group>;
-  /** delete data from the table: "adming_group_device" */
-  delete_adming_group_device?: Maybe<Adming_Group_Device_Mutation_Response>;
-  /** delete single row from the table: "adming_group_device" */
-  delete_adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
+  /** delete data from the table: "admin_group_device" */
+  delete_admin_group_device?: Maybe<Admin_Group_Device_Mutation_Response>;
+  /** delete single row from the table: "admin_group_device" */
+  delete_admin_group_device_by_pk?: Maybe<Admin_Group_Device>;
   /** delete data from the table: "aggregation_data" */
   delete_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** delete single row from the table: "aggregation_data" */
@@ -7158,12 +7539,12 @@ export type Mutation_Root = {
   delete_zappi_minute_by_pk?: Maybe<Zappi_Minute>;
   /** insert data into the table: "admin_group" */
   insert_admin_group?: Maybe<Admin_Group_Mutation_Response>;
+  /** insert data into the table: "admin_group_device" */
+  insert_admin_group_device?: Maybe<Admin_Group_Device_Mutation_Response>;
+  /** insert a single row into the table: "admin_group_device" */
+  insert_admin_group_device_one?: Maybe<Admin_Group_Device>;
   /** insert a single row into the table: "admin_group" */
   insert_admin_group_one?: Maybe<Admin_Group>;
-  /** insert data into the table: "adming_group_device" */
-  insert_adming_group_device?: Maybe<Adming_Group_Device_Mutation_Response>;
-  /** insert a single row into the table: "adming_group_device" */
-  insert_adming_group_device_one?: Maybe<Adming_Group_Device>;
   /** insert data into the table: "aggregation_data" */
   insert_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** insert a single row into the table: "aggregation_data" */
@@ -7224,10 +7605,10 @@ export type Mutation_Root = {
   update_admin_group?: Maybe<Admin_Group_Mutation_Response>;
   /** update single row of the table: "admin_group" */
   update_admin_group_by_pk?: Maybe<Admin_Group>;
-  /** update data of the table: "adming_group_device" */
-  update_adming_group_device?: Maybe<Adming_Group_Device_Mutation_Response>;
-  /** update single row of the table: "adming_group_device" */
-  update_adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
+  /** update data of the table: "admin_group_device" */
+  update_admin_group_device?: Maybe<Admin_Group_Device_Mutation_Response>;
+  /** update single row of the table: "admin_group_device" */
+  update_admin_group_device_by_pk?: Maybe<Admin_Group_Device>;
   /** update data of the table: "aggregation_data" */
   update_aggregation_data?: Maybe<Aggregation_Data_Mutation_Response>;
   /** update single row of the table: "aggregation_data" */
@@ -7297,12 +7678,12 @@ export type Mutation_RootDelete_Admin_Group_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Adming_Group_DeviceArgs = {
-  where: Adming_Group_Device_Bool_Exp;
+export type Mutation_RootDelete_Admin_Group_DeviceArgs = {
+  where: Admin_Group_Device_Bool_Exp;
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Adming_Group_Device_By_PkArgs = {
+export type Mutation_RootDelete_Admin_Group_Device_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -7457,21 +7838,21 @@ export type Mutation_RootInsert_Admin_GroupArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_Admin_Group_DeviceArgs = {
+  objects: Array<Admin_Group_Device_Insert_Input>;
+  on_conflict?: InputMaybe<Admin_Group_Device_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Admin_Group_Device_OneArgs = {
+  object: Admin_Group_Device_Insert_Input;
+  on_conflict?: InputMaybe<Admin_Group_Device_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_Admin_Group_OneArgs = {
   object: Admin_Group_Insert_Input;
   on_conflict?: InputMaybe<Admin_Group_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Adming_Group_DeviceArgs = {
-  objects: Array<Adming_Group_Device_Insert_Input>;
-  on_conflict?: InputMaybe<Adming_Group_Device_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Adming_Group_Device_OneArgs = {
-  object: Adming_Group_Device_Insert_Input;
-  on_conflict?: InputMaybe<Adming_Group_Device_On_Conflict>;
 };
 
 /** mutation root */
@@ -7657,17 +8038,17 @@ export type Mutation_RootUpdate_Admin_Group_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Adming_Group_DeviceArgs = {
-  _inc?: InputMaybe<Adming_Group_Device_Inc_Input>;
-  _set?: InputMaybe<Adming_Group_Device_Set_Input>;
-  where: Adming_Group_Device_Bool_Exp;
+export type Mutation_RootUpdate_Admin_Group_DeviceArgs = {
+  _inc?: InputMaybe<Admin_Group_Device_Inc_Input>;
+  _set?: InputMaybe<Admin_Group_Device_Set_Input>;
+  where: Admin_Group_Device_Bool_Exp;
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Adming_Group_Device_By_PkArgs = {
-  _inc?: InputMaybe<Adming_Group_Device_Inc_Input>;
-  _set?: InputMaybe<Adming_Group_Device_Set_Input>;
-  pk_columns: Adming_Group_Device_Pk_Columns_Input;
+export type Mutation_RootUpdate_Admin_Group_Device_By_PkArgs = {
+  _inc?: InputMaybe<Admin_Group_Device_Inc_Input>;
+  _set?: InputMaybe<Admin_Group_Device_Set_Input>;
+  pk_columns: Admin_Group_Device_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -7948,12 +8329,12 @@ export type Query_Root = {
   admin_group_aggregate: Admin_Group_Aggregate;
   /** fetch data from the table: "admin_group" using primary key columns */
   admin_group_by_pk?: Maybe<Admin_Group>;
-  /** fetch data from the table: "adming_group_device" */
-  adming_group_device: Array<Adming_Group_Device>;
-  /** fetch aggregated fields from the table: "adming_group_device" */
-  adming_group_device_aggregate: Adming_Group_Device_Aggregate;
-  /** fetch data from the table: "adming_group_device" using primary key columns */
-  adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
+  /** fetch data from the table: "admin_group_device" */
+  admin_group_device: Array<Admin_Group_Device>;
+  /** fetch aggregated fields from the table: "admin_group_device" */
+  admin_group_device_aggregate: Admin_Group_Device_Aggregate;
+  /** fetch data from the table: "admin_group_device" using primary key columns */
+  admin_group_device_by_pk?: Maybe<Admin_Group_Device>;
   /** fetch data from the table: "aggregation_data" */
   aggregation_data: Array<Aggregation_Data>;
   /** fetch aggregated fields from the table: "aggregation_data" */
@@ -8060,23 +8441,23 @@ export type Query_RootAdmin_Group_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type Query_RootAdming_Group_DeviceArgs = {
-  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+export type Query_RootAdmin_Group_DeviceArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
-  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
 };
 
-export type Query_RootAdming_Group_Device_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+export type Query_RootAdmin_Group_Device_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
-  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
 };
 
-export type Query_RootAdming_Group_Device_By_PkArgs = {
+export type Query_RootAdmin_Group_Device_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -8385,12 +8766,12 @@ export type Subscription_Root = {
   admin_group_aggregate: Admin_Group_Aggregate;
   /** fetch data from the table: "admin_group" using primary key columns */
   admin_group_by_pk?: Maybe<Admin_Group>;
-  /** fetch data from the table: "adming_group_device" */
-  adming_group_device: Array<Adming_Group_Device>;
-  /** fetch aggregated fields from the table: "adming_group_device" */
-  adming_group_device_aggregate: Adming_Group_Device_Aggregate;
-  /** fetch data from the table: "adming_group_device" using primary key columns */
-  adming_group_device_by_pk?: Maybe<Adming_Group_Device>;
+  /** fetch data from the table: "admin_group_device" */
+  admin_group_device: Array<Admin_Group_Device>;
+  /** fetch aggregated fields from the table: "admin_group_device" */
+  admin_group_device_aggregate: Admin_Group_Device_Aggregate;
+  /** fetch data from the table: "admin_group_device" using primary key columns */
+  admin_group_device_by_pk?: Maybe<Admin_Group_Device>;
   /** fetch data from the table: "aggregation_data" */
   aggregation_data: Array<Aggregation_Data>;
   /** fetch aggregated fields from the table: "aggregation_data" */
@@ -8497,23 +8878,23 @@ export type Subscription_RootAdmin_Group_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type Subscription_RootAdming_Group_DeviceArgs = {
-  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+export type Subscription_RootAdmin_Group_DeviceArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
-  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
 };
 
-export type Subscription_RootAdming_Group_Device_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Adming_Group_Device_Select_Column>>;
+export type Subscription_RootAdmin_Group_Device_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Admin_Group_Device_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Adming_Group_Device_Order_By>>;
-  where?: InputMaybe<Adming_Group_Device_Bool_Exp>;
+  order_by?: InputMaybe<Array<Admin_Group_Device_Order_By>>;
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
 };
 
-export type Subscription_RootAdming_Group_Device_By_PkArgs = {
+export type Subscription_RootAdmin_Group_Device_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -12307,8 +12688,106 @@ export type Zappi_Variance_Order_By = {
   voltage3?: InputMaybe<Order_By>;
 };
 
+export type AdminGroupDevicesNotInControllGroupQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+}>;
+
+export type AdminGroupDevicesNotInControllGroupQuery = {
+  __typename?: 'query_root';
+  admin_group_by_pk?: {
+    __typename?: 'admin_group';
+    admin_group_devices: Array<{ __typename?: 'admin_group_device'; serialno: number }>;
+  } | null;
+};
+
+export type AdminGroupsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+export type AdminGroupsQuery = {
+  __typename?: 'query_root';
+  adminGroups: Array<{ __typename?: 'admin_group'; id: number; name: string }>;
+};
+
+export type AdminGroupQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+export type AdminGroupQuery = {
+  __typename?: 'query_root';
+  adminGroup?: { __typename?: 'admin_group'; id: number; name: string } | null;
+};
+
+export type AdminGroupDevicesQueryVariables = Exact<{
+  adminGroupId: Scalars['Int'];
+}>;
+
+export type AdminGroupDevicesQuery = {
+  __typename?: 'query_root';
+  adminGroupDevices: Array<{ __typename?: 'admin_group_device'; serialNo: number; deviceClass: Device_Type_Enum }>;
+};
+
+export type AdminGroupStatusQueryVariables = Exact<{
+  adminGroupId: Scalars['Int'];
+}>;
+
+export type AdminGroupStatusQuery = {
+  __typename?: 'query_root';
+  adminGroupStatus: Array<{
+    __typename?: 'admin_group_device';
+    zappi?: {
+      __typename?: 'zappi';
+      voltage?: number | null;
+      frequency?: number | null;
+      serialNo: number;
+      updateDate: string;
+      chargeEnergy?: number | null;
+    } | null;
+    eddi?: {
+      __typename?: 'eddi';
+      voltage?: number | null;
+      frequency?: number | null;
+      serialNo: number;
+      updateDate: string;
+      chargeEnergy?: number | null;
+    } | null;
+  }>;
+};
+
+export type CreateAdminGroupMutationVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+export type CreateAdminGroupMutation = {
+  __typename?: 'mutation_root';
+  adminGroup?: { __typename?: 'admin_group'; id: number; name: string } | null;
+};
+
+export type AddDeviceToAdminGroupMutationVariables = Exact<{
+  objects: Array<Admin_Group_Device_Insert_Input> | Admin_Group_Device_Insert_Input;
+}>;
+
+export type AddDeviceToAdminGroupMutation = {
+  __typename?: 'mutation_root';
+  response?: { __typename?: 'admin_group_device_mutation_response'; affectedRows: number } | null;
+};
+
+export type RemoveDeviceFromAdminGroupMutationVariables = Exact<{
+  adminGroupId: Scalars['Int'];
+  serialNos: Array<Scalars['Int']> | Scalars['Int'];
+}>;
+
+export type RemoveDeviceFromAdminGroupMutation = {
+  __typename?: 'mutation_root';
+  response?: { __typename?: 'admin_group_device_mutation_response'; affectedRows: number } | null;
+};
+
+export type AdminGroupFieldsFragment = { __typename?: 'admin_group'; id: number; name: string };
+
 export type CreateControlGroupMutationVariables = Exact<{
   name: Scalars['String'];
+  adminGroupId: Scalars['Int'];
 }>;
 
 export type CreateControlGroupMutation = {
@@ -12659,6 +13138,12 @@ export type EddiHistoryFragment = {
   voltage1?: number | null;
 };
 
+export const AdminGroupFieldsFragmentDoc = gql`
+  fragment AdminGroupFields on admin_group {
+    id
+    name
+  }
+`;
 export const ControlGroupFieldsFragmentDoc = gql`
   fragment ControlGroupFields on control_group {
     id
@@ -12739,9 +13224,80 @@ export const EddiHistoryFragmentDoc = gql`
     timestamp
   }
 `;
+export const AdminGroupDevicesNotInControllGroupDocument = gql`
+  query AdminGroupDevicesNotInControllGroup($id: Int = 10) {
+    admin_group_by_pk(id: $id) {
+      admin_group_devices(where: { control_group_devices: { control_group_id: { _is_null: true } } }) {
+        serialno
+      }
+    }
+  }
+`;
+export const AdminGroupsDocument = gql`
+  query AdminGroups($limit: Int, $offset: Int) {
+    adminGroups: admin_group(limit: $limit, offset: $offset) {
+      ...AdminGroupFields
+    }
+  }
+  ${AdminGroupFieldsFragmentDoc}
+`;
+export const AdminGroupDocument = gql`
+  query AdminGroup($id: Int!) {
+    adminGroup: admin_group_by_pk(id: $id) {
+      ...AdminGroupFields
+    }
+  }
+  ${AdminGroupFieldsFragmentDoc}
+`;
+export const AdminGroupDevicesDocument = gql`
+  query AdminGroupDevices($adminGroupId: Int!) {
+    adminGroupDevices: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
+      serialNo: serialno
+      deviceClass: device_type
+    }
+  }
+`;
+export const AdminGroupStatusDocument = gql`
+  query AdminGroupStatus($adminGroupId: Int!) {
+    adminGroupStatus: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
+      zappi: admin_group_device_zappi {
+        ...ZappiStatus
+      }
+      eddi: admin_group_device_eddi {
+        ...EddiStatus
+      }
+    }
+  }
+  ${ZappiStatusFragmentDoc}
+  ${EddiStatusFragmentDoc}
+`;
+export const CreateAdminGroupDocument = gql`
+  mutation CreateAdminGroup($name: String!) {
+    adminGroup: insert_admin_group_one(object: { name: $name }) {
+      ...AdminGroupFields
+    }
+  }
+  ${AdminGroupFieldsFragmentDoc}
+`;
+export const AddDeviceToAdminGroupDocument = gql`
+  mutation AddDeviceToAdminGroup($objects: [admin_group_device_insert_input!]!) {
+    response: insert_admin_group_device(objects: $objects) {
+      affectedRows: affected_rows
+    }
+  }
+`;
+export const RemoveDeviceFromAdminGroupDocument = gql`
+  mutation RemoveDeviceFromAdminGroup($adminGroupId: Int!, $serialNos: [Int!]!) {
+    response: delete_admin_group_device(
+      where: { admin_group_id: { _eq: $adminGroupId }, serialno: { _in: $serialNos } }
+    ) {
+      affectedRows: affected_rows
+    }
+  }
+`;
 export const CreateControlGroupDocument = gql`
-  mutation CreateControlGroup($name: String!) {
-    controlGroup: insert_control_group_one(object: { name: $name }) {
+  mutation CreateControlGroup($name: String!, $adminGroupId: Int!) {
+    controlGroup: insert_control_group_one(object: { name: $name, admin_group_id: $adminGroupId }) {
       ...ControlGroupFields
     }
   }
@@ -12928,6 +13484,111 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    AdminGroupDevicesNotInControllGroup(
+      variables?: AdminGroupDevicesNotInControllGroupQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupDevicesNotInControllGroupQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupDevicesNotInControllGroupQuery>(
+            AdminGroupDevicesNotInControllGroupDocument,
+            variables,
+            { ...requestHeaders, ...wrappedRequestHeaders }
+          ),
+        'AdminGroupDevicesNotInControllGroup'
+      );
+    },
+    AdminGroups(
+      variables?: AdminGroupsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupsQuery>(AdminGroupsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AdminGroups'
+      );
+    },
+    AdminGroup(
+      variables: AdminGroupQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupQuery>(AdminGroupDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AdminGroup'
+      );
+    },
+    AdminGroupDevices(
+      variables: AdminGroupDevicesQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupDevicesQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupDevicesQuery>(AdminGroupDevicesDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AdminGroupDevices'
+      );
+    },
+    AdminGroupStatus(
+      variables: AdminGroupStatusQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupStatusQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupStatusQuery>(AdminGroupStatusDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AdminGroupStatus'
+      );
+    },
+    CreateAdminGroup(
+      variables: CreateAdminGroupMutationVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<CreateAdminGroupMutation> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<CreateAdminGroupMutation>(CreateAdminGroupDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'CreateAdminGroup'
+      );
+    },
+    AddDeviceToAdminGroup(
+      variables: AddDeviceToAdminGroupMutationVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AddDeviceToAdminGroupMutation> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AddDeviceToAdminGroupMutation>(AddDeviceToAdminGroupDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AddDeviceToAdminGroup'
+      );
+    },
+    RemoveDeviceFromAdminGroup(
+      variables: RemoveDeviceFromAdminGroupMutationVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<RemoveDeviceFromAdminGroupMutation> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<RemoveDeviceFromAdminGroupMutation>(RemoveDeviceFromAdminGroupDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'RemoveDeviceFromAdminGroup'
+      );
+    },
     CreateControlGroup(
       variables: CreateControlGroupMutationVariables,
       requestHeaders?: Dom.RequestInit['headers']

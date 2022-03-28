@@ -11,7 +11,7 @@ export const port = process.env.PORT || 3000;
 
 dotenv.config();
 
-const bootstrap = async () => {
+const bootstrap = async (): Promise<void> => {
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     schema,

@@ -1,13 +1,15 @@
+/* eslint-disable class-methods-use-this */
+
 class Logger {
-  info = (input: any) => {
+  info = (input: any): void => {
     console.info(JSON.stringify(input));
   };
 
-  log = (input: any) => {
+  log = (input: any): void => {
     console.log(JSON.stringify(input));
   };
 
-  error = (input: any) => {
+  error = (input: any): void => {
     console.error(JSON.stringify(input));
   };
 }

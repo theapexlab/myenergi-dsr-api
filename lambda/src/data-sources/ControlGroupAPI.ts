@@ -5,7 +5,7 @@ import { ControlGroupsArgs, MutateControlGroupArgs } from '../control-group/cont
 import { Device } from '../device';
 import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
-import { getSdk } from '../generated/graphql';
+import { Device_Type_Enum, getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
 import { logger } from '../utils/logger';
 import { mapHistoryFragmentToDeviceHistory } from '../utils/maps';
@@ -30,9 +30,9 @@ export class ControlGroupAPI extends RESTDataSource {
     }
   }
 
-  async createControlGroup(name: string): Promise<ControlGroup> {
+  async createControlGroup(name: string, adminGroupId: number): Promise<ControlGroup> {
     try {
-      const { controlGroup } = await this.sdk.CreateControlGroup({ name });
+      const { controlGroup } = await this.sdk.CreateControlGroup({ name, adminGroupId });
       return controlGroup;
     } catch (err) {
       logger.error(err.toString());
@@ -54,13 +54,22 @@ export class ControlGroupAPI extends RESTDataSource {
     const { id: control_group_id, serialNos } = args;
     try {
       const { zappis, eddis } = await this.sdk.DevicesBySerialNos({ serialNos });
-      const devices = [...zappis, ...eddis];
+      const zappiObjects = zappis.map(({ serialNo: serialno }) => ({
+        control_group_id,
+        serialno,
+        device_type: Device_Type_Enum.Zappi,
+      }));
+      const eddiObjects = eddis.map(({ serialNo: serialno }) => ({
+        control_group_id,
+        serialno,
+        device_type: Device_Type_Enum.Eddi,
+      }));
+      const objects = [...zappiObjects, ...eddiObjects];
 
-      if (!devices.length) {
+      if (!objects.length) {
         throw new Error(`No devices was found`);
       }
 
-      const objects = devices.map(({ serialNo }) => ({ control_group_id, serialno: serialNo }));
       const { response } = await this.sdk.AddDevice({ objects });
       return {
         affectedRows: response?.affectedRows ?? 0,

@@ -5,3 +5,58 @@ query AdminGroupDevicesNotInControllGroup($id: Int = 10) {
     }
   }
 }
+
+query AdminGroups($limit: Int, $offset: Int) {
+  adminGroups: admin_group(limit: $limit, offset: $offset) {
+    ...AdminGroupFields
+  }
+}
+
+query AdminGroup($id: Int!) {
+  adminGroup: admin_group_by_pk(id: $id) {
+    ...AdminGroupFields
+  }
+}
+
+query AdminGroupDevices($adminGroupId: Int!) {
+  adminGroupDevices: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
+    serialNo: serialno
+    deviceClass: device_type
+  }
+}
+
+query AdminGroupStatus($adminGroupId: Int!) {
+  adminGroupStatus: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
+    zappi: admin_group_device_zappi {
+      ...ZappiStatus
+    }
+    eddi: admin_group_device_eddi {
+      ...EddiStatus
+    }
+  }
+}
+
+mutation CreateAdminGroup($name: String!) {
+  adminGroup: insert_admin_group_one(object: { name: $name }) {
+    ...AdminGroupFields
+  }
+}
+
+mutation AddDeviceToAdminGroup($objects: [admin_group_device_insert_input!]!) {
+  response: insert_admin_group_device(objects: $objects) {
+    affectedRows: affected_rows
+  }
+}
+
+mutation RemoveDeviceFromAdminGroup($adminGroupId: Int!, $serialNos: [Int!]!) {
+  response: delete_admin_group_device(
+    where: { admin_group_id: { _eq: $adminGroupId }, serialno: { _in: $serialNos } }
+  ) {
+    affectedRows: affected_rows
+  }
+}
+
+fragment AdminGroupFields on admin_group {
+  id
+  name
+}
