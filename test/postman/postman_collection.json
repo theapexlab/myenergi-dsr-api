@@ -23,11 +23,11 @@
 												"exec": [
 													"pm.test(\"Response have correct device\", () => {",
 													"  const responseJson = pm.response.json();",
-													"  const zappiSerialNo = parseInt(pm.variables.get(\"zappiSerialNo\"));",
+													"  const testEddiSNO = parseInt(pm.variables.get(\"testEddiSNO\"));",
 													"",
-													"  pm.expect(responseJson[0].serialNo).to.eq(zappiSerialNo);",
+													"  pm.expect(responseJson[0].serialNo).to.eq(testEddiSNO);",
 													"  pm.expect(responseJson[0].productCode).to.be.null;",
-													"  pm.expect(responseJson[0].deviceClass).to.equal('ZAPPI');",
+													"  pm.expect(responseJson[0].deviceClass).to.equal('EDDI');",
 													"});",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
@@ -74,7 +74,7 @@
 											"variable": [
 												{
 													"key": "id",
-													"value": "{{controlGroupId}}",
+													"value": "{{testControlGroupId1}}",
 													"description": "(Required) "
 												}
 											]
@@ -144,7 +144,7 @@
 											"variable": [
 												{
 													"key": "id",
-													"value": "-14922698",
+													"value": "{{testControlGroupId1}}",
 													"description": "(Required) "
 												}
 											]
@@ -214,7 +214,7 @@
 											"variable": [
 												{
 													"key": "id",
-													"value": "-14922698",
+													"value": "{{testControlGroupId1}}",
 													"description": "(Required) "
 												}
 											]
@@ -262,6 +262,27 @@
 								},
 								{
 									"name": "add Device To Control Group mutation",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"mutation had correct rows affected\", () => {",
+													"  const responseJson = pm.response.json();",
+													"",
+													"  pm.expect(responseJson.affectedRows).to.eq(2);",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson).to.be.a(\"object\");",
+													"  pm.expect(responseJson.affectedRows).to.be.a(\"number\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "PUT",
 										"header": [
@@ -276,7 +297,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"id\": 75491824,\n  \"serialNos\": [\n    98277518,\n    -16977721\n  ]\n}",
+											"raw": "{\n  \"id\": {{testControlGroupId1}},\n  \"serialNos\": [\n    {{createdZappiSNO}},\n    {{createdEddiSNO}}\n  ]\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -296,7 +317,8 @@
 											],
 											"variable": [
 												{
-													"key": "id"
+													"key": "id",
+													"value": "{{testControlGroupId1}}"
 												}
 											]
 										}
@@ -309,7 +331,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": -12770540,\n  \"serialNos\": [\n    17997715,\n    -3229426\n  ]\n}",
+													"raw": "{\n  \"id\": 1,\n  \"serialNos\": [\n    111111,\n    222222\n  ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -329,7 +351,8 @@
 													],
 													"variable": [
 														{
-															"key": "id"
+															"key": "id",
+															"value": null
 														}
 													]
 												}
@@ -350,6 +373,27 @@
 								},
 								{
 									"name": "remove Device From Control Group mutation",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"mutation had correct rows affected\", () => {",
+													"  const responseJson = pm.response.json();",
+													"",
+													"  pm.expect(responseJson.affectedRows).to.eq(2);",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson).to.be.a(\"object\");",
+													"  pm.expect(responseJson.affectedRows).to.be.a(\"number\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "PUT",
 										"header": [
@@ -364,7 +408,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"id\": 75491824,\n  \"serialNos\": [\n    98277518,\n    -16977721\n  ]\n}",
+											"raw": "{\n  \"id\": {{testControlGroupId1}},\n  \"serialNos\": [\n    {{createdZappiSNO}},\n    {{createdEddiSNO}}\n  ]\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -384,7 +428,8 @@
 											],
 											"variable": [
 												{
-													"key": "id"
+													"key": "id",
+													"value": "{{testControlGroupId1}}"
 												}
 											]
 										}
@@ -397,7 +442,7 @@
 												"header": [],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"id\": -12770540,\n  \"serialNos\": [\n    17997715,\n    -3229426\n  ]\n}",
+													"raw": "{\n  \"id\": 1,\n  \"serialNos\": [\n    111111,\n    222222\n  ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -417,7 +462,8 @@
 													],
 													"variable": [
 														{
-															"key": "id"
+															"key": "id",
+															"value": null
 														}
 													]
 												}
@@ -445,10 +491,11 @@
 												"exec": [
 													"pm.test(\"Response have correct control group\", () => {",
 													"  const responseJson = pm.response.json();",
-													"  const controlGroupId = parseInt(pm.variables.get(\"controlGroupId\"));",
+													"  const testControlGroupId1 = parseInt(pm.variables.get(\"testControlGroupId1\"));",
+													"  const testControlGroupName1 = pm.variables.get(\"testControlGroupName1\");",
 													"",
-													"  pm.expect(responseJson.id).to.eq(controlGroupId);",
-													"  pm.expect(responseJson.name).to.equal('demo');",
+													"  pm.expect(responseJson.id).to.eq(testControlGroupId1);",
+													"  pm.expect(responseJson.name).to.equal(testControlGroupName1);",
 													"});",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
@@ -483,7 +530,7 @@
 											"variable": [
 												{
 													"key": "id",
-													"value": "{{controlGroupId}}",
+													"value": "{{testControlGroupId1}}",
 													"description": "(Required) "
 												}
 											]
@@ -539,10 +586,11 @@
 										"exec": [
 											"pm.test(\"Response have correct control groups\", () => {",
 											"  const responseJson = pm.response.json();",
-											"  const controlGroupId = parseInt(pm.variables.get(\"controlGroupId\"));",
+											"  const controlGroupId = parseInt(pm.variables.get(\"testControlGroupId1\"));",
+											"  const controlGroupName = pm.variables.get(\"testControlGroupName1\");",
 											"",
 											"  pm.expect(responseJson[0].id).to.eq(controlGroupId);",
-											"  pm.expect(responseJson[0].name).to.equal('demo');",
+											"  pm.expect(responseJson[0].name).to.equal(controlGroupName);",
 											"});",
 											"",
 											"pm.test(\"Response have correct types\", () => {",
@@ -555,7 +603,7 @@
 											"",
 											"pm.test(\"Response have correct length\", () => {",
 											"  const responseJson = pm.response.json();",
-											"  pm.expect(responseJson.length).to.be.eql(2);",
+											"  pm.expect(responseJson.length).to.be.eql(1);",
 											"});",
 											"",
 											"",
@@ -638,6 +686,30 @@
 						},
 						{
 							"name": "create Control Group mutation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response have correct control group\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  const createdControlGroupName = pm.variables.get(\"createdControlGroupName\");",
+											"",
+											"  pm.expect(responseJson.id).to.exist",
+											"  pm.expect(responseJson.name).to.equal(createdControlGroupName);",
+											"});",
+											"",
+											"pm.test(\"Response have correct types\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  pm.expect(responseJson.id).to.be.a(\"number\");",
+											"  pm.expect(responseJson.name).to.be.a(\"string\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -652,7 +724,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"adminGroupId\": {{controlGroupId}},\n    \"name\": {{controlGroupName}}\n}",
+									"raw": "{\n    \"adminGroupId\": {{testAdminGroupId1}},\n    \"name\": \"{{createdControlGroupName}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -727,7 +799,7 @@
 												"exec": [
 													"pm.test(\"Response have correct devices\", () => {",
 													"  const responseJson = pm.response.json();",
-													"  const zappiSerialNo = parseInt(pm.variables.get(\"zappiSerialNo\"));",
+													"  const zappiSerialNo = parseInt(pm.variables.get(\"testZappiSNO\"));",
 													"",
 													"  pm.expect(responseJson.serialNo).to.eq(zappiSerialNo);",
 													"  pm.expect(responseJson.productCode).to.be.null;",
@@ -769,7 +841,7 @@
 											"variable": [
 												{
 													"key": "serialNo",
-													"value": "{{zappiSerialNo}}",
+													"value": "{{testZappiSNO}}",
 													"description": "(Required) "
 												}
 											]
@@ -823,7 +895,7 @@
 												"exec": [
 													"pm.test(\"Response have correct devices\", () => {",
 													"  const responseJson = pm.response.json();",
-													"  const eddiSerialNo = parseInt(pm.variables.get(\"eddiSerialNo\"));",
+													"  const eddiSerialNo = parseInt(pm.variables.get(\"testEddiSNO\"));",
 													"",
 													"  pm.expect(responseJson.serialNo).to.eq(eddiSerialNo);",
 													"  pm.expect(responseJson.productCode).to.be.null;",
@@ -865,7 +937,7 @@
 											"variable": [
 												{
 													"key": "serialNo",
-													"value": "{{eddiSerialNo}}",
+													"value": "{{testEddiSNO}}",
 													"description": "(Required) "
 												}
 											]
@@ -912,6 +984,31 @@
 								},
 								{
 									"name": "device Control Group query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct control group\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const testControlGroupId1 = parseInt(pm.variables.get(\"testControlGroupId1\"));",
+													"  const testControlGroupName1 = pm.variables.get(\"testControlGroupName1\");",
+													"",
+													"  pm.expect(responseJson.id).to.eq(testControlGroupId1);",
+													"  pm.expect(responseJson.name).to.equal(testControlGroupName1);",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson.id).to.be.a(\"number\");",
+													"  pm.expect(responseJson.name).to.be.a(\"string\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "GET",
 										"header": [
@@ -934,7 +1031,7 @@
 											"variable": [
 												{
 													"key": "serialNo",
-													"value": "{{zappiSerialNo}}",
+													"value": "{{testEddiSNO}}",
 													"description": "(Required) "
 												}
 											]
@@ -982,6 +1079,42 @@
 								},
 								{
 									"name": "device Status query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct device status\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const testEddiSNO = parseInt(pm.variables.get(\"testEddiSNO\"));",
+													"",
+													"  pm.expect(responseJson.serialNo).to.eq(testEddiSNO);",
+													"",
+													"  //pm.expect(responseJson.voltage).to.be.string || pm.expect(responseJson.voltage).to.be.null ;",
+													"",
+													"  pm.expect(responseJson.frequency).to.exist;",
+													"  pm.expect(responseJson.chargeEnergy).to.exist;",
+													"  pm.expect(responseJson.updateDate).to.exist;",
+													"  pm.expect(responseJson.isAvailable).to.exist;",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"",
+													"  pm.expect(responseJson.serialNo).to.be.a(\"number\");",
+													"//  pm.expect(responseJson.voltage).to.be.a(\"number\");",
+													"  pm.expect(responseJson.frequency).to.be.a(\"number\");",
+													"  pm.expect(responseJson.chargeEnergy).to.be.a(\"number\");",
+													"  pm.expect(responseJson.updateDate).to.be.a(\"string\");",
+													"  pm.expect(responseJson.isAvailable).to.be.a(\"boolean\");",
+													"",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "GET",
 										"header": [
@@ -1004,7 +1137,7 @@
 											"variable": [
 												{
 													"key": "serialNo",
-													"value": "-14922698",
+													"value": "{{testEddiSNO}}",
 													"description": "(Required) "
 												}
 											]
@@ -1061,7 +1194,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/devices/:serialNo/history?limit=-14922698&offset=-14922698&value=reference %23/components/schemas/DateTime not found in the OpenAPI spec&value=reference %23/components/schemas/DateTime not found in the OpenAPI spec",
+											"raw": "{{baseUrl}}/api/devices/:serialNo/history?limit={{limit}}&offset={{offset}}&value=2021-12-06 01:43:19.631000 +00:00&value=2022-12-06 01:43:19.631000 +00:00",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -1074,27 +1207,27 @@
 											"query": [
 												{
 													"key": "limit",
-													"value": "-14922698"
+													"value": "{{limit}}"
 												},
 												{
 													"key": "offset",
-													"value": "-14922698"
+													"value": "{{offset}}"
 												},
 												{
 													"key": "value",
-													"value": "reference #/components/schemas/DateTime not found in the OpenAPI spec",
+													"value": "2021-12-06 01:43:19.631000 +00:00",
 													"description": "(Required) "
 												},
 												{
 													"key": "value",
-													"value": "reference #/components/schemas/DateTime not found in the OpenAPI spec",
+													"value": "2022-12-06 01:43:19.631000 +00:00",
 													"description": "(Required) "
 												}
 											],
 											"variable": [
 												{
 													"key": "serialNo",
-													"value": "-14922698",
+													"value": "{{testEddiSNO}}",
 													"description": "(Required) "
 												}
 											]
@@ -1169,7 +1302,7 @@
 										"exec": [
 											"pm.test(\"Response have correct devices\", () => {",
 											"  const responseJson = pm.response.json();",
-											"  const zappiSerialNo = parseInt(pm.variables.get(\"zappiSerialNo\"));",
+											"  const zappiSerialNo = parseInt(pm.variables.get(\"testZappiSNO\"));",
 											"",
 											"  pm.expect(responseJson[0].serialNo).to.eq(zappiSerialNo);",
 											"  pm.expect(responseJson[0].productCode).to.be.null;",
@@ -1279,6 +1412,31 @@
 							"item": [
 								{
 									"name": "admin Group query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct admin group\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const testAdminGroupId1 = parseInt(pm.variables.get(\"testAdminGroupId1\"));",
+													"  const testAdminGroupName1 = pm.variables.get(\"testAdminGroupName1\");",
+													"",
+													"  pm.expect(responseJson.id).to.eq(testAdminGroupId1);",
+													"  pm.expect(responseJson.name).to.equal(testAdminGroupName1);",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson.id).to.be.a(\"number\");",
+													"  pm.expect(responseJson.name).to.be.a(\"string\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "GET",
 										"header": [
@@ -1300,7 +1458,7 @@
 											"variable": [
 												{
 													"key": "id",
-													"value": "-14922698",
+													"value": "{{testAdminGroupId1}}",
 													"description": "(Required) "
 												}
 											]
@@ -1347,6 +1505,51 @@
 								},
 								{
 									"name": "admin Group Devices query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct devices\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const testEddiSNO = parseInt(pm.variables.get(\"testEddiSNO\"));",
+													"  const testZappiSNO = parseInt(pm.variables.get(\"testZappiSNO\"));",
+													"",
+													"  pm.expect(responseJson[0].serialNo).to.eq(testEddiSNO);",
+													"  pm.expect(responseJson[0].productCode).to.be.null;",
+													"  pm.expect(responseJson[0].deviceClass).to.equal('eddi');",
+													"",
+													"  pm.expect(responseJson[1].serialNo).to.eq(testZappiSNO);",
+													"  pm.expect(responseJson[1].productCode).to.be.null;",
+													"  pm.expect(responseJson[1].deviceClass).to.equal('zappi');",
+													"",
+													"",
+													"",
+													"",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson).to.be.a(\"array\");",
+													"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].productCode).to.be.null",
+													"  pm.expect(responseJson[0].deviceClass).to.be.a(\"string\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response have correct length\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson.length).to.be.eql(2);",
+													"});",
+													"",
+													"",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "GET",
 										"header": [
@@ -1356,7 +1559,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/admin-group-devices?id=-14922698",
+											"raw": "{{baseUrl}}/api/admin-group-devices?id={{testAdminGroupId1}}",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -1367,7 +1570,7 @@
 											"query": [
 												{
 													"key": "id",
-													"value": "-14922698",
+													"value": "{{testAdminGroupId1}}",
 													"description": "(Required) "
 												}
 											]
@@ -1421,7 +1624,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/api/admin-group-status?id=-14922698",
+											"raw": "{{baseUrl}}/api/admin-group-status?id={{testAdminGroupId1}}",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -1432,7 +1635,7 @@
 											"query": [
 												{
 													"key": "id",
-													"value": "-14922698",
+													"value": "{{testAdminGroupId1}}",
 													"description": "(Required) "
 												}
 											]
@@ -1491,7 +1694,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"id\": 75491824,\n  \"serialNos\": [\n    98277518,\n    -16977721\n  ]\n}",
+											"raw": "{\n  \"id\": 3,\n  \"serialNos\": [\n    {{createdZappiSNO}},\n    {{createdEddiSNO}}\n  ]\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1560,8 +1763,8 @@
 										"exec": [
 											"pm.test(\"Response have correct admin Groups\", () => {",
 											"  const responseJson = pm.response.json();",
-											"  const adminGroupId = parseInt(pm.variables.get(\"adminGroupId\"));",
-											"  const adminGroupName = parseInt(pm.variables.get(\"adminGroupName\"));",
+											"  const adminGroupId = parseInt(pm.variables.get(\"testAdminGroupId1\"));",
+											"  const adminGroupName = pm.variables.get(\"testAdminGroupName1\");",
 											"",
 											"  pm.expect(responseJson[0].id).to.eq(adminGroupId);",
 											"  pm.expect(responseJson[0].name).to.equal(adminGroupName);",
@@ -1657,6 +1860,30 @@
 						},
 						{
 							"name": "create Admin Group mutation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response have correct Admin group\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  const createdAdminGroupName = pm.variables.get(\"createdAdminGroupName\");",
+											"",
+											"  pm.expect(responseJson.id).to.exist",
+											"  pm.expect(responseJson.name).to.equal(createdAdminGroupName);",
+											"});",
+											"",
+											"pm.test(\"Response have correct types\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  pm.expect(responseJson.id).to.be.a(\"number\");",
+											"  pm.expect(responseJson.name).to.be.a(\"string\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -1671,7 +1898,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"{{adminGroupName}}\"\n}",
+									"raw": "{\n  \"name\": \"{{createdAdminGroupName}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1834,7 +2061,7 @@
 					"});",
 					"",
 					"pm.test(\"Content-Type header is correct\", () => {",
-					"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');",
+					"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
 					"});",
 					"",
 					"pm.test(\"Response time is less than allowed\", () => {",
@@ -1851,28 +2078,36 @@
 			"value": "/"
 		},
 		{
-			"key": "controlGroupId",
-			"value": "14"
-		},
-		{
-			"key": "controlGroupName",
-			"value": "testControlGroup"
-		},
-		{
-			"key": "adminlGroupId",
+			"key": "testControlGroupId1",
 			"value": "1"
 		},
 		{
-			"key": "adminGroupName",
-			"value": "testAdminGroup"
+			"key": "testControlGroupName1",
+			"value": "testControlGroup"
 		},
 		{
-			"key": "zappiSerialNo",
-			"value": "1190411796"
+			"key": "testControlGroupId2",
+			"value": "2"
 		},
 		{
-			"key": "eddiSerialNo",
-			"value": "262883402"
+			"key": "testControlGroupName2",
+			"value": "testControlGroup2"
+		},
+		{
+			"key": "testAdminGroupId1",
+			"value": "1"
+		},
+		{
+			"key": "testAdminGroupName1",
+			"value": "testAdminGroup-1"
+		},
+		{
+			"key": "testAdminGroupId2",
+			"value": "2"
+		},
+		{
+			"key": "testAdminGroupName2",
+			"value": "testAdminGroup-2"
 		},
 		{
 			"key": "maxResponseTime",
@@ -1885,6 +2120,30 @@
 		{
 			"key": "offset",
 			"value": "0"
+		},
+		{
+			"key": "testZappiSNO",
+			"value": "1190411796"
+		},
+		{
+			"key": "testEddiSNO",
+			"value": "262883402"
+		},
+		{
+			"key": "createdZappiSNO",
+			"value": "234667540"
+		},
+		{
+			"key": "createdEddiSNO",
+			"value": "279070730"
+		},
+		{
+			"key": "createdControlGroupName",
+			"value": "test12345"
+		},
+		{
+			"key": "createdAdminGroupName",
+			"value": "test123456"
 		}
 	]
 }
