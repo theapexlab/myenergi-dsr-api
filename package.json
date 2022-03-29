@@ -10,7 +10,7 @@
     "yarn": "1.22.17"
   },
   "scripts": {
-    "prestart": "docker-compose up -d && cd ./test/test-hasura && hasura metadata apply  && hasura migrate apply --all-databases && hasura metadata reload && hasura seed apply --database-name default && hasura metadata reload && hasura seed apply --database-name history-db && hasura metadata reload && hasura seed apply --database-name main-db",
+    "prestart": "docker-compose up -d && cd ./test/test-hasura && hasura metadata apply  && hasura migrate apply --all-databases && hasura metadata reload && hasura seed apply --database-name default && hasura seed apply --database-name history-db && hasura seed apply --database-name main-db",
     "start": "ts-node-dev --respawn --transpile-only ./lambda/src/server.ts",
     "lint": "eslint --ext .js,.ts,.tsx ./lambda/src/",
     "generate:swagger": "ts-node scripts/generate-swagger.ts",
