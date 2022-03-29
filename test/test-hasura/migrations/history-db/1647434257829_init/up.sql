@@ -21,7 +21,7 @@ CREATE TABLE "public"."eddi_minute" (
     "externalctpospower2" float4,
     "externalctnegpower1" float4,
     "externalctnegpower2" float4,
-    PRIMARY KEY ("serialno","timestamp")
+    PRIMARY KEY ("serialno", "timestamp")
 );
 
 CREATE TABLE "public"."zappi_minute" (
@@ -52,6 +52,5 @@ CREATE TABLE "public"."zappi_minute" (
     "externalctnegpower1" float4,
     "externalctnegpower2" float4,
     "externalctnegpower3" float4,
-    PRIMARY KEY ("serialno","timestamp")
+    PRIMARY KEY ("serialno", "timestamp")
 );
-
