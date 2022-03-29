@@ -1,0 +1,1890 @@
+{
+	"info": {
+		"_postman_id": "1c0c2314-a167-4d9b-beb5-4ea093ad6e89",
+		"name": "Myenergi DSR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "control-groups",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "control Group Devices query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct device\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const zappiSerialNo = parseInt(pm.variables.get(\"zappiSerialNo\"));",
+													"",
+													"  pm.expect(responseJson[0].serialNo).to.eq(zappiSerialNo);",
+													"  pm.expect(responseJson[0].productCode).to.be.null;",
+													"  pm.expect(responseJson[0].deviceClass).to.equal('ZAPPI');",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson).to.be.a(\"array\");",
+													"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].productCode).to.be.null",
+													"  pm.expect(responseJson[0].deviceClass).to.be.a(\"string\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response have correct length\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson.length).to.be.eql(1);",
+													"});",
+													"",
+													"",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/control-groups/:id/devices",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-groups",
+												":id",
+												"devices"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{controlGroupId}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/control-groups/:id/devices",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"control-groups",
+														":id",
+														"devices"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"serialNo\": -78158225.83167362,\n    \"deviceClass\": \"in co\",\n    \"productCode\": 55553000.40547079\n  },\n  {\n    \"serialNo\": 54208807.006628126,\n    \"deviceClass\": \"consequat et Lorem Ut\",\n    \"productCode\": -22364794.02003075\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "control Group Status query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/control-groups/:id/status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-groups",
+												":id",
+												"status"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "-14922698",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/control-groups/:id/status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"control-groups",
+														":id",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"serialNo\": -78158225.83167362,\n    \"deviceClass\": \"in co\",\n    \"productCode\": 55553000.40547079\n  },\n  {\n    \"serialNo\": 54208807.006628126,\n    \"deviceClass\": \"consequat et Lorem Ut\",\n    \"productCode\": -22364794.02003075\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "control Group History query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/control-groups/:id/history",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-groups",
+												":id",
+												"history"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "-14922698",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/control-groups/:id/history",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"control-groups",
+														":id",
+														"history"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"serialNo\": -78158225.83167362,\n    \"deviceClass\": \"in co\",\n    \"productCode\": 55553000.40547079\n  },\n  {\n    \"serialNo\": 54208807.006628126,\n    \"deviceClass\": \"consequat et Lorem Ut\",\n    \"productCode\": -22364794.02003075\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "add Device To Control Group mutation",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 75491824,\n  \"serialNos\": [\n    98277518,\n    -16977721\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/control-groups/:id/add-device",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-groups",
+												":id",
+												"add-device"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": -12770540,\n  \"serialNos\": [\n    17997715,\n    -3229426\n  ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/control-groups/:id/add-device",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"control-groups",
+														":id",
+														"add-device"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"affectedRows\": -20168884.144484118\n}"
+										}
+									]
+								},
+								{
+									"name": "remove Device From Control Group mutation",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 75491824,\n  \"serialNos\": [\n    98277518,\n    -16977721\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/control-groups/:id/remove-device",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-groups",
+												":id",
+												"remove-device"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": -12770540,\n  \"serialNos\": [\n    17997715,\n    -3229426\n  ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/control-groups/:id/remove-device",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"control-groups",
+														":id",
+														"remove-device"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"affectedRows\": -20168884.144484118\n}"
+										}
+									]
+								},
+								{
+									"name": "control Group query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct control group\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const controlGroupId = parseInt(pm.variables.get(\"controlGroupId\"));",
+													"",
+													"  pm.expect(responseJson.id).to.eq(controlGroupId);",
+													"  pm.expect(responseJson.name).to.equal('demo');",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson.id).to.be.a(\"number\");",
+													"  pm.expect(responseJson.name).to.be.a(\"string\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/control-group/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-group",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{controlGroupId}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/control-group/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"control-group",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": 60701457,\n  \"name\": \"anim deserunt\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "control Groups query",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response have correct control groups\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  const controlGroupId = parseInt(pm.variables.get(\"controlGroupId\"));",
+											"",
+											"  pm.expect(responseJson[0].id).to.eq(controlGroupId);",
+											"  pm.expect(responseJson[0].name).to.equal('demo');",
+											"});",
+											"",
+											"pm.test(\"Response have correct types\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  pm.expect(responseJson).to.be.a(\"array\");",
+											"  pm.expect(responseJson[0].id).to.be.a(\"number\");",
+											"  pm.expect(responseJson[0].name).to.be.a(\"string\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response have correct length\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  pm.expect(responseJson.length).to.be.eql(2);",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/control-groups?limit={{limit}}&offset={{offset}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"control-groups"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "{{limit}}"
+										},
+										{
+											"key": "offset",
+											"value": "{{offset}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/control-groups?limit=-14922698&offset=-14922698",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-groups"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "-14922698"
+												},
+												{
+													"key": "offset",
+													"value": "-14922698"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": -1221804,\n    \"name\": \"cillum dolor cupidatat et\"\n  },\n  {\n    \"id\": -90579903,\n    \"name\": \"dolor labore incididunt deserunt\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "create Control Group mutation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"adminGroupId\": {{controlGroupId}},\n    \"name\": {{controlGroupName}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/control-groups",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"control-groups"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"minim qui\",\n  \"adminGroupId\": 36711267\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/control-groups",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"control-groups"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 60701457,\n  \"name\": \"anim deserunt\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "devices",
+					"item": [
+						{
+							"name": "{serial No}",
+							"item": [
+								{
+									"name": "device query Zappi",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct devices\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const zappiSerialNo = parseInt(pm.variables.get(\"zappiSerialNo\"));",
+													"",
+													"  pm.expect(responseJson.serialNo).to.eq(zappiSerialNo);",
+													"  pm.expect(responseJson.productCode).to.be.null;",
+													"  pm.expect(responseJson.deviceClass).to.equal('ZAPPI');",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson).to.be.a(\"object\");",
+													"  pm.expect(responseJson.serialNo).to.be.a(\"number\");",
+													"  pm.expect(responseJson.productCode).to.be.null",
+													"  pm.expect(responseJson.deviceClass).to.be.a(\"string\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/devices/:serialNo",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"devices",
+												":serialNo"
+											],
+											"variable": [
+												{
+													"key": "serialNo",
+													"value": "{{zappiSerialNo}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/devices/:serialNo",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"devices",
+														":serialNo"
+													],
+													"variable": [
+														{
+															"key": "serialNo",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"serialNo\": -23384633.015565634,\n  \"deviceClass\": \"minim et commodo elit\",\n  \"productCode\": 4086327.6509557366\n}"
+										}
+									]
+								},
+								{
+									"name": "device query Eddi",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Response have correct devices\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  const eddiSerialNo = parseInt(pm.variables.get(\"eddiSerialNo\"));",
+													"",
+													"  pm.expect(responseJson.serialNo).to.eq(eddiSerialNo);",
+													"  pm.expect(responseJson.productCode).to.be.null;",
+													"  pm.expect(responseJson.deviceClass).to.equal('EDDI');",
+													"});",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson).to.be.a(\"object\");",
+													"  pm.expect(responseJson.serialNo).to.be.a(\"number\");",
+													"  pm.expect(responseJson.productCode).to.be.null",
+													"  pm.expect(responseJson.deviceClass).to.be.a(\"string\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/devices/:serialNo",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"devices",
+												":serialNo"
+											],
+											"variable": [
+												{
+													"key": "serialNo",
+													"value": "{{eddiSerialNo}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/devices/:serialNo",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"devices",
+														":serialNo"
+													],
+													"variable": [
+														{
+															"key": "serialNo",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"serialNo\": -23384633.015565634,\n  \"deviceClass\": \"minim et commodo elit\",\n  \"productCode\": 4086327.6509557366\n}"
+										}
+									]
+								},
+								{
+									"name": "device Control Group query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/devices/:serialNo/control-group",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"devices",
+												":serialNo",
+												"control-group"
+											],
+											"variable": [
+												{
+													"key": "serialNo",
+													"value": "{{zappiSerialNo}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/devices/:serialNo/control-group",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"devices",
+														":serialNo",
+														"control-group"
+													],
+													"variable": [
+														{
+															"key": "serialNo",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": 60701457,\n  \"name\": \"anim deserunt\"\n}"
+										}
+									]
+								},
+								{
+									"name": "device Status query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/devices/:serialNo/status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"devices",
+												":serialNo",
+												"status"
+											],
+											"variable": [
+												{
+													"key": "serialNo",
+													"value": "-14922698",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/devices/:serialNo/status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"devices",
+														":serialNo",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "serialNo",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"serialNo\": 29253644.73804933,\n  \"updateDate\": {},\n  \"isAvailable\": true,\n  \"voltage\": -99435226,\n  \"frequency\": -55294993,\n  \"chargeEnergy\": -70373990\n}"
+										}
+									]
+								},
+								{
+									"name": "device History query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/devices/:serialNo/history?limit=-14922698&offset=-14922698&value=reference %23/components/schemas/DateTime not found in the OpenAPI spec&value=reference %23/components/schemas/DateTime not found in the OpenAPI spec",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"devices",
+												":serialNo",
+												"history"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "-14922698"
+												},
+												{
+													"key": "offset",
+													"value": "-14922698"
+												},
+												{
+													"key": "value",
+													"value": "reference #/components/schemas/DateTime not found in the OpenAPI spec",
+													"description": "(Required) "
+												},
+												{
+													"key": "value",
+													"value": "reference #/components/schemas/DateTime not found in the OpenAPI spec",
+													"description": "(Required) "
+												}
+											],
+											"variable": [
+												{
+													"key": "serialNo",
+													"value": "-14922698",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/devices/:serialNo/history?limit=-14922698&offset=-14922698&value=reference %23/components/schemas/DateTime not found in the OpenAPI spec&value=reference %23/components/schemas/DateTime not found in the OpenAPI spec",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"devices",
+														":serialNo",
+														"history"
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "-14922698"
+														},
+														{
+															"key": "offset",
+															"value": "-14922698"
+														},
+														{
+															"key": "value",
+															"value": "reference #/components/schemas/DateTime not found in the OpenAPI spec"
+														},
+														{
+															"key": "value",
+															"value": "reference #/components/schemas/DateTime not found in the OpenAPI spec"
+														}
+													],
+													"variable": [
+														{
+															"key": "serialNo",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"serialNo\": 17761902.82171175,\n    \"timestamp\": {},\n    \"importPower\": -69758629.43153466,\n    \"exportPower\": -32079667.088526025,\n    \"externalCtPositivePower1\": -78035354.04896982,\n    \"externalCtPositivePower2\": 79213111.08749527,\n    \"externalCtPositivePower3\": 24047528.95496434,\n    \"externalCtNegativePower1\": 23092603.96238178,\n    \"externalCtNegativePower2\": 92172492.88118136,\n    \"externalCtNegativePower3\": 13859068.646638304,\n    \"divertedLoadPower1\": -32493530.54895833,\n    \"divertedLoadPower2\": 94372606.09276024,\n    \"divertedLoadPower3\": -61539416.358620346,\n    \"boostLoadPower1\": -68763413.45152594,\n    \"boostLoadPower2\": -82156366.55395539,\n    \"boostLoadPower3\": -46148110.36138766,\n    \"voltage1\": 43592435.79749346,\n    \"voltage2\": 1255151.3056740016,\n    \"voltage3\": 48921524.60150975,\n    \"frequency\": -86525779.56040254\n  },\n  {\n    \"serialNo\": 75599141.36149111,\n    \"timestamp\": {},\n    \"importPower\": -69671842.00544083,\n    \"exportPower\": 9855096.634421125,\n    \"externalCtPositivePower1\": -66864745.21279964,\n    \"externalCtPositivePower2\": 48703975.309931874,\n    \"externalCtPositivePower3\": -50402235.173341215,\n    \"externalCtNegativePower1\": -93625894.13852516,\n    \"externalCtNegativePower2\": -49594988.095538154,\n    \"externalCtNegativePower3\": -46319082.76203793,\n    \"divertedLoadPower1\": 38502623.95989102,\n    \"divertedLoadPower2\": -88001254.89631152,\n    \"divertedLoadPower3\": 84922339.26484212,\n    \"boostLoadPower1\": -58466984.11637856,\n    \"boostLoadPower2\": -23521948.073517025,\n    \"boostLoadPower3\": -65182188.828003526,\n    \"voltage1\": -93631802.61292978,\n    \"voltage2\": -53447394.074847445,\n    \"voltage3\": 4842302.904382035,\n    \"frequency\": 99312706.72384009\n  }\n]"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "devices query",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response have correct devices\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  const zappiSerialNo = parseInt(pm.variables.get(\"zappiSerialNo\"));",
+											"",
+											"  pm.expect(responseJson[0].serialNo).to.eq(zappiSerialNo);",
+											"  pm.expect(responseJson[0].productCode).to.be.null;",
+											"  pm.expect(responseJson[0].deviceClass).to.equal('ZAPPI');",
+											"});",
+											"",
+											"pm.test(\"Response have correct types\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  pm.expect(responseJson).to.be.a(\"array\");",
+											"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
+											"  pm.expect(responseJson[0].productCode).to.be.null",
+											"  pm.expect(responseJson[0].deviceClass).to.be.a(\"string\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response have correct length\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  const limit = parseInt(pm.variables.get(\"limit\"));",
+											"",
+											"  pm.expect(responseJson.length).to.be.eql(limit*2);",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/devices?limit={{limit}}&offset={{offset}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"devices"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "{{limit}}"
+										},
+										{
+											"key": "offset",
+											"value": "{{offset}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/devices?limit=-14922698&offset=-14922698",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"devices"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "-14922698"
+												},
+												{
+													"key": "offset",
+													"value": "-14922698"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"serialNo\": -78158225.83167362,\n    \"deviceClass\": \"in co\",\n    \"productCode\": 55553000.40547079\n  },\n  {\n    \"serialNo\": 54208807.006628126,\n    \"deviceClass\": \"consequat et Lorem Ut\",\n    \"productCode\": -22364794.02003075\n  }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "admin-groups",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "admin Group query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/admin-group/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"admin-group",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "-14922698",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/admin-group/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin-group",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "-14922698",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": 76438997,\n  \"name\": \"non inci\"\n}"
+										}
+									]
+								},
+								{
+									"name": "admin Group Devices query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/admin-group-devices?id=-14922698",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"admin-group-devices"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "-14922698",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/admin-group-devices?id=-14922698",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin-group-devices"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "-14922698"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"serialNo\": -78158225.83167362,\n    \"deviceClass\": \"in co\",\n    \"productCode\": 55553000.40547079\n  },\n  {\n    \"serialNo\": 54208807.006628126,\n    \"deviceClass\": \"consequat et Lorem Ut\",\n    \"productCode\": -22364794.02003075\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "admin Group Status query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/admin-group-status?id=-14922698",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"admin-group-status"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "-14922698",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/admin-group-status?id=-14922698",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"admin-group-status"
+													],
+													"query": [
+														{
+															"key": "id",
+															"value": "-14922698"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"serialNo\": -26283266.67089151,\n    \"updateDate\": {},\n    \"isAvailable\": false,\n    \"voltage\": 49122635,\n    \"frequency\": -17924141,\n    \"chargeEnergy\": -74837419\n  },\n  {\n    \"serialNo\": 78909740.10261539,\n    \"updateDate\": {},\n    \"isAvailable\": false,\n    \"voltage\": -1911192,\n    \"frequency\": -4642018,\n    \"chargeEnergy\": 27455853\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "add Device To Admin Group mutation",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 75491824,\n  \"serialNos\": [\n    98277518,\n    -16977721\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/add-device-to-admin-group",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"add-device-to-admin-group"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": -12770540,\n  \"serialNos\": [\n    17997715,\n    -3229426\n  ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/add-device-to-admin-group",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"add-device-to-admin-group"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"affectedRows\": -20168884.144484118\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "admin Groups query",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response have correct admin Groups\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  const adminGroupId = parseInt(pm.variables.get(\"adminGroupId\"));",
+											"  const adminGroupName = parseInt(pm.variables.get(\"adminGroupName\"));",
+											"",
+											"  pm.expect(responseJson[0].id).to.eq(adminGroupId);",
+											"  pm.expect(responseJson[0].name).to.equal(adminGroupName);",
+											"});",
+											"",
+											"pm.test(\"Response have correct types\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  pm.expect(responseJson).to.be.a(\"array\");",
+											"  pm.expect(responseJson[0].id).to.be.a(\"number\");",
+											"  pm.expect(responseJson[0].name).to.be.a(\"string\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response have correct length\", () => {",
+											"  const responseJson = pm.response.json();",
+											"  pm.expect(responseJson.length).to.be.eql(2);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin-groups?limit={{limit}}&offset={{offset}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"admin-groups"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "{{limit}}"
+										},
+										{
+											"key": "offset",
+											"value": "{{offset}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/admin-groups?limit=-14922698&offset=-14922698",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"admin-groups"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "-14922698"
+												},
+												{
+													"key": "offset",
+													"value": "-14922698"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": 85166407,\n    \"name\": \"ut anim\"\n  },\n  {\n    \"id\": -40268295,\n    \"name\": \"dolore ipsum cupidatat ut veniam\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "create Admin Group mutation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"{{adminGroupName}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/create-admin-group",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"create-admin-group"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"ut exercitation\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/create-admin-group",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"create-admin-group"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 76438997,\n  \"name\": \"non inci\"\n}"
+								}
+							]
+						},
+						{
+							"name": "remove Device From Admin Group mutation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 75491824,\n  \"serialNos\": [\n    98277518,\n    -16977721\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/remove-device-from-admin-group",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"remove-device-from-admin-group"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": -12770540,\n  \"serialNos\": [\n    17997715,\n    -3229426\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/remove-device-from-admin-group",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"remove-device-from-admin-group"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"affectedRows\": -20168884.144484118\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"response must be valid and have a body\", function () {",
+					"     pm.response.to.be.ok;",
+					"     pm.response.to.be.withBody;",
+					"     pm.response.to.be.json;",
+					"});",
+					"",
+					"pm.test(\"Status code is 200\", () => {",
+					"  pm.expect(pm.response.code).to.eql(200);",
+					"});",
+					"",
+					"pm.test(\"Content-Type header is correct\", () => {",
+					"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');",
+					"});",
+					"",
+					"pm.test(\"Response time is less than allowed\", () => {",
+					"  const maxResponseTime = parseInt(pm.variables.get(\"maxResponseTime\"));",
+					"  pm.expect(pm.response.responseTime).to.be.below(maxResponseTime);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		},
+		{
+			"key": "controlGroupId",
+			"value": "14"
+		},
+		{
+			"key": "controlGroupName",
+			"value": "testControlGroup"
+		},
+		{
+			"key": "adminlGroupId",
+			"value": "1"
+		},
+		{
+			"key": "adminGroupName",
+			"value": "testAdminGroup"
+		},
+		{
+			"key": "zappiSerialNo",
+			"value": "1190411796"
+		},
+		{
+			"key": "eddiSerialNo",
+			"value": "262883402"
+		},
+		{
+			"key": "maxResponseTime",
+			"value": "500"
+		},
+		{
+			"key": "limit",
+			"value": "10"
+		},
+		{
+			"key": "offset",
+			"value": "0"
+		}
+	]
+}

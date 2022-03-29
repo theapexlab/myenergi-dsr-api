@@ -10,6 +10,7 @@
     "yarn": "1.22.17"
   },
   "scripts": {
+    "prestart": "docker-compose up -d && cd ./test/test-hasura && hasura metadata apply  && hasura migrate apply --all-databases && hasura metadata reload && hasura seed apply --database-name default && hasura metadata reload && hasura seed apply --database-name history-db && hasura metadata reload && hasura seed apply --database-name main-db",
     "start": "ts-node-dev --respawn --transpile-only ./lambda/src/server.ts",
     "lint": "eslint --ext .js,.ts,.tsx ./lambda/src/",
     "generate:swagger": "ts-node scripts/generate-swagger.ts",
@@ -20,8 +21,6 @@
     "build": "yarn build:layer && yarn build:lambda",
     "test:watch": "jest --watch",
     "test": "jest",
-    "pretest:db": "docker-compose up -d && cd ./test-hasura && hasura metadata apply  && hasura migrate apply --all-databases && hasura metadata reload",
-    "test:db": "",
     "cleanup:layer": "rm -fr dist_layer",
     "cleanup:lambda": "rm -rf dist",
     "tf:init": "terraform -chdir=./terraform init -var-file ./config/terraform.tfvars",
@@ -47,6 +46,7 @@
     "@types/aws-lambda": "^8.10.92",
     "@types/aws-sdk": "^2.7.0",
     "@types/jest": "^27.4.0",
+    "@types/newman": "^5.3.0",
     "@types/node-fetch": "^2.6.1",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
