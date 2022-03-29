@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
 import { AppContext } from '../context';
+import { getDataSources } from '../data-sources';
 import { IdArgs } from '../shared';
 import { DeviceStatus } from './deviceStatus.type';
 
@@ -14,6 +15,7 @@ export class DeviceStatusResolver {
 
   @Query(() => DeviceStatus)
   deviceStatus(@Ctx() ctx: AppContext, @Args() { serialNo }: IdArgs): Promise<DeviceStatus> {
-    return ctx.dataSources.deviceApi.getDeviceStatus(serialNo);
+    const { deviceApi } = getDataSources(ctx);
+    return deviceApi.getDeviceStatus(serialNo);
   }
 }

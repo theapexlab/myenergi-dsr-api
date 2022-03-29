@@ -3,12 +3,10 @@ import { GraphQLError } from 'graphql';
 import { ControlGroup } from '../control-group';
 import { ControlGroupsArgs, MutateControlGroupArgs } from '../control-group/controlGroup.args';
 import { Device } from '../device';
-import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
 import { Device_Type_Enum, getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
 import { logger } from '../utils/logger';
-import { mapHistoryFragmentToDeviceHistory } from '../utils/maps';
 import { getGraphqlSdk } from './getGraphqlSdk';
 
 export class ControlGroupAPI extends RESTDataSource {
@@ -115,22 +113,6 @@ export class ControlGroupAPI extends RESTDataSource {
           updateDate: new Date(updateDate),
           ...device,
         }));
-    } catch (err) {
-      logger.error(err.toString());
-      throw new GraphQLError('Control group query failed');
-    }
-  }
-
-  async getControlGroupHistory(id: number): Promise<DeviceHistory[]> {
-    try {
-      const { controlGroupHistory } = await this.sdk.ControlGroupHistory({ controlGroupId: id });
-      if (!controlGroupHistory.devices.length) {
-        throw new GraphQLError('Not found!');
-      }
-      return controlGroupHistory.devices
-        .flatMap(({ zappiMinutes, eddiMinutes }) => [zappiMinutes, eddiMinutes])
-        .filter((item) => !!item)
-        .map(mapHistoryFragmentToDeviceHistory);
     } catch (err) {
       logger.error(err.toString());
       throw new GraphQLError('Control group query failed');

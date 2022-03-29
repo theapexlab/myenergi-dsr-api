@@ -1,5 +1,5 @@
 import { ArgsType, Field, Int } from 'type-graphql';
-import { PaginationArgs } from '../shared';
+import { HistoryByIdsArgs, PaginationArgs } from '../shared';
 
 @ArgsType()
 export class AdminGroupsArgs extends PaginationArgs {}
@@ -11,4 +11,10 @@ export class MutateAdminGroupArgs {
 
   @Field(() => [Int])
   serialNos: number[];
+}
+
+@ArgsType()
+export class AdminGroupHistoryArgs extends HistoryByIdsArgs {
+  @Field(() => Int)
+  id: number;
 }

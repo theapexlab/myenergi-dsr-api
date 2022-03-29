@@ -20,10 +20,7 @@ export const getAPIs = (): AppDataSources => {
   };
 };
 
-export const getApi = <K extends keyof AppDataSources>(
-  name: K,
-  ctx: { dataSources: AppDataSources }
-): AppDataSources[K] => {
+export const getDataSources = (ctx: { dataSources: AppDataSources }): AppDataSources => {
   const { dataSources } = ctx;
-  return dataSources[name];
+  return dataSources;
 };
