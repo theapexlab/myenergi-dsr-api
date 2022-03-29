@@ -213,6 +213,8 @@ export type Admin_Group_Device = {
   admin_group: Admin_Group;
   admin_group_device_eddi?: Maybe<Eddi>;
   admin_group_device_zappi?: Maybe<Zappi>;
+  admin_group_history_eddi?: Maybe<Eddi_Minute>;
+  admin_group_history_zappi?: Maybe<Zappi_Minute>;
   admin_group_id: Scalars['Int'];
   /** An array relationship */
   control_group_devices: Array<Control_Group_Device>;
@@ -2589,7 +2591,9 @@ export enum Device_Type_Constraint {
 }
 
 export enum Device_Type_Enum {
+  /** Heater */
   Eddi = 'eddi',
+  /** Car charger */
   Zappi = 'zappi',
 }
 
@@ -2706,6 +2710,7 @@ export type Eddi = {
   configstate?: Maybe<Scalars['smallint']>;
   configstructure?: Maybe<Scalars['smallint']>;
   configversion?: Maybe<Scalars['smallint']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   ct1?: Maybe<Scalars['jsonb']>;
   ct2?: Maybe<Scalars['jsonb']>;
   ct2absent?: Maybe<Scalars['smallint']>;
@@ -2744,6 +2749,7 @@ export type Eddi = {
   dsrdataseconds?: Maybe<Scalars['smallint']>;
   eddi_control_group_device?: Maybe<Control_Group_Device>;
   ethernetfitted?: Maybe<Scalars['Boolean']>;
+  ethernetlink?: Maybe<Scalars['Boolean']>;
   ethernetmacaddress?: Maybe<Scalars['macaddr']>;
   ethernetspeed?: Maybe<Scalars['String']>;
   frequency?: Maybe<Scalars['smallint']>;
@@ -2756,7 +2762,9 @@ export type Eddi = {
   hubserialno?: Maybe<Scalars['bigint']>;
   isaggregated: Scalars['Boolean'];
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
+  microprocessorti?: Maybe<Scalars['Boolean']>;
   minpower?: Maybe<Scalars['Int']>;
   phase?: Maybe<Scalars['smallint']>;
   priority?: Maybe<Scalars['smallint']>;
@@ -2776,7 +2784,9 @@ export type Eddi = {
   state?: Maybe<Scalars['String']>;
   stubloaderversion?: Maybe<Scalars['Int']>;
   updatedat: Scalars['timestamptz'];
+  vhub?: Maybe<Scalars['Boolean']>;
   voltage?: Maybe<Scalars['smallint']>;
+  wifilink?: Maybe<Scalars['Boolean']>;
 };
 
 /** columns and relationships of "eddi" */
@@ -2972,6 +2982,7 @@ export type Eddi_Avg_Fields = {
   heaterno?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   phase?: Maybe<Scalars['Float']>;
@@ -3013,6 +3024,7 @@ export type Eddi_Avg_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -3050,6 +3062,7 @@ export type Eddi_Bool_Exp = {
   configstate?: InputMaybe<Smallint_Comparison_Exp>;
   configstructure?: InputMaybe<Smallint_Comparison_Exp>;
   configversion?: InputMaybe<Smallint_Comparison_Exp>;
+  createdat?: InputMaybe<Timestamptz_Comparison_Exp>;
   ct1?: InputMaybe<Jsonb_Comparison_Exp>;
   ct2?: InputMaybe<Jsonb_Comparison_Exp>;
   ct2absent?: InputMaybe<Smallint_Comparison_Exp>;
@@ -3087,6 +3100,7 @@ export type Eddi_Bool_Exp = {
   dsrdataload?: InputMaybe<Smallint_Comparison_Exp>;
   dsrdataseconds?: InputMaybe<Smallint_Comparison_Exp>;
   ethernetfitted?: InputMaybe<Boolean_Comparison_Exp>;
+  ethernetlink?: InputMaybe<Boolean_Comparison_Exp>;
   ethernetmacaddress?: InputMaybe<Macaddr_Comparison_Exp>;
   ethernetspeed?: InputMaybe<String_Comparison_Exp>;
   frequency?: InputMaybe<Smallint_Comparison_Exp>;
@@ -3098,7 +3112,9 @@ export type Eddi_Bool_Exp = {
   hubserialno?: InputMaybe<Bigint_Comparison_Exp>;
   isaggregated?: InputMaybe<Boolean_Comparison_Exp>;
   maxpower?: InputMaybe<Int_Comparison_Exp>;
+  melibversion?: InputMaybe<Int_Comparison_Exp>;
   melinkversion?: InputMaybe<Int_Comparison_Exp>;
+  microprocessorti?: InputMaybe<Boolean_Comparison_Exp>;
   minpower?: InputMaybe<Int_Comparison_Exp>;
   phase?: InputMaybe<Smallint_Comparison_Exp>;
   priority?: InputMaybe<Smallint_Comparison_Exp>;
@@ -3118,7 +3134,9 @@ export type Eddi_Bool_Exp = {
   state?: InputMaybe<String_Comparison_Exp>;
   stubloaderversion?: InputMaybe<Int_Comparison_Exp>;
   updatedat?: InputMaybe<Timestamptz_Comparison_Exp>;
+  vhub?: InputMaybe<Boolean_Comparison_Exp>;
   voltage?: InputMaybe<Smallint_Comparison_Exp>;
+  wifilink?: InputMaybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "eddi" */
@@ -3224,6 +3242,7 @@ export type Eddi_Inc_Input = {
   heaterno?: InputMaybe<Scalars['smallint']>;
   hubserialno?: InputMaybe<Scalars['bigint']>;
   maxpower?: InputMaybe<Scalars['Int']>;
+  melibversion?: InputMaybe<Scalars['Int']>;
   melinkversion?: InputMaybe<Scalars['Int']>;
   minpower?: InputMaybe<Scalars['Int']>;
   phase?: InputMaybe<Scalars['smallint']>;
@@ -3258,6 +3277,7 @@ export type Eddi_Insert_Input = {
   configstate?: InputMaybe<Scalars['smallint']>;
   configstructure?: InputMaybe<Scalars['smallint']>;
   configversion?: InputMaybe<Scalars['smallint']>;
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   ct1?: InputMaybe<Scalars['jsonb']>;
   ct2?: InputMaybe<Scalars['jsonb']>;
   ct2absent?: InputMaybe<Scalars['smallint']>;
@@ -3295,6 +3315,7 @@ export type Eddi_Insert_Input = {
   dsrdataload?: InputMaybe<Scalars['smallint']>;
   dsrdataseconds?: InputMaybe<Scalars['smallint']>;
   ethernetfitted?: InputMaybe<Scalars['Boolean']>;
+  ethernetlink?: InputMaybe<Scalars['Boolean']>;
   ethernetmacaddress?: InputMaybe<Scalars['macaddr']>;
   ethernetspeed?: InputMaybe<Scalars['String']>;
   frequency?: InputMaybe<Scalars['smallint']>;
@@ -3306,7 +3327,9 @@ export type Eddi_Insert_Input = {
   hubserialno?: InputMaybe<Scalars['bigint']>;
   isaggregated?: InputMaybe<Scalars['Boolean']>;
   maxpower?: InputMaybe<Scalars['Int']>;
+  melibversion?: InputMaybe<Scalars['Int']>;
   melinkversion?: InputMaybe<Scalars['Int']>;
+  microprocessorti?: InputMaybe<Scalars['Boolean']>;
   minpower?: InputMaybe<Scalars['Int']>;
   phase?: InputMaybe<Scalars['smallint']>;
   priority?: InputMaybe<Scalars['smallint']>;
@@ -3326,7 +3349,9 @@ export type Eddi_Insert_Input = {
   state?: InputMaybe<Scalars['String']>;
   stubloaderversion?: InputMaybe<Scalars['Int']>;
   updatedat?: InputMaybe<Scalars['timestamptz']>;
+  vhub?: InputMaybe<Scalars['Boolean']>;
   voltage?: InputMaybe<Scalars['smallint']>;
+  wifilink?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
@@ -3345,6 +3370,7 @@ export type Eddi_Max_Fields = {
   configstate?: Maybe<Scalars['smallint']>;
   configstructure?: Maybe<Scalars['smallint']>;
   configversion?: Maybe<Scalars['smallint']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   ct2absent?: Maybe<Scalars['smallint']>;
   ct3absent?: Maybe<Scalars['smallint']>;
   currentboostremaining?: Maybe<Scalars['smallint']>;
@@ -3364,6 +3390,7 @@ export type Eddi_Max_Fields = {
   heatertype2?: Maybe<Scalars['String']>;
   hubserialno?: Maybe<Scalars['bigint']>;
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
   minpower?: Maybe<Scalars['Int']>;
   phase?: Maybe<Scalars['smallint']>;
@@ -3396,6 +3423,7 @@ export type Eddi_Max_Order_By = {
   configstate?: InputMaybe<Order_By>;
   configstructure?: InputMaybe<Order_By>;
   configversion?: InputMaybe<Order_By>;
+  createdat?: InputMaybe<Order_By>;
   ct2absent?: InputMaybe<Order_By>;
   ct3absent?: InputMaybe<Order_By>;
   currentboostremaining?: InputMaybe<Order_By>;
@@ -3415,6 +3443,7 @@ export type Eddi_Max_Order_By = {
   heatertype2?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -3448,6 +3477,7 @@ export type Eddi_Min_Fields = {
   configstate?: Maybe<Scalars['smallint']>;
   configstructure?: Maybe<Scalars['smallint']>;
   configversion?: Maybe<Scalars['smallint']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   ct2absent?: Maybe<Scalars['smallint']>;
   ct3absent?: Maybe<Scalars['smallint']>;
   currentboostremaining?: Maybe<Scalars['smallint']>;
@@ -3467,6 +3497,7 @@ export type Eddi_Min_Fields = {
   heatertype2?: Maybe<Scalars['String']>;
   hubserialno?: Maybe<Scalars['bigint']>;
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
   minpower?: Maybe<Scalars['Int']>;
   phase?: Maybe<Scalars['smallint']>;
@@ -3499,6 +3530,7 @@ export type Eddi_Min_Order_By = {
   configstate?: InputMaybe<Order_By>;
   configstructure?: InputMaybe<Order_By>;
   configversion?: InputMaybe<Order_By>;
+  createdat?: InputMaybe<Order_By>;
   ct2absent?: InputMaybe<Order_By>;
   ct3absent?: InputMaybe<Order_By>;
   currentboostremaining?: InputMaybe<Order_By>;
@@ -3518,6 +3550,7 @@ export type Eddi_Min_Order_By = {
   heatertype2?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -4154,6 +4187,7 @@ export type Eddi_Order_By = {
   configstate?: InputMaybe<Order_By>;
   configstructure?: InputMaybe<Order_By>;
   configversion?: InputMaybe<Order_By>;
+  createdat?: InputMaybe<Order_By>;
   ct1?: InputMaybe<Order_By>;
   ct2?: InputMaybe<Order_By>;
   ct2absent?: InputMaybe<Order_By>;
@@ -4191,6 +4225,7 @@ export type Eddi_Order_By = {
   dsrdataload?: InputMaybe<Order_By>;
   dsrdataseconds?: InputMaybe<Order_By>;
   ethernetfitted?: InputMaybe<Order_By>;
+  ethernetlink?: InputMaybe<Order_By>;
   ethernetmacaddress?: InputMaybe<Order_By>;
   ethernetspeed?: InputMaybe<Order_By>;
   frequency?: InputMaybe<Order_By>;
@@ -4202,7 +4237,9 @@ export type Eddi_Order_By = {
   hubserialno?: InputMaybe<Order_By>;
   isaggregated?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
+  microprocessorti?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
   priority?: InputMaybe<Order_By>;
@@ -4222,7 +4259,9 @@ export type Eddi_Order_By = {
   state?: InputMaybe<Order_By>;
   stubloaderversion?: InputMaybe<Order_By>;
   updatedat?: InputMaybe<Order_By>;
+  vhub?: InputMaybe<Order_By>;
   voltage?: InputMaybe<Order_By>;
+  wifilink?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: eddi */
@@ -4293,6 +4332,8 @@ export enum Eddi_Select_Column {
   /** column name */
   Configversion = 'configversion',
   /** column name */
+  Createdat = 'createdat',
+  /** column name */
   Ct1 = 'ct1',
   /** column name */
   Ct2 = 'ct2',
@@ -4367,6 +4408,8 @@ export enum Eddi_Select_Column {
   /** column name */
   Ethernetfitted = 'ethernetfitted',
   /** column name */
+  Ethernetlink = 'ethernetlink',
+  /** column name */
   Ethernetmacaddress = 'ethernetmacaddress',
   /** column name */
   Ethernetspeed = 'ethernetspeed',
@@ -4387,7 +4430,11 @@ export enum Eddi_Select_Column {
   /** column name */
   Maxpower = 'maxpower',
   /** column name */
+  Melibversion = 'melibversion',
+  /** column name */
   Melinkversion = 'melinkversion',
+  /** column name */
+  Microprocessorti = 'microprocessorti',
   /** column name */
   Minpower = 'minpower',
   /** column name */
@@ -4427,7 +4474,11 @@ export enum Eddi_Select_Column {
   /** column name */
   Updatedat = 'updatedat',
   /** column name */
+  Vhub = 'vhub',
+  /** column name */
   Voltage = 'voltage',
+  /** column name */
+  Wifilink = 'wifilink',
 }
 
 /** input type for updating data in table "eddi" */
@@ -4451,6 +4502,7 @@ export type Eddi_Set_Input = {
   configstate?: InputMaybe<Scalars['smallint']>;
   configstructure?: InputMaybe<Scalars['smallint']>;
   configversion?: InputMaybe<Scalars['smallint']>;
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   ct1?: InputMaybe<Scalars['jsonb']>;
   ct2?: InputMaybe<Scalars['jsonb']>;
   ct2absent?: InputMaybe<Scalars['smallint']>;
@@ -4488,6 +4540,7 @@ export type Eddi_Set_Input = {
   dsrdataload?: InputMaybe<Scalars['smallint']>;
   dsrdataseconds?: InputMaybe<Scalars['smallint']>;
   ethernetfitted?: InputMaybe<Scalars['Boolean']>;
+  ethernetlink?: InputMaybe<Scalars['Boolean']>;
   ethernetmacaddress?: InputMaybe<Scalars['macaddr']>;
   ethernetspeed?: InputMaybe<Scalars['String']>;
   frequency?: InputMaybe<Scalars['smallint']>;
@@ -4498,7 +4551,9 @@ export type Eddi_Set_Input = {
   hubserialno?: InputMaybe<Scalars['bigint']>;
   isaggregated?: InputMaybe<Scalars['Boolean']>;
   maxpower?: InputMaybe<Scalars['Int']>;
+  melibversion?: InputMaybe<Scalars['Int']>;
   melinkversion?: InputMaybe<Scalars['Int']>;
+  microprocessorti?: InputMaybe<Scalars['Boolean']>;
   minpower?: InputMaybe<Scalars['Int']>;
   phase?: InputMaybe<Scalars['smallint']>;
   priority?: InputMaybe<Scalars['smallint']>;
@@ -4518,7 +4573,9 @@ export type Eddi_Set_Input = {
   state?: InputMaybe<Scalars['String']>;
   stubloaderversion?: InputMaybe<Scalars['Int']>;
   updatedat?: InputMaybe<Scalars['timestamptz']>;
+  vhub?: InputMaybe<Scalars['Boolean']>;
   voltage?: InputMaybe<Scalars['smallint']>;
+  wifilink?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate stddev on columns */
@@ -4551,6 +4608,7 @@ export type Eddi_Stddev_Fields = {
   heaterno?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   phase?: Maybe<Scalars['Float']>;
@@ -4592,6 +4650,7 @@ export type Eddi_Stddev_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -4634,6 +4693,7 @@ export type Eddi_Stddev_Pop_Fields = {
   heaterno?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   phase?: Maybe<Scalars['Float']>;
@@ -4675,6 +4735,7 @@ export type Eddi_Stddev_Pop_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -4717,6 +4778,7 @@ export type Eddi_Stddev_Samp_Fields = {
   heaterno?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   phase?: Maybe<Scalars['Float']>;
@@ -4758,6 +4820,7 @@ export type Eddi_Stddev_Samp_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -4800,6 +4863,7 @@ export type Eddi_Sum_Fields = {
   heaterno?: Maybe<Scalars['smallint']>;
   hubserialno?: Maybe<Scalars['bigint']>;
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
   minpower?: Maybe<Scalars['Int']>;
   phase?: Maybe<Scalars['smallint']>;
@@ -4841,6 +4905,7 @@ export type Eddi_Sum_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -4894,6 +4959,8 @@ export enum Eddi_Update_Column {
   /** column name */
   Configversion = 'configversion',
   /** column name */
+  Createdat = 'createdat',
+  /** column name */
   Ct1 = 'ct1',
   /** column name */
   Ct2 = 'ct2',
@@ -4968,6 +5035,8 @@ export enum Eddi_Update_Column {
   /** column name */
   Ethernetfitted = 'ethernetfitted',
   /** column name */
+  Ethernetlink = 'ethernetlink',
+  /** column name */
   Ethernetmacaddress = 'ethernetmacaddress',
   /** column name */
   Ethernetspeed = 'ethernetspeed',
@@ -4988,7 +5057,11 @@ export enum Eddi_Update_Column {
   /** column name */
   Maxpower = 'maxpower',
   /** column name */
+  Melibversion = 'melibversion',
+  /** column name */
   Melinkversion = 'melinkversion',
+  /** column name */
+  Microprocessorti = 'microprocessorti',
   /** column name */
   Minpower = 'minpower',
   /** column name */
@@ -5028,7 +5101,11 @@ export enum Eddi_Update_Column {
   /** column name */
   Updatedat = 'updatedat',
   /** column name */
+  Vhub = 'vhub',
+  /** column name */
   Voltage = 'voltage',
+  /** column name */
+  Wifilink = 'wifilink',
 }
 
 /** aggregate var_pop on columns */
@@ -5061,6 +5138,7 @@ export type Eddi_Var_Pop_Fields = {
   heaterno?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   phase?: Maybe<Scalars['Float']>;
@@ -5102,6 +5180,7 @@ export type Eddi_Var_Pop_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -5144,6 +5223,7 @@ export type Eddi_Var_Samp_Fields = {
   heaterno?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   phase?: Maybe<Scalars['Float']>;
@@ -5185,6 +5265,7 @@ export type Eddi_Var_Samp_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -5227,6 +5308,7 @@ export type Eddi_Variance_Fields = {
   heaterno?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   phase?: Maybe<Scalars['Float']>;
@@ -5268,6 +5350,7 @@ export type Eddi_Variance_Order_By = {
   heaterno?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   phase?: InputMaybe<Order_By>;
@@ -5883,6 +5966,7 @@ export type Event_Variance_Fields = {
 /** columns and relationships of "harvi" */
 export type Harvi = {
   __typename?: 'harvi';
+  createdat?: Maybe<Scalars['timestamptz']>;
   ct1?: Maybe<Scalars['jsonb']>;
   ct2?: Maybe<Scalars['jsonb']>;
   ct3?: Maybe<Scalars['jsonb']>;
@@ -6079,6 +6163,7 @@ export type Harvi_Bool_Exp = {
   _and?: InputMaybe<Array<Harvi_Bool_Exp>>;
   _not?: InputMaybe<Harvi_Bool_Exp>;
   _or?: InputMaybe<Array<Harvi_Bool_Exp>>;
+  createdat?: InputMaybe<Timestamptz_Comparison_Exp>;
   ct1?: InputMaybe<Jsonb_Comparison_Exp>;
   ct2?: InputMaybe<Jsonb_Comparison_Exp>;
   ct3?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -6178,6 +6263,7 @@ export type Harvi_Inc_Input = {
 
 /** input type for inserting data into table "harvi" */
 export type Harvi_Insert_Input = {
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   ct1?: InputMaybe<Scalars['jsonb']>;
   ct2?: InputMaybe<Scalars['jsonb']>;
   ct3?: InputMaybe<Scalars['jsonb']>;
@@ -6205,6 +6291,7 @@ export type Harvi_Insert_Input = {
 /** aggregate max on columns */
 export type Harvi_Max_Fields = {
   __typename?: 'harvi_max_fields';
+  createdat?: Maybe<Scalars['timestamptz']>;
   currentversion?: Maybe<Scalars['Int']>;
   deviceclass?: Maybe<Scalars['String']>;
   hubserialno?: Maybe<Scalars['bigint']>;
@@ -6214,6 +6301,7 @@ export type Harvi_Max_Fields = {
 
 /** order by max() on columns of table "harvi" */
 export type Harvi_Max_Order_By = {
+  createdat?: InputMaybe<Order_By>;
   currentversion?: InputMaybe<Order_By>;
   deviceclass?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
@@ -6224,6 +6312,7 @@ export type Harvi_Max_Order_By = {
 /** aggregate min on columns */
 export type Harvi_Min_Fields = {
   __typename?: 'harvi_min_fields';
+  createdat?: Maybe<Scalars['timestamptz']>;
   currentversion?: Maybe<Scalars['Int']>;
   deviceclass?: Maybe<Scalars['String']>;
   hubserialno?: Maybe<Scalars['bigint']>;
@@ -6233,6 +6322,7 @@ export type Harvi_Min_Fields = {
 
 /** order by min() on columns of table "harvi" */
 export type Harvi_Min_Order_By = {
+  createdat?: InputMaybe<Order_By>;
   currentversion?: InputMaybe<Order_By>;
   deviceclass?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
@@ -6258,6 +6348,7 @@ export type Harvi_On_Conflict = {
 
 /** Ordering options when selecting data from "harvi". */
 export type Harvi_Order_By = {
+  createdat?: InputMaybe<Order_By>;
   ct1?: InputMaybe<Order_By>;
   ct2?: InputMaybe<Order_By>;
   ct3?: InputMaybe<Order_By>;
@@ -6310,6 +6401,8 @@ export type Harvi_Prepend_Input = {
 /** select columns of table "harvi" */
 export enum Harvi_Select_Column {
   /** column name */
+  Createdat = 'createdat',
+  /** column name */
   Ct1 = 'ct1',
   /** column name */
   Ct2 = 'ct2',
@@ -6355,6 +6448,7 @@ export enum Harvi_Select_Column {
 
 /** input type for updating data in table "harvi" */
 export type Harvi_Set_Input = {
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   ct1?: InputMaybe<Scalars['jsonb']>;
   ct2?: InputMaybe<Scalars['jsonb']>;
   ct3?: InputMaybe<Scalars['jsonb']>;
@@ -6440,6 +6534,8 @@ export type Harvi_Sum_Order_By = {
 
 /** update columns of table "harvi" */
 export enum Harvi_Update_Column {
+  /** column name */
+  Createdat = 'createdat',
   /** column name */
   Ct1 = 'ct1',
   /** column name */
@@ -6533,7 +6629,9 @@ export type Harvi_Variance_Order_By = {
 export type Hub = {
   __typename?: 'hub';
   apppassword?: Maybe<Scalars['String']>;
+  australia: Scalars['Boolean'];
   cloudipoverrideserverid?: Maybe<Scalars['Int']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   currentversion?: Maybe<Scalars['Int']>;
   deviceclass: Scalars['String'];
   /** An array relationship */
@@ -6544,6 +6642,7 @@ export type Hub = {
   harvis: Array<Harvi>;
   /** An aggregate relationship */
   harvis_aggregate: Harvi_Aggregate;
+  hubfirmwareversions?: Maybe<Scalars['jsonb']>;
   ipaddress?: Maybe<Scalars['String']>;
   isblocked: Scalars['Boolean'];
   keyvaluestore?: Maybe<Scalars['jsonb']>;
@@ -6571,15 +6670,18 @@ export type Hub = {
   masterdeviceclass?: Maybe<Scalars['String']>;
   masterdeviceinstance?: Maybe<Scalars['Int']>;
   masterdevicerawaddress?: Maybe<Scalars['Int']>;
+  microprocessorti?: Maybe<Scalars['Boolean']>;
   networkid: Scalars['Int'];
   nodevices?: Maybe<Scalars['Int']>;
   port: Scalars['Int'];
+  radiochannel?: Maybe<Scalars['smallint']>;
   registrationdate?: Maybe<Scalars['timestamptz']>;
   regpassword: Scalars['String'];
   serialno: Scalars['bigint'];
   serverlastheard?: Maybe<Scalars['Int']>;
   updatedat: Scalars['timestamptz'];
   uptime?: Maybe<Scalars['Int']>;
+  vhub?: Maybe<Scalars['Boolean']>;
   /** An array relationship */
   zappis: Array<Zappi>;
   /** An aggregate relationship */
@@ -6620,6 +6722,11 @@ export type HubHarvis_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Harvi_Order_By>>;
   where?: InputMaybe<Harvi_Bool_Exp>;
+};
+
+/** columns and relationships of "hub" */
+export type HubHubfirmwareversionsArgs = {
+  path?: InputMaybe<Scalars['String']>;
 };
 
 /** columns and relationships of "hub" */
@@ -6676,6 +6783,7 @@ export type Hub_Aggregate_FieldsCountArgs = {
 
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Hub_Append_Input = {
+  hubfirmwareversions?: InputMaybe<Scalars['jsonb']>;
   keyvaluestore?: InputMaybe<Scalars['jsonb']>;
 };
 
@@ -6704,6 +6812,7 @@ export type Hub_Avg_Fields = {
   networkid?: Maybe<Scalars['Float']>;
   nodevices?: Maybe<Scalars['Float']>;
   port?: Maybe<Scalars['Float']>;
+  radiochannel?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
@@ -6715,11 +6824,14 @@ export type Hub_Bool_Exp = {
   _not?: InputMaybe<Hub_Bool_Exp>;
   _or?: InputMaybe<Array<Hub_Bool_Exp>>;
   apppassword?: InputMaybe<String_Comparison_Exp>;
+  australia?: InputMaybe<Boolean_Comparison_Exp>;
   cloudipoverrideserverid?: InputMaybe<Int_Comparison_Exp>;
+  createdat?: InputMaybe<Timestamptz_Comparison_Exp>;
   currentversion?: InputMaybe<Int_Comparison_Exp>;
   deviceclass?: InputMaybe<String_Comparison_Exp>;
   eddis?: InputMaybe<Eddi_Bool_Exp>;
   harvis?: InputMaybe<Harvi_Bool_Exp>;
+  hubfirmwareversions?: InputMaybe<Jsonb_Comparison_Exp>;
   ipaddress?: InputMaybe<String_Comparison_Exp>;
   isblocked?: InputMaybe<Boolean_Comparison_Exp>;
   keyvaluestore?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -6747,15 +6859,18 @@ export type Hub_Bool_Exp = {
   masterdeviceclass?: InputMaybe<String_Comparison_Exp>;
   masterdeviceinstance?: InputMaybe<Int_Comparison_Exp>;
   masterdevicerawaddress?: InputMaybe<Int_Comparison_Exp>;
+  microprocessorti?: InputMaybe<Boolean_Comparison_Exp>;
   networkid?: InputMaybe<Int_Comparison_Exp>;
   nodevices?: InputMaybe<Int_Comparison_Exp>;
   port?: InputMaybe<Int_Comparison_Exp>;
+  radiochannel?: InputMaybe<Smallint_Comparison_Exp>;
   registrationdate?: InputMaybe<Timestamptz_Comparison_Exp>;
   regpassword?: InputMaybe<String_Comparison_Exp>;
   serialno?: InputMaybe<Bigint_Comparison_Exp>;
   serverlastheard?: InputMaybe<Int_Comparison_Exp>;
   updatedat?: InputMaybe<Timestamptz_Comparison_Exp>;
   uptime?: InputMaybe<Int_Comparison_Exp>;
+  vhub?: InputMaybe<Boolean_Comparison_Exp>;
   zappis?: InputMaybe<Zappi_Bool_Exp>;
 };
 
@@ -6767,16 +6882,19 @@ export enum Hub_Constraint {
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Hub_Delete_At_Path_Input = {
+  hubfirmwareversions?: InputMaybe<Array<Scalars['String']>>;
   keyvaluestore?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
 export type Hub_Delete_Elem_Input = {
+  hubfirmwareversions?: InputMaybe<Scalars['Int']>;
   keyvaluestore?: InputMaybe<Scalars['Int']>;
 };
 
 /** delete key/value pair or string element. key/value pairs are matched based on their key value */
 export type Hub_Delete_Key_Input = {
+  hubfirmwareversions?: InputMaybe<Scalars['String']>;
   keyvaluestore?: InputMaybe<Scalars['String']>;
 };
 
@@ -6804,6 +6922,7 @@ export type Hub_Inc_Input = {
   networkid?: InputMaybe<Scalars['Int']>;
   nodevices?: InputMaybe<Scalars['Int']>;
   port?: InputMaybe<Scalars['Int']>;
+  radiochannel?: InputMaybe<Scalars['smallint']>;
   serialno?: InputMaybe<Scalars['bigint']>;
   serverlastheard?: InputMaybe<Scalars['Int']>;
   uptime?: InputMaybe<Scalars['Int']>;
@@ -6812,11 +6931,14 @@ export type Hub_Inc_Input = {
 /** input type for inserting data into table "hub" */
 export type Hub_Insert_Input = {
   apppassword?: InputMaybe<Scalars['String']>;
+  australia?: InputMaybe<Scalars['Boolean']>;
   cloudipoverrideserverid?: InputMaybe<Scalars['Int']>;
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   currentversion?: InputMaybe<Scalars['Int']>;
   deviceclass?: InputMaybe<Scalars['String']>;
   eddis?: InputMaybe<Eddi_Arr_Rel_Insert_Input>;
   harvis?: InputMaybe<Harvi_Arr_Rel_Insert_Input>;
+  hubfirmwareversions?: InputMaybe<Scalars['jsonb']>;
   ipaddress?: InputMaybe<Scalars['String']>;
   isblocked?: InputMaybe<Scalars['Boolean']>;
   keyvaluestore?: InputMaybe<Scalars['jsonb']>;
@@ -6844,15 +6966,18 @@ export type Hub_Insert_Input = {
   masterdeviceclass?: InputMaybe<Scalars['String']>;
   masterdeviceinstance?: InputMaybe<Scalars['Int']>;
   masterdevicerawaddress?: InputMaybe<Scalars['Int']>;
+  microprocessorti?: InputMaybe<Scalars['Boolean']>;
   networkid?: InputMaybe<Scalars['Int']>;
   nodevices?: InputMaybe<Scalars['Int']>;
   port?: InputMaybe<Scalars['Int']>;
+  radiochannel?: InputMaybe<Scalars['smallint']>;
   registrationdate?: InputMaybe<Scalars['timestamptz']>;
   regpassword?: InputMaybe<Scalars['String']>;
   serialno?: InputMaybe<Scalars['bigint']>;
   serverlastheard?: InputMaybe<Scalars['Int']>;
   updatedat?: InputMaybe<Scalars['timestamptz']>;
   uptime?: InputMaybe<Scalars['Int']>;
+  vhub?: InputMaybe<Scalars['Boolean']>;
   zappis?: InputMaybe<Zappi_Arr_Rel_Insert_Input>;
 };
 
@@ -6861,6 +6986,7 @@ export type Hub_Max_Fields = {
   __typename?: 'hub_max_fields';
   apppassword?: Maybe<Scalars['String']>;
   cloudipoverrideserverid?: Maybe<Scalars['Int']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   currentversion?: Maybe<Scalars['Int']>;
   deviceclass?: Maybe<Scalars['String']>;
   ipaddress?: Maybe<Scalars['String']>;
@@ -6886,6 +7012,7 @@ export type Hub_Max_Fields = {
   networkid?: Maybe<Scalars['Int']>;
   nodevices?: Maybe<Scalars['Int']>;
   port?: Maybe<Scalars['Int']>;
+  radiochannel?: Maybe<Scalars['smallint']>;
   registrationdate?: Maybe<Scalars['timestamptz']>;
   regpassword?: Maybe<Scalars['String']>;
   serialno?: Maybe<Scalars['bigint']>;
@@ -6899,6 +7026,7 @@ export type Hub_Min_Fields = {
   __typename?: 'hub_min_fields';
   apppassword?: Maybe<Scalars['String']>;
   cloudipoverrideserverid?: Maybe<Scalars['Int']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   currentversion?: Maybe<Scalars['Int']>;
   deviceclass?: Maybe<Scalars['String']>;
   ipaddress?: Maybe<Scalars['String']>;
@@ -6924,6 +7052,7 @@ export type Hub_Min_Fields = {
   networkid?: Maybe<Scalars['Int']>;
   nodevices?: Maybe<Scalars['Int']>;
   port?: Maybe<Scalars['Int']>;
+  radiochannel?: Maybe<Scalars['smallint']>;
   registrationdate?: Maybe<Scalars['timestamptz']>;
   regpassword?: Maybe<Scalars['String']>;
   serialno?: Maybe<Scalars['bigint']>;
@@ -6958,11 +7087,14 @@ export type Hub_On_Conflict = {
 /** Ordering options when selecting data from "hub". */
 export type Hub_Order_By = {
   apppassword?: InputMaybe<Order_By>;
+  australia?: InputMaybe<Order_By>;
   cloudipoverrideserverid?: InputMaybe<Order_By>;
+  createdat?: InputMaybe<Order_By>;
   currentversion?: InputMaybe<Order_By>;
   deviceclass?: InputMaybe<Order_By>;
   eddis_aggregate?: InputMaybe<Eddi_Aggregate_Order_By>;
   harvis_aggregate?: InputMaybe<Harvi_Aggregate_Order_By>;
+  hubfirmwareversions?: InputMaybe<Order_By>;
   ipaddress?: InputMaybe<Order_By>;
   isblocked?: InputMaybe<Order_By>;
   keyvaluestore?: InputMaybe<Order_By>;
@@ -6990,15 +7122,18 @@ export type Hub_Order_By = {
   masterdeviceclass?: InputMaybe<Order_By>;
   masterdeviceinstance?: InputMaybe<Order_By>;
   masterdevicerawaddress?: InputMaybe<Order_By>;
+  microprocessorti?: InputMaybe<Order_By>;
   networkid?: InputMaybe<Order_By>;
   nodevices?: InputMaybe<Order_By>;
   port?: InputMaybe<Order_By>;
+  radiochannel?: InputMaybe<Order_By>;
   registrationdate?: InputMaybe<Order_By>;
   regpassword?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
   serverlastheard?: InputMaybe<Order_By>;
   updatedat?: InputMaybe<Order_By>;
   uptime?: InputMaybe<Order_By>;
+  vhub?: InputMaybe<Order_By>;
   zappis_aggregate?: InputMaybe<Zappi_Aggregate_Order_By>;
 };
 
@@ -7009,6 +7144,7 @@ export type Hub_Pk_Columns_Input = {
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
 export type Hub_Prepend_Input = {
+  hubfirmwareversions?: InputMaybe<Scalars['jsonb']>;
   keyvaluestore?: InputMaybe<Scalars['jsonb']>;
 };
 
@@ -7017,11 +7153,17 @@ export enum Hub_Select_Column {
   /** column name */
   Apppassword = 'apppassword',
   /** column name */
+  Australia = 'australia',
+  /** column name */
   Cloudipoverrideserverid = 'cloudipoverrideserverid',
+  /** column name */
+  Createdat = 'createdat',
   /** column name */
   Currentversion = 'currentversion',
   /** column name */
   Deviceclass = 'deviceclass',
+  /** column name */
+  Hubfirmwareversions = 'hubfirmwareversions',
   /** column name */
   Ipaddress = 'ipaddress',
   /** column name */
@@ -7077,11 +7219,15 @@ export enum Hub_Select_Column {
   /** column name */
   Masterdevicerawaddress = 'masterdevicerawaddress',
   /** column name */
+  Microprocessorti = 'microprocessorti',
+  /** column name */
   Networkid = 'networkid',
   /** column name */
   Nodevices = 'nodevices',
   /** column name */
   Port = 'port',
+  /** column name */
+  Radiochannel = 'radiochannel',
   /** column name */
   Registrationdate = 'registrationdate',
   /** column name */
@@ -7094,14 +7240,19 @@ export enum Hub_Select_Column {
   Updatedat = 'updatedat',
   /** column name */
   Uptime = 'uptime',
+  /** column name */
+  Vhub = 'vhub',
 }
 
 /** input type for updating data in table "hub" */
 export type Hub_Set_Input = {
   apppassword?: InputMaybe<Scalars['String']>;
+  australia?: InputMaybe<Scalars['Boolean']>;
   cloudipoverrideserverid?: InputMaybe<Scalars['Int']>;
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   currentversion?: InputMaybe<Scalars['Int']>;
   deviceclass?: InputMaybe<Scalars['String']>;
+  hubfirmwareversions?: InputMaybe<Scalars['jsonb']>;
   ipaddress?: InputMaybe<Scalars['String']>;
   isblocked?: InputMaybe<Scalars['Boolean']>;
   keyvaluestore?: InputMaybe<Scalars['jsonb']>;
@@ -7129,15 +7280,18 @@ export type Hub_Set_Input = {
   masterdeviceclass?: InputMaybe<Scalars['String']>;
   masterdeviceinstance?: InputMaybe<Scalars['Int']>;
   masterdevicerawaddress?: InputMaybe<Scalars['Int']>;
+  microprocessorti?: InputMaybe<Scalars['Boolean']>;
   networkid?: InputMaybe<Scalars['Int']>;
   nodevices?: InputMaybe<Scalars['Int']>;
   port?: InputMaybe<Scalars['Int']>;
+  radiochannel?: InputMaybe<Scalars['smallint']>;
   registrationdate?: InputMaybe<Scalars['timestamptz']>;
   regpassword?: InputMaybe<Scalars['String']>;
   serialno?: InputMaybe<Scalars['bigint']>;
   serverlastheard?: InputMaybe<Scalars['Int']>;
   updatedat?: InputMaybe<Scalars['timestamptz']>;
   uptime?: InputMaybe<Scalars['Int']>;
+  vhub?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate stddev on columns */
@@ -7165,6 +7319,7 @@ export type Hub_Stddev_Fields = {
   networkid?: Maybe<Scalars['Float']>;
   nodevices?: Maybe<Scalars['Float']>;
   port?: Maybe<Scalars['Float']>;
+  radiochannel?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
@@ -7195,6 +7350,7 @@ export type Hub_Stddev_Pop_Fields = {
   networkid?: Maybe<Scalars['Float']>;
   nodevices?: Maybe<Scalars['Float']>;
   port?: Maybe<Scalars['Float']>;
+  radiochannel?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
@@ -7225,6 +7381,7 @@ export type Hub_Stddev_Samp_Fields = {
   networkid?: Maybe<Scalars['Float']>;
   nodevices?: Maybe<Scalars['Float']>;
   port?: Maybe<Scalars['Float']>;
+  radiochannel?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
@@ -7255,6 +7412,7 @@ export type Hub_Sum_Fields = {
   networkid?: Maybe<Scalars['Int']>;
   nodevices?: Maybe<Scalars['Int']>;
   port?: Maybe<Scalars['Int']>;
+  radiochannel?: Maybe<Scalars['smallint']>;
   serialno?: Maybe<Scalars['bigint']>;
   serverlastheard?: Maybe<Scalars['Int']>;
   uptime?: Maybe<Scalars['Int']>;
@@ -7265,11 +7423,17 @@ export enum Hub_Update_Column {
   /** column name */
   Apppassword = 'apppassword',
   /** column name */
+  Australia = 'australia',
+  /** column name */
   Cloudipoverrideserverid = 'cloudipoverrideserverid',
+  /** column name */
+  Createdat = 'createdat',
   /** column name */
   Currentversion = 'currentversion',
   /** column name */
   Deviceclass = 'deviceclass',
+  /** column name */
+  Hubfirmwareversions = 'hubfirmwareversions',
   /** column name */
   Ipaddress = 'ipaddress',
   /** column name */
@@ -7325,11 +7489,15 @@ export enum Hub_Update_Column {
   /** column name */
   Masterdevicerawaddress = 'masterdevicerawaddress',
   /** column name */
+  Microprocessorti = 'microprocessorti',
+  /** column name */
   Networkid = 'networkid',
   /** column name */
   Nodevices = 'nodevices',
   /** column name */
   Port = 'port',
+  /** column name */
+  Radiochannel = 'radiochannel',
   /** column name */
   Registrationdate = 'registrationdate',
   /** column name */
@@ -7342,6 +7510,8 @@ export enum Hub_Update_Column {
   Updatedat = 'updatedat',
   /** column name */
   Uptime = 'uptime',
+  /** column name */
+  Vhub = 'vhub',
 }
 
 /** aggregate var_pop on columns */
@@ -7369,6 +7539,7 @@ export type Hub_Var_Pop_Fields = {
   networkid?: Maybe<Scalars['Float']>;
   nodevices?: Maybe<Scalars['Float']>;
   port?: Maybe<Scalars['Float']>;
+  radiochannel?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
@@ -7399,6 +7570,7 @@ export type Hub_Var_Samp_Fields = {
   networkid?: Maybe<Scalars['Float']>;
   nodevices?: Maybe<Scalars['Float']>;
   port?: Maybe<Scalars['Float']>;
+  radiochannel?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
@@ -7429,6 +7601,7 @@ export type Hub_Variance_Fields = {
   networkid?: Maybe<Scalars['Float']>;
   nodevices?: Maybe<Scalars['Float']>;
   port?: Maybe<Scalars['Float']>;
+  radiochannel?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
   serverlastheard?: Maybe<Scalars['Float']>;
   uptime?: Maybe<Scalars['Float']>;
@@ -9845,6 +10018,7 @@ export type Zappi = {
   configstate?: Maybe<Scalars['smallint']>;
   configstructure?: Maybe<Scalars['smallint']>;
   configversion?: Maybe<Scalars['smallint']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   ct1?: Maybe<Scalars['jsonb']>;
   ct2?: Maybe<Scalars['jsonb']>;
   ct3?: Maybe<Scalars['jsonb']>;
@@ -9879,6 +10053,7 @@ export type Zappi = {
   dsrdatalce?: Maybe<Scalars['Boolean']>;
   dsrdataload?: Maybe<Scalars['smallint']>;
   dsrdataseconds?: Maybe<Scalars['smallint']>;
+  ethernetlink?: Maybe<Scalars['Boolean']>;
   frequency?: Maybe<Scalars['smallint']>;
   highpower?: Maybe<Scalars['Boolean']>;
   /** An object relationship */
@@ -9890,7 +10065,9 @@ export type Zappi = {
   lockedstatuslockednow?: Maybe<Scalars['Boolean']>;
   lockedstatuslockwhenpluggedin?: Maybe<Scalars['Boolean']>;
   lockedstatuslockwhenunplugged?: Maybe<Scalars['Boolean']>;
+  lockedstatusmicroprocessorti?: Maybe<Scalars['Boolean']>;
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
   minpower?: Maybe<Scalars['Int']>;
   normalboostkwh?: Maybe<Scalars['smallint']>;
@@ -9915,9 +10092,11 @@ export type Zappi = {
   stubloaderversion?: Maybe<Scalars['Int']>;
   threephase: Scalars['Boolean'];
   updatedat: Scalars['timestamptz'];
+  vhub?: Maybe<Scalars['Boolean']>;
   voltage?: Maybe<Scalars['smallint']>;
   voltage2?: Maybe<Scalars['smallint']>;
   voltage3?: Maybe<Scalars['smallint']>;
+  wifilink?: Maybe<Scalars['Boolean']>;
   zappi2: Scalars['Boolean'];
   zappi_control_group_device?: Maybe<Control_Group_Device>;
   zappimode?: Maybe<Scalars['String']>;
@@ -10100,6 +10279,7 @@ export type Zappi_Avg_Fields = {
   frequency?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   normalboostkwh?: Maybe<Scalars['Float']>;
@@ -10149,6 +10329,7 @@ export type Zappi_Avg_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -10197,6 +10378,7 @@ export type Zappi_Bool_Exp = {
   configstate?: InputMaybe<Smallint_Comparison_Exp>;
   configstructure?: InputMaybe<Smallint_Comparison_Exp>;
   configversion?: InputMaybe<Smallint_Comparison_Exp>;
+  createdat?: InputMaybe<Timestamptz_Comparison_Exp>;
   ct1?: InputMaybe<Jsonb_Comparison_Exp>;
   ct2?: InputMaybe<Jsonb_Comparison_Exp>;
   ct3?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -10231,6 +10413,7 @@ export type Zappi_Bool_Exp = {
   dsrdatalce?: InputMaybe<Boolean_Comparison_Exp>;
   dsrdataload?: InputMaybe<Smallint_Comparison_Exp>;
   dsrdataseconds?: InputMaybe<Smallint_Comparison_Exp>;
+  ethernetlink?: InputMaybe<Boolean_Comparison_Exp>;
   frequency?: InputMaybe<Smallint_Comparison_Exp>;
   highpower?: InputMaybe<Boolean_Comparison_Exp>;
   hub?: InputMaybe<Hub_Bool_Exp>;
@@ -10241,7 +10424,9 @@ export type Zappi_Bool_Exp = {
   lockedstatuslockednow?: InputMaybe<Boolean_Comparison_Exp>;
   lockedstatuslockwhenpluggedin?: InputMaybe<Boolean_Comparison_Exp>;
   lockedstatuslockwhenunplugged?: InputMaybe<Boolean_Comparison_Exp>;
+  lockedstatusmicroprocessorti?: InputMaybe<Boolean_Comparison_Exp>;
   maxpower?: InputMaybe<Int_Comparison_Exp>;
+  melibversion?: InputMaybe<Int_Comparison_Exp>;
   melinkversion?: InputMaybe<Int_Comparison_Exp>;
   minpower?: InputMaybe<Int_Comparison_Exp>;
   normalboostkwh?: InputMaybe<Smallint_Comparison_Exp>;
@@ -10266,9 +10451,11 @@ export type Zappi_Bool_Exp = {
   stubloaderversion?: InputMaybe<Int_Comparison_Exp>;
   threephase?: InputMaybe<Boolean_Comparison_Exp>;
   updatedat?: InputMaybe<Timestamptz_Comparison_Exp>;
+  vhub?: InputMaybe<Boolean_Comparison_Exp>;
   voltage?: InputMaybe<Smallint_Comparison_Exp>;
   voltage2?: InputMaybe<Smallint_Comparison_Exp>;
   voltage3?: InputMaybe<Smallint_Comparison_Exp>;
+  wifilink?: InputMaybe<Boolean_Comparison_Exp>;
   zappi2?: InputMaybe<Boolean_Comparison_Exp>;
   zappimode?: InputMaybe<String_Comparison_Exp>;
 };
@@ -10366,6 +10553,7 @@ export type Zappi_Inc_Input = {
   frequency?: InputMaybe<Scalars['smallint']>;
   hubserialno?: InputMaybe<Scalars['bigint']>;
   maxpower?: InputMaybe<Scalars['Int']>;
+  melibversion?: InputMaybe<Scalars['Int']>;
   melinkversion?: InputMaybe<Scalars['Int']>;
   minpower?: InputMaybe<Scalars['Int']>;
   normalboostkwh?: InputMaybe<Scalars['smallint']>;
@@ -10411,6 +10599,7 @@ export type Zappi_Insert_Input = {
   configstate?: InputMaybe<Scalars['smallint']>;
   configstructure?: InputMaybe<Scalars['smallint']>;
   configversion?: InputMaybe<Scalars['smallint']>;
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   ct1?: InputMaybe<Scalars['jsonb']>;
   ct2?: InputMaybe<Scalars['jsonb']>;
   ct3?: InputMaybe<Scalars['jsonb']>;
@@ -10445,6 +10634,7 @@ export type Zappi_Insert_Input = {
   dsrdatalce?: InputMaybe<Scalars['Boolean']>;
   dsrdataload?: InputMaybe<Scalars['smallint']>;
   dsrdataseconds?: InputMaybe<Scalars['smallint']>;
+  ethernetlink?: InputMaybe<Scalars['Boolean']>;
   frequency?: InputMaybe<Scalars['smallint']>;
   highpower?: InputMaybe<Scalars['Boolean']>;
   hub?: InputMaybe<Hub_Obj_Rel_Insert_Input>;
@@ -10455,7 +10645,9 @@ export type Zappi_Insert_Input = {
   lockedstatuslockednow?: InputMaybe<Scalars['Boolean']>;
   lockedstatuslockwhenpluggedin?: InputMaybe<Scalars['Boolean']>;
   lockedstatuslockwhenunplugged?: InputMaybe<Scalars['Boolean']>;
+  lockedstatusmicroprocessorti?: InputMaybe<Scalars['Boolean']>;
   maxpower?: InputMaybe<Scalars['Int']>;
+  melibversion?: InputMaybe<Scalars['Int']>;
   melinkversion?: InputMaybe<Scalars['Int']>;
   minpower?: InputMaybe<Scalars['Int']>;
   normalboostkwh?: InputMaybe<Scalars['smallint']>;
@@ -10480,9 +10672,11 @@ export type Zappi_Insert_Input = {
   stubloaderversion?: InputMaybe<Scalars['Int']>;
   threephase?: InputMaybe<Scalars['Boolean']>;
   updatedat?: InputMaybe<Scalars['timestamptz']>;
+  vhub?: InputMaybe<Scalars['Boolean']>;
   voltage?: InputMaybe<Scalars['smallint']>;
   voltage2?: InputMaybe<Scalars['smallint']>;
   voltage3?: InputMaybe<Scalars['smallint']>;
+  wifilink?: InputMaybe<Scalars['Boolean']>;
   zappi2?: InputMaybe<Scalars['Boolean']>;
   zappimode?: InputMaybe<Scalars['String']>;
 };
@@ -10501,6 +10695,7 @@ export type Zappi_Max_Fields = {
   configstate?: Maybe<Scalars['smallint']>;
   configstructure?: Maybe<Scalars['smallint']>;
   configversion?: Maybe<Scalars['smallint']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   currentboostremaining?: Maybe<Scalars['smallint']>;
   currentversion?: Maybe<Scalars['Int']>;
   deviceaddressraw?: Maybe<Scalars['Int']>;
@@ -10514,6 +10709,7 @@ export type Zappi_Max_Fields = {
   frequency?: Maybe<Scalars['smallint']>;
   hubserialno?: Maybe<Scalars['bigint']>;
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
   minpower?: Maybe<Scalars['Int']>;
   normalboostkwh?: Maybe<Scalars['smallint']>;
@@ -10556,6 +10752,7 @@ export type Zappi_Max_Order_By = {
   configstate?: InputMaybe<Order_By>;
   configstructure?: InputMaybe<Order_By>;
   configversion?: InputMaybe<Order_By>;
+  createdat?: InputMaybe<Order_By>;
   currentboostremaining?: InputMaybe<Order_By>;
   currentversion?: InputMaybe<Order_By>;
   deviceaddressraw?: InputMaybe<Order_By>;
@@ -10569,6 +10766,7 @@ export type Zappi_Max_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -10612,6 +10810,7 @@ export type Zappi_Min_Fields = {
   configstate?: Maybe<Scalars['smallint']>;
   configstructure?: Maybe<Scalars['smallint']>;
   configversion?: Maybe<Scalars['smallint']>;
+  createdat?: Maybe<Scalars['timestamptz']>;
   currentboostremaining?: Maybe<Scalars['smallint']>;
   currentversion?: Maybe<Scalars['Int']>;
   deviceaddressraw?: Maybe<Scalars['Int']>;
@@ -10625,6 +10824,7 @@ export type Zappi_Min_Fields = {
   frequency?: Maybe<Scalars['smallint']>;
   hubserialno?: Maybe<Scalars['bigint']>;
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
   minpower?: Maybe<Scalars['Int']>;
   normalboostkwh?: Maybe<Scalars['smallint']>;
@@ -10667,6 +10867,7 @@ export type Zappi_Min_Order_By = {
   configstate?: InputMaybe<Order_By>;
   configstructure?: InputMaybe<Order_By>;
   configversion?: InputMaybe<Order_By>;
+  createdat?: InputMaybe<Order_By>;
   currentboostremaining?: InputMaybe<Order_By>;
   currentversion?: InputMaybe<Order_By>;
   deviceaddressraw?: InputMaybe<Order_By>;
@@ -10680,6 +10881,7 @@ export type Zappi_Min_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -11427,6 +11629,7 @@ export type Zappi_Order_By = {
   configstate?: InputMaybe<Order_By>;
   configstructure?: InputMaybe<Order_By>;
   configversion?: InputMaybe<Order_By>;
+  createdat?: InputMaybe<Order_By>;
   ct1?: InputMaybe<Order_By>;
   ct2?: InputMaybe<Order_By>;
   ct3?: InputMaybe<Order_By>;
@@ -11461,6 +11664,7 @@ export type Zappi_Order_By = {
   dsrdatalce?: InputMaybe<Order_By>;
   dsrdataload?: InputMaybe<Order_By>;
   dsrdataseconds?: InputMaybe<Order_By>;
+  ethernetlink?: InputMaybe<Order_By>;
   frequency?: InputMaybe<Order_By>;
   highpower?: InputMaybe<Order_By>;
   hub?: InputMaybe<Hub_Order_By>;
@@ -11471,7 +11675,9 @@ export type Zappi_Order_By = {
   lockedstatuslockednow?: InputMaybe<Order_By>;
   lockedstatuslockwhenpluggedin?: InputMaybe<Order_By>;
   lockedstatuslockwhenunplugged?: InputMaybe<Order_By>;
+  lockedstatusmicroprocessorti?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -11496,9 +11702,11 @@ export type Zappi_Order_By = {
   stubloaderversion?: InputMaybe<Order_By>;
   threephase?: InputMaybe<Order_By>;
   updatedat?: InputMaybe<Order_By>;
+  vhub?: InputMaybe<Order_By>;
   voltage?: InputMaybe<Order_By>;
   voltage2?: InputMaybe<Order_By>;
   voltage3?: InputMaybe<Order_By>;
+  wifilink?: InputMaybe<Order_By>;
   zappi2?: InputMaybe<Order_By>;
   zappimode?: InputMaybe<Order_By>;
 };
@@ -11567,6 +11775,8 @@ export enum Zappi_Select_Column {
   /** column name */
   Configversion = 'configversion',
   /** column name */
+  Createdat = 'createdat',
+  /** column name */
   Ct1 = 'ct1',
   /** column name */
   Ct2 = 'ct2',
@@ -11635,6 +11845,8 @@ export enum Zappi_Select_Column {
   /** column name */
   Dsrdataseconds = 'dsrdataseconds',
   /** column name */
+  Ethernetlink = 'ethernetlink',
+  /** column name */
   Frequency = 'frequency',
   /** column name */
   Highpower = 'highpower',
@@ -11653,7 +11865,11 @@ export enum Zappi_Select_Column {
   /** column name */
   Lockedstatuslockwhenunplugged = 'lockedstatuslockwhenunplugged',
   /** column name */
+  Lockedstatusmicroprocessorti = 'lockedstatusmicroprocessorti',
+  /** column name */
   Maxpower = 'maxpower',
+  /** column name */
+  Melibversion = 'melibversion',
   /** column name */
   Melinkversion = 'melinkversion',
   /** column name */
@@ -11703,11 +11919,15 @@ export enum Zappi_Select_Column {
   /** column name */
   Updatedat = 'updatedat',
   /** column name */
+  Vhub = 'vhub',
+  /** column name */
   Voltage = 'voltage',
   /** column name */
   Voltage2 = 'voltage2',
   /** column name */
   Voltage3 = 'voltage3',
+  /** column name */
+  Wifilink = 'wifilink',
   /** column name */
   Zappi2 = 'zappi2',
   /** column name */
@@ -11734,6 +11954,7 @@ export type Zappi_Set_Input = {
   configstate?: InputMaybe<Scalars['smallint']>;
   configstructure?: InputMaybe<Scalars['smallint']>;
   configversion?: InputMaybe<Scalars['smallint']>;
+  createdat?: InputMaybe<Scalars['timestamptz']>;
   ct1?: InputMaybe<Scalars['jsonb']>;
   ct2?: InputMaybe<Scalars['jsonb']>;
   ct3?: InputMaybe<Scalars['jsonb']>;
@@ -11768,6 +11989,7 @@ export type Zappi_Set_Input = {
   dsrdatalce?: InputMaybe<Scalars['Boolean']>;
   dsrdataload?: InputMaybe<Scalars['smallint']>;
   dsrdataseconds?: InputMaybe<Scalars['smallint']>;
+  ethernetlink?: InputMaybe<Scalars['Boolean']>;
   frequency?: InputMaybe<Scalars['smallint']>;
   highpower?: InputMaybe<Scalars['Boolean']>;
   hubserialno?: InputMaybe<Scalars['bigint']>;
@@ -11777,7 +11999,9 @@ export type Zappi_Set_Input = {
   lockedstatuslockednow?: InputMaybe<Scalars['Boolean']>;
   lockedstatuslockwhenpluggedin?: InputMaybe<Scalars['Boolean']>;
   lockedstatuslockwhenunplugged?: InputMaybe<Scalars['Boolean']>;
+  lockedstatusmicroprocessorti?: InputMaybe<Scalars['Boolean']>;
   maxpower?: InputMaybe<Scalars['Int']>;
+  melibversion?: InputMaybe<Scalars['Int']>;
   melinkversion?: InputMaybe<Scalars['Int']>;
   minpower?: InputMaybe<Scalars['Int']>;
   normalboostkwh?: InputMaybe<Scalars['smallint']>;
@@ -11802,9 +12026,11 @@ export type Zappi_Set_Input = {
   stubloaderversion?: InputMaybe<Scalars['Int']>;
   threephase?: InputMaybe<Scalars['Boolean']>;
   updatedat?: InputMaybe<Scalars['timestamptz']>;
+  vhub?: InputMaybe<Scalars['Boolean']>;
   voltage?: InputMaybe<Scalars['smallint']>;
   voltage2?: InputMaybe<Scalars['smallint']>;
   voltage3?: InputMaybe<Scalars['smallint']>;
+  wifilink?: InputMaybe<Scalars['Boolean']>;
   zappi2?: InputMaybe<Scalars['Boolean']>;
   zappimode?: InputMaybe<Scalars['String']>;
 };
@@ -11835,6 +12061,7 @@ export type Zappi_Stddev_Fields = {
   frequency?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   normalboostkwh?: Maybe<Scalars['Float']>;
@@ -11884,6 +12111,7 @@ export type Zappi_Stddev_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -11934,6 +12162,7 @@ export type Zappi_Stddev_Pop_Fields = {
   frequency?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   normalboostkwh?: Maybe<Scalars['Float']>;
@@ -11983,6 +12212,7 @@ export type Zappi_Stddev_Pop_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -12033,6 +12263,7 @@ export type Zappi_Stddev_Samp_Fields = {
   frequency?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   normalboostkwh?: Maybe<Scalars['Float']>;
@@ -12082,6 +12313,7 @@ export type Zappi_Stddev_Samp_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -12132,6 +12364,7 @@ export type Zappi_Sum_Fields = {
   frequency?: Maybe<Scalars['smallint']>;
   hubserialno?: Maybe<Scalars['bigint']>;
   maxpower?: Maybe<Scalars['Int']>;
+  melibversion?: Maybe<Scalars['Int']>;
   melinkversion?: Maybe<Scalars['Int']>;
   minpower?: Maybe<Scalars['Int']>;
   normalboostkwh?: Maybe<Scalars['smallint']>;
@@ -12181,6 +12414,7 @@ export type Zappi_Sum_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -12244,6 +12478,8 @@ export enum Zappi_Update_Column {
   /** column name */
   Configversion = 'configversion',
   /** column name */
+  Createdat = 'createdat',
+  /** column name */
   Ct1 = 'ct1',
   /** column name */
   Ct2 = 'ct2',
@@ -12312,6 +12548,8 @@ export enum Zappi_Update_Column {
   /** column name */
   Dsrdataseconds = 'dsrdataseconds',
   /** column name */
+  Ethernetlink = 'ethernetlink',
+  /** column name */
   Frequency = 'frequency',
   /** column name */
   Highpower = 'highpower',
@@ -12330,7 +12568,11 @@ export enum Zappi_Update_Column {
   /** column name */
   Lockedstatuslockwhenunplugged = 'lockedstatuslockwhenunplugged',
   /** column name */
+  Lockedstatusmicroprocessorti = 'lockedstatusmicroprocessorti',
+  /** column name */
   Maxpower = 'maxpower',
+  /** column name */
+  Melibversion = 'melibversion',
   /** column name */
   Melinkversion = 'melinkversion',
   /** column name */
@@ -12380,11 +12622,15 @@ export enum Zappi_Update_Column {
   /** column name */
   Updatedat = 'updatedat',
   /** column name */
+  Vhub = 'vhub',
+  /** column name */
   Voltage = 'voltage',
   /** column name */
   Voltage2 = 'voltage2',
   /** column name */
   Voltage3 = 'voltage3',
+  /** column name */
+  Wifilink = 'wifilink',
   /** column name */
   Zappi2 = 'zappi2',
   /** column name */
@@ -12417,6 +12663,7 @@ export type Zappi_Var_Pop_Fields = {
   frequency?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   normalboostkwh?: Maybe<Scalars['Float']>;
@@ -12466,6 +12713,7 @@ export type Zappi_Var_Pop_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -12516,6 +12764,7 @@ export type Zappi_Var_Samp_Fields = {
   frequency?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   normalboostkwh?: Maybe<Scalars['Float']>;
@@ -12565,6 +12814,7 @@ export type Zappi_Var_Samp_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -12615,6 +12865,7 @@ export type Zappi_Variance_Fields = {
   frequency?: Maybe<Scalars['Float']>;
   hubserialno?: Maybe<Scalars['Float']>;
   maxpower?: Maybe<Scalars['Float']>;
+  melibversion?: Maybe<Scalars['Float']>;
   melinkversion?: Maybe<Scalars['Float']>;
   minpower?: Maybe<Scalars['Float']>;
   normalboostkwh?: Maybe<Scalars['Float']>;
@@ -12664,6 +12915,7 @@ export type Zappi_Variance_Order_By = {
   frequency?: InputMaybe<Order_By>;
   hubserialno?: InputMaybe<Order_By>;
   maxpower?: InputMaybe<Order_By>;
+  melibversion?: InputMaybe<Order_By>;
   melinkversion?: InputMaybe<Order_By>;
   minpower?: InputMaybe<Order_By>;
   normalboostkwh?: InputMaybe<Order_By>;
@@ -13096,6 +13348,58 @@ export type DeviceHistoryQuery = {
   }>;
 };
 
+export type DeviceHistoryByIdsQueryVariables = Exact<{
+  serialNos: Array<Scalars['bigint']> | Scalars['bigint'];
+  gte: Scalars['timestamp'];
+  lt: Scalars['timestamp'];
+  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+}>;
+
+export type DeviceHistoryByIdsQuery = {
+  __typename?: 'query_root';
+  zappiMinutes: Array<{
+    __typename?: 'zappi_minute';
+    voltage1?: number | null;
+    voltage2?: number | null;
+    voltage3?: number | null;
+    frequency?: number | null;
+    timestamp: string;
+    serialNo: number;
+    importPower?: number | null;
+    exportPower?: number | null;
+    externalCtPositivePower1?: number | null;
+    externalCtPositivePower2?: number | null;
+    externalCtPositivePower3?: number | null;
+    externalCtNegativePower1?: number | null;
+    externalCtNegativePower2?: number | null;
+    externalCtNegativePower3?: number | null;
+    divertedLoadPower1?: number | null;
+    divertedLoadPower2?: number | null;
+    divertedLoadPower3?: number | null;
+    boostLoadPower1?: number | null;
+    boostLoadPower2?: number | null;
+    boostLoadPower3?: number | null;
+  }>;
+  eddiMinutes: Array<{
+    __typename?: 'eddi_minute';
+    frequency?: number | null;
+    timestamp: string;
+    serialNo: number;
+    importPower?: number | null;
+    exportPower?: number | null;
+    externalCtPositivePower1?: number | null;
+    externalCtPositivePower2?: number | null;
+    externalCtNegativePower1?: number | null;
+    externalCtNegativePower2?: number | null;
+    divertedLoadPower1?: number | null;
+    divertedLoadPower2?: number | null;
+    boostLoadPower1?: number | null;
+    boostLoadPower2?: number | null;
+    voltage1?: number | null;
+  }>;
+};
+
 export type ZappiHistoryFragment = {
   __typename?: 'zappi_minute';
   voltage1?: number | null;
@@ -13474,6 +13778,26 @@ export const DeviceHistoryDocument = gql`
   ${ZappiHistoryFragmentDoc}
   ${EddiHistoryFragmentDoc}
 `;
+export const DeviceHistoryByIdsDocument = gql`
+  query DeviceHistoryByIds($serialNos: [bigint!]!, $gte: timestamp!, $lt: timestamp!, $offset: Int, $limit: Int) {
+    zappiMinutes: zappi_minute(
+      offset: $offset
+      limit: $limit
+      where: { timestamp: { _gte: $gte, _lt: $lt }, serialno: { _in: $serialNos } }
+    ) {
+      ...ZappiHistory
+    }
+    eddiMinutes: eddi_minute(
+      offset: $offset
+      limit: $limit
+      where: { timestamp: { _gte: $gte, _lt: $lt }, serialno: { _in: $serialNos } }
+    ) {
+      ...EddiHistory
+    }
+  }
+  ${ZappiHistoryFragmentDoc}
+  ${EddiHistoryFragmentDoc}
+`;
 
 export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
@@ -13757,6 +14081,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'DeviceHistory'
+      );
+    },
+    DeviceHistoryByIds(
+      variables: DeviceHistoryByIdsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<DeviceHistoryByIdsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<DeviceHistoryByIdsQuery>(DeviceHistoryByIdsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'DeviceHistoryByIds'
       );
     },
   };

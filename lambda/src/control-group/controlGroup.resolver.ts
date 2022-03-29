@@ -2,25 +2,31 @@
 import { GraphQLError } from 'graphql';
 import { Arg, Args, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
 import { AppContext } from '../context';
-import { getApi } from '../data-sources';
+import { getDataSources } from '../data-sources';
 import { Device } from '../device';
 import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
 import { AffectedResponse } from '../shared';
-import { ControlGroupsArgs, CreateControlGroupArgs, MutateControlGroupArgs } from './controlGroup.args';
+import { mapSerialNo } from '../utils';
+import {
+  ControlGroupHistoryArgs,
+  ControlGroupsArgs,
+  CreateControlGroupArgs,
+  MutateControlGroupArgs,
+} from './controlGroup.args';
 import { ControlGroup } from './controlGroup.type';
 
 @Resolver(ControlGroup)
 export class ControlGroupResolver {
   @Query(() => [ControlGroup])
   controlGroups(@Ctx() ctx: AppContext, @Args() args: ControlGroupsArgs): Promise<ControlGroup[]> {
-    const controlGroupApi = getApi('controlGroupApi', ctx);
+    const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.getControlGroups(args);
   }
 
   @Query(() => ControlGroup)
   async controlGroup(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<ControlGroup> {
-    const controlGroupApi = getApi('controlGroupApi', ctx);
+    const { controlGroupApi } = getDataSources(ctx);
     const result = await controlGroupApi.getControlGroupById(id);
     if (result === null) {
       throw new GraphQLError('Not found');
@@ -30,32 +36,34 @@ export class ControlGroupResolver {
 
   @Query(() => [Device])
   controlGroupDevices(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<Device[]> {
-    const controlGroupApi = getApi('controlGroupApi', ctx);
+    const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.getControlGroupDevices(id);
   }
 
   @Query(() => [Device])
   controlGroupStatus(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceStatus[]> {
-    const controlGroupApi = getApi('controlGroupApi', ctx);
+    const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.getControlGroupStatus(id);
   }
 
   @Query(() => [Device])
-  controlGroupHistory(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceHistory[]> {
-    const controlGroupApi = getApi('controlGroupApi', ctx);
-    return controlGroupApi.getControlGroupHistory(id);
+  async controlGroupHistory(@Ctx() ctx: AppContext, @Args() args: ControlGroupHistoryArgs): Promise<DeviceHistory[]> {
+    const { id, ...rest } = args;
+    const { controlGroupApi, historyApi } = getDataSources(ctx);
+    const devices = await controlGroupApi.getControlGroupDevices(id);
+    return historyApi.getHistoryByIds(rest, devices.map(mapSerialNo));
   }
 
   @Mutation(() => ControlGroup)
   createControlGroup(@Ctx() ctx: AppContext, @Args() args: CreateControlGroupArgs): Promise<ControlGroup> {
     const { name, adminGroupId } = args;
-    const controlGroupApi = getApi('controlGroupApi', ctx);
+    const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.createControlGroup(name, adminGroupId);
   }
 
   @Mutation(() => AffectedResponse)
   addDeviceToControlGroup(@Ctx() ctx: AppContext, @Args() args: MutateControlGroupArgs): Promise<AffectedResponse> {
-    const controlGroupApi = getApi('controlGroupApi', ctx);
+    const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.addDevice(args);
   }
 
@@ -64,7 +72,7 @@ export class ControlGroupResolver {
     @Ctx() ctx: AppContext,
     @Args() args: MutateControlGroupArgs
   ): Promise<AffectedResponse> {
-    const controlGroupApi = getApi('controlGroupApi', ctx);
+    const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.removeDevice(args);
   }
 }
