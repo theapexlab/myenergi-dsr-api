@@ -1,81 +1,82 @@
 #  FYI:  After changing anything here run yarn codegen to generate new types
 query Devices($limit: Int, $offset: Int) {
-    zappis: zappi(limit: $limit, offset: $offset) {
-        ... ZappiData
-    }
-    eddis: eddi(limit: $limit, offset: $offset) {
-        ... EddiData
-    } 
+  zappis: zappi(limit: $limit, offset: $offset) {
+    ...ZappiData
+  }
+  eddis: eddi(limit: $limit, offset: $offset) {
+    ...EddiData
+  }
 }
 
 query DevicesBySerialNos($serialNos: [bigint!]) {
-    zappis: zappi(where: {serialno: {_in: $serialNos}}) {
-        serialNo: serialno
-    }
-    eddis: eddi(where: {serialno: {_in: $serialNos}}) {
-        serialNo: serialno
-    } 
+  zappis: zappi(where: { serialno: { _in: $serialNos } }) {
+    serialNo: serialno
+  }
+  eddis: eddi(where: { serialno: { _in: $serialNos } }) {
+    serialNo: serialno
+  }
 }
 
 query Device($serialNo: bigint!) {
-    zappi: zappi_by_pk(serialno: $serialNo) {
-        ... ZappiData
-    }
-    eddi: eddi_by_pk(serialno: $serialNo) {
-        ... EddiData
-    }
+  zappi: zappi_by_pk(serialno: $serialNo) {
+    ...ZappiData
+  }
+  eddi: eddi_by_pk(serialno: $serialNo) {
+    ...EddiData
+  }
 }
 
 query DeviceStatus($serialNo: bigint!) {
-    zappi: zappi_by_pk(serialno: $serialNo) {
-        ... ZappiStatus
-    }
-    eddi: eddi_by_pk(serialno: $serialNo) {
-        ... EddiStatus
-    }
+  zappi: zappi_by_pk(serialno: $serialNo) {
+    ...ZappiStatus
+  }
+  eddi: eddi_by_pk(serialno: $serialNo) {
+    ...EddiStatus
+  }
 }
 
 query DeviceControlGroup($serialNo: bigint!) {
-    zappi: zappi_by_pk(serialno: $serialNo) {
-        controlGroupDevice: zappi_control_group_device {
-            controlGroup: control_group {
-                ...ControlGroupFields
-            }
-        }
+  zappi: zappi_by_pk(serialno: $serialNo) {
+    controlGroupDevice: zappi_control_group_device {
+      controlGroup: control_group {
+        ...ControlGroupFields
+      }
     }
-    eddi: eddi_by_pk(serialno: $serialNo) {
-        controlGroupDevice: eddi_control_group_device {
-            controlGroup: control_group {
-                ...ControlGroupFields
-            }
-        }
+  }
+  eddi: eddi_by_pk(serialno: $serialNo) {
+    controlGroupDevice: eddi_control_group_device {
+      controlGroup: control_group {
+        ...ControlGroupFields
+      }
     }
+  }
 }
 
 fragment ZappiData on zappi {
-    serialNo: serialno
-    deviceClass: deviceclass
-    productCode: productcode
+  serialNo: serialno
+  deviceClass: deviceclass
+  productCode: productcode
 }
 
 fragment EddiData on eddi {
-    serialNo: serialno
-    deviceClass: deviceclass
-    productCode: productcode
+  serialNo: serialno
+  deviceClass: deviceclass
+  productCode: productcode
 }
 
 fragment ZappiStatus on zappi {
-    serialNo: serialno
-    updateDate: updatedat
-    chargeEnergy: chargeenergy
-    voltage
-    frequency
+  serialNo: serialno
+  updateDate: updatedat
+  chargeEnergy: chargeenergy
+  voltage
+  frequency
 }
 
 fragment EddiStatus on eddi {
-    serialNo: serialno
-    updateDate: updatedat
-    chargeEnergy: chargeenergy
-    voltage
-    frequency
+  serialNo: serialno
+  deviceClass: deviceclass
+  updateDate: updatedat
+  chargeEnergy: chargeenergy
+  voltage
+  frequency
 }

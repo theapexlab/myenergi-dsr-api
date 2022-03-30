@@ -40,7 +40,7 @@ export class ControlGroupResolver {
     return controlGroupApi.getControlGroupDevices(id);
   }
 
-  @Query(() => [Device])
+  @Query(() => [DeviceStatus])
   controlGroupStatus(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceStatus[]> {
     const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.getControlGroupStatus(id);

@@ -105,8 +105,8 @@ export class ControlGroupAPI extends RESTDataSource {
 
   async getControlGroupStatus(id: number): Promise<DeviceStatus[]> {
     try {
-      const { controlGroupHistory } = await this.sdk.ControlGroupStatus({ controlGroupId: id });
-      return controlGroupHistory.devices
+      const { controlGroupStatus } = await this.sdk.ControlGroupStatus({ controlGroupId: id });
+      return controlGroupStatus.devices
         .flatMap(({ zappi, eddi }) => [zappi, eddi])
         .filter((item) => !!item)
         .map(({ updateDate, ...device }) => ({

@@ -13001,6 +13001,7 @@ export type AdminGroupStatusQuery = {
       voltage?: number | null;
       frequency?: number | null;
       serialNo: number;
+      deviceClass: string;
       updateDate: string;
       chargeEnergy?: number | null;
     } | null;
@@ -13097,7 +13098,7 @@ export type ControlGroupStatusQueryVariables = Exact<{
 
 export type ControlGroupStatusQuery = {
   __typename?: 'query_root';
-  controlGroupHistory?: {
+  controlGroupStatus?: {
     __typename?: 'control_group';
     devices: Array<{
       __typename?: 'control_group_device';
@@ -13106,6 +13107,7 @@ export type ControlGroupStatusQuery = {
         voltage?: number | null;
         frequency?: number | null;
         serialNo: number;
+        deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
       } | null;
@@ -13237,6 +13239,7 @@ export type DeviceStatusQuery = {
     voltage?: number | null;
     frequency?: number | null;
     serialNo: number;
+    deviceClass: string;
     updateDate: string;
     chargeEnergy?: number | null;
   } | null;
@@ -13292,6 +13295,7 @@ export type EddiStatusFragment = {
   voltage?: number | null;
   frequency?: number | null;
   serialNo: number;
+  deviceClass: string;
   updateDate: string;
   chargeEnergy?: number | null;
 };
@@ -13480,6 +13484,7 @@ export const ZappiStatusFragmentDoc = gql`
 export const EddiStatusFragmentDoc = gql`
   fragment EddiStatus on eddi {
     serialNo: serialno
+    deviceClass: deviceclass
     updateDate: updatedat
     chargeEnergy: chargeenergy
     voltage
@@ -13649,7 +13654,7 @@ export const ControlGroupDevicesDocument = gql`
 `;
 export const ControlGroupStatusDocument = gql`
   query ControlGroupStatus($controlGroupId: Int!) {
-    controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
+    controlGroupStatus: control_group_by_pk(id: $controlGroupId) {
       devices {
         eddi: control_group_device_eddi {
           ...EddiStatus
