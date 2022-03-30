@@ -21,6 +21,7 @@
     "build": "yarn build:layer && yarn build:lambda",
     "test:watch": "jest --watch",
     "test": "jest",
+    "test:postman": "yarn newman run test/postman/postman_collection.json -e test/postman/postman_environment.json",
     "cleanup:layer": "rm -fr dist_layer",
     "cleanup:lambda": "rm -rf dist",
     "tf:init": "terraform -chdir=./terraform init -var-file ./config/terraform.tfvars",
