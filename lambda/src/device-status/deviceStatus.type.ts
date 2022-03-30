@@ -15,7 +15,7 @@ export class DeviceStatus implements StatusBase {
   frequency?: number;
 
   @Field({ description: 'Class of the device Zappi | Eddi' })
-  deviceClass?: string;
+  deviceClass: string;
 
   @Field(() => Int, { nullable: true, description: 'Charge energy in kWh delivered so far (Zappi)' })
   chargeEnergy?: number;
