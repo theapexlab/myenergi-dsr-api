@@ -16,3 +16,44 @@ array_relationships:
       table:
         name: control_group_device
         schema: public
+remote_relationships:
+- definition:
+    to_source:
+      field_mapping:
+        serialno: serialno
+      relationship_type: object
+      source: main-db
+      table:
+        name: eddi
+        schema: public
+  name: admin_group_device_eddi
+- definition:
+    to_source:
+      field_mapping:
+        serialno: serialno
+      relationship_type: object
+      source: main-db
+      table:
+        name: zappi
+        schema: public
+  name: admin_group_device_zappi
+- definition:
+    to_source:
+      field_mapping:
+        serialno: serialno
+      relationship_type: object
+      source: history-db
+      table:
+        name: eddi_minute
+        schema: public
+  name: admin_group_history_eddi
+- definition:
+    to_source:
+      field_mapping:
+        serialno: serialno
+      relationship_type: object
+      source: history-db
+      table:
+        name: zappi_minute
+        schema: public
+  name: admin_group_history_zappi

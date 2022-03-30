@@ -12993,6 +12993,7 @@ export type AdminGroupStatusQuery = {
       voltage?: number | null;
       frequency?: number | null;
       serialNo: number;
+      deviceClass: string;
       updateDate: string;
       chargeEnergy?: number | null;
     } | null;
@@ -13116,6 +13117,7 @@ export type ControlGroupStatusQuery = {
         voltage?: number | null;
         frequency?: number | null;
         serialNo: number;
+        deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
       } | null;
@@ -13231,6 +13233,7 @@ export type DeviceStatusQuery = {
     voltage?: number | null;
     frequency?: number | null;
     serialNo: number;
+    deviceClass: string;
     updateDate: string;
     chargeEnergy?: number | null;
   } | null;
@@ -13286,6 +13289,7 @@ export type ZappiStatusFragment = {
   voltage?: number | null;
   frequency?: number | null;
   serialNo: number;
+  deviceClass: string;
   updateDate: string;
   chargeEnergy?: number | null;
 };
@@ -13475,6 +13479,7 @@ export const EddiDataFragmentDoc = gql`
 export const ZappiStatusFragmentDoc = gql`
   fragment ZappiStatus on zappi {
     serialNo: serialno
+    deviceClass: deviceclass
     updateDate: updatedat
     chargeEnergy: chargeenergy
     voltage

@@ -66,6 +66,7 @@ fragment EddiData on eddi {
 
 fragment ZappiStatus on zappi {
   serialNo: serialno
+  deviceClass: deviceclass
   updateDate: updatedat
   chargeEnergy: chargeenergy
   voltage
