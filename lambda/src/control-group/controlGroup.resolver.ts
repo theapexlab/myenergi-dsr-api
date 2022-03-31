@@ -8,6 +8,7 @@ import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
 import { AffectedResponse } from '../shared';
 import { mapSerialNo } from '../utils';
+
 import {
   ControlGroupHistoryArgs,
   ControlGroupsArgs,
@@ -46,7 +47,7 @@ export class ControlGroupResolver {
     return controlGroupApi.getControlGroupStatus(id);
   }
 
-  @Query(() => [Device])
+  @Query(() => [DeviceHistory])
   async controlGroupHistory(@Ctx() ctx: AppContext, @Args() args: ControlGroupHistoryArgs): Promise<DeviceHistory[]> {
     const { id, ...rest } = args;
     const { controlGroupApi, historyApi } = getDataSources(ctx);

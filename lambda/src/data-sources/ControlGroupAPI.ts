@@ -63,11 +63,9 @@ export class ControlGroupAPI extends RESTDataSource {
         device_type: Device_Type_Enum.Eddi,
       }));
       const objects = [...zappiObjects, ...eddiObjects];
-
       if (!objects.length) {
         throw new Error(`No devices was found`);
       }
-
       const { response } = await this.sdk.AddDevice({ objects });
       return {
         affectedRows: response?.affectedRows ?? 0,
