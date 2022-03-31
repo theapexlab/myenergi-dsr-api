@@ -21,29 +21,28 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Response have correct device\", () => {",
 													"  const responseJson = pm.response.json();",
-													"  const testEddiSNO = parseInt(pm.variables.get(\"testEddiSNO\"));",
+													"  const testZappiSNO = parseInt(pm.variables.get(\"testZappiSNO\"));",
 													"",
-													"  pm.expect(responseJson[0].serialNo).to.eq(testEddiSNO);",
-													"  pm.expect(responseJson[0].productCode).to.be.null;",
-													"  pm.expect(responseJson[0].deviceClass).to.equal('EDDI');",
-													"});",
+													"",
+													"pm.test(\"Verify serialNo is in response\", () => {",
+													"    pm.expect(responseJson.some(item => item.serialNo === testZappiSNO && item.deviceClass ==='ZAPPI'), 'serialno not in array').to.be.true;",
+													"})",
+													"",
+													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"  responseJson.forEach(item => {",
+													"      pm.expect(item).to.have.keys('serialNo','productCode','deviceClass')",
+													"  });",
+													"})",
+													"",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
-													"  const responseJson = pm.response.json();",
 													"  pm.expect(responseJson).to.be.a(\"array\");",
 													"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
 													"  pm.expect(responseJson[0].productCode).to.be.null",
 													"  pm.expect(responseJson[0].deviceClass).to.be.a(\"string\");",
 													"});",
-													"",
-													"",
-													"pm.test(\"Response have correct length\", () => {",
-													"  const responseJson = pm.response.json();",
-													"  pm.expect(responseJson.length).to.be.eql(1);",
-													"});",
-													"",
 													"",
 													"",
 													""
@@ -122,6 +121,45 @@
 								},
 								{
 									"name": "control Group Status query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();",
+													"const testZappiSNO = parseInt(pm.variables.get(\"testZappiSNO\"));",
+													"",
+													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"  responseJson.forEach(item => {",
+													"      pm.expect(item).to.have.keys('serialNo','voltage','frequency','deviceClass','chargeEnergy', 'updateDate','isAvailable')",
+													"  });",
+													"})",
+													"",
+													"",
+													"pm.test(\"Response have correct device\", () => {",
+													"    pm.expect(responseJson.some(item => item.serialNo === testZappiSNO ",
+													"    && item.deviceClass ==='ZAPPI'",
+													"    && item.frequency ===4999",
+													"    && item.chargeEnergy ===0",
+													"    && item.isAvailable ===true",
+													"    ), 'device not in array').to.be.true;",
+													"})",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  pm.expect(responseJson).to.be.a(\"array\");",
+													"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].deviceClass).to.be.a(\"string\");",
+													"  pm.expect(responseJson[0].frequency).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].chargeEnergy).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].isAvailable).to.be.a(\"boolean\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "GET",
 										"header": [
@@ -192,6 +230,80 @@
 								},
 								{
 									"name": "control Group History query",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"  const responseJson = pm.response.json();",
+													"  const testZappiSNO = parseInt(pm.variables.get(\"testZappiSNO\"));",
+													"",
+													"",
+													"pm.test(\"Verify serialNo is in response\", () => {",
+													"    pm.expect(responseJson.some(item => item.serialNo === testZappiSNO), 'serialno not in array').to.be.true;",
+													"})",
+													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"  responseJson.forEach(item => {",
+													"      pm.expect(item).to.have.keys(",
+													"        \"serialNo\",",
+													"        \"importPower\",",
+													"        \"exportPower\",",
+													"        \"externalCtPositivePower1\",",
+													"        \"externalCtPositivePower2\",",
+													"        \"externalCtPositivePower3\",",
+													"        \"externalCtNegativePower1\",",
+													"        \"externalCtNegativePower2\",",
+													"        \"externalCtNegativePower3\",",
+													"        \"divertedLoadPower1\",",
+													"        \"divertedLoadPower2\",",
+													"        \"divertedLoadPower3\",",
+													"        \"boostLoadPower1\",",
+													"        \"boostLoadPower2\",",
+													"        \"boostLoadPower3\",",
+													"        \"voltage1\",",
+													"        \"voltage2\",",
+													"        \"voltage3\",",
+													"        \"frequency\",",
+													"        \"timestamp\")",
+													"  });",
+													"",
+													"",
+													"})",
+													"",
+													"pm.test(\"Response have correct device\", () => {",
+													"    pm.expect(responseJson.some(item => ",
+													"    item.serialNo === testZappiSNO ",
+													"    && item.exportPower ===0",
+													"    && item.frequency ===4999",
+													"    && item.voltage1 ===2322",
+													"    && item.voltage3 ===2327",
+													"    ), 'device not in array').to.be.true;",
+													"})",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  pm.expect(responseJson).to.be.a(\"array\");",
+													"  pm.expect(responseJson[0].importPower).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].voltage1).to.be.a(\"number\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
 									"request": {
 										"method": "GET",
 										"header": [
@@ -200,8 +312,35 @@
 												"value": "application/json"
 											}
 										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "limit",
+													"value": "{{limit}}",
+													"type": "text"
+												},
+												{
+													"key": "offset",
+													"value": "{{offset}}",
+													"type": "text"
+												},
+												{
+													"key": "startDate",
+													"value": "2017-01-01T00:00:00.000Z",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "endDate",
+													"value": "2022-05-01T00:00:00.000Z",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
 										"url": {
-											"raw": "{{baseUrl}}/api/control-groups/:id/history",
+											"raw": "{{baseUrl}}/api/control-groups/:id/history?startDate={{startDate}}&endDate={{endDate}}",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -210,6 +349,16 @@
 												"control-groups",
 												":id",
 												"history"
+											],
+											"query": [
+												{
+													"key": "startDate",
+													"value": "{{startDate}}"
+												},
+												{
+													"key": "endDate",
+													"value": "{{endDate}}"
+												}
 											],
 											"variable": [
 												{
@@ -489,17 +638,16 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Response have correct control group\", () => {",
 													"  const responseJson = pm.response.json();",
 													"  const testControlGroupId1 = parseInt(pm.variables.get(\"testControlGroupId1\"));",
 													"  const testControlGroupName1 = pm.variables.get(\"testControlGroupName1\");",
 													"",
+													"pm.test(\"Response have correct control group\", () => {",
 													"  pm.expect(responseJson.id).to.eq(testControlGroupId1);",
 													"  pm.expect(responseJson.name).to.equal(testControlGroupName1);",
 													"});",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
-													"  const responseJson = pm.response.json();",
 													"  pm.expect(responseJson.id).to.be.a(\"number\");",
 													"  pm.expect(responseJson.name).to.be.a(\"string\");",
 													"});",
@@ -584,28 +732,36 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Response have correct control groups\", () => {",
 											"  const responseJson = pm.response.json();",
 											"  const controlGroupId = parseInt(pm.variables.get(\"testControlGroupId1\"));",
 											"  const controlGroupName = pm.variables.get(\"testControlGroupName1\");",
 											"",
-											"  pm.expect(responseJson[0].id).to.eq(controlGroupId);",
-											"  pm.expect(responseJson[0].name).to.equal(controlGroupName);",
+											"",
+											"pm.test(\"Response have correct control group\", () => {",
+											"    pm.expect(responseJson.some(item => item.id === controlGroupId && item.name === controlGroupName ), 'control group not in array').to.be.true;",
+											"})",
+											"",
+											"pm.test(\"Response have correct fields\", () => {",
+											"  responseJson.forEach(item => {",
+											"      pm.expect(item).to.have.keys(",
+											"        \"id\",",
+											"        \"name\",",
+											"    )})",
 											"});",
 											"",
+											"",
 											"pm.test(\"Response have correct types\", () => {",
-											"  const responseJson = pm.response.json();",
 											"  pm.expect(responseJson).to.be.a(\"array\");",
 											"  pm.expect(responseJson[0].id).to.be.a(\"number\");",
 											"  pm.expect(responseJson[0].name).to.be.a(\"string\");",
 											"});",
 											"",
-											"",
+											"/*",
 											"pm.test(\"Response have correct length\", () => {",
 											"  const responseJson = pm.response.json();",
 											"  pm.expect(responseJson.length).to.be.eql(1);",
 											"});",
-											"",
+											"*/",
 											"",
 											"",
 											""
@@ -797,17 +953,20 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Response have correct devices\", () => {",
 													"  const responseJson = pm.response.json();",
 													"  const zappiSerialNo = parseInt(pm.variables.get(\"testZappiSNO\"));",
 													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"      pm.expect(responseJson).to.have.keys('serialNo','productCode','deviceClass')",
+													"})",
+													"",
+													"pm.test(\"Response have correct devices\", () => {",
 													"  pm.expect(responseJson.serialNo).to.eq(zappiSerialNo);",
 													"  pm.expect(responseJson.productCode).to.be.null;",
 													"  pm.expect(responseJson.deviceClass).to.equal('ZAPPI');",
 													"});",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
-													"  const responseJson = pm.response.json();",
 													"  pm.expect(responseJson).to.be.a(\"object\");",
 													"  pm.expect(responseJson.serialNo).to.be.a(\"number\");",
 													"  pm.expect(responseJson.productCode).to.be.null",
@@ -893,17 +1052,21 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Response have correct devices\", () => {",
 													"  const responseJson = pm.response.json();",
 													"  const eddiSerialNo = parseInt(pm.variables.get(\"testEddiSNO\"));",
 													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"      pm.expect(responseJson).to.have.keys('serialNo','productCode','deviceClass')",
+													"})",
+													"",
+													"",
+													"pm.test(\"Response have correct devices\", () => {",
 													"  pm.expect(responseJson.serialNo).to.eq(eddiSerialNo);",
 													"  pm.expect(responseJson.productCode).to.be.null;",
 													"  pm.expect(responseJson.deviceClass).to.equal('EDDI');",
 													"});",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
-													"  const responseJson = pm.response.json();",
 													"  pm.expect(responseJson).to.be.a(\"object\");",
 													"  pm.expect(responseJson.serialNo).to.be.a(\"number\");",
 													"  pm.expect(responseJson.productCode).to.be.null",
@@ -989,17 +1152,23 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Response have correct control group\", () => {",
 													"  const responseJson = pm.response.json();",
 													"  const testControlGroupId1 = parseInt(pm.variables.get(\"testControlGroupId1\"));",
 													"  const testControlGroupName1 = pm.variables.get(\"testControlGroupName1\");",
 													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"      pm.expect(responseJson).to.have.keys('id','name')",
+													"})",
+													"",
+													"",
+													"",
+													"pm.test(\"Response have correct control group\", () => {",
 													"  pm.expect(responseJson.id).to.eq(testControlGroupId1);",
 													"  pm.expect(responseJson.name).to.equal(testControlGroupName1);",
 													"});",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
-													"  const responseJson = pm.response.json();",
+													"",
 													"  pm.expect(responseJson.id).to.be.a(\"number\");",
 													"  pm.expect(responseJson.name).to.be.a(\"string\");",
 													"});",
@@ -1031,7 +1200,7 @@
 											"variable": [
 												{
 													"key": "serialNo",
-													"value": "{{testEddiSNO}}",
+													"value": "{{testZappiSNO}}",
 													"description": "(Required) "
 												}
 											]
@@ -1084,14 +1253,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Response have correct device status\", () => {",
 													"  const responseJson = pm.response.json();",
 													"  const testEddiSNO = parseInt(pm.variables.get(\"testEddiSNO\"));",
 													"",
+													"",
+													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"      pm.expect(responseJson).to.have.keys('serialNo','frequency','voltage','deviceClass', 'chargeEnergy', 'updateDate', 'isAvailable')",
+													"})",
+													"",
+													"",
+													"pm.test(\"Response have correct device status\", () => {",
 													"  pm.expect(responseJson.serialNo).to.eq(testEddiSNO);",
-													"",
-													"  //pm.expect(responseJson.voltage).to.be.string || pm.expect(responseJson.voltage).to.be.null ;",
-													"",
+													"  pm.expect(responseJson.deviceClass).to.eq('EDDI');",
 													"  pm.expect(responseJson.frequency).to.exist;",
 													"  pm.expect(responseJson.chargeEnergy).to.exist;",
 													"  pm.expect(responseJson.updateDate).to.exist;",
@@ -1099,10 +1273,7 @@
 													"});",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
-													"  const responseJson = pm.response.json();",
-													"",
 													"  pm.expect(responseJson.serialNo).to.be.a(\"number\");",
-													"//  pm.expect(responseJson.voltage).to.be.a(\"number\");",
 													"  pm.expect(responseJson.frequency).to.be.a(\"number\");",
 													"  pm.expect(responseJson.chargeEnergy).to.be.a(\"number\");",
 													"  pm.expect(responseJson.updateDate).to.be.a(\"string\");",
@@ -1185,6 +1356,69 @@
 								},
 								{
 									"name": "device History query",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"  const responseJson = pm.response.json();",
+													"  const testZappiSNO = parseInt(pm.variables.get(\"testZappiSNO\"));",
+													"",
+													"",
+													"pm.test(\"Verify serialNo is in response\", () => {",
+													"    pm.expect(responseJson.some(item => item.serialNo === testZappiSNO && item.frequency ===5001), 'serialno not in array').to.be.true;",
+													"})",
+													"",
+													"pm.test(\"Response have correct fields\", () => {",
+													"  responseJson.forEach(item => {",
+													"      pm.expect(item).to.have.keys(",
+													"        \"serialNo\",",
+													"        \"importPower\",",
+													"        \"exportPower\",",
+													"        \"externalCtPositivePower1\",",
+													"        \"externalCtPositivePower2\",",
+													"        \"externalCtPositivePower3\",",
+													"        \"externalCtNegativePower1\",",
+													"        \"externalCtNegativePower2\",",
+													"        \"externalCtNegativePower3\",",
+													"        \"divertedLoadPower1\",",
+													"        \"divertedLoadPower2\",",
+													"        \"divertedLoadPower3\",",
+													"        \"boostLoadPower1\",",
+													"        \"boostLoadPower2\",",
+													"        \"boostLoadPower3\",",
+													"        \"voltage1\",",
+													"        \"voltage2\",",
+													"        \"voltage3\",",
+													"        \"frequency\",",
+													"        \"timestamp\")",
+													"  });",
+													"  });",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  pm.expect(responseJson).to.be.a(\"array\");",
+													"  pm.expect(responseJson[0].importPower).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].voltage1).to.be.a(\"number\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
 									"request": {
 										"method": "GET",
 										"header": [
@@ -1193,8 +1427,23 @@
 												"value": "application/json"
 											}
 										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "serialNo",
+													"value": "{{testZappiSNO}}",
+													"type": "text"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
-											"raw": "{{baseUrl}}/api/devices/:serialNo/history?limit={{limit}}&offset={{offset}}&value=2021-12-06 01:43:19.631000 +00:00&value=2022-12-06 01:43:19.631000 +00:00",
+											"raw": "{{baseUrl}}/api/devices/:serialNo/history?startDate={{startDate}}&endDate={{endDate}}",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -1207,27 +1456,29 @@
 											"query": [
 												{
 													"key": "limit",
-													"value": "{{limit}}"
+													"value": "{{limit}}",
+													"disabled": true
 												},
 												{
 													"key": "offset",
-													"value": "{{offset}}"
+													"value": "{{offset}}",
+													"disabled": true
 												},
 												{
-													"key": "value",
-													"value": "2021-12-06 01:43:19.631000 +00:00",
+													"key": "startDate",
+													"value": "{{startDate}}",
 													"description": "(Required) "
 												},
 												{
-													"key": "value",
-													"value": "2022-12-06 01:43:19.631000 +00:00",
+													"key": "endDate",
+													"value": "{{endDate}}",
 													"description": "(Required) "
 												}
 											],
 											"variable": [
 												{
 													"key": "serialNo",
-													"value": "{{testEddiSNO}}",
+													"value": "{{testZappiSNO}}",
 													"description": "(Required) "
 												}
 											]
@@ -1300,17 +1551,22 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Response have correct devices\", () => {",
-											"  const responseJson = pm.response.json();",
-											"  const zappiSerialNo = parseInt(pm.variables.get(\"testZappiSNO\"));",
+											"const responseJson = pm.response.json();",
 											"",
-											"  pm.expect(responseJson[0].serialNo).to.eq(zappiSerialNo);",
-											"  pm.expect(responseJson[0].productCode).to.be.null;",
-											"  pm.expect(responseJson[0].deviceClass).to.equal('ZAPPI');",
-											"});",
+											"",
+											"pm.test(\"Response have correct fields\", () => {",
+											"  responseJson.forEach(item => {",
+											"      pm.expect(item).to.have.keys('serialNo','productCode','deviceClass')",
+											"  });",
+											"})",
+											"",
+											"pm.test(\"Verify serialNo is in response\", () => {",
+											"   pm.expect(responseJson.some(item => item.serialNo === 1190411796), 'serialno not in array').to.be.true;",
+											"})",
+											"",
+											"",
 											"",
 											"pm.test(\"Response have correct types\", () => {",
-											"  const responseJson = pm.response.json();",
 											"  pm.expect(responseJson).to.be.a(\"array\");",
 											"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
 											"  pm.expect(responseJson[0].productCode).to.be.null",
@@ -1510,26 +1766,27 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Response have correct devices\", () => {",
 													"  const responseJson = pm.response.json();",
 													"  const testEddiSNO = parseInt(pm.variables.get(\"testEddiSNO\"));",
 													"  const testZappiSNO = parseInt(pm.variables.get(\"testZappiSNO\"));",
 													"",
-													"  pm.expect(responseJson[0].serialNo).to.eq(testEddiSNO);",
-													"  pm.expect(responseJson[0].productCode).to.be.null;",
-													"  pm.expect(responseJson[0].deviceClass).to.equal('eddi');",
+													"pm.test(\"Verify Zappi is in response\", () => {",
+													"    pm.expect(responseJson.some(item => item.serialNo === testZappiSNO && item.deviceClass ==='zappi'), 'serialno not in array').to.be.true;",
+													"})",
 													"",
-													"  pm.expect(responseJson[1].serialNo).to.eq(testZappiSNO);",
-													"  pm.expect(responseJson[1].productCode).to.be.null;",
-													"  pm.expect(responseJson[1].deviceClass).to.equal('zappi');",
-													"",
-													"",
+													"pm.test(\"Verify Eddi is in response\", () => {",
+													"    pm.expect(responseJson.some(item => item.serialNo === testEddiSNO && item.deviceClass ==='eddi'), 'serialno not in array').to.be.true;",
+													"})",
 													"",
 													"",
-													"});",
+													"pm.test(\"Response have correct fields\", () => {",
+													"  responseJson.forEach(item => {",
+													"      pm.expect(item).to.have.keys('serialNo','productCode','deviceClass')",
+													"  });",
+													"})",
+													"",
 													"",
 													"pm.test(\"Response have correct types\", () => {",
-													"  const responseJson = pm.response.json();",
 													"  pm.expect(responseJson).to.be.a(\"array\");",
 													"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
 													"  pm.expect(responseJson[0].productCode).to.be.null",
@@ -1537,8 +1794,8 @@
 													"});",
 													"",
 													"",
+													"",
 													"pm.test(\"Response have correct length\", () => {",
-													"  const responseJson = pm.response.json();",
 													"  pm.expect(responseJson.length).to.be.eql(2);",
 													"});",
 													"",
@@ -1615,6 +1872,67 @@
 								},
 								{
 									"name": "admin Group Status query",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"  const responseJson = pm.response.json();",
+													"  const testEddiSNO = parseInt(pm.variables.get(\"testEddiSNO\"));",
+													"  const testZappiSNO = parseInt(pm.variables.get(\"testZappiSNO\"));",
+													"",
+													"",
+													"pm.test(\"Response have correct EDDI\", () => {",
+													"    pm.expect(responseJson.some(item => ",
+													"    item.serialNo === testEddiSNO ",
+													"    && item.deviceClass ==='EDDI'",
+													"    && item.voltage ===2270",
+													"    && item.chargeEnergy ===0",
+													"    && item.frequency ===5002",
+													"    && item.isAvailable ===true",
+													"    ), 'device not in array').to.be.true;",
+													"})",
+													"",
+													"pm.test(\"Response have correct Zappi\", () => {",
+													"    pm.expect(responseJson.some(item => ",
+													"    item.serialNo === testZappiSNO ",
+													"    && item.deviceClass ==='ZAPPI'",
+													"    && item.voltage ===0",
+													"    && item.chargeEnergy ===0",
+													"    && item.frequency ===4999",
+													"    && item.isAvailable ===true",
+													"    ), 'device not in array').to.be.true;",
+													"})",
+													"  ",
+													"pm.test(\"Response have correct fields\", () => {",
+													"      responseJson.forEach(item => {",
+													"        pm.expect(item).to.have.keys('serialNo','frequency','voltage','deviceClass', 'chargeEnergy', 'updateDate', 'isAvailable')",
+													"      })",
+													"})",
+													"",
+													"pm.test(\"Response have correct types\", () => {",
+													"  pm.expect(responseJson).to.be.a(\"array\");",
+													"  pm.expect(responseJson[0].serialNo).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].deviceClass).to.be.a(\"string\");",
+													"  pm.expect(responseJson[0].frequency).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].chargeEnergy).to.be.a(\"number\");",
+													"  pm.expect(responseJson[0].isAvailable).to.be.a(\"boolean\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response have correct length\", () => {",
+													"  const responseJson = pm.response.json();",
+													"  pm.expect(responseJson.length).to.be.eql(2);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
 									"request": {
 										"method": "GET",
 										"header": [
@@ -1623,21 +1941,24 @@
 												"value": "application/json"
 											}
 										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": {{testAdminGroupId1}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
-											"raw": "{{baseUrl}}/api/admin-group-status?id={{testAdminGroupId1}}",
+											"raw": "{{baseUrl}}/api/admin-group-status/",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"api",
-												"admin-group-status"
-											],
-											"query": [
-												{
-													"key": "id",
-													"value": "{{testAdminGroupId1}}",
-													"description": "(Required) "
-												}
+												"admin-group-status",
+												""
 											]
 										}
 									},
@@ -1761,13 +2082,26 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Response have correct admin Groups\", () => {",
 											"  const responseJson = pm.response.json();",
 											"  const adminGroupId = parseInt(pm.variables.get(\"testAdminGroupId1\"));",
 											"  const adminGroupName = pm.variables.get(\"testAdminGroupName1\");",
+											"  const testAdminGroupId2 = parseInt(pm.variables.get(\"testAdminGroupId2\"));",
+											"  const testAdminGroupName2 = pm.variables.get(\"testAdminGroupName2\");",
 											"",
-											"  pm.expect(responseJson[0].id).to.eq(adminGroupId);",
-											"  pm.expect(responseJson[0].name).to.equal(adminGroupName);",
+											"pm.test(\"Response have correct admin Group\", () => {",
+											"    pm.expect(responseJson.some(item => item.id === adminGroupId && item.name === adminGroupName ), 'control group not in array').to.be.true;",
+											"})",
+											"",
+											"pm.test(\"Response have correct admin Group\", () => {",
+											"    pm.expect(responseJson.some(item => item.id === testAdminGroupId2 && item.name === testAdminGroupName2 ), 'control group not in array').to.be.true;",
+											"})",
+											"",
+											"pm.test(\"Response have correct fields\", () => {",
+											"  responseJson.forEach(item => {",
+											"      pm.expect(item).to.have.keys(",
+											"        \"id\",",
+											"        \"name\",",
+											"    )})",
 											"});",
 											"",
 											"pm.test(\"Response have correct types\", () => {",
@@ -1778,10 +2112,6 @@
 											"});",
 											"",
 											"",
-											"pm.test(\"Response have correct length\", () => {",
-											"  const responseJson = pm.response.json();",
-											"  pm.expect(responseJson.length).to.be.eql(2);",
-											"});",
 											""
 										],
 										"type": "text/javascript"
@@ -1865,16 +2195,16 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Response have correct Admin group\", () => {",
 											"  const responseJson = pm.response.json();",
 											"  const createdAdminGroupName = pm.variables.get(\"createdAdminGroupName\");",
 											"",
+											"",
+											"pm.test(\"Response have correct Admin group\", () => {",
 											"  pm.expect(responseJson.id).to.exist",
 											"  pm.expect(responseJson.name).to.equal(createdAdminGroupName);",
 											"});",
 											"",
 											"pm.test(\"Response have correct types\", () => {",
-											"  const responseJson = pm.response.json();",
 											"  pm.expect(responseJson.id).to.be.a(\"number\");",
 											"  pm.expect(responseJson.name).to.be.a(\"string\");",
 											"});",
@@ -2123,11 +2453,11 @@
 		},
 		{
 			"key": "testZappiSNO",
-			"value": "1190411796"
+			"value": "586432020"
 		},
 		{
 			"key": "testEddiSNO",
-			"value": "262883402"
+			"value": "10635274"
 		},
 		{
 			"key": "createdZappiSNO",
@@ -2144,6 +2474,14 @@
 		{
 			"key": "createdAdminGroupName",
 			"value": "test123456"
+		},
+		{
+			"key": "startDate",
+			"value": "2020-10-01"
+		},
+		{
+			"key": "endDate",
+			"value": "2021-10-01"
 		}
 	]
 }
