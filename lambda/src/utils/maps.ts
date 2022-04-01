@@ -10,7 +10,7 @@ export const mapHistoryFragmentToDeviceHistory = ({
 
   return {
     ...item,
-    timestamp: new Date(value),
+    timestamp: new Date(value).toISOString(),
   };
 };
 
