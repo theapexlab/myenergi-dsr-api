@@ -25,10 +25,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check node version
-          command: |
-            node -v
-      - run:
           name: 'Install Project Node'
           command: |
             set +x
@@ -44,11 +40,8 @@ jobs:
           name: 'Install dependencies'
           command: 'yarn install'
       - run:
-          name: Start all services declared in docker-compose.yml
-          command: docker-compose up -d
-      - run:
-          name: Start
-          command: yarn start
+          name: 'Run build layer'
+          command: 'yarn build:layer'
       - run:
           name: Run Postman tests
           command: yarn test:postman
@@ -116,10 +109,10 @@ jobs:
 workflows:
   lint-test-build-validate-plan-apply:
     jobs:
-      - lint-test
-      - postman-test:
+      - postman-test
+      - lint-test:
           requires:
-            - lint-test
+            - postman-test
       - build:
           requires:
             - postman-test
