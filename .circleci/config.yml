@@ -18,86 +18,105 @@ jobs:
       - run:
           name: 'Run tests'
           command: 'yarn test'
-  build:
-    docker:
-      - image: cimg/node:14.19
+  postman-test:
+    machine: true # Use a Linux VM instead of docker environment
+    working_directory:  /tmp/project # Default working directory, where your project will be cloned
     steps:
       - checkout
       - run:
-          name: 'Install dependencies'
-          command: 'yarn install'
+          name: Start all services declared in docker-compose.yml
+          command: docker-compose up -d
       - run:
-          name: 'Run build layer'
-          command: 'yarn build:layer'
+          name: Start
+          command: yarn start
       - run:
-          name: 'Run build lambda'
-          command: 'yarn build:lambda'
-      - persist_to_workspace:
-          root: .
-          paths:
-            - dist
-            - dist_layer
-            - terraform
-  validate-plan:
-    working_directory: /tmp/project
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          command: >-
-            echo "credentials \"app.terraform.io\" {token =
-            \"$TERRAFORM_TOKEN\"}" > $HOME/.terraformrc
-          name: Create .terraformrc file locally
-      - run:
-          name: terraform init & validate & plan
-          command: |
-            terraform -chdir=./terraform init -input=false
-            terraform -chdir=./terraform validate
-            terraform -chdir=./terraform plan -out tfapply
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-  apply:
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          command: >-
-            echo "credentials \"app.terraform.io\" {token =
-            \"$TERRAFORM_TOKEN\"}" > $HOME/.terraformrc
-          name: Create .terraformrc file locally
-      - run:
-          name: terraform
-          command: |
-            terraform -chdir=./terraform apply -auto-approve tfapply
+          name: Run Postman tests
+          command: yarn test:postman
+       - run:
+           name: Stop all services declared in docker-compose.yml
+           command: docker-compose down
+   build:
+     docker:
+       - image: cimg/node:14.19
+     steps:
+       - checkout
+       - run:
+           name: 'Install dependencies'
+           command: 'yarn install'
+       - run:
+           name: 'Run build layer'
+           command: 'yarn build:layer'
+       - run:
+           name: 'Run build lambda'
+           command: 'yarn build:lambda'
+       - persist_to_workspace:
+           root: .
+           paths:
+             - dist
+             - dist_layer
+             - terraform
+   validate-plan:
+     working_directory: /tmp/project
+     docker:
+       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+     steps:
+       - attach_workspace:
+           at: .
+       - run:
+           command: >-
+             echo "credentials \"app.terraform.io\" {token =
+             \"$TERRAFORM_TOKEN\"}" > $HOME/.terraformrc
+           name: Create .terraformrc file locally
+       - run:
+           name: terraform init & validate & plan
+           command: |
+             terraform -chdir=./terraform init -input=false
+             terraform -chdir=./terraform validate
+             terraform -chdir=./terraform plan -out tfapply
+       - persist_to_workspace:
+           root: .
+           paths:
+             - .
+   apply:
+     docker:
+       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+     steps:
+       - attach_workspace:
+           at: .
+       - run:
+           command: >-
+             echo "credentials \"app.terraform.io\" {token =
+             \"$TERRAFORM_TOKEN\"}" > $HOME/.terraformrc
+           name: Create .terraformrc file locally
+       - run:
+           name: terraform
+           command: |
+             terraform -chdir=./terraform apply -auto-approve tfapply
 
 workflows:
   lint-test-build-validate-plan-apply:
     jobs:
       - lint-test
+      - postman-test
       - build:
-          requires:
-            - lint-test
+           requires:
+             - lint-test
+             - postman-test
       - validate-plan:
-          context:
-            - AWS-DSR
-          requires:
-            - build
+         context:
+           - AWS-DSR
+         requires:
+           - build
       - hold-apply:
-          type: approval
-          requires:
-            - validate-plan
-          filters:
-            branches:
-              only:
-                - master
+         type: approval
+         requires:
+           - validate-plan
+         filters:
+           branches:
+             only:
+               - master
       - apply:
-          context:
-            - AWS-DSR
-          requires:
-            - hold-apply
+         context:
+           - AWS-DSR
+         requires:
+           - hold-apply
