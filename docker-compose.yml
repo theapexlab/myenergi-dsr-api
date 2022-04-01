@@ -41,8 +41,8 @@ services:
     environment:
       HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
       HASURA_GRAPHQL_METADATA_DIR: /hasura-metadata
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
-      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log
       HASURA_GRAPHQL_DATABASE_URL: postgresql://myenergi:myenergi@default:5432/default
       HASURA_GRAPHQL_MAINDB_URL: postgresql://myenergi:myenergi@main-db:5432/main-db
       HASURA_GRAPHQL_HISTORYDB_URL: postgresql://myenergi:myenergi@history-db:5432/history-db

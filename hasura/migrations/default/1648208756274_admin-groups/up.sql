@@ -36,7 +36,7 @@ INSERT INTO device_type (value, comment) VALUES
 
 alter table "public"."control_group_device" rename column "deviceType" to "device_type";
 
-CREATE TABLE "public"."adming_group_device" ("id" serial NOT NULL, "device_type" text NOT NULL, "postcode" text NOT NULL, "serialno" integer NOT NULL, "admin_group_id" integer NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , FOREIGN KEY ("device_type") REFERENCES "public"."device_type"("value") ON UPDATE cascade ON DELETE cascade, FOREIGN KEY ("admin_group_id") REFERENCES "public"."admin_group"("id") ON UPDATE cascade ON DELETE cascade);
+CREATE TABLE "public"."admin_group_device" ("id" serial NOT NULL, "device_type" text NOT NULL, "postcode" text NOT NULL, "serialno" integer NOT NULL, "admin_group_id" integer NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , FOREIGN KEY ("device_type") REFERENCES "public"."device_type"("value") ON UPDATE cascade ON DELETE cascade, FOREIGN KEY ("admin_group_id") REFERENCES "public"."admin_group"("id") ON UPDATE cascade ON DELETE cascade);
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -47,14 +47,13 @@ BEGIN
   RETURN _new;
 END;
 $$ LANGUAGE plpgsql;
-CREATE TRIGGER "set_public_adming_group_device_updated_at"
-BEFORE UPDATE ON "public"."adming_group_device"
+CREATE TRIGGER "set_public_admin_group_device_updated_at"
+BEFORE UPDATE ON "public"."admin_group_device"
 FOR EACH ROW
 EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
-COMMENT ON TRIGGER "set_public_adming_group_device_updated_at" ON "public"."adming_group_device" 
+COMMENT ON TRIGGER "set_public_admin_group_device_updated_at" ON "public"."admin_group_device" 
 IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 
-alter table "public"."adming_group_device" rename to "admin_group_device";
 
 alter table "public"."admin_group_device" add constraint "admin_group_device_serialno_key" unique ("serialno");
 

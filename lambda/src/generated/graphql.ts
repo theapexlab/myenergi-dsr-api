@@ -336,7 +336,7 @@ export enum Admin_Group_Device_Constraint {
   /** unique or primary key constraint */
   AdminGroupDeviceSerialnoKey = 'admin_group_device_serialno_key',
   /** unique or primary key constraint */
-  AdmingGroupDevicePkey = 'adming_group_device_pkey',
+  AdmingGroupDevicePkey = 'admin_group_device_pkey',
 }
 
 /** input type for incrementing numeric columns in table "admin_group_device" */

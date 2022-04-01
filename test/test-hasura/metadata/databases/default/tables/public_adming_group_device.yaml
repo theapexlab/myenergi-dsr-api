@@ -1,5 +1,5 @@
 table:
-  name: adming_group_device
+  name: admin_group_device
   schema: public
 object_relationships:
   - name: admin_group
