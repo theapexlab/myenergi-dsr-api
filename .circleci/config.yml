@@ -29,13 +29,13 @@ jobs:
           command: |
             node -v
       - run:
-          name: Install  Node.js 8.9.1 with build in nvm tool
+          name: 'Install Project Node'
           command: |
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install v14.19 && nvm use v14.19 && nvm alias default v14.19
-            node -v
-
+            set +x
+            source ~/.bashrc
+            nvm install 14.19
+            NODE_DIR=$(dirname $(which node))
+            echo "export PATH=$NODE_DIR:\$PATH" >> $BASH_ENV
       - run:
           name: Check node version
           command: |
