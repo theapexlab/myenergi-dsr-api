@@ -19,7 +19,9 @@ jobs:
           name: 'Run tests'
           command: 'yarn test'
   postman-test:
-    machine: true
+    machine:
+      image: ubuntu-2004:current
+      docker_layer_caching: true
     steps:
       - checkout
       - run:
@@ -101,7 +103,7 @@ workflows:
             - lint-test
       - build:
           requires:
-            - lint-test
+            - postman-test
       - validate-plan:
           context:
             - AWS-DSR
