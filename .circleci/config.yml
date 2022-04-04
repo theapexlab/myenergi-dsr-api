@@ -22,10 +22,13 @@ jobs:
     machine:
       image: ubuntu-2004:current
       docker_layer_caching: true
+    resource_class: medium
     steps:
       - checkout
       - run:
           name: 'Install Project Node'
+          # Machine executor has node 16 installed by default .
+          # this installs and forces it to use the correct version.
           command: |
             set +x
             source ~/.bashrc
@@ -45,10 +48,14 @@ jobs:
           background: true
       - run:
           name: 'Check server health'
+          # wait for the server to start responding. We expect Request 200 ok once it starts listening.
           shell: /bin/sh
           command: |
-            wget --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=50 -t 40 http://localhost:3000/graphql
-            :
+            for i in {1..15};
+              do
+                wget -T 15 -O- -c http://localhost:3000/api/control-groups && break;
+                sleep 5;
+            done
       - run:
           name: Run Postman tests
           command: yarn test:postman
