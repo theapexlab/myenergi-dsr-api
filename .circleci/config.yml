@@ -37,15 +37,18 @@ jobs:
           command: |
             node -v
       - run:
-          name: Start all services declared in docker-compose.yml
-          command: docker-compose up -d
-      - run:
           name: 'Install dependencies'
           command: 'yarn install'
       - run:
           name: 'Run server'
           command: 'yarn start'
           background: true
+      - run:
+          name: 'Check server health'
+          shell: /bin/sh
+          command: |
+            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:3000/graphql
+            :
       - run:
           name: Run Postman tests
           command: yarn test:postman
