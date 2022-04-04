@@ -19,6 +19,9 @@ jobs:
           name: 'Run tests'
           command: 'yarn test'
   postman-test:
+    environment:
+      DAL_ENDPOINT: http://localhost:8080/v1/graphql
+      DAL_ADMIN_SECRET: admin123
     machine:
       image: ubuntu-2004:current
       docker_layer_caching: true
