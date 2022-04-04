@@ -51,9 +51,10 @@ jobs:
           background: true
       - run:
           name: 'Check server health'
-          # wait for the server to start responding. We expect Request 200 ok once it starts listening.
+          # Wait for the server to start responding. We expect Request 200 ok once it starts listening.
+          # Polls a limited ammount of time.
           command: |
-            for i in {1..25};do wget -T 15 -O- -c http://localhost:8080/healthz && break; sleep 10; done
+            for i in {1..25};do wget -T 15 -O- -c http://localhost:8080/healthz && exit 0; sleep 10; done; exit 1
       - run:
           name: Run Postman tests
           command: yarn test:postman
@@ -119,12 +120,12 @@ jobs:
             terraform -chdir=./terraform apply -auto-approve tfapply
 
 workflows:
-  lint-test-build-validate-plan-apply:
+  lint-test-postman-test-build-validate-plan-apply:
     jobs:
-      - postman-test
-      - lint-test:
+      - lint-test
+      - postman-test:
           requires:
-            - postman-test
+            - lint-test
       - build:
           requires:
             - postman-test
