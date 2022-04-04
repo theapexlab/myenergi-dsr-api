@@ -53,7 +53,7 @@ jobs:
           name: 'Check server health'
           # wait for the server to start responding. We expect Request 200 ok once it starts listening.
           command: |
-            for i in {1..15};do wget -T 15 -O- -c http://localhost:3000/api/control-groups && break; sleep 3; done
+            for i in {1..40};do wget -T 15 -O- -c http://localhost:3000/api/control-groups && break; sleep 3; done
       - run:
           name: Run Postman tests
           command: yarn test:postman
