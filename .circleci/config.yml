@@ -47,7 +47,7 @@ jobs:
           name: 'Check server health'
           shell: /bin/sh
           command: |
-            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:3000/graphql
+            wget --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=50 -t 40 http://localhost:3000/graphql
             :
       - run:
           name: Run Postman tests
