@@ -21,6 +21,7 @@ export class DeviceResolver {
     return deviceApi.getDevice(serialNo);
   }
 
+  // todo: consider if we need this
   @Query(() => ControlGroup, { nullable: true })
   deviceControlGroup(
     @Ctx() ctx: AppContext,

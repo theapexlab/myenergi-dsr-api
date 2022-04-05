@@ -7,7 +7,6 @@ import { DeviceHistory } from './deviceHistory.type';
 
 @Resolver(DeviceHistory)
 export class DeviceHistoryResolver {
-  // todo: add arg to filter hours / days
   @Query(() => [DeviceHistory])
   deviceHistory(@Ctx() ctx: AppContext, @Args() args: DeviceHistoryArgs): Promise<DeviceHistory[]> {
     const { historyApi } = getDataSources(ctx);

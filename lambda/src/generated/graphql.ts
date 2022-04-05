@@ -336,7 +336,7 @@ export enum Admin_Group_Device_Constraint {
   /** unique or primary key constraint */
   AdminGroupDeviceSerialnoKey = 'admin_group_device_serialno_key',
   /** unique or primary key constraint */
-  AdmingGroupDevicePkey = 'admin_group_device_pkey',
+  AdmingGroupDevicePkey = 'adming_group_device_pkey',
 }
 
 /** input type for incrementing numeric columns in table "admin_group_device" */
@@ -12980,6 +12980,19 @@ export type AdminGroupDevicesQuery = {
   adminGroupDevices: Array<{ __typename?: 'admin_group_device'; serialNo: number; deviceClass: Device_Type_Enum }>;
 };
 
+export type AdminGroupDevicesBySerialNosQueryVariables = Exact<{
+  adminGroupId: Scalars['Int'];
+  serialNos?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+export type AdminGroupDevicesBySerialNosQuery = {
+  __typename?: 'query_root';
+  admin_group_by_pk?: {
+    __typename?: 'admin_group';
+    admin_group_devices: Array<{ __typename?: 'admin_group_device'; serialNo: number; deviceClass: Device_Type_Enum }>;
+  } | null;
+};
+
 export type AdminGroupStatusQueryVariables = Exact<{
   adminGroupId: Scalars['Int'];
 }>;
@@ -13571,6 +13584,16 @@ export const AdminGroupDevicesDocument = gql`
     }
   }
 `;
+export const AdminGroupDevicesBySerialNosDocument = gql`
+  query AdminGroupDevicesBySerialNos($adminGroupId: Int!, $serialNos: [Int!]) {
+    admin_group_by_pk(id: $adminGroupId) {
+      admin_group_devices(where: { serialno: { _in: $serialNos } }) {
+        serialNo: serialno
+        deviceClass: device_type
+      }
+    }
+  }
+`;
 export const AdminGroupStatusDocument = gql`
   query AdminGroupStatus($adminGroupId: Int!) {
     adminGroupStatus: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
@@ -13869,6 +13892,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'AdminGroupDevices'
+      );
+    },
+    AdminGroupDevicesBySerialNos(
+      variables: AdminGroupDevicesBySerialNosQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupDevicesBySerialNosQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupDevicesBySerialNosQuery>(AdminGroupDevicesBySerialNosDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AdminGroupDevicesBySerialNos'
       );
     },
     AdminGroupStatus(

@@ -100,5 +100,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/api', restMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApi.get()));
+// app.use(errorHandler);
 
 export { openApi, app };

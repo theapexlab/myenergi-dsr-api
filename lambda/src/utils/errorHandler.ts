@@ -23,20 +23,23 @@ type RouterError = {
 // }
 // };
 export const errorHandlerSofa: ErrorHandler = (errors) => {
+  console.log({ errors });
   const error = errors[0];
   logger.error(error);
 
+  const routerError: RouterError = {
+    type: 'error',
+    status: 500,
+    statusMessage: 'Internal Server Error',
+    error: {
+      message: error.message,
+    },
+  };
   if (error?.extensions.code === ErrorCodes.NotFound) {
-    const routerError: RouterError = {
-      type: 'error',
-      status: 500,
-      statusMessage: 'Internal Server Error',
-      error: error.message,
-    };
     routerError.status = 404;
     routerError.statusMessage = ErrorCodes.NotFound;
-    return routerError;
   }
+  return routerError;
 };
 
 // export const ErrorInterceptor: MiddlewareFn<any> = async ({ context, info }, next) => {

@@ -1,4 +1,6 @@
 #  FYI:  After changing anything here run yarn codegen to generate new types
+
+#  todo: use admingroup device table instead of zappi
 query Devices($limit: Int, $offset: Int) {
   zappis: zappi(limit: $limit, offset: $offset) {
     ...ZappiData
@@ -8,15 +10,7 @@ query Devices($limit: Int, $offset: Int) {
   }
 }
 
-query DevicesBySerialNos($serialNos: [bigint!]) {
-  zappis: zappi(where: { serialno: { _in: $serialNos } }) {
-    serialNo: serialno
-  }
-  eddis: eddi(where: { serialno: { _in: $serialNos } }) {
-    serialNo: serialno
-  }
-}
-
+#  todo: use admingroup device table instead of zappi
 query Device($serialNo: bigint!) {
   zappi: zappi_by_pk(serialno: $serialNo) {
     ...ZappiData

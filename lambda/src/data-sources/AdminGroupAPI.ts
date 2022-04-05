@@ -5,9 +5,9 @@ import { Device } from '../device';
 import { DeviceStatus } from '../device-status';
 import { Device_Type_Enum, getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
+import { ErrorMessages } from '../utils/errorHandler';
 import { logger } from '../utils/logger';
 import { getGraphqlSdk } from './getGraphqlSdk';
-import { NotFoundError } from './NotFoundError';
 
 export class AdminGroupAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;
@@ -30,19 +30,11 @@ export class AdminGroupAPI extends RESTDataSource {
   }
 
   async getById(id: number): Promise<AdminGroup> {
-    try {
-      const { adminGroup } = await this.sdk.AdminGroup({ id });
-      if (!adminGroup) {
-        throw new NotFoundError();
-      }
-      return adminGroup;
-    } catch (err) {
-      logger.error(err.toString());
-      if (err instanceof NotFoundError) {
-        throw new GraphQLError('Admin group not found!');
-      }
-      throw new GraphQLError('Admin group query failed');
+    const { adminGroup } = await this.sdk.AdminGroup({ id });
+    if (!adminGroup) {
+      throw new GraphQLError(ErrorMessages.NotFound);
     }
+    return adminGroup;
   }
 
   async getDevices(id: number): Promise<Device[]> {

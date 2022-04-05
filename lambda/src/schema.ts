@@ -29,6 +29,7 @@ const schema = buildSchemaSync({
       }
     }
   },
+  // globalMiddlewares: [ErrorInterceptor],
 });
 
 export { schema };

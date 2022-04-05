@@ -1,4 +1,3 @@
--- CREATE ROLE myenergi SUPERUSER;
 --
 -- PostgreSQL database dump
 --

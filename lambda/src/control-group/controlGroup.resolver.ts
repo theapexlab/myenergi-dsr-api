@@ -8,7 +8,6 @@ import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
 import { AffectedResponse } from '../shared';
 import { mapSerialNo } from '../utils';
-
 import {
   ControlGroupHistoryArgs,
   ControlGroupsArgs,
@@ -57,6 +56,7 @@ export class ControlGroupResolver {
 
   @Mutation(() => ControlGroup)
   createControlGroup(@Ctx() ctx: AppContext, @Args() args: CreateControlGroupArgs): Promise<ControlGroup> {
+    // todo: get adminGroupId from context after auth is done
     const { name, adminGroupId } = args;
     const { controlGroupApi } = getDataSources(ctx);
     return controlGroupApi.createControlGroup(name, adminGroupId);
@@ -65,7 +65,8 @@ export class ControlGroupResolver {
   @Mutation(() => AffectedResponse)
   addDeviceToControlGroup(@Ctx() ctx: AppContext, @Args() args: MutateControlGroupArgs): Promise<AffectedResponse> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.addDevice(args);
+    const adminGroupId = 1; // todo: get adminGroupId from context after auth is done
+    return controlGroupApi.addDevice(args, adminGroupId);
   }
 
   @Mutation(() => AffectedResponse)
