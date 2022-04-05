@@ -1,12 +1,10 @@
-export class NotFoundError extends Error {
-  constructor(...params: any[]) {
-    super(...params);
+import { ApolloError } from 'apollo-server-errors';
+import { ErrorCodes } from '../utils/errorHandler';
 
-    // Maintains proper stack trace for where our error was thrown (only available on V8)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, NotFoundError);
-    }
+export class NotFoundError extends ApolloError {
+  constructor(message: string) {
+    super(message, ErrorCodes.NotFound);
 
-    this.name = 'NotFoundError';
+    Object.defineProperty(this, 'name', { value: 'NotFoundError' });
   }
 }

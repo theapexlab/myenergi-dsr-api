@@ -4,6 +4,7 @@ import { OpenAPI, useSofa } from 'sofa-api';
 import swaggerUi from 'swagger-ui-express';
 import { getAPIs } from './data-sources';
 import { schema } from './schema';
+import { errorHandlerSofa } from './utils/errorHandler';
 
 const basePath = '/api';
 
@@ -18,6 +19,7 @@ const openApi = OpenAPI({
 const restMiddleware = useSofa({
   schema,
   basePath,
+  errorHandler: errorHandlerSofa,
   onRoute(info) {
     openApi.addRoute(info, {
       basePath,

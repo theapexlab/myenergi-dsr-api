@@ -8,6 +8,7 @@ import { Device_Type_Enum, getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
 import { logger } from '../utils/logger';
 import { getGraphqlSdk } from './getGraphqlSdk';
+import { NotFoundError } from './NotFoundError';
 
 export class ControlGroupAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;
@@ -90,15 +91,11 @@ export class ControlGroupAPI extends RESTDataSource {
   }
 
   async getControlGroupDevices(id: number): Promise<Device[]> {
-    try {
-      const {
-        controlGroupDevices: { devices },
-      } = await this.sdk.ControlGroupDevices({ controlGroupId: id });
-      return devices.flatMap(({ zappi, eddi }) => [zappi, eddi]).filter((item) => !!item);
-    } catch (err) {
-      logger.error(err.toString());
-      throw new GraphQLError('Control group query failed');
+    const { controlGroupDevices } = await this.sdk.ControlGroupDevices({ controlGroupId: id });
+    if (!controlGroupDevices) {
+      throw new NotFoundError(`Control group with id ${id} not found`);
     }
+    return controlGroupDevices.devices.flatMap(({ zappi, eddi }) => [zappi, eddi]).filter((item) => !!item);
   }
 
   async getControlGroupStatus(id: number): Promise<DeviceStatus[]> {
