@@ -42,6 +42,9 @@ const restMiddleware = useSofa({
     'Query.deviceControlGroup': {
       path: '/devices/:serialNo/control-group',
     },
+    'Query.controlGroup': {
+      path: '/control-groups/:id',
+    },
     'Query.controlGroupDevices': {
       path: '/control-groups/:id/devices',
     },
@@ -61,6 +64,30 @@ const restMiddleware = useSofa({
     },
     'Mutation.removeDeviceFromControlGroup': {
       path: '/control-groups/:id/remove-device',
+      method: 'PUT',
+    },
+    'Query.adminGroup': {
+      path: '/admin-groups/:id',
+    },
+    'Query.adminGroupDevices': {
+      path: '/admin-groups/:id/devices',
+    },
+    'Query.adminGroupStatus': {
+      path: '/admin-groups/:id/status',
+    },
+    'Query.adminGroupHistory': {
+      path: '/admin-groups/:id/history',
+    },
+    'Mutation.createAdminGroup': {
+      path: '/admin-groups',
+      method: 'POST',
+    },
+    'Mutation.addDeviceToAdminGroup': {
+      path: '/admin-groups/:id/add-device',
+      method: 'PUT',
+    },
+    'Mutation.removeDeviceFromAdminGroup': {
+      path: '/admin-groups/:id/remove-device',
       method: 'PUT',
     },
   },

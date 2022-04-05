@@ -112,9 +112,9 @@ export class AdminGroupAPI extends RESTDataSource {
   }
 
   async removeDevices(args: MutateAdminGroupArgs): Promise<AffectedResponse> {
-    const { id: controlGroupId, serialNos } = args;
+    const { id: adminGroupId, serialNos } = args;
     try {
-      const { response } = await this.sdk.RemoveDevice({ controlGroupId, serialNos });
+      const { response } = await this.sdk.RemoveDeviceFromAdminGroup({ adminGroupId, serialNos });
       return {
         affectedRows: response?.affectedRows ?? 0,
       };

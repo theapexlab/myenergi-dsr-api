@@ -55,6 +55,7 @@ jobs:
           name: Run Postman tests
           command: yarn test:postman
       - run:
+          when: always
           name: Stop all services declared in docker-compose.yml
           command: docker-compose down
   build:
