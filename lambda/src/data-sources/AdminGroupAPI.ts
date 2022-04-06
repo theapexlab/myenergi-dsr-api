@@ -5,9 +5,10 @@ import { Device } from '../device';
 import { DeviceStatus } from '../device-status';
 import { Device_Type_Enum, getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
-import { ErrorMessages } from '../utils/errorHandler';
+import { mapDeviceClassToDeviceType } from '../utils';
 import { logger } from '../utils/logger';
 import { getGraphqlSdk } from './getGraphqlSdk';
+import { NotFoundError } from './NotFoundError';
 
 export class AdminGroupAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;
@@ -20,47 +21,42 @@ export class AdminGroupAPI extends RESTDataSource {
 
   async getAll(args: AdminGroupsArgs): Promise<AdminGroup[]> {
     const { limit, offset } = args;
-    try {
-      const { adminGroups } = await this.sdk.AdminGroups({ limit, offset });
-      return adminGroups;
-    } catch (err) {
-      logger.error(err.toString());
-      throw new GraphQLError('Admin groups query failed');
+    const { adminGroups } = await this.sdk.AdminGroups({ limit, offset });
+    if (!adminGroups.length) {
+      throw new NotFoundError(`No admin groups found`);
     }
+    return adminGroups;
   }
 
   async getById(id: number): Promise<AdminGroup> {
     const { adminGroup } = await this.sdk.AdminGroup({ id });
     if (!adminGroup) {
-      throw new GraphQLError(ErrorMessages.NotFound);
+      throw new NotFoundError(`Admin group with id ${id} not found`);
     }
     return adminGroup;
   }
 
   async getDevices(id: number): Promise<Device[]> {
-    try {
-      const { adminGroupDevices } = await this.sdk.AdminGroupDevices({ adminGroupId: id });
-      return adminGroupDevices;
-    } catch (err) {
-      logger.error(err.toString());
-      throw new GraphQLError('Admin group devices query failed');
+    const { adminGroup } = await this.sdk.AdminGroupDevices({ adminGroupId: id });
+    if (!adminGroup) {
+      throw new NotFoundError(`Admin group with id ${id} not found`);
     }
+    return adminGroup.devices || [];
   }
 
   async getStatus(id: number): Promise<DeviceStatus[]> {
-    try {
-      const { adminGroupStatus } = await this.sdk.AdminGroupStatus({ adminGroupId: id });
-      return adminGroupStatus
-        .flatMap(({ zappi, eddi }) => [zappi, eddi])
-        .filter((item) => !!item)
-        .map(({ updateDate, ...rest }) => ({
-          ...rest,
-          updateDate: new Date(updateDate),
-        }));
-    } catch (err) {
-      logger.error(err.toString());
-      throw new GraphQLError('Admin group status query failed');
+    const { adminGroup } = await this.sdk.AdminGroupStatus({ adminGroupId: id });
+    if (!adminGroup) {
+      throw new NotFoundError(`Admin group with id ${id} not found`);
     }
+    return adminGroup.adminGroupStatus
+      .flatMap(({ zappi, eddi }) => [zappi, eddi])
+      .filter((item) => !!item)
+      .map(({ updateDate, ...deviceStatus }) => ({
+        ...deviceStatus,
+        deviceClass: mapDeviceClassToDeviceType(deviceStatus.deviceClass),
+        updateDate: new Date(updateDate),
+      }));
   }
 
   async create(name: string): Promise<AdminGroup> {
@@ -75,44 +71,49 @@ export class AdminGroupAPI extends RESTDataSource {
 
   async addDevices(args: MutateAdminGroupArgs): Promise<AffectedResponse> {
     const { id: admin_group_id, serialNos } = args;
-    try {
-      const { zappis, eddis } = await this.sdk.DevicesBySerialNos({ serialNos });
-      const zappiObjects = zappis.map(({ serialNo: serialno }) => ({
-        admin_group_id,
-        serialno,
-        device_type: Device_Type_Enum.Zappi,
-      }));
-      const eddiObjects = eddis.map(({ serialNo: serialno }) => ({
-        admin_group_id,
-        serialno,
-        device_type: Device_Type_Enum.Eddi,
-      }));
-      const objects = [...zappiObjects, ...eddiObjects];
+    const { zappis, eddis } = await this.sdk.NewDevicesBySerialNos({ serialNos });
+    const zappiObjects = zappis.map(({ serialNo: serialno }) => ({
+      admin_group_id,
+      serialno,
+      device_type: Device_Type_Enum.Zappi,
+    }));
+    const eddiObjects = eddis.map(({ serialNo: serialno }) => ({
+      admin_group_id,
+      serialno,
+      device_type: Device_Type_Enum.Eddi,
+    }));
+    const objects = [...zappiObjects, ...eddiObjects];
 
-      if (!objects.length) {
-        throw new Error(`No devices was found`);
-      }
-
-      const { response } = await this.sdk.AddDeviceToAdminGroup({ objects });
-      return {
-        affectedRows: response?.affectedRows ?? 0,
-      };
-    } catch (err) {
-      logger.error(err.toString());
-      throw new GraphQLError('Cannot assign device to group');
+    if (!objects.length) {
+      throw new NotFoundError(`No devices was found`);
     }
+
+    const {
+      response: { affectedRows = 0 },
+    } = await this.sdk.AddDeviceToAdminGroup({ objects });
+
+    if (!affectedRows) {
+      throw new GraphQLError(`No devices were added to admin group ${admin_group_id}`);
+    }
+
+    return {
+      affectedRows,
+    };
   }
 
   async removeDevices(args: MutateAdminGroupArgs): Promise<AffectedResponse> {
-    const { id: adminGroupId, serialNos } = args;
-    try {
-      const { response } = await this.sdk.RemoveDeviceFromAdminGroup({ adminGroupId, serialNos });
-      return {
-        affectedRows: response?.affectedRows ?? 0,
-      };
-    } catch (err) {
-      logger.error(err.toString());
-      throw new GraphQLError('Cannot remove device from group');
+    const { id: admin_group_id, serialNos } = args;
+
+    const {
+      response: { affectedRows = 0 },
+    } = await this.sdk.RemoveDeviceFromAdminGroup({ adminGroupId: admin_group_id, serialNos });
+
+    if (!affectedRows) {
+      throw new NotFoundError(`Given devices were not found in admin group ${admin_group_id}`);
     }
+
+    return {
+      affectedRows,
+    };
   }
 }

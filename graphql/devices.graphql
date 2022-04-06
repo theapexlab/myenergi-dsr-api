@@ -1,22 +1,18 @@
 #  FYI:  After changing anything here run yarn codegen to generate new types
 
-#  todo: use admingroup device table instead of zappi
-query Devices($limit: Int, $offset: Int) {
-  zappis: zappi(limit: $limit, offset: $offset) {
-    ...ZappiData
-  }
-  eddis: eddi(limit: $limit, offset: $offset) {
-    ...EddiData
-  }
-}
+# query Devices($adminGroupId: Int!, $limit: Int, $offset: Int) {
+#    adminGroup: admin_group_by_pk(id: $adminGroupId) {
+#      devices: admin_group_devices {
+#       ...DeviceData
+#     }
+#   }
+# }
 
-#  todo: use admingroup device table instead of zappi
-query Device($serialNo: bigint!) {
-  zappi: zappi_by_pk(serialno: $serialNo) {
-    ...ZappiData
-  }
-  eddi: eddi_by_pk(serialno: $serialNo) {
-    ...EddiData
+query Device($adminGroupId: Int!, $serialNo: Int!) {
+   adminGroup: admin_group_by_pk(id: $adminGroupId) {
+    devices: admin_group_devices(where: {serialno: {_eq: $serialNo}}) {
+      ...DeviceData
+    }
   }
 }
 
@@ -29,21 +25,30 @@ query DeviceStatus($serialNo: bigint!) {
   }
 }
 
-query DeviceControlGroup($serialNo: bigint!) {
-  zappi: zappi_by_pk(serialno: $serialNo) {
-    controlGroupDevice: zappi_control_group_device {
-      controlGroup: control_group {
-        ...ControlGroupFields
-      }
-    }
+query NewDevicesBySerialNos($serialNos: [bigint!]) {
+  zappis: zappi(where: { serialno: { _in: $serialNos } }) {
+    serialNo: serialno
   }
-  eddi: eddi_by_pk(serialno: $serialNo) {
-    controlGroupDevice: eddi_control_group_device {
-      controlGroup: control_group {
-        ...ControlGroupFields
-      }
-    }
+  eddis: eddi(where: { serialno: { _in: $serialNos } }) {
+    serialNo: serialno
   }
+}
+
+query DeviceControlGroup($adminGroupId: Int!, $serialNo: Int!) {
+    adminGroup: admin_group_by_pk(id: $adminGroupId) {
+      controlGroups: control_groups {
+        devices(where: {serialno: {_eq: $serialNo}}) {
+            controlGroup: control_group {
+              ...ControlGroupFields
+            }
+        }
+      }
+  }
+}
+
+fragment DeviceData on admin_group_device {
+  serialNo: serialno
+  deviceClass: device_type
 }
 
 fragment ZappiData on zappi {

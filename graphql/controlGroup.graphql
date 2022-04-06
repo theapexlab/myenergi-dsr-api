@@ -10,7 +10,7 @@ mutation AddDevice($objects: [control_group_device_insert_input!]!) {
   }
 }
 
-mutation RemoveDevice($controlGroupId: Int!, $serialNos: [Int!]!) {
+mutation RemoveDeviceFromControlGroup($controlGroupId: Int!, $serialNos: [Int!]!) {
   response: delete_control_group_device(
     where: { control_group_id: { _eq: $controlGroupId }, serialno: { _in: $serialNos } }
   ) {
@@ -25,14 +25,10 @@ query ControlGroup($id: Int!) {
 }
 
 query ControlGroupDevices($controlGroupId: Int!) {
-  controlGroupDevices: control_group_by_pk(id: $controlGroupId) {
+  controlGroup: control_group_by_pk(id: $controlGroupId) {
     devices {
-      zappi: control_group_device_zappi {
-        ...ZappiData
-      }
-      eddi: control_group_device_eddi {
-        ...EddiData
-      }
+      serialNo: serialno
+      deviceClass: device_type
     }
   }
 }
@@ -40,6 +36,7 @@ query ControlGroupDevices($controlGroupId: Int!) {
 query ControlGroupStatus($controlGroupId: Int!) {
   controlGroupStatus: control_group_by_pk(id: $controlGroupId) {
     devices {
+      
       eddi: control_group_device_eddi {
         ...EddiStatus
       }

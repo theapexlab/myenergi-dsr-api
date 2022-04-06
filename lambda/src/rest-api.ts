@@ -41,8 +41,8 @@ const restMiddleware = useSofa({
     'Query.device': {
       path: '/devices/:serialNo',
     },
-    'Query.deviceControlGroup': {
-      path: '/devices/:serialNo/control-group',
+    'Query.deviceControlGroups': {
+      path: '/devices/:serialNo/control-groups',
     },
     'Query.controlGroup': {
       path: '/control-groups/:id',

@@ -75,6 +75,6 @@ export class ControlGroupResolver {
     @Args() args: MutateControlGroupArgs
   ): Promise<AffectedResponse> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.removeDevice(args);
+    return controlGroupApi.removeDeviceFromControlGroup(args);
   }
 }

@@ -12,22 +12,24 @@ export class DeviceResolver {
   @Query(() => [Device])
   devices(@Ctx() ctx: AppContext, @Args() args: DevicesArgs): Promise<Device[]> {
     const { deviceApi } = getDataSources(ctx);
-    return deviceApi.getDevices(args);
+    // todo: get adminGroupId from context
+    const adminGroupId = 1;
+    return deviceApi.getAdminGroupDevices(args, adminGroupId);
   }
 
   @Query(() => Device)
   device(@Ctx() ctx: AppContext, @Args() { serialNo }: IdArgs): Promise<Device> {
     const { deviceApi } = getDataSources(ctx);
-    return deviceApi.getDevice(serialNo);
+    // todo: get adminGroupId from context
+    const adminGroupId = 1;
+    return deviceApi.getAdminGroupDevice(serialNo, adminGroupId);
   }
 
-  // todo: consider if we need this
-  @Query(() => ControlGroup, { nullable: true })
-  deviceControlGroup(
-    @Ctx() ctx: AppContext,
-    @Arg('serialNo', () => Int) serialNo: number
-  ): Promise<ControlGroup | null> {
+  @Query(() => [ControlGroup])
+  deviceControlGroups(@Ctx() ctx: AppContext, @Arg('serialNo', () => Int) serialNo: number): Promise<ControlGroup[]> {
     const { deviceApi } = getDataSources(ctx);
-    return deviceApi.getDeviceControlGroup(serialNo);
+    // todo: get adminGroupId from context
+    const adminGroupId = 1;
+    return deviceApi.getDeviceControlGroup(serialNo, adminGroupId);
   }
 }

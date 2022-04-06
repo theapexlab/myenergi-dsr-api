@@ -5,6 +5,7 @@ import { Device } from '../device';
 import { DeviceStatus } from '../device-status';
 import { getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
+import { mapDeviceClassToDeviceType } from '../utils';
 import { getGraphqlSdk } from './getGraphqlSdk';
 import { NotFoundError } from './NotFoundError';
 
@@ -29,6 +30,9 @@ export class ControlGroupAPI extends RESTDataSource {
 
   async getControlGroupById(id: number): Promise<ControlGroup> {
     const { controlGroup } = await this.sdk.ControlGroup({ id });
+    if (!controlGroup) {
+      throw new NotFoundError(`Control group with id ${id} not found`);
+    }
     return controlGroup;
   }
 
@@ -36,7 +40,7 @@ export class ControlGroupAPI extends RESTDataSource {
     const { id: control_group_id, serialNos } = args;
 
     const {
-      admin_group_by_pk: { admin_group_devices: devices },
+      adminGroup: { devices },
     } = await this.sdk.AdminGroupDevicesBySerialNos({ adminGroupId, serialNos });
 
     if (!devices.length) {
@@ -63,20 +67,27 @@ export class ControlGroupAPI extends RESTDataSource {
     };
   }
 
-  async removeDevice(args: MutateControlGroupArgs): Promise<AffectedResponse> {
+  async removeDeviceFromControlGroup(args: MutateControlGroupArgs): Promise<AffectedResponse> {
     const { id: controlGroupId, serialNos } = args;
-    const { response } = await this.sdk.RemoveDevice({ controlGroupId, serialNos });
+    const {
+      response: { affectedRows = 0 },
+    } = await this.sdk.RemoveDeviceFromControlGroup({ controlGroupId, serialNos });
+
+    if (!affectedRows) {
+      throw new NotFoundError(`Given devices were not found in control group ${controlGroupId}`);
+    }
+
     return {
-      affectedRows: response?.affectedRows ?? 0,
+      affectedRows,
     };
   }
 
   async getControlGroupDevices(id: number): Promise<Device[]> {
-    const { controlGroupDevices } = await this.sdk.ControlGroupDevices({ controlGroupId: id });
-    if (!controlGroupDevices) {
+    const { controlGroup } = await this.sdk.ControlGroupDevices({ controlGroupId: id });
+    if (!controlGroup) {
       throw new NotFoundError(`Control group with id ${id} not found`);
     }
-    return controlGroupDevices.devices.flatMap(({ zappi, eddi }) => [zappi, eddi]).filter((item) => !!item);
+    return controlGroup.devices || [];
   }
 
   async getControlGroupStatus(id: number): Promise<DeviceStatus[]> {
@@ -88,8 +99,9 @@ export class ControlGroupAPI extends RESTDataSource {
       .flatMap(({ zappi, eddi }) => [zappi, eddi])
       .filter((item) => !!item)
       .map(({ updateDate, ...device }) => ({
-        updateDate: new Date(updateDate),
         ...device,
+        deviceClass: mapDeviceClassToDeviceType(device.deviceClass),
+        updateDate: new Date(updateDate),
       }));
   }
 }

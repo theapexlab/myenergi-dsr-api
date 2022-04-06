@@ -8,8 +8,8 @@ import { DeviceHistory } from './deviceHistory.type';
 @Resolver(DeviceHistory)
 export class DeviceHistoryResolver {
   @Query(() => [DeviceHistory])
-  deviceHistory(@Ctx() ctx: AppContext, @Args() args: DeviceHistoryArgs): Promise<DeviceHistory[]> {
+  deviceHistory(@Ctx() ctx: AppContext, @Args() { serialNo, ...dates }: DeviceHistoryArgs): Promise<DeviceHistory[]> {
     const { historyApi } = getDataSources(ctx);
-    return historyApi.getDeviceHistory(args);
+    return historyApi.getHistoryByIds(dates, [serialNo]);
   }
 }

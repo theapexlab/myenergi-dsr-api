@@ -18,30 +18,32 @@ query AdminGroup($id: Int!) {
   }
 }
 
-query AdminGroupDevices($adminGroupId: Int!) {
-  adminGroupDevices: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
-    serialNo: serialno
-    deviceClass: device_type
+query AdminGroupDevices($adminGroupId: Int!, $limit: Int, $offset: Int) {
+   adminGroup: admin_group_by_pk(id: $adminGroupId) {
+     devices: admin_group_devices(offset: $offset, limit: $limit) {
+      ...DeviceData
+    }
   }
 }
 query AdminGroupDevicesBySerialNos($adminGroupId: Int!, $serialNos: [Int!]) {
-  admin_group_by_pk(id: $adminGroupId) {
-    admin_group_devices(where: { serialno: {_in: $serialNos}}) {
-      serialNo: serialno
-      deviceClass: device_type
+  adminGroup: admin_group_by_pk(id: $adminGroupId) {
+    devices: admin_group_devices(where: { serialno: {_in: $serialNos}}) {
+      ...DeviceData
     }
   }
 }
 
 query AdminGroupStatus($adminGroupId: Int!) {
-  adminGroupStatus: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
-    zappi: admin_group_device_zappi {
-      ...ZappiStatus
+   adminGroup: admin_group_by_pk(id: $adminGroupId) {
+    adminGroupStatus: admin_group_devices {
+      zappi: admin_group_device_zappi {
+        ...ZappiStatus
+      }
+      eddi: admin_group_device_eddi {
+        ...EddiStatus
+      }
     }
-    eddi: admin_group_device_eddi {
-      ...EddiStatus
-    }
-  }
+   }
 }
 
 mutation CreateAdminGroup($name: String!) {

@@ -48,8 +48,6 @@ export class AdminGroupResolver {
     return historyApi.getHistoryByIds(rest, devices.map(mapSerialNo));
   }
 
-  /* Mutations */
-
   @Mutation(() => AdminGroup)
   createAdminGroup(@Ctx() ctx: AppContext, @Arg('name') name: string): Promise<AdminGroup> {
     const { adminGroupApi } = getDataSources(ctx);
