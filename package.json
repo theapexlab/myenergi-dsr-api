@@ -30,7 +30,7 @@
     "tf:apply": "terraform -chdir=./terraform apply -var-file ./config/terraform.tfvars",
     "tf:destroy": "terraform -chdir=./terraform destroy -var-file ./config/terraform.tfvars",
     "deploy": "yarn build && yarn tf:apply",
-    "codegen": "graphql-codegen --config codegen.yml",
+    "codegen": "graphql-codegen --config codegen.yml -r dotenv/config",
     "hasura:console": "cd ./hasura && hasura console",
     "hasura:console:local": "cd ./test/test-hasura && hasura console",
     "hasura:metadata:apply": "cd ./hasura && hasura metadata apply",
