@@ -1,5 +1,6 @@
 import { DataSources } from 'apollo-server-core/src/graphqlOptions';
 import { AdminGroupAPI } from './AdminGroupAPI';
+import { AppClientAPI } from './AppClientAPI';
 import { ControlGroupAPI } from './ControlGroupAPI';
 import { DeviceAPI } from './DeviceAPI';
 import { HistoryAPI } from './HistoryAPI';
@@ -9,6 +10,7 @@ export interface AppDataSources extends DataSources<Record<string, any>> {
   historyApi: HistoryAPI;
   controlGroupApi: ControlGroupAPI;
   adminGroupApi: AdminGroupAPI;
+  appClientApi: AppClientAPI;
 }
 
 export const getAPIs = (): AppDataSources => {
@@ -17,6 +19,7 @@ export const getAPIs = (): AppDataSources => {
     historyApi: new HistoryAPI(process.env.DAL_ENDPOINT, process.env.DAL_ADMIN_SECRET),
     controlGroupApi: new ControlGroupAPI(process.env.DAL_ENDPOINT, process.env.DAL_ADMIN_SECRET),
     adminGroupApi: new AdminGroupAPI(process.env.DAL_ENDPOINT, process.env.DAL_ADMIN_SECRET),
+    appClientApi: new AppClientAPI(process.env.USER_POOL_ID, process.env.USER_POOL_REGION),
   };
 };
 

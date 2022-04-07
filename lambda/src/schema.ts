@@ -1,11 +1,13 @@
 import { UserInputError } from 'apollo-server-express';
 import { buildSchemaSync } from 'type-graphql';
-import { AdminGroupResolver } from './admin-group';
+import { AdminGroupResolver, SuperAdminGroupResolver } from './admin-group';
+import { authChecker } from './auth/auth-checker';
 import { ControlGroupResolver } from './control-group';
 import { DeviceResolver } from './device';
 import { DeviceHistoryResolver } from './device-history';
 import { DeviceHistoryArgs } from './device-history/deviceHistory.args';
 import { DeviceStatusResolver } from './device-status';
+import { AppClientResolver } from './app-client';
 import { isValidDateOrder, isValidDateRange } from './utils/validateStartEndDate';
 
 const schema = buildSchemaSync({
@@ -21,6 +23,12 @@ const schema = buildSchemaSync({
       }
     }
   },
+  authChecker: authChecker,
 });
 
-export { schema };
+const adminSchema = buildSchemaSync({
+  resolvers: [AppClientResolver, AdminGroupResolver, SuperAdminGroupResolver],
+  authChecker: authChecker,
+});
+
+export { schema, adminSchema };

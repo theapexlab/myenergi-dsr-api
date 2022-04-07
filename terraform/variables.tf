@@ -162,3 +162,13 @@ variable "sg_main_db" {
   default     = "sg-077105b94c8fb1a57"
 }
 
+variable "super_admin_username" {
+  description = "Superadmin username for HTTP Basic Authentication"
+  default = "admin"
+}
+variable "super_admin_password" {
+  description = "Superadmin password for HTTP Basic Authentication"
+  default = "6yn3sEAzj4qxpF7u"
+}
+
+

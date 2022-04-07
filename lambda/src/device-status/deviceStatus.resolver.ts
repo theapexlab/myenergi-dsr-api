@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import { Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
+import { Args, Authorized, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
+import { RoleType } from '../auth/auth-checker';
 import { AppContext } from '../context';
 import { getDataSources } from '../data-sources';
 import { IdArgs } from '../shared';
@@ -13,6 +14,7 @@ export class DeviceStatusResolver {
     return true;
   }
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => DeviceStatus)
   deviceStatus(@Ctx() ctx: AppContext, @Args() { serialNo }: IdArgs): Promise<DeviceStatus> {
     const { deviceApi } = getDataSources(ctx);

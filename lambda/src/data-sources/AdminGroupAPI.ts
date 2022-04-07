@@ -3,7 +3,7 @@ import { GraphQLError } from 'graphql';
 import { AdminGroup, AdminGroupsArgs, MutateAdminGroupArgs } from '../admin-group';
 import { Device } from '../device';
 import { DeviceStatus } from '../device-status';
-import { Device_Type_Enum, getSdk } from '../generated/graphql';
+import { Admin_Group_Bool_Exp, Device_Type_Enum, getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
 import { logger } from '../utils/logger';
 import { getGraphqlSdk } from './getGraphqlSdk';
@@ -18,10 +18,12 @@ export class AdminGroupAPI extends RESTDataSource {
     this.sdk = getGraphqlSdk({ baseURL, secret });
   }
 
-  async getAll(args: AdminGroupsArgs): Promise<AdminGroup[]> {
+  async getAll(args: AdminGroupsArgs, aggregatorId?: string): Promise<AdminGroup[]> {
     const { limit, offset } = args;
     try {
-      const { adminGroups } = await this.sdk.AdminGroups({ limit, offset });
+      const isSuperAdmin = !aggregatorId;
+      const where: Admin_Group_Bool_Exp = isSuperAdmin ? null : { aggregator_id: { _eq: aggregatorId } };
+      const { adminGroups } = await this.sdk.AdminGroups({ limit, offset, where });
       return adminGroups;
     } catch (err) {
       logger.error(err.toString());
@@ -71,14 +73,19 @@ export class AdminGroupAPI extends RESTDataSource {
     }
   }
 
-  async create(name: string): Promise<AdminGroup> {
+  async create(name: string, aggregatorId: string): Promise<AdminGroup> {
     try {
-      const { adminGroup } = await this.sdk.CreateAdminGroup({ name });
+      const { adminGroup } = await this.sdk.CreateAdminGroup({ name, aggregatorId });
       return adminGroup;
     } catch (err) {
       logger.error(err.toString());
       throw new GraphQLError('Admin group creation failed');
     }
+  }
+
+  async removeByAggregatorId(aggregatorId: string): Promise<AdminGroup[]> {
+    const { adminGroup } = await this.sdk.RemoveAdminGroupByAggregatorId({ aggregatorId });
+    return adminGroup.returning;
   }
 
   async addDevices(args: MutateAdminGroupArgs): Promise<AffectedResponse> {

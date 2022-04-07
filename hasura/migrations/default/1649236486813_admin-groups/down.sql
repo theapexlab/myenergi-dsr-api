@@ -1,4 +1,11 @@
 
+
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- alter table "public"."admin_group" add column "aggregator_id" text
+--  not null;
+
+
 alter table "public"."admin_group_device" alter column "postcode" set not null;
 
 

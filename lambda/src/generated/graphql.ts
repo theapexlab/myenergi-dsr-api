@@ -106,6 +106,7 @@ export type Admin_Group = {
   admin_group_devices: Array<Admin_Group_Device>;
   /** An aggregate relationship */
   admin_group_devices_aggregate: Admin_Group_Device_Aggregate;
+  aggregator_id: Scalars['String'];
   /** An array relationship */
   control_groups: Array<Control_Group>;
   /** An aggregate relationship */
@@ -193,6 +194,7 @@ export type Admin_Group_Bool_Exp = {
   _not?: InputMaybe<Admin_Group_Bool_Exp>;
   _or?: InputMaybe<Array<Admin_Group_Bool_Exp>>;
   admin_group_devices?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+  aggregator_id?: InputMaybe<String_Comparison_Exp>;
   control_groups?: InputMaybe<Control_Group_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
@@ -604,6 +606,7 @@ export type Admin_Group_Inc_Input = {
 /** input type for inserting data into table "admin_group" */
 export type Admin_Group_Insert_Input = {
   admin_group_devices?: InputMaybe<Admin_Group_Device_Arr_Rel_Insert_Input>;
+  aggregator_id?: InputMaybe<Scalars['String']>;
   control_groups?: InputMaybe<Control_Group_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
@@ -614,6 +617,7 @@ export type Admin_Group_Insert_Input = {
 /** aggregate max on columns */
 export type Admin_Group_Max_Fields = {
   __typename?: 'admin_group_max_fields';
+  aggregator_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
@@ -623,6 +627,7 @@ export type Admin_Group_Max_Fields = {
 /** aggregate min on columns */
 export type Admin_Group_Min_Fields = {
   __typename?: 'admin_group_min_fields';
+  aggregator_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
@@ -655,6 +660,7 @@ export type Admin_Group_On_Conflict = {
 /** Ordering options when selecting data from "admin_group". */
 export type Admin_Group_Order_By = {
   admin_group_devices_aggregate?: InputMaybe<Admin_Group_Device_Aggregate_Order_By>;
+  aggregator_id?: InputMaybe<Order_By>;
   control_groups_aggregate?: InputMaybe<Control_Group_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -670,6 +676,8 @@ export type Admin_Group_Pk_Columns_Input = {
 /** select columns of table "admin_group" */
 export enum Admin_Group_Select_Column {
   /** column name */
+  AggregatorId = 'aggregator_id',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
@@ -681,6 +689,7 @@ export enum Admin_Group_Select_Column {
 
 /** input type for updating data in table "admin_group" */
 export type Admin_Group_Set_Input = {
+  aggregator_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
   name?: InputMaybe<Scalars['String']>;
@@ -713,6 +722,8 @@ export type Admin_Group_Sum_Fields = {
 
 /** update columns of table "admin_group" */
 export enum Admin_Group_Update_Column {
+  /** column name */
+  AggregatorId = 'aggregator_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -12955,6 +12966,7 @@ export type AdminGroupDevicesNotInControllGroupQuery = {
 export type AdminGroupsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Admin_Group_Bool_Exp>;
 }>;
 
 export type AdminGroupsQuery = {
@@ -13009,11 +13021,24 @@ export type AdminGroupStatusQuery = {
 
 export type CreateAdminGroupMutationVariables = Exact<{
   name: Scalars['String'];
+  aggregatorId: Scalars['String'];
 }>;
 
 export type CreateAdminGroupMutation = {
   __typename?: 'mutation_root';
   adminGroup?: { __typename?: 'admin_group'; id: number; name: string } | null;
+};
+
+export type RemoveAdminGroupByAggregatorIdMutationVariables = Exact<{
+  aggregatorId: Scalars['String'];
+}>;
+
+export type RemoveAdminGroupByAggregatorIdMutation = {
+  __typename?: 'mutation_root';
+  adminGroup?: {
+    __typename?: 'admin_group_mutation_response';
+    returning: Array<{ __typename?: 'admin_group'; id: number; name: string }>;
+  } | null;
 };
 
 export type AddDeviceToAdminGroupMutationVariables = Exact<{
@@ -13538,8 +13563,8 @@ export const AdminGroupDevicesNotInControllGroupDocument = gql`
   }
 `;
 export const AdminGroupsDocument = gql`
-  query AdminGroups($limit: Int, $offset: Int) {
-    adminGroups: admin_group(limit: $limit, offset: $offset) {
+  query AdminGroups($limit: Int, $offset: Int, $where: admin_group_bool_exp) {
+    adminGroups: admin_group(limit: $limit, offset: $offset, where: $where) {
       ...AdminGroupFields
     }
   }
@@ -13576,9 +13601,19 @@ export const AdminGroupStatusDocument = gql`
   ${EddiStatusFragmentDoc}
 `;
 export const CreateAdminGroupDocument = gql`
-  mutation CreateAdminGroup($name: String!) {
-    adminGroup: insert_admin_group_one(object: { name: $name }) {
+  mutation CreateAdminGroup($name: String!, $aggregatorId: String!) {
+    adminGroup: insert_admin_group_one(object: { name: $name, aggregator_id: $aggregatorId }) {
       ...AdminGroupFields
+    }
+  }
+  ${AdminGroupFieldsFragmentDoc}
+`;
+export const RemoveAdminGroupByAggregatorIdDocument = gql`
+  mutation RemoveAdminGroupByAggregatorId($aggregatorId: String!) {
+    adminGroup: delete_admin_group(where: { aggregator_id: { _eq: $aggregatorId } }) {
+      returning {
+        ...AdminGroupFields
+      }
     }
   }
   ${AdminGroupFieldsFragmentDoc}
@@ -13885,6 +13920,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'CreateAdminGroup'
+      );
+    },
+    RemoveAdminGroupByAggregatorId(
+      variables: RemoveAdminGroupByAggregatorIdMutationVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<RemoveAdminGroupByAggregatorIdMutation> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<RemoveAdminGroupByAggregatorIdMutation>(RemoveAdminGroupByAggregatorIdDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'RemoveAdminGroupByAggregatorId'
       );
     },
     AddDeviceToAdminGroup(

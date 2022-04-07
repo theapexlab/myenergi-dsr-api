@@ -1,6 +1,8 @@
 
 
 
+
+
 CREATE TABLE "public"."admin_group" ("id" serial NOT NULL, "name" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") );
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
@@ -74,3 +76,6 @@ alter table "public"."control_group"
   ("id") on update cascade on delete cascade;
 
 alter table "public"."admin_group_device" alter column "postcode" drop not null;
+
+alter table "public"."admin_group" add column "aggregator_id" text
+ not null;

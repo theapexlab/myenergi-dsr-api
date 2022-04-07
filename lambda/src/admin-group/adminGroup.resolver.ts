@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import { Arg, Args, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
+import { Arg, Args, Authorized, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
+import { RoleType } from '../auth/auth-checker';
 import { AppContext } from '../context';
 import { getDataSources } from '../data-sources';
 import { Device } from '../device';
@@ -14,12 +15,14 @@ import { AdminGroup } from './adminGroup.type';
 export class AdminGroupResolver {
   /* Queries */
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [AdminGroup])
   adminGroups(@Ctx() ctx: AppContext, @Args() args: AdminGroupsArgs): Promise<AdminGroup[]> {
     const { adminGroupApi } = getDataSources(ctx);
-    return adminGroupApi.getAll(args);
+    return adminGroupApi.getAll(args, ctx.appClientId);
   }
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => AdminGroup)
   adminGroup(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<AdminGroup> {
     const { adminGroupApi } = getDataSources(ctx);
@@ -28,18 +31,21 @@ export class AdminGroupResolver {
 
   /* Relation queries */
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [Device])
   adminGroupDevices(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<Device[]> {
     const { adminGroupApi } = getDataSources(ctx);
     return adminGroupApi.getDevices(id);
   }
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [DeviceStatus])
   adminGroupStatus(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceStatus[]> {
     const { adminGroupApi } = getDataSources(ctx);
     return adminGroupApi.getStatus(id);
   }
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [DeviceHistory])
   async adminGroupHistory(@Ctx() ctx: AppContext, @Args() args: AdminGroupHistoryArgs): Promise<DeviceHistory[]> {
     const { id, ...rest } = args;
@@ -47,21 +53,29 @@ export class AdminGroupResolver {
     const devices = await adminGroupApi.getDevices(id);
     return historyApi.getHistoryByIds(rest, devices.map(mapSerialNo));
   }
+}
 
-  /* Mutations */
-
+@Resolver()
+export class SuperAdminGroupResolver {
+  @Authorized<RoleType>(RoleType.SUPERADMIN)
   @Mutation(() => AdminGroup)
-  createAdminGroup(@Ctx() ctx: AppContext, @Arg('name') name: string): Promise<AdminGroup> {
+  createAdminGroup(
+    @Ctx() ctx: AppContext,
+    @Arg('name') name: string,
+    @Arg('aggregatorId') aggregatorId: string
+  ): Promise<AdminGroup> {
     const { adminGroupApi } = getDataSources(ctx);
-    return adminGroupApi.create(name);
+    return adminGroupApi.create(name, aggregatorId);
   }
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN)
   @Mutation(() => AffectedResponse)
   addDeviceToAdminGroup(@Ctx() ctx: AppContext, @Args() args: MutateAdminGroupArgs): Promise<AffectedResponse> {
     const { adminGroupApi } = getDataSources(ctx);
     return adminGroupApi.addDevices(args);
   }
 
+  @Authorized<RoleType>(RoleType.SUPERADMIN)
   @Mutation(() => AffectedResponse)
   removeDeviceFromAdminGroup(@Ctx() ctx: AppContext, @Args() args: MutateAdminGroupArgs): Promise<AffectedResponse> {
     const { adminGroupApi } = getDataSources(ctx);

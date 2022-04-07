@@ -1,13 +1,13 @@
 query AdminGroupDevicesNotInControllGroup($id: Int = 10) {
   admin_group_by_pk(id: $id) {
-    admin_group_devices(where: {control_group_devices: {control_group_id: {_is_null: true}}}) {
+    admin_group_devices(where: { control_group_devices: { control_group_id: { _is_null: true } } }) {
       serialno
     }
   }
 }
 
-query AdminGroups($limit: Int, $offset: Int) {
-  adminGroups: admin_group(limit: $limit, offset: $offset) {
+query AdminGroups($limit: Int, $offset: Int, $where: admin_group_bool_exp) {
+  adminGroups: admin_group(limit: $limit, offset: $offset, where: $where) {
     ...AdminGroupFields
   }
 }
@@ -36,9 +36,17 @@ query AdminGroupStatus($adminGroupId: Int!) {
   }
 }
 
-mutation CreateAdminGroup($name: String!) {
-  adminGroup: insert_admin_group_one(object: { name: $name }) {
+mutation CreateAdminGroup($name: String!, $aggregatorId: String!) {
+  adminGroup: insert_admin_group_one(object: { name: $name, aggregator_id: $aggregatorId }) {
     ...AdminGroupFields
+  }
+}
+
+mutation RemoveAdminGroupByAggregatorId($aggregatorId: String!) {
+  adminGroup: delete_admin_group(where: { aggregator_id: { _eq: $aggregatorId } }) {
+    returning {
+      ...AdminGroupFields
+    }
   }
 }
 
