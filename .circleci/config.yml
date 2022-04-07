@@ -57,7 +57,7 @@ jobs:
       - run:
           when: always
           name: Stop node server
-          command: pkill -SIGQUIT node
+          command: pkill -SIGTERM node
       - run:
           when: always
           name: Stop all services declared in docker-compose.yml
