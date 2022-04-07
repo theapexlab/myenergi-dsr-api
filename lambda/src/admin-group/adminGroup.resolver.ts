@@ -8,7 +8,7 @@ import { DeviceStatus } from '../device-status';
 import { AffectedResponse } from '../shared';
 import { mapSerialNo } from '../utils';
 import { AdminGroupHistoryArgs, AdminGroupsArgs, MutateAdminGroupArgs } from './adminGroup.args';
-import { AdminGroup } from './adminGroup.type';
+import { AdminGroup, AdminGroupDevicesArgs } from './adminGroup.type';
 
 @Resolver(AdminGroup)
 export class AdminGroupResolver {
@@ -29,9 +29,15 @@ export class AdminGroupResolver {
   /* Relation queries */
 
   @Query(() => [Device])
-  adminGroupDevices(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<Device[]> {
+  adminGroupDevices(@Ctx() ctx: AppContext, @Args() args: AdminGroupDevicesArgs): Promise<Device[]> {
     const { adminGroupApi } = getDataSources(ctx);
-    return adminGroupApi.getDevices(id);
+    const { id, limit, offset } = args;
+    // todo: get adminGroupId from context
+    // const adminGroupId = 1;
+    // if (id !== adminGroupId) {
+    //   throw new GraphQLError('Invalid adminGroupId');
+    // }
+    return adminGroupApi.getDevices({ limit, offset }, id);
   }
 
   @Query(() => [DeviceStatus])
@@ -44,7 +50,7 @@ export class AdminGroupResolver {
   async adminGroupHistory(@Ctx() ctx: AppContext, @Args() args: AdminGroupHistoryArgs): Promise<DeviceHistory[]> {
     const { id, ...rest } = args;
     const { adminGroupApi, historyApi } = getDataSources(ctx);
-    const devices = await adminGroupApi.getDevices(id);
+    const devices = await adminGroupApi.getDevices({}, id);
     return historyApi.getHistoryByIds(rest, devices.map(mapSerialNo));
   }
 

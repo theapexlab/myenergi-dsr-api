@@ -46,4 +46,4 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgresql://myenergi:myenergi@default:5432/default
       HASURA_GRAPHQL_MAINDB_URL: postgresql://myenergi:myenergi@main-db:5432/main-db
       HASURA_GRAPHQL_HISTORYDB_URL: postgresql://myenergi:myenergi@history-db:5432/history-db
-      HASURA_GRAPHQL_ADMIN_SECRET: admin123
+      HASURA_GRAPHQL_ADMIN_SECRET: ${DAL_ADMIN_SECRET}

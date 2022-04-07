@@ -1,7 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { GraphQLError } from 'graphql';
 import { AdminGroup, AdminGroupsArgs, MutateAdminGroupArgs } from '../admin-group';
-import { Device } from '../device';
+import { Device, DevicesArgs } from '../device';
 import { DeviceStatus } from '../device-status';
 import { Device_Type_Enum, getSdk } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
@@ -36,10 +36,28 @@ export class AdminGroupAPI extends RESTDataSource {
     return adminGroup;
   }
 
-  async getDevices(id: number): Promise<Device[]> {
-    const { adminGroup } = await this.sdk.AdminGroupDevices({ adminGroupId: id });
+  async getDevice(serialNo: number, adminGroupId: number): Promise<Device> {
+    const {
+      adminGroup: { devices },
+    } = await this.sdk.AdminGroupDevicesBySerialNos({
+      adminGroupId,
+      serialNos: [serialNo],
+    });
+    const device = devices[0];
+    if (!device) {
+      throw new NotFoundError(`Device with serial number ${serialNo} not found`);
+    }
+    return device;
+  }
+
+  async getDevices({ limit = null, offset = null }: DevicesArgs, adminGroupId: number): Promise<Device[]> {
+    const { adminGroup } = await this.sdk.AdminGroupDevices({
+      adminGroupId,
+      limit,
+      offset,
+    });
     if (!adminGroup) {
-      throw new NotFoundError(`Admin group with id ${id} not found`);
+      throw new NotFoundError(`Admin group with id ${adminGroupId} not found`);
     }
     return adminGroup.devices || [];
   }

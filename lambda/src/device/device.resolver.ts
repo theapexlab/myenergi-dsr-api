@@ -11,18 +11,18 @@ import { Device } from './device.type';
 export class DeviceResolver {
   @Query(() => [Device])
   devices(@Ctx() ctx: AppContext, @Args() args: DevicesArgs): Promise<Device[]> {
-    const { deviceApi } = getDataSources(ctx);
+    const { adminGroupApi } = getDataSources(ctx);
     // todo: get adminGroupId from context
     const adminGroupId = 1;
-    return deviceApi.getAdminGroupDevices(args, adminGroupId);
+    return adminGroupApi.getDevices(args, adminGroupId);
   }
 
   @Query(() => Device)
   device(@Ctx() ctx: AppContext, @Args() { serialNo }: IdArgs): Promise<Device> {
-    const { deviceApi } = getDataSources(ctx);
+    const { adminGroupApi } = getDataSources(ctx);
     // todo: get adminGroupId from context
     const adminGroupId = 1;
-    return deviceApi.getAdminGroupDevice(serialNo, adminGroupId);
+    return adminGroupApi.getDevice(serialNo, adminGroupId);
   }
 
   @Query(() => [ControlGroup])

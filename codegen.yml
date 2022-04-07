@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - ${DAL_ENDPOINT}:
       headers:
-        x-hasura-admin-secret: 'admin123'
+        x-hasura-admin-secret: ${DAL_ADMIN_SECRET}
 
 documents:
   - 'graphql/**/*.graphql'
