@@ -1,4 +1,4 @@
-query AdminGroupDevicesNotInControllGroup($id: Int = 10) {
+query AdminGroupDevicesNotInControllGroup($id: Int!) {
   admin_group_by_pk(id: $id) {
     admin_group_devices(where: { control_group_devices: { control_group_id: { _is_null: true } } }) {
       serialno
@@ -12,29 +12,25 @@ query AdminGroups($limit: Int, $offset: Int, $where: admin_group_bool_exp) {
   }
 }
 
-query AdminGroup($id: Int!) {
-  adminGroup: admin_group_by_pk(id: $id) {
-    ...AdminGroupFields
+query AdminGroupDevices($where: admin_group_device_bool_exp, $limit: Int, $offset: Int) {
+  devices: admin_group_device(where: $where, limit: $limit, offset: $offset) {
+   ...DeviceData
   }
 }
 
-query AdminGroupDevices($adminGroupId: Int!) {
-  adminGroupDevices: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
-    serialNo: serialno
-    deviceClass: device_type
+query AdminGroupStatus($where: admin_group_bool_exp, $offset: Int, $limit: Int) {
+  adminGroups: admin_group(where: $where) {
+    devices: admin_group_devices(limit: $limit, offset: $offset) {
+        zappi: admin_group_device_zappi {
+          ...ZappiStatus
+        }
+        eddi: admin_group_device_eddi {
+          ...EddiStatus
+        }
+    }
   }
 }
 
-query AdminGroupStatus($adminGroupId: Int!) {
-  adminGroupStatus: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
-    zappi: admin_group_device_zappi {
-      ...ZappiStatus
-    }
-    eddi: admin_group_device_eddi {
-      ...EddiStatus
-    }
-  }
-}
 
 mutation CreateAdminGroup($name: String!, $aggregatorId: String!) {
   adminGroup: insert_admin_group_one(object: { name: $name, aggregator_id: $aggregatorId }) {

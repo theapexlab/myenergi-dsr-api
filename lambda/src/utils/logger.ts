@@ -2,15 +2,15 @@
 
 class Logger {
   info = (input: any): void => {
-    console.info(JSON.stringify(input));
+    console.info('ℹ️:' + JSON.stringify(input));
   };
 
   log = (input: any): void => {
-    console.log(JSON.stringify(input));
+    console.log('📰:' + JSON.stringify(input));
   };
 
   error = (input: any): void => {
-    console.error(JSON.stringify(input));
+    console.error('❌:' + JSON.stringify(input));
   };
 }
 

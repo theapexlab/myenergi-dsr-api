@@ -1,9 +1,7 @@
 import { Field, ObjectType } from 'type-graphql';
 import { EddiHistoryFragment, ZappiHistoryFragment } from '../generated/graphql';
 
-type DeviceHistoryBase = Omit<ZappiHistoryFragment | EddiHistoryFragment, '__typename' | 'timestamp'> & {
-  timestamp: Date;
-};
+type DeviceHistoryBase = Omit<ZappiHistoryFragment | EddiHistoryFragment, '__typename'>;
 
 @ObjectType()
 export class DeviceHistory implements DeviceHistoryBase {
@@ -68,5 +66,5 @@ export class DeviceHistory implements DeviceHistoryBase {
   frequency?: number;
 
   @Field()
-  timestamp: Date;
+  timestamp: string;
 }

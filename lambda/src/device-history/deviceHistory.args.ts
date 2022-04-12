@@ -7,8 +7,8 @@ export class DeviceHistoryArgs extends PaginationArgs {
   serialNo: number;
 
   @Field()
-  startDate: Date;
+  startDate: string;
 
   @Field()
-  endDate: Date;
+  endDate: string;
 }

@@ -1,8 +1,8 @@
 overwrite: true
 schema:
-  - 'https://dsr-hasura-api.myenergi-dev.zoosh.ie/v1/graphql':
+  - ${DAL_ENDPOINT}:
       headers:
-        x-hasura-admin-secret: 'admin123'
+        x-hasura-admin-secret: ${DAL_ADMIN_SECRET}
 
 documents:
   - 'graphql/**/*.graphql'

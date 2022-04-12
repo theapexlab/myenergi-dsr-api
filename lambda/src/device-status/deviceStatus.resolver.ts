@@ -18,6 +18,7 @@ export class DeviceStatusResolver {
   @Query(() => DeviceStatus)
   deviceStatus(@Ctx() ctx: AppContext, @Args() { serialNo }: IdArgs): Promise<DeviceStatus> {
     const { deviceApi } = getDataSources(ctx);
-    return deviceApi.getDeviceStatus(serialNo);
+
+    return deviceApi.getDeviceStatus(serialNo, ctx.user);
   }
 }

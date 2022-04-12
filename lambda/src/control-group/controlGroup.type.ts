@@ -10,4 +10,7 @@ export class ControlGroup implements ControlGroupBase {
 
   @Field(() => String, { description: 'Name of the control Group' })
   name: string;
+
+  @Field(() => String, { description: 'Id of the owners admin group ' })
+  adminGroupId: number;
 }

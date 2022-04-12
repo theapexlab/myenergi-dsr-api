@@ -1,12 +1,25 @@
 import { ContextFunction } from 'apollo-server-core';
 import { ExpressContext } from 'apollo-server-express';
+import { RoleType } from './auth/auth-checker';
 import { AppDataSources } from './data-sources';
-import { logger } from './utils/logger';
 
+type SuperAdminUser = {
+  role: RoleType.SUPERADMIN;
+};
+
+type AggregatorUser = {
+  role: RoleType.AGGREGATOR;
+  aggregatorId: string;
+};
+
+type AnonymousUser = {
+  role: RoleType.ANONYMOUS;
+};
+
+export type AppUser = SuperAdminUser | AggregatorUser | AnonymousUser;
 export interface AppContext {
   dataSources: AppDataSources;
-  isAdmin: boolean;
-  appClientId?: string;
+  user: AppUser;
 }
 
 type AdminCredentials = {
@@ -18,18 +31,42 @@ type AggregatorCredentials = {
   client_id: string;
 };
 
+const isSuperadmin = (user: AppUser): user is SuperAdminUser => {
+  return user.role === RoleType.SUPERADMIN;
+};
+const isAggregator = (user: AppUser): user is AggregatorUser => {
+  return user.role === RoleType.AGGREGATOR;
+};
+
+export const getAggregatorCondition = <T>(
+  user: AppUser,
+  aggregatorConditionFactory: (aggregatorId: string) => T,
+  adminConditionFactory: () => T | null = () => null
+): T | null => {
+  if (isSuperadmin(user)) {
+    return adminConditionFactory();
+  }
+  if (isAggregator(user)) {
+    return aggregatorConditionFactory(user.aggregatorId);
+  }
+  return null;
+};
+
 export const getContext: ContextFunction<ExpressContext, Omit<AppContext, 'dataSources'>> = async ({ req }) => {
   const admin: AdminCredentials | undefined = req['auth'];
   const aggregator: AggregatorCredentials | undefined = req['user'];
-  try {
+  if (!admin && !aggregator) {
     return {
-      appClientId: aggregator?.client_id,
-      isAdmin: !!admin,
-    };
-  } catch (err) {
-    logger.error(err.toString());
-    return {
-      isAdmin: false,
+      user: {
+        role: RoleType.ANONYMOUS,
+      },
     };
   }
+
+  return {
+    user: {
+      role: admin ? RoleType.SUPERADMIN : RoleType.AGGREGATOR,
+      aggregatorId: admin ? undefined : aggregator?.client_id,
+    },
+  };
 };

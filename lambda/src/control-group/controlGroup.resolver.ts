@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-import { GraphQLError } from 'graphql';
 import { Arg, Args, Authorized, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
 import { RoleType } from '../auth/auth-checker';
 import { AppContext } from '../context';
@@ -7,7 +6,7 @@ import { getDataSources } from '../data-sources';
 import { Device } from '../device';
 import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
-import { AffectedResponse } from '../shared';
+import { AffectedResponse, PaginationArgs } from '../shared';
 import { mapSerialNo } from '../utils';
 import {
   ControlGroupHistoryArgs,
@@ -21,67 +20,65 @@ import { ControlGroup } from './controlGroup.type';
 export class ControlGroupResolver {
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [ControlGroup])
-  controlGroups(@Ctx() ctx: AppContext, @Args() args: ControlGroupsArgs): Promise<ControlGroup[]> {
+  controlGroups(@Ctx() ctx: AppContext, @Args() args: PaginationArgs): Promise<ControlGroup[]> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.getControlGroups(args);
+    return controlGroupApi.getControlGroups(args, ctx.user);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => ControlGroup)
   async controlGroup(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<ControlGroup> {
     const { controlGroupApi } = getDataSources(ctx);
-    const result = await controlGroupApi.getControlGroupById(id);
-    if (result === null) {
-      throw new GraphQLError('Not found');
-    }
-    return result;
+    const controlGroup = await controlGroupApi.getControlGroupById(id, ctx.user);
+    return controlGroup;
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [Device])
   controlGroupDevices(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<Device[]> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.getControlGroupDevices(id);
+    return controlGroupApi.getControlGroupDevices(id, ctx.user);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
-  @Query(() => [Device])
-  controlGroupStatus(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceStatus[]> {
+  @Query(() => [DeviceStatus])
+  controlGroupStatus(@Ctx() ctx: AppContext, @Args() args: ControlGroupsArgs): Promise<DeviceStatus[]> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.getControlGroupStatus(id);
+    return controlGroupApi.getControlGroupStatus(args, ctx.user);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
-  @Query(() => [Device])
+  @Query(() => [DeviceHistory])
   async controlGroupHistory(@Ctx() ctx: AppContext, @Args() args: ControlGroupHistoryArgs): Promise<DeviceHistory[]> {
     const { id, ...rest } = args;
     const { controlGroupApi, historyApi } = getDataSources(ctx);
-    const devices = await controlGroupApi.getControlGroupDevices(id);
+    const devices = await controlGroupApi.getControlGroupDevices(id, ctx.user);
     return historyApi.getHistoryByIds(rest, devices.map(mapSerialNo));
   }
 
-  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
+  @Authorized<RoleType>(RoleType.AGGREGATOR)
   @Mutation(() => ControlGroup)
-  createControlGroup(@Ctx() ctx: AppContext, @Args() args: CreateControlGroupArgs): Promise<ControlGroup> {
-    const { name, adminGroupId } = args;
-    const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.createControlGroup(name, adminGroupId);
+  async createControlGroup(@Ctx() ctx: AppContext, @Args() args: CreateControlGroupArgs): Promise<ControlGroup> {
+    const { name } = args;
+    const { controlGroupApi, adminGroupApi } = getDataSources(ctx);
+    const [adminGroup] = await adminGroupApi.getAll({}, ctx.user);
+    return controlGroupApi.createControlGroup(name, adminGroup.id, ctx.user);
   }
 
-  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
+  @Authorized<RoleType>(RoleType.AGGREGATOR)
   @Mutation(() => AffectedResponse)
   addDeviceToControlGroup(@Ctx() ctx: AppContext, @Args() args: MutateControlGroupArgs): Promise<AffectedResponse> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.addDevice(args);
+    return controlGroupApi.addDevice(args, ctx.user);
   }
 
-  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
+  @Authorized<RoleType>(RoleType.AGGREGATOR)
   @Mutation(() => AffectedResponse)
   removeDeviceFromControlGroup(
     @Ctx() ctx: AppContext,
     @Args() args: MutateControlGroupArgs
   ): Promise<AffectedResponse> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.removeDevice(args);
+    return controlGroupApi.removeDeviceFromControlGroup(args, ctx.user);
   }
 }

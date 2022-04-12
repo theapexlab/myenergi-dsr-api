@@ -18,6 +18,55 @@ jobs:
       - run:
           name: 'Run tests'
           command: 'yarn test'
+  postman-test:
+    environment:
+      DAL_ENDPOINT: http://localhost:8080/v1/graphql
+      DAL_ADMIN_SECRET: admin123
+      NODE_ENV: test
+      TEST_IS_ADMIN: 'true'
+      TEST_AGGREGATOR_ID: testAppClientId-1
+    machine:
+      image: ubuntu-2004:current
+      docker_layer_caching: true
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: 'Install Project Node'
+          # Machine executor has node 16 installed by default .
+          # this installs and forces it to use the correct version.
+          command: |
+            set +x
+            source ~/.bashrc
+            nvm install 14.19
+            NODE_DIR=$(dirname $(which node))
+            echo "export PATH=$NODE_DIR:\$PATH" >> $BASH_ENV
+      - run:
+          name: 'Install dependencies'
+          command: 'yarn install'
+      - run:
+          name: 'Run server'
+          command: 'yarn start'
+          background: true
+      - run:
+          name: 'Check server health'
+          # Wait for the server to start responding. We expect Request 200 ok once it starts listening.
+          # Tries a limited ammount of wget calls.
+          command: |
+            for i in {1..25};do wget -T 15 -O- -c http://localhost:8080/healthz && exit 0; sleep 10; done; exit 1
+      - run:
+          name: Run Postman tests
+          command: yarn test:postman
+      # todo: stop server with exit code 0
+      # - run: circleci-agent step halt
+      - run:
+          when: always
+          name: Stop node server
+          command: pkill -SIGTERM node
+      - run:
+          when: always
+          name: Stop all services declared in docker-compose.yml
+          command: docker-compose down
   build:
     docker:
       - image: cimg/node:14.19
@@ -77,12 +126,15 @@ jobs:
             terraform -chdir=./terraform apply -auto-approve tfapply
 
 workflows:
-  lint-test-build-validate-plan-apply:
+  lint-test-postman-test-build-validate-plan-apply:
     jobs:
       - lint-test
-      - build:
+      - postman-test:
           requires:
             - lint-test
+      - build:
+          requires:
+            - postman-test
       - validate-plan:
           context:
             - AWS-DSR

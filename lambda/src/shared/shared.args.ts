@@ -18,8 +18,8 @@ export class IdArgs {
 @ArgsType()
 export class HistoryByIdsArgs extends PaginationArgs {
   @Field()
-  startDate: Date;
+  startDate: string;
 
   @Field()
-  endDate: Date;
+  endDate: string;
 }

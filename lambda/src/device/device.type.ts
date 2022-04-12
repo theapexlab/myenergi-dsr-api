@@ -1,17 +1,17 @@
-import { Field, ObjectType } from 'type-graphql';
-import { EddiDataFragment, ZappiDataFragment } from '../generated/graphql';
+import { Field, ObjectType, registerEnumType } from 'type-graphql';
+import { DeviceDataFragment, Device_Type_Enum } from '../generated/graphql';
 
-type DeviceBase = Omit<ZappiDataFragment | EddiDataFragment, '__typename'>;
+type DeviceBase = Omit<DeviceDataFragment, '__typename'>;
 
+registerEnumType(Device_Type_Enum, {
+  name: 'Device_Type_Enum',
+  description: 'Type of device, which can be eddi or zappi',
+});
 @ObjectType()
 export class Device implements DeviceBase {
   @Field({ description: 'Serial Number of unit' })
   serialNo: number;
 
-  @Field({ nullable: true, description: '3200 : Eddi (Heater controller) OR 3300 : Zappi (Carcharger)' })
-  productCode?: number;
-
-  // todo: may it would be better to use deviceclass instead of product code
-  @Field()
-  deviceClass: string;
+  @Field((type) => Device_Type_Enum)
+  deviceClass: Device_Type_Enum;
 }

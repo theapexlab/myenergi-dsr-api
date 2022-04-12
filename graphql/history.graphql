@@ -1,20 +1,4 @@
 # FYI: After changing anything here run yarn codegen to generate new types
-query DeviceHistory($serialNo: bigint!, $timestampGte: timestamp, $timestampLte: timestamp, $offset: Int, $limit: Int) {
-  zappiMinutes: zappi_minute(
-    offset: $offset
-    limit: $limit
-    where: { _and: { timestamp: { _gte: $timestampGte, _lt: $timestampLte }, serialno: { _eq: $serialNo } } }
-  ) {
-    ...ZappiHistory
-  }
-  eddiMinutes: eddi_minute(
-    offset: $offset
-    limit: $limit
-    where: { _and: { timestamp: { _gte: $timestampGte, _lt: $timestampLte }, serialno: { _eq: $serialNo } } }
-  ) {
-    ...EddiHistory
-  }
-}
 
 query DeviceHistoryByIds($serialNos: [bigint!]!, $gte: timestamp!, $lt: timestamp!, $offset: Int, $limit: Int) {
   zappiMinutes: zappi_minute(

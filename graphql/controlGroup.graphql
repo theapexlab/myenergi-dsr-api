@@ -1,5 +1,5 @@
-mutation CreateControlGroup($name: String!, $adminGroupId: Int!) {
-  controlGroup: insert_control_group_one(object: { name: $name, admin_group_id: $adminGroupId }) {
+mutation CreateControlGroup($object: control_group_insert_input! = {}) {
+  controlGroup: insert_control_group_one(object: $object) {
     ...ControlGroupFields
   }
 }
@@ -10,64 +10,40 @@ mutation AddDevice($objects: [control_group_device_insert_input!]!) {
   }
 }
 
-mutation RemoveDevice($controlGroupId: Int!, $serialNos: [Int!]!) {
-  response: delete_control_group_device(where: {control_group_id: {_eq: $controlGroupId }, serialno: {_in: $serialNos}}) {
+mutation RemoveDeviceFromControlGroup($where: control_group_device_bool_exp = {}) {
+  response: delete_control_group_device(where: $where) {
     affectedRows: affected_rows
   }
 }
 
-query ControlGroup($id: Int!) {
-  controlGroup: control_group_by_pk(id: $id) {
-    ...ControlGroupFields
+query ControlGroupDevices($limit: Int, $offset: Int, $where: control_group_device_bool_exp = {}) {
+  devices: control_group_device(limit: $limit, offset: $offset, where: $where){
+      serialNo: serialno
+      deviceClass: device_type
   }
 }
 
-query ControlGroupDevices($controlGroupId: Int!) {
-  controlGroupDevices: control_group_by_pk(id: $controlGroupId) {
-    devices {
-      zappi: control_group_device_zappi {
-        ...ZappiData
-      }
+query ControlGroupStatus($limit: Int, $offset: Int,  $where: control_group_bool_exp = {}) {
+  controlGroups: control_group(where: $where) {
+    devices(limit: $limit, offset: $offset) {
       eddi: control_group_device_eddi {
-        ...EddiData
+        ...EddiStatus
+      }
+      zappi:  control_group_device_zappi {
+        ...ZappiStatus
       }
     }
   }
 }
 
-query ControlGroupStatus($controlGroupId: Int!) {
-  controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
-      devices {
-        eddi: control_group_device_eddi {
-          ...EddiStatus
-        }
-        zappi: control_group_device_zappi {
-        ...ZappiStatus
-        }
-      }
-  }
-}
-
-query ControlGroupHistory($controlGroupId: Int!) {
-  controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
-      devices {
-        eddiMinutes: control_group_history_eddi {
-          ...EddiHistory
-        }
-        zappiMinutes: control_group_history_zappi {
-        ...ZappiHistory
-        }
-      }
-  }
-}
-
-query ControlGroups($limit: Int, $offset: Int) {
-  controlGroups: control_group(limit: $limit, offset: $offset) {
-    ...ControlGroupFields
+query ControlGroups($limit: Int, $offset: Int, $where: control_group_bool_exp = {}) {
+  controlGroups: control_group(limit: $limit, offset: $offset, where: $where) {
+     ...ControlGroupFields
   }
 }
 
 fragment ControlGroupFields on control_group {
   id
   name
+  adminGroupId: admin_group_id
 }

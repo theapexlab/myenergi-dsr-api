@@ -1,11 +1,13 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
-import { GraphQLError } from 'graphql';
 import { getGraphqlSdk } from '.';
+import { AppUser, getAggregatorCondition } from '../context';
 import { ControlGroup } from '../control-group';
-import { Device, DevicesArgs } from '../device';
+import { Device } from '../device';
 import { DeviceStatus } from '../device-status';
-import { getSdk } from '../generated/graphql';
-import { logger } from '../utils/logger';
+import { Admin_Group_Device_Bool_Exp, Control_Group_Bool_Exp, getSdk } from '../generated/graphql';
+import { PaginationArgs } from '../shared';
+import { mapDeviceClassToDeviceType } from '../utils';
+import { NotFoundError } from './CustomError';
 
 export class DeviceAPI extends RESTDataSource {
   sdk: ReturnType<typeof getSdk>;
@@ -16,51 +18,57 @@ export class DeviceAPI extends RESTDataSource {
     this.sdk = getGraphqlSdk({ baseURL, secret });
   }
 
-  // todo: currently limit is applied per device type
-  async getDevices({ limit, offset }: DevicesArgs): Promise<Device[]> {
-    try {
-      const { zappis, eddis } = await this.sdk.Devices({
-        limit,
-        offset,
-      });
-      return [...zappis, ...eddis];
-    } catch (err) {
-      logger.error(err);
-      return [];
+  async getDevices(args: PaginationArgs, user: AppUser): Promise<Device[]> {
+    const { offset, limit } = args;
+    const where = getAggregatorCondition<Admin_Group_Device_Bool_Exp>(user, (aggregatorId) => ({
+      admin_group: { aggregator_id: { _eq: aggregatorId } },
+    }));
+    const { devices } = await this.sdk.AdminGroupDevices({
+      offset,
+      limit,
+      where,
+    });
+
+    if (!devices.length) {
+      throw new NotFoundError(`No devices found`);
     }
+    return devices;
   }
 
-  async getDevice(serialNo: number): Promise<Device> {
-    try {
-      const { zappi, eddi } = await this.sdk.Device({
-        serialNo,
-      });
-      return zappi || eddi;
-    } catch (err) {
-      throw new GraphQLError('Get Device query error');
+  async getDeviceStatus(serialNo: number, user: AppUser): Promise<DeviceStatus> {
+    const condition = (aggregatorId): Admin_Group_Device_Bool_Exp => ({
+      serialno: { _eq: serialNo },
+      admin_group: { aggregator_id: { _eq: aggregatorId } },
+    });
+    const where = getAggregatorCondition(user, condition);
+    const {
+      devices: [device],
+    } = await this.sdk.DeviceStatus({
+      where,
+    });
+    if (!device) {
+      throw new NotFoundError(`Device with serial number ${serialNo} not found`);
     }
+    const { updateDate, ...deviceProps } = device.zappi || device.eddi;
+
+    return {
+      ...deviceProps,
+      deviceClass: mapDeviceClassToDeviceType(deviceProps.deviceClass),
+      updateDate: new Date(updateDate),
+    };
   }
 
-  async getDeviceStatus(serialNo: number): Promise<DeviceStatus> {
-    try {
-      const { zappi, eddi } = await this.sdk.DeviceStatus({
-        serialNo,
-      });
-      const { updateDate, ...device } = zappi || eddi;
-      return { ...device, updateDate: new Date(updateDate) };
-    } catch (err) {
-      logger.error(err);
-      throw new GraphQLError('Device status error');
-    }
-  }
+  async getDeviceControlGroup(serialNo: number, user: AppUser): Promise<ControlGroup[]> {
+    const condition = (aggregatorId: string): Control_Group_Bool_Exp => ({
+      admin_group: { aggregator_id: { _eq: aggregatorId } },
+      devices: { serialno: { _eq: serialNo } },
+    });
+    const where = getAggregatorCondition(user, condition);
+    const { controlGroups } = await this.sdk.DeviceControlGroup({ where });
 
-  async getDeviceControlGroup(serialNo: number): Promise<ControlGroup | null> {
-    try {
-      const { zappi, eddi } = await this.sdk.DeviceControlGroup({ serialNo });
-      return zappi?.controlGroupDevice?.controlGroup ?? eddi?.controlGroupDevice?.controlGroup ?? null;
-    } catch (err) {
-      logger.error(err);
-      throw new GraphQLError('Device control group error');
+    if (!controlGroups.length) {
+      throw new NotFoundError(`Device with serial number ${serialNo} not found in any of your control groups`);
     }
+    return controlGroups;
   }
 }

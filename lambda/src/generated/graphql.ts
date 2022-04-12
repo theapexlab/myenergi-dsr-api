@@ -215,8 +215,10 @@ export type Admin_Group_Device = {
   admin_group: Admin_Group;
   admin_group_device_eddi?: Maybe<Eddi>;
   admin_group_device_zappi?: Maybe<Zappi>;
-  admin_group_history_eddi?: Maybe<Eddi_Minute>;
-  admin_group_history_zappi?: Maybe<Zappi_Minute>;
+  admin_group_history_eddi: Array<Eddi_Minute>;
+  admin_group_history_eddi_aggregate: Eddi_Minute_Aggregate;
+  admin_group_history_zappi: Array<Zappi_Minute>;
+  admin_group_history_zappi_aggregate: Zappi_Minute_Aggregate;
   admin_group_id: Scalars['Int'];
   /** An array relationship */
   control_group_devices: Array<Control_Group_Device>;
@@ -230,6 +232,42 @@ export type Admin_Group_Device = {
   postcode?: Maybe<Scalars['String']>;
   serialno: Scalars['Int'];
   updated_at: Scalars['timestamptz'];
+};
+
+/** columns and relationships of "admin_group_device" */
+export type Admin_Group_DeviceAdmin_Group_History_EddiArgs = {
+  distinct_on?: InputMaybe<Array<Eddi_Minute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Eddi_Minute_Order_By>>;
+  where?: InputMaybe<Eddi_Minute_Bool_Exp>;
+};
+
+/** columns and relationships of "admin_group_device" */
+export type Admin_Group_DeviceAdmin_Group_History_Eddi_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Eddi_Minute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Eddi_Minute_Order_By>>;
+  where?: InputMaybe<Eddi_Minute_Bool_Exp>;
+};
+
+/** columns and relationships of "admin_group_device" */
+export type Admin_Group_DeviceAdmin_Group_History_ZappiArgs = {
+  distinct_on?: InputMaybe<Array<Zappi_Minute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Zappi_Minute_Order_By>>;
+  where?: InputMaybe<Zappi_Minute_Bool_Exp>;
+};
+
+/** columns and relationships of "admin_group_device" */
+export type Admin_Group_DeviceAdmin_Group_History_Zappi_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Zappi_Minute_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Zappi_Minute_Order_By>>;
+  where?: InputMaybe<Zappi_Minute_Bool_Exp>;
 };
 
 /** columns and relationships of "admin_group_device" */
@@ -336,9 +374,11 @@ export type Admin_Group_Device_Bool_Exp = {
 /** unique or primary key constraints on table "admin_group_device" */
 export enum Admin_Group_Device_Constraint {
   /** unique or primary key constraint */
-  AdminGroupDeviceSerialnoKey = 'admin_group_device_serialno_key',
+  AdminGroupDeviceAdminGroupIdSerialnoKey = 'admin_group_device_admin_group_id_serialno_key',
   /** unique or primary key constraint */
-  AdmingGroupDevicePkey = 'adming_group_device_pkey',
+  AdminGroupDevicePkey = 'admin_group_device_pkey',
+  /** unique or primary key constraint */
+  AdminGroupDeviceSerialnoKey = 'admin_group_device_serialno_key',
 }
 
 /** input type for incrementing numeric columns in table "admin_group_device" */
@@ -1945,6 +1985,7 @@ export type Control_Group_Device = {
   __typename?: 'control_group_device';
   /** An object relationship */
   admin_group_device: Admin_Group_Device;
+  admin_group_id: Scalars['Int'];
   /** An object relationship */
   control_group: Control_Group;
   control_group_device_eddi?: Maybe<Eddi>;
@@ -1954,8 +1995,8 @@ export type Control_Group_Device = {
   control_group_id: Scalars['Int'];
   created_at: Scalars['timestamptz'];
   /** An object relationship */
-  deviceTypeByDeviceType?: Maybe<Device_Type>;
-  device_type?: Maybe<Device_Type_Enum>;
+  deviceTypeByDeviceType: Device_Type;
+  device_type: Device_Type_Enum;
   id: Scalars['Int'];
   serialno: Scalars['Int'];
   updated_at: Scalars['timestamptz'];
@@ -2015,6 +2056,7 @@ export type Control_Group_Device_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Control_Group_Device_Avg_Fields = {
   __typename?: 'control_group_device_avg_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   control_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
@@ -2022,6 +2064,7 @@ export type Control_Group_Device_Avg_Fields = {
 
 /** order by avg() on columns of table "control_group_device" */
 export type Control_Group_Device_Avg_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2033,6 +2076,7 @@ export type Control_Group_Device_Bool_Exp = {
   _not?: InputMaybe<Control_Group_Device_Bool_Exp>;
   _or?: InputMaybe<Array<Control_Group_Device_Bool_Exp>>;
   admin_group_device?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+  admin_group_id?: InputMaybe<Int_Comparison_Exp>;
   control_group?: InputMaybe<Control_Group_Bool_Exp>;
   control_group_id?: InputMaybe<Int_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -2053,6 +2097,7 @@ export enum Control_Group_Device_Constraint {
 
 /** input type for incrementing numeric columns in table "control_group_device" */
 export type Control_Group_Device_Inc_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
   control_group_id?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['Int']>;
   serialno?: InputMaybe<Scalars['Int']>;
@@ -2061,6 +2106,7 @@ export type Control_Group_Device_Inc_Input = {
 /** input type for inserting data into table "control_group_device" */
 export type Control_Group_Device_Insert_Input = {
   admin_group_device?: InputMaybe<Admin_Group_Device_Obj_Rel_Insert_Input>;
+  admin_group_id?: InputMaybe<Scalars['Int']>;
   control_group?: InputMaybe<Control_Group_Obj_Rel_Insert_Input>;
   control_group_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
@@ -2074,6 +2120,7 @@ export type Control_Group_Device_Insert_Input = {
 /** aggregate max on columns */
 export type Control_Group_Device_Max_Fields = {
   __typename?: 'control_group_device_max_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
   control_group_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
@@ -2083,6 +2130,7 @@ export type Control_Group_Device_Max_Fields = {
 
 /** order by max() on columns of table "control_group_device" */
 export type Control_Group_Device_Max_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -2093,6 +2141,7 @@ export type Control_Group_Device_Max_Order_By = {
 /** aggregate min on columns */
 export type Control_Group_Device_Min_Fields = {
   __typename?: 'control_group_device_min_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
   control_group_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
@@ -2102,6 +2151,7 @@ export type Control_Group_Device_Min_Fields = {
 
 /** order by min() on columns of table "control_group_device" */
 export type Control_Group_Device_Min_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -2128,6 +2178,7 @@ export type Control_Group_Device_On_Conflict = {
 /** Ordering options when selecting data from "control_group_device". */
 export type Control_Group_Device_Order_By = {
   admin_group_device?: InputMaybe<Admin_Group_Device_Order_By>;
+  admin_group_id?: InputMaybe<Order_By>;
   control_group?: InputMaybe<Control_Group_Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
@@ -2146,6 +2197,8 @@ export type Control_Group_Device_Pk_Columns_Input = {
 /** select columns of table "control_group_device" */
 export enum Control_Group_Device_Select_Column {
   /** column name */
+  AdminGroupId = 'admin_group_id',
+  /** column name */
   ControlGroupId = 'control_group_id',
   /** column name */
   CreatedAt = 'created_at',
@@ -2161,6 +2214,7 @@ export enum Control_Group_Device_Select_Column {
 
 /** input type for updating data in table "control_group_device" */
 export type Control_Group_Device_Set_Input = {
+  admin_group_id?: InputMaybe<Scalars['Int']>;
   control_group_id?: InputMaybe<Scalars['Int']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   device_type?: InputMaybe<Device_Type_Enum>;
@@ -2172,6 +2226,7 @@ export type Control_Group_Device_Set_Input = {
 /** aggregate stddev on columns */
 export type Control_Group_Device_Stddev_Fields = {
   __typename?: 'control_group_device_stddev_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   control_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
@@ -2179,6 +2234,7 @@ export type Control_Group_Device_Stddev_Fields = {
 
 /** order by stddev() on columns of table "control_group_device" */
 export type Control_Group_Device_Stddev_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2187,6 +2243,7 @@ export type Control_Group_Device_Stddev_Order_By = {
 /** aggregate stddev_pop on columns */
 export type Control_Group_Device_Stddev_Pop_Fields = {
   __typename?: 'control_group_device_stddev_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   control_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
@@ -2194,6 +2251,7 @@ export type Control_Group_Device_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "control_group_device" */
 export type Control_Group_Device_Stddev_Pop_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2202,6 +2260,7 @@ export type Control_Group_Device_Stddev_Pop_Order_By = {
 /** aggregate stddev_samp on columns */
 export type Control_Group_Device_Stddev_Samp_Fields = {
   __typename?: 'control_group_device_stddev_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   control_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
@@ -2209,6 +2268,7 @@ export type Control_Group_Device_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "control_group_device" */
 export type Control_Group_Device_Stddev_Samp_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2217,6 +2277,7 @@ export type Control_Group_Device_Stddev_Samp_Order_By = {
 /** aggregate sum on columns */
 export type Control_Group_Device_Sum_Fields = {
   __typename?: 'control_group_device_sum_fields';
+  admin_group_id?: Maybe<Scalars['Int']>;
   control_group_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   serialno?: Maybe<Scalars['Int']>;
@@ -2224,6 +2285,7 @@ export type Control_Group_Device_Sum_Fields = {
 
 /** order by sum() on columns of table "control_group_device" */
 export type Control_Group_Device_Sum_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2231,6 +2293,8 @@ export type Control_Group_Device_Sum_Order_By = {
 
 /** update columns of table "control_group_device" */
 export enum Control_Group_Device_Update_Column {
+  /** column name */
+  AdminGroupId = 'admin_group_id',
   /** column name */
   ControlGroupId = 'control_group_id',
   /** column name */
@@ -2248,6 +2312,7 @@ export enum Control_Group_Device_Update_Column {
 /** aggregate var_pop on columns */
 export type Control_Group_Device_Var_Pop_Fields = {
   __typename?: 'control_group_device_var_pop_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   control_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
@@ -2255,6 +2320,7 @@ export type Control_Group_Device_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "control_group_device" */
 export type Control_Group_Device_Var_Pop_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2263,6 +2329,7 @@ export type Control_Group_Device_Var_Pop_Order_By = {
 /** aggregate var_samp on columns */
 export type Control_Group_Device_Var_Samp_Fields = {
   __typename?: 'control_group_device_var_samp_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   control_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
@@ -2270,6 +2337,7 @@ export type Control_Group_Device_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "control_group_device" */
 export type Control_Group_Device_Var_Samp_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -2278,6 +2346,7 @@ export type Control_Group_Device_Var_Samp_Order_By = {
 /** aggregate variance on columns */
 export type Control_Group_Device_Variance_Fields = {
   __typename?: 'control_group_device_variance_fields';
+  admin_group_id?: Maybe<Scalars['Float']>;
   control_group_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   serialno?: Maybe<Scalars['Float']>;
@@ -2285,6 +2354,7 @@ export type Control_Group_Device_Variance_Fields = {
 
 /** order by variance() on columns of table "control_group_device" */
 export type Control_Group_Device_Variance_Order_By = {
+  admin_group_id?: InputMaybe<Order_By>;
   control_group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   serialno?: InputMaybe<Order_By>;
@@ -3693,7 +3763,7 @@ export type Eddi_Minute_Bool_Exp = {
 /** unique or primary key constraints on table "eddi_minute" */
 export enum Eddi_Minute_Constraint {
   /** unique or primary key constraint */
-  Pk_4c94f05e4de575488f4a0c2905d = 'PK_4c94f05e4de575488f4a0c2905d',
+  EddiMinutePkey = 'eddi_minute_pkey',
 }
 
 /** input type for incrementing numeric columns in table "eddi_minute" */
@@ -11051,7 +11121,7 @@ export type Zappi_Minute_Bool_Exp = {
 /** unique or primary key constraints on table "zappi_minute" */
 export enum Zappi_Minute_Constraint {
   /** unique or primary key constraint */
-  Pk_5f4400bed8cbe77429781c5f9b3 = 'PK_5f4400bed8cbe77429781c5f9b3',
+  ZappiMinutePkey = 'zappi_minute_pkey',
 }
 
 /** input type for incrementing numeric columns in table "zappi_minute" */
@@ -12952,7 +13022,7 @@ export type Zappi_Variance_Order_By = {
 };
 
 export type AdminGroupDevicesNotInControllGroupQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['Int']>;
+  id: Scalars['Int'];
 }>;
 
 export type AdminGroupDevicesNotInControllGroupQuery = {
@@ -12974,48 +13044,48 @@ export type AdminGroupsQuery = {
   adminGroups: Array<{ __typename?: 'admin_group'; id: number; name: string }>;
 };
 
-export type AdminGroupQueryVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-export type AdminGroupQuery = {
-  __typename?: 'query_root';
-  adminGroup?: { __typename?: 'admin_group'; id: number; name: string } | null;
-};
-
 export type AdminGroupDevicesQueryVariables = Exact<{
-  adminGroupId: Scalars['Int'];
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 }>;
 
 export type AdminGroupDevicesQuery = {
   __typename?: 'query_root';
-  adminGroupDevices: Array<{ __typename?: 'admin_group_device'; serialNo: number; deviceClass: Device_Type_Enum }>;
+  devices: Array<{ __typename?: 'admin_group_device'; serialNo: number; deviceClass: Device_Type_Enum }>;
 };
 
 export type AdminGroupStatusQueryVariables = Exact<{
-  adminGroupId: Scalars['Int'];
+  where?: InputMaybe<Admin_Group_Bool_Exp>;
+  offset?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
 }>;
 
 export type AdminGroupStatusQuery = {
   __typename?: 'query_root';
-  adminGroupStatus: Array<{
-    __typename?: 'admin_group_device';
-    zappi?: {
-      __typename?: 'zappi';
-      voltage?: number | null;
-      frequency?: number | null;
-      serialNo: number;
-      updateDate: string;
-      chargeEnergy?: number | null;
-    } | null;
-    eddi?: {
-      __typename?: 'eddi';
-      voltage?: number | null;
-      frequency?: number | null;
-      serialNo: number;
-      updateDate: string;
-      chargeEnergy?: number | null;
-    } | null;
+  adminGroups: Array<{
+    __typename?: 'admin_group';
+    devices: Array<{
+      __typename?: 'admin_group_device';
+      zappi?: {
+        __typename?: 'zappi';
+        voltage?: number | null;
+        frequency?: number | null;
+        serialNo: number;
+        deviceClass: string;
+        updateDate: string;
+        chargeEnergy?: number | null;
+      } | null;
+      eddi?: {
+        __typename?: 'eddi';
+        voltage?: number | null;
+        frequency?: number | null;
+        serialNo: number;
+        deviceClass: string;
+        updateDate: string;
+        chargeEnergy?: number | null;
+      } | null;
+    }>;
   }>;
 };
 
@@ -13063,13 +13133,12 @@ export type RemoveDeviceFromAdminGroupMutation = {
 export type AdminGroupFieldsFragment = { __typename?: 'admin_group'; id: number; name: string };
 
 export type CreateControlGroupMutationVariables = Exact<{
-  name: Scalars['String'];
-  adminGroupId: Scalars['Int'];
+  object?: Control_Group_Insert_Input;
 }>;
 
 export type CreateControlGroupMutation = {
   __typename?: 'mutation_root';
-  controlGroup?: { __typename?: 'control_group'; id: number; name: string } | null;
+  controlGroup?: { __typename?: 'control_group'; id: number; name: string; adminGroupId: number } | null;
 };
 
 export type AddDeviceMutationVariables = Exact<{
@@ -13081,48 +13150,35 @@ export type AddDeviceMutation = {
   response?: { __typename?: 'control_group_device_mutation_response'; affectedRows: number } | null;
 };
 
-export type RemoveDeviceMutationVariables = Exact<{
-  controlGroupId: Scalars['Int'];
-  serialNos: Array<Scalars['Int']> | Scalars['Int'];
+export type RemoveDeviceFromControlGroupMutationVariables = Exact<{
+  where?: InputMaybe<Control_Group_Device_Bool_Exp>;
 }>;
 
-export type RemoveDeviceMutation = {
+export type RemoveDeviceFromControlGroupMutation = {
   __typename?: 'mutation_root';
   response?: { __typename?: 'control_group_device_mutation_response'; affectedRows: number } | null;
 };
 
-export type ControlGroupQueryVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-export type ControlGroupQuery = {
-  __typename?: 'query_root';
-  controlGroup?: { __typename?: 'control_group'; id: number; name: string } | null;
-};
-
 export type ControlGroupDevicesQueryVariables = Exact<{
-  controlGroupId: Scalars['Int'];
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Control_Group_Device_Bool_Exp>;
 }>;
 
 export type ControlGroupDevicesQuery = {
   __typename?: 'query_root';
-  controlGroupDevices?: {
-    __typename?: 'control_group';
-    devices: Array<{
-      __typename?: 'control_group_device';
-      zappi?: { __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
-      eddi?: { __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
-    }>;
-  } | null;
+  devices: Array<{ __typename?: 'control_group_device'; serialNo: number; deviceClass: Device_Type_Enum }>;
 };
 
 export type ControlGroupStatusQueryVariables = Exact<{
-  controlGroupId: Scalars['Int'];
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Control_Group_Bool_Exp>;
 }>;
 
 export type ControlGroupStatusQuery = {
   __typename?: 'query_root';
-  controlGroupHistory?: {
+  controlGroups: Array<{
     __typename?: 'control_group';
     devices: Array<{
       __typename?: 'control_group_device';
@@ -13131,6 +13187,7 @@ export type ControlGroupStatusQuery = {
         voltage?: number | null;
         frequency?: number | null;
         serialNo: number;
+        deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
       } | null;
@@ -13139,175 +13196,88 @@ export type ControlGroupStatusQuery = {
         voltage?: number | null;
         frequency?: number | null;
         serialNo: number;
+        deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
       } | null;
     }>;
-  } | null;
-};
-
-export type ControlGroupHistoryQueryVariables = Exact<{
-  controlGroupId: Scalars['Int'];
-}>;
-
-export type ControlGroupHistoryQuery = {
-  __typename?: 'query_root';
-  controlGroupHistory?: {
-    __typename?: 'control_group';
-    devices: Array<{
-      __typename?: 'control_group_device';
-      eddiMinutes?: {
-        __typename?: 'eddi_minute';
-        frequency?: number | null;
-        timestamp: string;
-        serialNo: number;
-        importPower?: number | null;
-        exportPower?: number | null;
-        externalCtPositivePower1?: number | null;
-        externalCtPositivePower2?: number | null;
-        externalCtNegativePower1?: number | null;
-        externalCtNegativePower2?: number | null;
-        divertedLoadPower1?: number | null;
-        divertedLoadPower2?: number | null;
-        boostLoadPower1?: number | null;
-        boostLoadPower2?: number | null;
-        voltage1?: number | null;
-      } | null;
-      zappiMinutes?: {
-        __typename?: 'zappi_minute';
-        voltage1?: number | null;
-        voltage2?: number | null;
-        voltage3?: number | null;
-        frequency?: number | null;
-        timestamp: string;
-        serialNo: number;
-        importPower?: number | null;
-        exportPower?: number | null;
-        externalCtPositivePower1?: number | null;
-        externalCtPositivePower2?: number | null;
-        externalCtPositivePower3?: number | null;
-        externalCtNegativePower1?: number | null;
-        externalCtNegativePower2?: number | null;
-        externalCtNegativePower3?: number | null;
-        divertedLoadPower1?: number | null;
-        divertedLoadPower2?: number | null;
-        divertedLoadPower3?: number | null;
-        boostLoadPower1?: number | null;
-        boostLoadPower2?: number | null;
-        boostLoadPower3?: number | null;
-      } | null;
-    }>;
-  } | null;
+  }>;
 };
 
 export type ControlGroupsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Control_Group_Bool_Exp>;
 }>;
 
 export type ControlGroupsQuery = {
   __typename?: 'query_root';
-  controlGroups: Array<{ __typename?: 'control_group'; id: number; name: string }>;
+  controlGroups: Array<{ __typename?: 'control_group'; id: number; name: string; adminGroupId: number }>;
 };
 
-export type ControlGroupFieldsFragment = { __typename?: 'control_group'; id: number; name: string };
+export type ControlGroupFieldsFragment = {
+  __typename?: 'control_group';
+  id: number;
+  name: string;
+  adminGroupId: number;
+};
 
-export type DevicesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+export type DeviceStatusQueryVariables = Exact<{
+  where?: InputMaybe<Admin_Group_Device_Bool_Exp>;
 }>;
 
-export type DevicesQuery = {
+export type DeviceStatusQuery = {
   __typename?: 'query_root';
-  zappis: Array<{ __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null }>;
-  eddis: Array<{ __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null }>;
+  devices: Array<{
+    __typename?: 'admin_group_device';
+    eddi?: {
+      __typename?: 'eddi';
+      voltage?: number | null;
+      frequency?: number | null;
+      serialNo: number;
+      deviceClass: string;
+      updateDate: string;
+      chargeEnergy?: number | null;
+    } | null;
+    zappi?: {
+      __typename?: 'zappi';
+      voltage?: number | null;
+      frequency?: number | null;
+      serialNo: number;
+      deviceClass: string;
+      updateDate: string;
+      chargeEnergy?: number | null;
+    } | null;
+  }>;
 };
 
-export type DevicesBySerialNosQueryVariables = Exact<{
+export type NewDevicesBySerialNosQueryVariables = Exact<{
   serialNos?: InputMaybe<Array<Scalars['bigint']> | Scalars['bigint']>;
 }>;
 
-export type DevicesBySerialNosQuery = {
+export type NewDevicesBySerialNosQuery = {
   __typename?: 'query_root';
   zappis: Array<{ __typename?: 'zappi'; serialNo: number }>;
   eddis: Array<{ __typename?: 'eddi'; serialNo: number }>;
 };
 
-export type DeviceQueryVariables = Exact<{
-  serialNo: Scalars['bigint'];
-}>;
-
-export type DeviceQuery = {
-  __typename?: 'query_root';
-  zappi?: { __typename?: 'zappi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
-  eddi?: { __typename?: 'eddi'; serialNo: number; deviceClass: string; productCode?: number | null } | null;
-};
-
-export type DeviceStatusQueryVariables = Exact<{
-  serialNo: Scalars['bigint'];
-}>;
-
-export type DeviceStatusQuery = {
-  __typename?: 'query_root';
-  zappi?: {
-    __typename?: 'zappi';
-    voltage?: number | null;
-    frequency?: number | null;
-    serialNo: number;
-    updateDate: string;
-    chargeEnergy?: number | null;
-  } | null;
-  eddi?: {
-    __typename?: 'eddi';
-    voltage?: number | null;
-    frequency?: number | null;
-    serialNo: number;
-    updateDate: string;
-    chargeEnergy?: number | null;
-  } | null;
-};
-
 export type DeviceControlGroupQueryVariables = Exact<{
-  serialNo: Scalars['bigint'];
+  where?: InputMaybe<Control_Group_Bool_Exp>;
 }>;
 
 export type DeviceControlGroupQuery = {
   __typename?: 'query_root';
-  zappi?: {
-    __typename?: 'zappi';
-    controlGroupDevice?: {
-      __typename?: 'control_group_device';
-      controlGroup: { __typename?: 'control_group'; id: number; name: string };
-    } | null;
-  } | null;
-  eddi?: {
-    __typename?: 'eddi';
-    controlGroupDevice?: {
-      __typename?: 'control_group_device';
-      controlGroup: { __typename?: 'control_group'; id: number; name: string };
-    } | null;
-  } | null;
+  controlGroups: Array<{ __typename?: 'control_group'; id: number; name: string; adminGroupId: number }>;
 };
 
-export type ZappiDataFragment = {
-  __typename?: 'zappi';
-  serialNo: number;
-  deviceClass: string;
-  productCode?: number | null;
-};
-
-export type EddiDataFragment = {
-  __typename?: 'eddi';
-  serialNo: number;
-  deviceClass: string;
-  productCode?: number | null;
-};
+export type DeviceDataFragment = { __typename?: 'admin_group_device'; serialNo: number; deviceClass: Device_Type_Enum };
 
 export type ZappiStatusFragment = {
   __typename?: 'zappi';
   voltage?: number | null;
   frequency?: number | null;
   serialNo: number;
+  deviceClass: string;
   updateDate: string;
   chargeEnergy?: number | null;
 };
@@ -13317,60 +13287,9 @@ export type EddiStatusFragment = {
   voltage?: number | null;
   frequency?: number | null;
   serialNo: number;
+  deviceClass: string;
   updateDate: string;
   chargeEnergy?: number | null;
-};
-
-export type DeviceHistoryQueryVariables = Exact<{
-  serialNo: Scalars['bigint'];
-  timestampGte?: InputMaybe<Scalars['timestamp']>;
-  timestampLte?: InputMaybe<Scalars['timestamp']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  limit?: InputMaybe<Scalars['Int']>;
-}>;
-
-export type DeviceHistoryQuery = {
-  __typename?: 'query_root';
-  zappiMinutes: Array<{
-    __typename?: 'zappi_minute';
-    voltage1?: number | null;
-    voltage2?: number | null;
-    voltage3?: number | null;
-    frequency?: number | null;
-    timestamp: string;
-    serialNo: number;
-    importPower?: number | null;
-    exportPower?: number | null;
-    externalCtPositivePower1?: number | null;
-    externalCtPositivePower2?: number | null;
-    externalCtPositivePower3?: number | null;
-    externalCtNegativePower1?: number | null;
-    externalCtNegativePower2?: number | null;
-    externalCtNegativePower3?: number | null;
-    divertedLoadPower1?: number | null;
-    divertedLoadPower2?: number | null;
-    divertedLoadPower3?: number | null;
-    boostLoadPower1?: number | null;
-    boostLoadPower2?: number | null;
-    boostLoadPower3?: number | null;
-  }>;
-  eddiMinutes: Array<{
-    __typename?: 'eddi_minute';
-    frequency?: number | null;
-    timestamp: string;
-    serialNo: number;
-    importPower?: number | null;
-    exportPower?: number | null;
-    externalCtPositivePower1?: number | null;
-    externalCtPositivePower2?: number | null;
-    externalCtNegativePower1?: number | null;
-    externalCtNegativePower2?: number | null;
-    divertedLoadPower1?: number | null;
-    divertedLoadPower2?: number | null;
-    boostLoadPower1?: number | null;
-    boostLoadPower2?: number | null;
-    voltage1?: number | null;
-  }>;
 };
 
 export type DeviceHistoryByIdsQueryVariables = Exact<{
@@ -13477,25 +13396,19 @@ export const ControlGroupFieldsFragmentDoc = gql`
   fragment ControlGroupFields on control_group {
     id
     name
+    adminGroupId: admin_group_id
   }
 `;
-export const ZappiDataFragmentDoc = gql`
-  fragment ZappiData on zappi {
+export const DeviceDataFragmentDoc = gql`
+  fragment DeviceData on admin_group_device {
     serialNo: serialno
-    deviceClass: deviceclass
-    productCode: productcode
-  }
-`;
-export const EddiDataFragmentDoc = gql`
-  fragment EddiData on eddi {
-    serialNo: serialno
-    deviceClass: deviceclass
-    productCode: productcode
+    deviceClass: device_type
   }
 `;
 export const ZappiStatusFragmentDoc = gql`
   fragment ZappiStatus on zappi {
     serialNo: serialno
+    deviceClass: deviceclass
     updateDate: updatedat
     chargeEnergy: chargeenergy
     voltage
@@ -13505,6 +13418,7 @@ export const ZappiStatusFragmentDoc = gql`
 export const EddiStatusFragmentDoc = gql`
   fragment EddiStatus on eddi {
     serialNo: serialno
+    deviceClass: deviceclass
     updateDate: updatedat
     chargeEnergy: chargeenergy
     voltage
@@ -13554,7 +13468,7 @@ export const EddiHistoryFragmentDoc = gql`
   }
 `;
 export const AdminGroupDevicesNotInControllGroupDocument = gql`
-  query AdminGroupDevicesNotInControllGroup($id: Int = 10) {
+  query AdminGroupDevicesNotInControllGroup($id: Int!) {
     admin_group_by_pk(id: $id) {
       admin_group_devices(where: { control_group_devices: { control_group_id: { _is_null: true } } }) {
         serialno
@@ -13570,30 +13484,24 @@ export const AdminGroupsDocument = gql`
   }
   ${AdminGroupFieldsFragmentDoc}
 `;
-export const AdminGroupDocument = gql`
-  query AdminGroup($id: Int!) {
-    adminGroup: admin_group_by_pk(id: $id) {
-      ...AdminGroupFields
-    }
-  }
-  ${AdminGroupFieldsFragmentDoc}
-`;
 export const AdminGroupDevicesDocument = gql`
-  query AdminGroupDevices($adminGroupId: Int!) {
-    adminGroupDevices: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
-      serialNo: serialno
-      deviceClass: device_type
+  query AdminGroupDevices($where: admin_group_device_bool_exp, $limit: Int, $offset: Int) {
+    devices: admin_group_device(where: $where, limit: $limit, offset: $offset) {
+      ...DeviceData
     }
   }
+  ${DeviceDataFragmentDoc}
 `;
 export const AdminGroupStatusDocument = gql`
-  query AdminGroupStatus($adminGroupId: Int!) {
-    adminGroupStatus: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
-      zappi: admin_group_device_zappi {
-        ...ZappiStatus
-      }
-      eddi: admin_group_device_eddi {
-        ...EddiStatus
+  query AdminGroupStatus($where: admin_group_bool_exp, $offset: Int, $limit: Int) {
+    adminGroups: admin_group(where: $where) {
+      devices: admin_group_devices(limit: $limit, offset: $offset) {
+        zappi: admin_group_device_zappi {
+          ...ZappiStatus
+        }
+        eddi: admin_group_device_eddi {
+          ...EddiStatus
+        }
       }
     }
   }
@@ -13635,8 +13543,8 @@ export const RemoveDeviceFromAdminGroupDocument = gql`
   }
 `;
 export const CreateControlGroupDocument = gql`
-  mutation CreateControlGroup($name: String!, $adminGroupId: Int!) {
-    controlGroup: insert_control_group_one(object: { name: $name, admin_group_id: $adminGroupId }) {
+  mutation CreateControlGroup($object: control_group_insert_input! = {}) {
+    controlGroup: insert_control_group_one(object: $object) {
       ...ControlGroupFields
     }
   }
@@ -13649,43 +13557,25 @@ export const AddDeviceDocument = gql`
     }
   }
 `;
-export const RemoveDeviceDocument = gql`
-  mutation RemoveDevice($controlGroupId: Int!, $serialNos: [Int!]!) {
-    response: delete_control_group_device(
-      where: { control_group_id: { _eq: $controlGroupId }, serialno: { _in: $serialNos } }
-    ) {
+export const RemoveDeviceFromControlGroupDocument = gql`
+  mutation RemoveDeviceFromControlGroup($where: control_group_device_bool_exp = {}) {
+    response: delete_control_group_device(where: $where) {
       affectedRows: affected_rows
     }
   }
 `;
-export const ControlGroupDocument = gql`
-  query ControlGroup($id: Int!) {
-    controlGroup: control_group_by_pk(id: $id) {
-      ...ControlGroupFields
-    }
-  }
-  ${ControlGroupFieldsFragmentDoc}
-`;
 export const ControlGroupDevicesDocument = gql`
-  query ControlGroupDevices($controlGroupId: Int!) {
-    controlGroupDevices: control_group_by_pk(id: $controlGroupId) {
-      devices {
-        zappi: control_group_device_zappi {
-          ...ZappiData
-        }
-        eddi: control_group_device_eddi {
-          ...EddiData
-        }
-      }
+  query ControlGroupDevices($limit: Int, $offset: Int, $where: control_group_device_bool_exp = {}) {
+    devices: control_group_device(limit: $limit, offset: $offset, where: $where) {
+      serialNo: serialno
+      deviceClass: device_type
     }
   }
-  ${ZappiDataFragmentDoc}
-  ${EddiDataFragmentDoc}
 `;
 export const ControlGroupStatusDocument = gql`
-  query ControlGroupStatus($controlGroupId: Int!) {
-    controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
-      devices {
+  query ControlGroupStatus($limit: Int, $offset: Int, $where: control_group_bool_exp = {}) {
+    controlGroups: control_group(where: $where) {
+      devices(limit: $limit, offset: $offset) {
         eddi: control_group_device_eddi {
           ...EddiStatus
         }
@@ -13698,44 +13588,30 @@ export const ControlGroupStatusDocument = gql`
   ${EddiStatusFragmentDoc}
   ${ZappiStatusFragmentDoc}
 `;
-export const ControlGroupHistoryDocument = gql`
-  query ControlGroupHistory($controlGroupId: Int!) {
-    controlGroupHistory: control_group_by_pk(id: $controlGroupId) {
-      devices {
-        eddiMinutes: control_group_history_eddi {
-          ...EddiHistory
-        }
-        zappiMinutes: control_group_history_zappi {
-          ...ZappiHistory
-        }
-      }
-    }
-  }
-  ${EddiHistoryFragmentDoc}
-  ${ZappiHistoryFragmentDoc}
-`;
 export const ControlGroupsDocument = gql`
-  query ControlGroups($limit: Int, $offset: Int) {
-    controlGroups: control_group(limit: $limit, offset: $offset) {
+  query ControlGroups($limit: Int, $offset: Int, $where: control_group_bool_exp = {}) {
+    controlGroups: control_group(limit: $limit, offset: $offset, where: $where) {
       ...ControlGroupFields
     }
   }
   ${ControlGroupFieldsFragmentDoc}
 `;
-export const DevicesDocument = gql`
-  query Devices($limit: Int, $offset: Int) {
-    zappis: zappi(limit: $limit, offset: $offset) {
-      ...ZappiData
-    }
-    eddis: eddi(limit: $limit, offset: $offset) {
-      ...EddiData
+export const DeviceStatusDocument = gql`
+  query DeviceStatus($where: admin_group_device_bool_exp) {
+    devices: admin_group_device(where: $where) {
+      eddi: admin_group_device_eddi {
+        ...EddiStatus
+      }
+      zappi: admin_group_device_zappi {
+        ...ZappiStatus
+      }
     }
   }
-  ${ZappiDataFragmentDoc}
-  ${EddiDataFragmentDoc}
+  ${EddiStatusFragmentDoc}
+  ${ZappiStatusFragmentDoc}
 `;
-export const DevicesBySerialNosDocument = gql`
-  query DevicesBySerialNos($serialNos: [bigint!]) {
+export const NewDevicesBySerialNosDocument = gql`
+  query NewDevicesBySerialNos($serialNos: [bigint!]) {
     zappis: zappi(where: { serialno: { _in: $serialNos } }) {
       serialNo: serialno
     }
@@ -13744,74 +13620,13 @@ export const DevicesBySerialNosDocument = gql`
     }
   }
 `;
-export const DeviceDocument = gql`
-  query Device($serialNo: bigint!) {
-    zappi: zappi_by_pk(serialno: $serialNo) {
-      ...ZappiData
-    }
-    eddi: eddi_by_pk(serialno: $serialNo) {
-      ...EddiData
-    }
-  }
-  ${ZappiDataFragmentDoc}
-  ${EddiDataFragmentDoc}
-`;
-export const DeviceStatusDocument = gql`
-  query DeviceStatus($serialNo: bigint!) {
-    zappi: zappi_by_pk(serialno: $serialNo) {
-      ...ZappiStatus
-    }
-    eddi: eddi_by_pk(serialno: $serialNo) {
-      ...EddiStatus
-    }
-  }
-  ${ZappiStatusFragmentDoc}
-  ${EddiStatusFragmentDoc}
-`;
 export const DeviceControlGroupDocument = gql`
-  query DeviceControlGroup($serialNo: bigint!) {
-    zappi: zappi_by_pk(serialno: $serialNo) {
-      controlGroupDevice: zappi_control_group_device {
-        controlGroup: control_group {
-          ...ControlGroupFields
-        }
-      }
-    }
-    eddi: eddi_by_pk(serialno: $serialNo) {
-      controlGroupDevice: eddi_control_group_device {
-        controlGroup: control_group {
-          ...ControlGroupFields
-        }
-      }
+  query DeviceControlGroup($where: control_group_bool_exp = {}) {
+    controlGroups: control_group(where: $where) {
+      ...ControlGroupFields
     }
   }
   ${ControlGroupFieldsFragmentDoc}
-`;
-export const DeviceHistoryDocument = gql`
-  query DeviceHistory(
-    $serialNo: bigint!
-    $timestampGte: timestamp
-    $timestampLte: timestamp
-    $offset: Int
-    $limit: Int
-  ) {
-    zappiMinutes: zappi_minute(
-      offset: $offset
-      limit: $limit
-      where: { _and: { timestamp: { _gte: $timestampGte, _lt: $timestampLte }, serialno: { _eq: $serialNo } } }
-    ) {
-      ...ZappiHistory
-    }
-    eddiMinutes: eddi_minute(
-      offset: $offset
-      limit: $limit
-      where: { _and: { timestamp: { _gte: $timestampGte, _lt: $timestampLte }, serialno: { _eq: $serialNo } } }
-    ) {
-      ...EddiHistory
-    }
-  }
-  ${ZappiHistoryFragmentDoc}
-  ${EddiHistoryFragmentDoc}
 `;
 export const DeviceHistoryByIdsDocument = gql`
   query DeviceHistoryByIds($serialNos: [bigint!]!, $gte: timestamp!, $lt: timestamp!, $offset: Int, $limit: Int) {
@@ -13844,7 +13659,7 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     AdminGroupDevicesNotInControllGroup(
-      variables?: AdminGroupDevicesNotInControllGroupQueryVariables,
+      variables: AdminGroupDevicesNotInControllGroupQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<AdminGroupDevicesNotInControllGroupQuery> {
       return withWrapper(
@@ -13870,21 +13685,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         'AdminGroups'
       );
     },
-    AdminGroup(
-      variables: AdminGroupQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<AdminGroupQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<AdminGroupQuery>(AdminGroupDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'AdminGroup'
-      );
-    },
     AdminGroupDevices(
-      variables: AdminGroupDevicesQueryVariables,
+      variables?: AdminGroupDevicesQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<AdminGroupDevicesQuery> {
       return withWrapper(
@@ -13897,7 +13699,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
       );
     },
     AdminGroupStatus(
-      variables: AdminGroupStatusQueryVariables,
+      variables?: AdminGroupStatusQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<AdminGroupStatusQuery> {
       return withWrapper(
@@ -13962,7 +13764,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
       );
     },
     CreateControlGroup(
-      variables: CreateControlGroupMutationVariables,
+      variables?: CreateControlGroupMutationVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<CreateControlGroupMutation> {
       return withWrapper(
@@ -13987,34 +13789,21 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         'AddDevice'
       );
     },
-    RemoveDevice(
-      variables: RemoveDeviceMutationVariables,
+    RemoveDeviceFromControlGroup(
+      variables?: RemoveDeviceFromControlGroupMutationVariables,
       requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<RemoveDeviceMutation> {
+    ): Promise<RemoveDeviceFromControlGroupMutation> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.request<RemoveDeviceMutation>(RemoveDeviceDocument, variables, {
+          client.request<RemoveDeviceFromControlGroupMutation>(RemoveDeviceFromControlGroupDocument, variables, {
             ...requestHeaders,
             ...wrappedRequestHeaders,
           }),
-        'RemoveDevice'
-      );
-    },
-    ControlGroup(
-      variables: ControlGroupQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<ControlGroupQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<ControlGroupQuery>(ControlGroupDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'ControlGroup'
+        'RemoveDeviceFromControlGroup'
       );
     },
     ControlGroupDevices(
-      variables: ControlGroupDevicesQueryVariables,
+      variables?: ControlGroupDevicesQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<ControlGroupDevicesQuery> {
       return withWrapper(
@@ -14027,7 +13816,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
       );
     },
     ControlGroupStatus(
-      variables: ControlGroupStatusQueryVariables,
+      variables?: ControlGroupStatusQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<ControlGroupStatusQuery> {
       return withWrapper(
@@ -14037,19 +13826,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'ControlGroupStatus'
-      );
-    },
-    ControlGroupHistory(
-      variables: ControlGroupHistoryQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<ControlGroupHistoryQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<ControlGroupHistoryQuery>(ControlGroupHistoryDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'ControlGroupHistory'
       );
     },
     ControlGroups(
@@ -14065,35 +13841,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         'ControlGroups'
       );
     },
-    Devices(variables?: DevicesQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<DevicesQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DevicesQuery>(DevicesDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'Devices'
-      );
-    },
-    DevicesBySerialNos(
-      variables?: DevicesBySerialNosQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<DevicesBySerialNosQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DevicesBySerialNosQuery>(DevicesBySerialNosDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'DevicesBySerialNos'
-      );
-    },
-    Device(variables: DeviceQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<DeviceQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DeviceQuery>(DeviceDocument, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
-        'Device'
-      );
-    },
     DeviceStatus(
-      variables: DeviceStatusQueryVariables,
+      variables?: DeviceStatusQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<DeviceStatusQuery> {
       return withWrapper(
@@ -14105,8 +13854,21 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         'DeviceStatus'
       );
     },
+    NewDevicesBySerialNos(
+      variables?: NewDevicesBySerialNosQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<NewDevicesBySerialNosQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<NewDevicesBySerialNosQuery>(NewDevicesBySerialNosDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'NewDevicesBySerialNos'
+      );
+    },
     DeviceControlGroup(
-      variables: DeviceControlGroupQueryVariables,
+      variables?: DeviceControlGroupQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<DeviceControlGroupQuery> {
       return withWrapper(
@@ -14116,19 +13878,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'DeviceControlGroup'
-      );
-    },
-    DeviceHistory(
-      variables: DeviceHistoryQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<DeviceHistoryQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<DeviceHistoryQuery>(DeviceHistoryDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'DeviceHistory'
       );
     },
     DeviceHistoryByIds(

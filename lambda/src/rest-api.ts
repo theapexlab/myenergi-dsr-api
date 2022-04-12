@@ -7,7 +7,9 @@ import { OpenAPI, useSofa } from 'sofa-api';
 import swaggerUi from 'swagger-ui-express';
 import { getContext } from './context';
 import { getAPIs } from './data-sources';
+import { testJwt } from './middlewares/testJwt';
 import { adminSchema, schema } from './schema';
+import { errorHandlerSofa } from './utils/errorHandler';
 
 const jwksClient = require('jwks-rsa');
 const basePath = '/api';
@@ -35,6 +37,7 @@ const adminOpenApi = OpenAPI({
 const restMiddleware = useSofa({
   schema,
   basePath,
+  errorHandler: errorHandlerSofa,
   onRoute(info) {
     openApi.addRoute(info, {
       basePath,
@@ -57,8 +60,11 @@ const restMiddleware = useSofa({
     'Query.device': {
       path: '/devices/:serialNo',
     },
-    'Query.deviceControlGroup': {
-      path: '/devices/:serialNo/control-group',
+    'Query.deviceControlGroups': {
+      path: '/devices/:serialNo/control-groups',
+    },
+    'Query.controlGroup': {
+      path: '/control-groups/:id',
     },
     'Query.controlGroupDevices': {
       path: '/control-groups/:id/devices',
@@ -80,6 +86,9 @@ const restMiddleware = useSofa({
     'Mutation.removeDeviceFromControlGroup': {
       path: '/control-groups/:id/remove-device',
       method: 'PUT',
+    },
+    'Query.adminGroup': {
+      path: '/admin-groups/:id',
     },
     'Query.adminGroupDevices': {
       path: '/admin-groups/:id/devices',
@@ -125,25 +134,33 @@ const adminMiddleware = useSofa({
 const app = express();
 
 app.use(bodyParser.json());
+
 app.use(
-  jwtAuth({
-    secret: jwksClient.expressJwtSecret({
-      jwksUri,
-    }),
-    algorithms: ['RS256'],
-    credentialsRequired: false,
-  })
+  process.env.NODE_ENV === 'test'
+    ? testJwt
+    : jwtAuth({
+        secret: jwksClient.expressJwtSecret({
+          jwksUri,
+        }),
+        algorithms: ['RS256'],
+        credentialsRequired: false,
+      })
 );
 app.use(basePath, restMiddleware);
 app.use(`${basePath}-docs`, swaggerUi.serve, swaggerUi.setup(openApi.get()));
 if (process.env.NODE_ENV !== 'production') {
-  app.use(`${adminBasePath}-docs`, swaggerUi.serve, swaggerUi.setup(adminOpenApi.get()));
+  app.use(`${adminBasePath}-docs`, swaggerUi.serve, (_req, res) => {
+    const html = swaggerUi.generateHTML(adminOpenApi.get());
+    res.send(html);
+  });
 }
 app.use(
   adminBasePath,
-  expressBasicAuth({
-    users: { [process.env.ADMIN_USERNAME]: process.env.ADMIN_PASSWORD },
-  }),
+  process.env.NODE_ENV === 'test'
+    ? testJwt
+    : expressBasicAuth({
+        users: { [process.env.ADMIN_USERNAME]: process.env.ADMIN_PASSWORD },
+      }),
   adminMiddleware
 );
 app.get(
@@ -153,7 +170,7 @@ app.get(
     challenge: true,
     realm: process.env.ADMIN_REALM ?? 'Imb4T3st4pp',
   }),
-  (req, res) => {
+  (_req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
   }
 );

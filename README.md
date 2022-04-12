@@ -1,9 +1,32 @@
 # Myenergi - Demand Side Response API
 
-## Get started - Local
+## Run Locally
 
-1. `yarn install`
-2. `yarn start`
+Clone the project
+
+Install dependencies
+
+```bash
+  yarn install
+```
+
+Start docker containers with docker compose
+&& start the server
+
+```bash
+  yarn start
+```
+
+Now you can navigate to `http://localhost:3000/graphql` to the Apollo Studio playground
+
+## (Optional)
+
+You can play around with the hasura console on `http://localhost:9695/` using the container db-s
+This runs a hasura instance in the test/test-hasura folder
+
+```bash
+  yarn hasura:console:local
+```
 
 ## Get started - AWS deployment
 
