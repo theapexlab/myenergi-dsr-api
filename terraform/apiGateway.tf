@@ -28,6 +28,11 @@ resource "aws_apigatewayv2_stage" "lambda" {
   }
 }
 
+resource "aws_apigatewayv2_route" "graphql" {
+  api_id    = aws_apigatewayv2_api.lambda.id
+  route_key = "$default"
+  target    = "integrations/${aws_apigatewayv2_integration.graphql.id}"
+}
 resource "aws_apigatewayv2_integration" "graphql" {
   api_id = aws_apigatewayv2_api.lambda.id
 
@@ -36,9 +41,4 @@ resource "aws_apigatewayv2_integration" "graphql" {
   integration_method = "POST"
 }
 
-resource "aws_apigatewayv2_route" "graphql" {
-  api_id    = aws_apigatewayv2_api.lambda.id
-  route_key = "$default"
-  target    = "integrations/${aws_apigatewayv2_integration.graphql.id}"
-}
 
