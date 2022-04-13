@@ -42,12 +42,13 @@ resource "aws_lambda_function" "dsr_api" {
 
   environment {
     variables = {
+      NODE_ENV         = "production",
       DAL_ENDPOINT     = "https://${module.hasura.hasura_route53_record_name}/v1/graphql"
       DAL_ADMIN_SECRET = var.hasura_admin_secret
-      USER_POOL_ID = aws_cognito_user_pool.pool.id
+      USER_POOL_ID     = aws_cognito_user_pool.pool.id
       USER_POOL_REGION = var.aws_region
-      ADMIN_USERNAME = var.super_admin_username
-      ADMIN_PASSWORD = var.super_admin_password
+      ADMIN_USERNAME   = var.super_admin_username
+      ADMIN_PASSWORD   = var.super_admin_password
     }
   }
 }

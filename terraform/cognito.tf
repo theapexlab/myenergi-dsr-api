@@ -12,6 +12,7 @@ resource "aws_cognito_resource_server" "resource" {
   user_pool_id = aws_cognito_user_pool.pool.id
 
   scope {
-    scope_name = "api.readwrite"
+    scope_name        = "api.readwrite"
+    scope_description = "Scope for read/write access to the API"
   }
 }
