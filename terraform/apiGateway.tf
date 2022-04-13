@@ -28,7 +28,7 @@ resource "aws_apigatewayv2_stage" "lambda" {
   }
 }
 
-resource "aws_apigatewayv2_integration" "hello_world" {
+resource "aws_apigatewayv2_integration" "graphql" {
   api_id = aws_apigatewayv2_api.lambda.id
 
   integration_uri    = aws_lambda_function.dsr_api.invoke_arn
@@ -39,12 +39,6 @@ resource "aws_apigatewayv2_integration" "hello_world" {
 resource "aws_apigatewayv2_route" "graphql" {
   api_id    = aws_apigatewayv2_api.lambda.id
   route_key = "$default"
-  target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.graphql.id}"
 }
-
-# resource "aws_apigatewayv2_route" "test" {
-#   api_id    = aws_apigatewayv2_api.lambda.id
-#   route_key = "ANY /rest"
-#   target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
-# }
 
