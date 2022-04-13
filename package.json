@@ -16,6 +16,7 @@
     "generate:swagger": "ts-node scripts/generate-swagger.ts",
     "prebuild:lambda": "yarn cleanup:lambda",
     "build:lambda": "tsc",
+    "postbuild:lambda": "cp -r ./lambda/src/public ./dist",
     "prebuild:layer": "yarn cleanup:layer",
     "build:layer": "yarn install --prod --modules-folder dist_layer/nodejs/node_modules",
     "build": "yarn build:layer && yarn build:lambda",
