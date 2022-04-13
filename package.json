@@ -40,7 +40,6 @@
     "hasura:status": "cd ./hasura && hasura migrate status --database-name default"
   },
   "devDependencies": {
-    "@aws-sdk/client-cognito-identity-provider": "^3.58.0",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/introspection": "^2.1.1",
     "@graphql-codegen/typescript": "2.4.5",
@@ -73,6 +72,7 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",
+    "@aws-sdk/client-cognito-identity-provider": "^3.58.0",
     "apollo-datasource-rest": "^3.5.1",
     "apollo-server-lambda": "^3.6.3",
     "class-validator": "^0.13.2",
