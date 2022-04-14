@@ -5,8 +5,8 @@ import jwtAuth from 'express-jwt';
 import * as path from 'path';
 import { OpenAPI, useSofa } from 'sofa-api';
 import swaggerUi from 'swagger-ui-express';
-import { getContext } from './context';
-import { getAPIs } from './data-sources';
+import { auth, env, superAdmin } from './config';
+import { getRestContext } from './context';
 import { testJwt } from './middlewares/testJwt';
 import { adminSchema, schema } from './schema';
 import { errorHandlerSofa } from './utils/errorHandler';
@@ -14,8 +14,8 @@ import { errorHandlerSofa } from './utils/errorHandler';
 const jwksClient = require('jwks-rsa');
 const basePath = '/api';
 const adminBasePath = '/admin-api';
-const region = process.env.USER_POOL_REGION;
-const UserPoolId = process.env.USER_POOL_ID;
+const region = auth.region;
+const UserPoolId = auth.userPoolId;
 const jwksUri = `https://cognito-idp.${region}.amazonaws.com/${UserPoolId}/.well-known/jwks.json`;
 
 const openApi = OpenAPI({
@@ -43,14 +43,13 @@ const restMiddleware = useSofa({
       basePath,
     });
   },
-  async context(contextValue) {
-    const context = await getContext(contextValue);
-    return {
-      dataSources: getAPIs(),
-      ...context,
-    };
+  async context(expressContext) {
+    return getRestContext(expressContext);
   },
   routes: {
+    'Query.deviceAdress': {
+      path: '/devices/:serialNo/address',
+    },
     'Query.deviceStatus': {
       path: '/devices/:serialNo/status',
     },
@@ -122,12 +121,8 @@ const adminMiddleware = useSofa({
       basePath: adminBasePath,
     });
   },
-  async context(contextValue) {
-    const context = await getContext(contextValue);
-    return {
-      dataSources: getAPIs(),
-      ...context,
-    };
+  async context(expressContext) {
+    return getRestContext(expressContext);
   },
 });
 
@@ -136,7 +131,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(
-  process.env.NODE_ENV === 'test'
+  env === 'test'
     ? testJwt
     : jwtAuth({
         secret: jwksClient.expressJwtSecret({
@@ -148,7 +143,7 @@ app.use(
 );
 app.use(basePath, restMiddleware);
 app.use(`${basePath}-docs`, swaggerUi.serve, swaggerUi.setup(openApi.get()));
-if (process.env.NODE_ENV !== 'production') {
+if (env !== 'production') {
   app.use(`${adminBasePath}-docs`, swaggerUi.serve, (_req, res) => {
     const html = swaggerUi.generateHTML(adminOpenApi.get());
     res.send(html);
@@ -156,19 +151,19 @@ if (process.env.NODE_ENV !== 'production') {
 }
 app.use(
   adminBasePath,
-  process.env.NODE_ENV === 'test'
+  env === 'test'
     ? testJwt
     : expressBasicAuth({
-        users: { [process.env.ADMIN_USERNAME]: process.env.ADMIN_PASSWORD },
+        users: { [superAdmin.username]: superAdmin.password },
       }),
   adminMiddleware
 );
 app.get(
   '/superadmin',
   expressBasicAuth({
-    users: { [process.env.ADMIN_USERNAME]: process.env.ADMIN_PASSWORD },
+    users: { [superAdmin.username]: superAdmin.password },
     challenge: true,
-    realm: process.env.ADMIN_REALM ?? 'Imb4T3st4pp',
+    realm: superAdmin.realm ?? 'Imb4T3st4pp',
   }),
   (_req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));

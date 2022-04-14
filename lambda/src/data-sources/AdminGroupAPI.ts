@@ -1,26 +1,19 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
 import { GraphQLError } from 'graphql';
-import { AdminGroup, AdminGroupDevicesArgs, AdminGroupsArgs, MutateAdminGroupArgs } from '../admin-group';
-import { AppUser, getAggregatorCondition } from '../context';
-import { Device } from '../device';
-import { DeviceStatus } from '../device-status';
-import { Admin_Group_Bool_Exp, Admin_Group_Device_Bool_Exp, Device_Type_Enum, getSdk } from '../generated/graphql';
+import { AdminGroup, AdminGroupsArgs, MutateAdminGroupArgs } from '../admin-group';
+import { getAggregatorCondition } from '../context';
+import { Admin_Group_Bool_Exp, Device_Type_Enum } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
-import { mapEddiOrZappiStatusToDeviceStatus } from '../utils';
 import { NotFoundError } from './CustomError';
-import { getGraphqlSdk } from './getGraphqlSdk';
+import { GraphqlDataSource } from './GraphqlDataSource';
 
-export class AdminGroupAPI extends RESTDataSource {
-  sdk: ReturnType<typeof getSdk>;
-
+export class AdminGroupAPI extends GraphqlDataSource {
   constructor(baseURL: string, secret: string) {
-    super();
-    this.baseURL = baseURL;
-    this.sdk = getGraphqlSdk({ baseURL, secret });
+    super(baseURL, secret);
   }
 
-  async getAll(args: AdminGroupsArgs, user: AppUser): Promise<AdminGroup[]> {
-    const { offset, limit } = args;
+  async getAll(args?: AdminGroupsArgs): Promise<AdminGroup[]> {
+    const { user } = this.context;
+    const { offset, limit } = args ?? {};
     const where = getAggregatorCondition<Admin_Group_Bool_Exp>(user, (aggregatorId) => ({
       aggregator_id: { _eq: aggregatorId },
     }));
@@ -31,7 +24,8 @@ export class AdminGroupAPI extends RESTDataSource {
     return adminGroups;
   }
 
-  async getById(id: number, user: AppUser): Promise<AdminGroup> {
+  async getById(id: number): Promise<AdminGroup> {
+    const { user } = this.context;
     const where = getAggregatorCondition<Admin_Group_Bool_Exp>(user, (aggregatorId) => ({
       aggregator_id: { _eq: aggregatorId },
       id: { _eq: id },
@@ -43,52 +37,6 @@ export class AdminGroupAPI extends RESTDataSource {
       throw new NotFoundError(`Admin group with id ${id} not found`);
     }
     return adminGroup;
-  }
-
-  async getDevice(serialNo: number, user: AppUser): Promise<Device> {
-    const where = getAggregatorCondition<Admin_Group_Device_Bool_Exp>(user, (aggregatorId) => ({
-      admin_group: { aggregator_id: { _eq: aggregatorId } },
-      serialno: { _eq: serialNo },
-    }));
-    const {
-      devices: [device],
-    } = await this.sdk.AdminGroupDevices({ where });
-    if (!device) {
-      throw new NotFoundError(`Device with serial number ${serialNo} not found`);
-    }
-    return device;
-  }
-
-  async getDevices(args: AdminGroupDevicesArgs, user: AppUser): Promise<Device[]> {
-    const { id, offset, limit } = args;
-    const where = getAggregatorCondition<Admin_Group_Device_Bool_Exp>(user, (aggregatorId) => ({
-      admin_group: { aggregator_id: { _eq: aggregatorId }, id: { _eq: id } },
-    }));
-    const { devices } = await this.sdk.AdminGroupDevices({
-      offset,
-      limit,
-      where,
-    });
-
-    if (!devices.length) {
-      throw new NotFoundError(`No devices found`);
-    }
-    return devices;
-  }
-
-  async getStatus(id: number, user: AppUser): Promise<DeviceStatus[]> {
-    const condition = (aggregatorId: string): Admin_Group_Bool_Exp => ({
-      aggregator_id: { _eq: aggregatorId },
-      id: { _eq: id },
-    });
-    const where = getAggregatorCondition(user, condition);
-    const {
-      adminGroups: [adminGroup],
-    } = await this.sdk.AdminGroupStatus({ where });
-    if (!adminGroup) {
-      throw new NotFoundError(`Admin group with id ${id} not found`);
-    }
-    return mapEddiOrZappiStatusToDeviceStatus(adminGroup.devices);
   }
 
   async create(name: string, aggregatorId: string): Promise<AdminGroup> {

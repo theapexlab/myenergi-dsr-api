@@ -1,7 +1,7 @@
 import { ContextFunction } from 'apollo-server-core';
 import { ExpressContext } from 'apollo-server-express';
 import { RoleType } from './auth/auth-checker';
-import { AppDataSources } from './data-sources';
+import { AppDataSources, getAPIs } from './data-sources';
 
 type SuperAdminUser = {
   role: RoleType.SUPERADMIN;
@@ -69,4 +69,24 @@ export const getContext: ContextFunction<ExpressContext, Omit<AppContext, 'dataS
       aggregatorId: admin ? undefined : aggregator?.client_id,
     },
   };
+};
+
+export const getRestContext = async (contextValue: ExpressContext): Promise<AppContext> => {
+  const context = (await getContext(contextValue)) as AppContext;
+  const dataSources = getAPIs();
+  const initializers: Array<void | Promise<void>> = [];
+  for (const dataSource of Object.values(dataSources)) {
+    if (dataSource.initialize) {
+      initializers.push(
+        dataSource.initialize({
+          context,
+          cache: {} as any,
+        })
+      );
+    }
+  }
+
+  await Promise.all(initializers);
+  context.dataSources = dataSources;
+  return context;
 };

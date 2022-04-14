@@ -19,7 +19,7 @@ export class AdminGroupResolver {
   @Query(() => [AdminGroup])
   adminGroups(@Ctx() ctx: AppContext, @Args() args: AdminGroupsArgs): Promise<AdminGroup[]> {
     const { adminGroupApi } = getDataSources(ctx);
-    return adminGroupApi.getAll(args, ctx.user);
+    return adminGroupApi.getAll(args);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
@@ -27,7 +27,7 @@ export class AdminGroupResolver {
   adminGroup(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<AdminGroup> {
     const { adminGroupApi } = getDataSources(ctx);
 
-    return adminGroupApi.getById(id, ctx.user);
+    return adminGroupApi.getById(id);
   }
 
   /* Relation queries */
@@ -35,23 +35,23 @@ export class AdminGroupResolver {
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [Device])
   adminGroupDevices(@Ctx() ctx: AppContext, @Args() args: AdminGroupDevicesArgs): Promise<Device[]> {
-    const { adminGroupApi } = getDataSources(ctx);
-    return adminGroupApi.getDevices(args, ctx.user);
+    const { deviceApi } = getDataSources(ctx);
+    return deviceApi.getAll(args);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [DeviceStatus])
   adminGroupStatus(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<DeviceStatus[]> {
-    const { adminGroupApi } = getDataSources(ctx);
-    return adminGroupApi.getStatus(id, ctx.user);
+    const { statusApi } = getDataSources(ctx);
+    return statusApi.getAdminGroupStatus(id);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [DeviceHistory])
   async adminGroupHistory(@Ctx() ctx: AppContext, @Args() args: AdminGroupHistoryArgs): Promise<DeviceHistory[]> {
     const { id, ...rest } = args;
-    const { adminGroupApi, historyApi } = getDataSources(ctx);
-    const devices = await adminGroupApi.getDevices({ id }, ctx.user);
+    const { deviceApi, historyApi } = getDataSources(ctx);
+    const devices = await deviceApi.getAll({ id });
     return historyApi.getHistoryByIds(rest, devices.map(mapSerialNo));
   }
 }

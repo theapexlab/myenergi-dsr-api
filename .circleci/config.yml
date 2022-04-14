@@ -20,11 +20,10 @@ jobs:
           command: 'yarn test'
   postman-test:
     environment:
+      NODE_ENV: test
       DAL_ENDPOINT: http://localhost:8080/v1/graphql
       DAL_ADMIN_SECRET: admin123
-      NODE_ENV: test
-      TEST_IS_ADMIN: 'true'
-      TEST_AGGREGATOR_ID: testAppClientId-1
+      JWT_SECRET: 'test'
     machine:
       image: ubuntu-2004:current
       docker_layer_caching: true

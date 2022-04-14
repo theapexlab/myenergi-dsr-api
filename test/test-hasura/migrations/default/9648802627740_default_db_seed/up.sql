@@ -37,6 +37,18 @@ VALUES ('eddi',
         1,
         '2022-03-29 12:20:10.057000 +00:00',
         '2022-03-29 12:20:11.042000 +00:00');
+INSERT INTO public.admin_group_device (device_type,
+                                       postcode,
+                                       serialno,
+                                       admin_group_id,
+                                       created_at,
+                                       updated_at)
+VALUES ('zappi',
+        'asdfasdf',
+        15595836,
+        1,
+        '2022-03-29 12:19:55.778000 +00:00',
+        '2022-03-29 12:19:58.455000 +00:00');
 INSERT INTO public.control_group (name, created_at, updated_at, admin_group_id)
 VALUES ('testControlGroup',
         '2022-03-29 12:21:01.235000 +00:00',

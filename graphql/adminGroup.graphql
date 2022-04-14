@@ -14,23 +14,22 @@ query AdminGroups($limit: Int, $offset: Int, $where: admin_group_bool_exp) {
 
 query AdminGroupDevices($where: admin_group_device_bool_exp, $limit: Int, $offset: Int) {
   devices: admin_group_device(where: $where, limit: $limit, offset: $offset) {
-   ...DeviceData
+    ...DeviceData
   }
 }
 
 query AdminGroupStatus($where: admin_group_bool_exp, $offset: Int, $limit: Int) {
   adminGroups: admin_group(where: $where) {
     devices: admin_group_devices(limit: $limit, offset: $offset) {
-        zappi: admin_group_device_zappi {
-          ...ZappiStatus
-        }
-        eddi: admin_group_device_eddi {
-          ...EddiStatus
-        }
+      zappi: admin_group_device_zappi {
+        ...ZappiStatus
+      }
+      eddi: admin_group_device_eddi {
+        ...EddiStatus
+      }
     }
   }
 }
-
 
 mutation CreateAdminGroup($name: String!, $aggregatorId: String!) {
   adminGroup: insert_admin_group_one(object: { name: $name, aggregator_id: $aggregatorId }) {
@@ -63,4 +62,13 @@ mutation RemoveDeviceFromAdminGroup($adminGroupId: Int!, $serialNos: [Int!]!) {
 fragment AdminGroupFields on admin_group {
   id
   name
+}
+
+query DeviceHubSerialNo($serialNo: bigint = "") {
+  eddi: eddi_by_pk(serialno: $serialNo) {
+    hubSerialNo: hubserialno
+  }
+  zappi: zappi_by_pk(serialno: $serialNo) {
+    hubSerialNo: hubserialno
+  }
 }

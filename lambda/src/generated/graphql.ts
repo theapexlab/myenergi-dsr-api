@@ -13132,6 +13132,16 @@ export type RemoveDeviceFromAdminGroupMutation = {
 
 export type AdminGroupFieldsFragment = { __typename?: 'admin_group'; id: number; name: string };
 
+export type DeviceHubSerialNoQueryVariables = Exact<{
+  serialNo?: InputMaybe<Scalars['bigint']>;
+}>;
+
+export type DeviceHubSerialNoQuery = {
+  __typename?: 'query_root';
+  eddi?: { __typename?: 'eddi'; hubSerialNo?: number | null } | null;
+  zappi?: { __typename?: 'zappi'; hubSerialNo?: number | null } | null;
+};
+
 export type CreateControlGroupMutationVariables = Exact<{
   object?: Control_Group_Insert_Input;
 }>;
@@ -13542,6 +13552,16 @@ export const RemoveDeviceFromAdminGroupDocument = gql`
     }
   }
 `;
+export const DeviceHubSerialNoDocument = gql`
+  query DeviceHubSerialNo($serialNo: bigint = "") {
+    eddi: eddi_by_pk(serialno: $serialNo) {
+      hubSerialNo: hubserialno
+    }
+    zappi: zappi_by_pk(serialno: $serialNo) {
+      hubSerialNo: hubserialno
+    }
+  }
+`;
 export const CreateControlGroupDocument = gql`
   mutation CreateControlGroup($object: control_group_insert_input! = {}) {
     controlGroup: insert_control_group_one(object: $object) {
@@ -13761,6 +13781,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'RemoveDeviceFromAdminGroup'
+      );
+    },
+    DeviceHubSerialNo(
+      variables?: DeviceHubSerialNoQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<DeviceHubSerialNoQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<DeviceHubSerialNoQuery>(DeviceHubSerialNoDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'DeviceHubSerialNo'
       );
     },
     CreateControlGroup(

@@ -1,18 +1,12 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
-import { getGraphqlSdk } from '.';
 import { DeviceHistory } from '../device-history';
-import { getSdk } from '../generated/graphql';
 import { HistoryByIdsArgs } from '../shared';
 import { mapHistoryFragmentToDeviceHistory } from '../utils';
 import { NotFoundError } from './CustomError';
+import { GraphqlDataSource } from './GraphqlDataSource';
 
-export class HistoryAPI extends RESTDataSource {
-  sdk: ReturnType<typeof getSdk>;
-
+export class HistoryAPI extends GraphqlDataSource {
   constructor(baseURL: string, secret: string) {
-    super();
-    this.baseURL = baseURL;
-    this.sdk = getGraphqlSdk({ baseURL, secret });
+    super(baseURL, secret);
   }
 
   async getHistoryByIds(args: HistoryByIdsArgs, serialNos: number[]): Promise<DeviceHistory[]> {

@@ -1,27 +1,40 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
-import { getGraphqlSdk } from '.';
-import { AppUser, getAggregatorCondition } from '../context';
-import { ControlGroup } from '../control-group';
+import { getAggregatorCondition } from '../context';
 import { Device } from '../device';
-import { DeviceStatus } from '../device-status';
-import { Admin_Group_Device_Bool_Exp, Control_Group_Bool_Exp, getSdk } from '../generated/graphql';
-import { PaginationArgs } from '../shared';
-import { mapDeviceClassToDeviceType } from '../utils';
+import { Admin_Group_Device_Bool_Exp, Control_Group_Device_Bool_Exp } from '../generated/graphql';
+import { getDataSources } from './APIs';
 import { NotFoundError } from './CustomError';
+import { GraphqlDataSource } from './GraphqlDataSource';
 
-export class DeviceAPI extends RESTDataSource {
-  sdk: ReturnType<typeof getSdk>;
+interface GetDevicesInput {
+  id?: number;
+  offset?: number;
+  limit?: number;
+}
 
+export class DeviceAPI extends GraphqlDataSource {
   constructor(baseURL: string, secret: string) {
-    super();
-    this.baseURL = baseURL;
-    this.sdk = getGraphqlSdk({ baseURL, secret });
+    super(baseURL, secret);
   }
 
-  async getDevices(args: PaginationArgs, user: AppUser): Promise<Device[]> {
-    const { offset, limit } = args;
+  async getById(serialNo: number): Promise<Device> {
+    const { user } = this.context;
     const where = getAggregatorCondition<Admin_Group_Device_Bool_Exp>(user, (aggregatorId) => ({
       admin_group: { aggregator_id: { _eq: aggregatorId } },
+      serialno: { _eq: serialNo },
+    }));
+    const {
+      devices: [device],
+    } = await this.sdk.AdminGroupDevices({ where });
+    if (!device) {
+      throw new NotFoundError(`Device with serial number ${serialNo} not found`);
+    }
+    return device;
+  }
+
+  async getAll(input: GetDevicesInput): Promise<Device[]> {
+    const { id, offset, limit } = input;
+    const where = getAggregatorCondition<Admin_Group_Device_Bool_Exp>(this.context.user, (aggregatorId) => ({
+      admin_group: { aggregator_id: { _eq: aggregatorId }, id: id ? { _eq: id } : undefined },
     }));
     const { devices } = await this.sdk.AdminGroupDevices({
       offset,
@@ -35,40 +48,41 @@ export class DeviceAPI extends RESTDataSource {
     return devices;
   }
 
-  async getDeviceStatus(serialNo: number, user: AppUser): Promise<DeviceStatus> {
-    const condition = (aggregatorId): Admin_Group_Device_Bool_Exp => ({
-      serialno: { _eq: serialNo },
-      admin_group: { aggregator_id: { _eq: aggregatorId } },
-    });
-    const where = getAggregatorCondition(user, condition);
+  getDevicePostcode = async (serialNo: number): Promise<string> => {
+    const { customerApi } = getDataSources(this.context);
+    const { eddi, zappi } = await this.sdk.DeviceHubSerialNo({ serialNo });
+    const { hubSerialNo } = eddi || zappi || {};
+
+    if (!hubSerialNo) {
+      throw new NotFoundError(`Hub related to device with serial number ${serialNo} not found`);
+    }
+
     const {
-      devices: [device],
-    } = await this.sdk.DeviceStatus({
-      where,
-    });
-    if (!device) {
-      throw new NotFoundError(`Device with serial number ${serialNo} not found`);
+      content: { address },
+    } = await customerApi.getCustomerData(hubSerialNo);
+
+    if (!address) {
+      throw new NotFoundError(`Customer data related to device ${serialNo} hub not found`);
     }
-    const { updateDate, ...deviceProps } = device.zappi || device.eddi;
 
-    return {
-      ...deviceProps,
-      deviceClass: mapDeviceClassToDeviceType(deviceProps.deviceClass),
-      updateDate: new Date(updateDate),
-    };
-  }
+    return address.postalCode || '';
+  };
 
-  async getDeviceControlGroup(serialNo: number, user: AppUser): Promise<ControlGroup[]> {
-    const condition = (aggregatorId: string): Control_Group_Bool_Exp => ({
-      admin_group: { aggregator_id: { _eq: aggregatorId } },
-      devices: { serialno: { _eq: serialNo } },
+  async getControlGroupDevices(id: number): Promise<Device[]> {
+    const { user } = this.context;
+    const where = getAggregatorCondition(user, (aggregatorId) => {
+      const exp: Control_Group_Device_Bool_Exp = {
+        control_group: {
+          admin_group: { aggregator_id: { _eq: aggregatorId } },
+          id: { _eq: id },
+        },
+      };
+      return exp;
     });
-    const where = getAggregatorCondition(user, condition);
-    const { controlGroups } = await this.sdk.DeviceControlGroup({ where });
-
-    if (!controlGroups.length) {
-      throw new NotFoundError(`Device with serial number ${serialNo} not found in any of your control groups`);
+    const { devices } = await this.sdk.ControlGroupDevices({ where });
+    if (!devices.length) {
+      throw new NotFoundError(`Control group with id ${id} not found`);
     }
-    return controlGroups;
+    return devices;
   }
 }

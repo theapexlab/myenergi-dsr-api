@@ -5,13 +5,12 @@ import { AppClientResolver } from './app-client';
 import { authChecker } from './auth/auth-checker';
 import { ControlGroupResolver } from './control-group';
 import { DeviceResolver } from './device';
-import { DeviceHistoryResolver } from './device-history';
 import { DeviceHistoryArgs } from './device-history/deviceHistory.args';
 import { DeviceStatusResolver } from './device-status';
 import { isValidDateOrder, isValidDateRange } from './utils/validateStartEndDate';
 
 const schema = buildSchemaSync({
-  resolvers: [AdminGroupResolver, DeviceResolver, DeviceStatusResolver, DeviceHistoryResolver, ControlGroupResolver],
+  resolvers: [AdminGroupResolver, DeviceResolver, DeviceStatusResolver, ControlGroupResolver],
   validate: (argValue, _argType) => {
     if (argValue instanceof DeviceHistoryArgs) {
       const { startDate: startDateString, endDate: endDateString } = argValue as DeviceHistoryArgs;

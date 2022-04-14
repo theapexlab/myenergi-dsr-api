@@ -22,37 +22,37 @@ export class ControlGroupResolver {
   @Query(() => [ControlGroup])
   controlGroups(@Ctx() ctx: AppContext, @Args() args: PaginationArgs): Promise<ControlGroup[]> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.getControlGroups(args, ctx.user);
+    return controlGroupApi.getControlGroups(args);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => ControlGroup)
   async controlGroup(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<ControlGroup> {
     const { controlGroupApi } = getDataSources(ctx);
-    const controlGroup = await controlGroupApi.getControlGroupById(id, ctx.user);
+    const controlGroup = await controlGroupApi.getControlGroupById(id);
     return controlGroup;
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [Device])
   controlGroupDevices(@Ctx() ctx: AppContext, @Arg('id', () => Int) id: number): Promise<Device[]> {
-    const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.getControlGroupDevices(id, ctx.user);
+    const { deviceApi } = getDataSources(ctx);
+    return deviceApi.getControlGroupDevices(id);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [DeviceStatus])
   controlGroupStatus(@Ctx() ctx: AppContext, @Args() args: ControlGroupsArgs): Promise<DeviceStatus[]> {
-    const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.getControlGroupStatus(args, ctx.user);
+    const { statusApi } = getDataSources(ctx);
+    return statusApi.getControlGroupStatus(args);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
   @Query(() => [DeviceHistory])
   async controlGroupHistory(@Ctx() ctx: AppContext, @Args() args: ControlGroupHistoryArgs): Promise<DeviceHistory[]> {
     const { id, ...rest } = args;
-    const { controlGroupApi, historyApi } = getDataSources(ctx);
-    const devices = await controlGroupApi.getControlGroupDevices(id, ctx.user);
+    const { deviceApi, historyApi } = getDataSources(ctx);
+    const devices = await deviceApi.getControlGroupDevices(id);
     return historyApi.getHistoryByIds(rest, devices.map(mapSerialNo));
   }
 
@@ -61,15 +61,15 @@ export class ControlGroupResolver {
   async createControlGroup(@Ctx() ctx: AppContext, @Args() args: CreateControlGroupArgs): Promise<ControlGroup> {
     const { name } = args;
     const { controlGroupApi, adminGroupApi } = getDataSources(ctx);
-    const [adminGroup] = await adminGroupApi.getAll({}, ctx.user);
-    return controlGroupApi.createControlGroup(name, adminGroup.id, ctx.user);
+    const [adminGroup] = await adminGroupApi.getAll();
+    return controlGroupApi.createControlGroup(name, adminGroup.id);
   }
 
   @Authorized<RoleType>(RoleType.AGGREGATOR)
   @Mutation(() => AffectedResponse)
   addDeviceToControlGroup(@Ctx() ctx: AppContext, @Args() args: MutateControlGroupArgs): Promise<AffectedResponse> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.addDevice(args, ctx.user);
+    return controlGroupApi.addDevice(args);
   }
 
   @Authorized<RoleType>(RoleType.AGGREGATOR)
@@ -79,6 +79,6 @@ export class ControlGroupResolver {
     @Args() args: MutateControlGroupArgs
   ): Promise<AffectedResponse> {
     const { controlGroupApi } = getDataSources(ctx);
-    return controlGroupApi.removeDeviceFromControlGroup(args, ctx.user);
+    return controlGroupApi.removeDeviceFromControlGroup(args);
   }
 }

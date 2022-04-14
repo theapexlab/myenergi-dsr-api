@@ -164,11 +164,21 @@ variable "sg_main_db" {
 
 variable "super_admin_username" {
   description = "Superadmin username for HTTP Basic Authentication"
-  default = "admin"
+  default     = "admin"
 }
 variable "super_admin_password" {
   description = "Superadmin password for HTTP Basic Authentication"
-  default = "6yn3sEAzj4qxpF7u"
+}
+variable "customer_api_jwt_secret_key" {
+  description = "JWT secret key for customer API"
+}
+variable "customer_api_jwt_expires_in" {
+  description = "JWT expiration time for customer API"
+  default     = "1h"
+}
+variable "customer_api_root_url" {
+  description = "Root URL for customer API"
+  default     = "https://staging-myaccount.myenergi.com:9090/"
 }
 
 

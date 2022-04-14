@@ -5,15 +5,22 @@ import {
   ListUserPoolClientsCommand,
   UserPoolClientDescription,
 } from '@aws-sdk/client-cognito-identity-provider';
-import { RESTDataSource } from 'apollo-datasource-rest';
+import { DataSource, DataSourceConfig } from 'apollo-datasource';
 import { AppClient } from '../app-client';
 import { AppClientDetails, AppClientId } from '../app-client/appClient.type';
+import { AppContext } from '../context';
 
-export class AppClientAPI extends RESTDataSource {
+export class AppClientAPI extends DataSource<AppContext> {
+  context!: AppContext;
   client: CognitoIdentityProviderClient;
+
   constructor(private userPoolId: string, private region: string) {
     super();
     this.client = new CognitoIdentityProviderClient({ region: this.region });
+  }
+
+  initialize(config: DataSourceConfig<AppContext>): void {
+    this.context = config.context;
   }
 
   private static mapAppClient(client: UserPoolClientDescription): AppClient {

@@ -1,31 +1,23 @@
-import { RESTDataSource } from 'apollo-datasource-rest/dist/RESTDataSource';
-import { AppUser, getAggregatorCondition } from '../context';
+import { getAggregatorCondition } from '../context';
 import { ControlGroup } from '../control-group';
-import { ControlGroupsArgs, MutateControlGroupArgs } from '../control-group/controlGroup.args';
-import { Device } from '../device';
-import { DeviceStatus } from '../device-status';
+import { MutateControlGroupArgs } from '../control-group/controlGroup.args';
 import {
   Admin_Group_Device_Bool_Exp,
   Control_Group_Bool_Exp,
   Control_Group_Device_Bool_Exp,
   Control_Group_Device_Insert_Input,
-  getSdk,
 } from '../generated/graphql';
 import { AffectedResponse, PaginationArgs } from '../shared';
-import { mapEddiOrZappiStatusToDeviceStatus } from '../utils';
 import { NotFoundError } from './CustomError';
-import { getGraphqlSdk } from './getGraphqlSdk';
+import { GraphqlDataSource } from './GraphqlDataSource';
 
-export class ControlGroupAPI extends RESTDataSource {
-  sdk: ReturnType<typeof getSdk>;
-
+export class ControlGroupAPI extends GraphqlDataSource {
   constructor(baseURL: string, secret: string) {
-    super();
-    this.baseURL = baseURL;
-    this.sdk = getGraphqlSdk({ baseURL, secret });
+    super(baseURL, secret);
   }
 
-  async getControlGroups({ limit, offset }: PaginationArgs, user: AppUser): Promise<ControlGroup[]> {
+  async getControlGroups({ limit, offset }: PaginationArgs): Promise<ControlGroup[]> {
+    const { user } = this.context;
     const condition = (aggregatorId: string): Control_Group_Bool_Exp => ({
       admin_group: { aggregator_id: { _eq: aggregatorId } },
     });
@@ -34,7 +26,7 @@ export class ControlGroupAPI extends RESTDataSource {
     return controlGroups;
   }
 
-  async createControlGroup(name: string, adminGroupId: number, user: AppUser): Promise<ControlGroup> {
+  async createControlGroup(name: string, adminGroupId: number): Promise<ControlGroup> {
     const object = {
       name,
       admin_group_id: adminGroupId,
@@ -43,7 +35,8 @@ export class ControlGroupAPI extends RESTDataSource {
     return controlGroup;
   }
 
-  async getControlGroupById(id: number, user: AppUser): Promise<ControlGroup> {
+  async getControlGroupById(id: number): Promise<ControlGroup> {
+    const { user } = this.context;
     const condition = (aggregatorId: string): Control_Group_Bool_Exp => ({
       admin_group: { aggregator_id: { _eq: aggregatorId } },
       id: { _eq: id },
@@ -61,7 +54,8 @@ export class ControlGroupAPI extends RESTDataSource {
     return controlGroup;
   }
 
-  async addDevice(args: MutateControlGroupArgs, user: AppUser): Promise<AffectedResponse> {
+  async addDevice(args: MutateControlGroupArgs): Promise<AffectedResponse> {
+    const { user } = this.context;
     const { id, serialNos } = args;
     const condition = (aggregatorId: string): Admin_Group_Device_Bool_Exp => ({
       admin_group: { aggregator_id: { _eq: aggregatorId } },
@@ -74,7 +68,7 @@ export class ControlGroupAPI extends RESTDataSource {
       throw new NotFoundError(`Device with serial number ${serialNos} not found`);
     }
 
-    const controlGroup = await this.getControlGroupById(id, user);
+    const controlGroup = await this.getControlGroupById(id);
 
     if (!controlGroup) {
       throw new NotFoundError(`Control group with id ${id} not found`);
@@ -94,7 +88,8 @@ export class ControlGroupAPI extends RESTDataSource {
     };
   }
 
-  async removeDeviceFromControlGroup(args: MutateControlGroupArgs, user: AppUser): Promise<AffectedResponse> {
+  async removeDeviceFromControlGroup(args: MutateControlGroupArgs): Promise<AffectedResponse> {
+    const { user } = this.context;
     const { id, serialNos } = args;
     const condition = (aggregatorId: string): Control_Group_Device_Bool_Exp => ({
       control_group: {
@@ -118,36 +113,17 @@ export class ControlGroupAPI extends RESTDataSource {
     };
   }
 
-  async getControlGroupDevices(id: number, user: AppUser): Promise<Device[]> {
-    const where = getAggregatorCondition(user, (aggregatorId) => {
-      const exp: Control_Group_Device_Bool_Exp = {
-        control_group: {
-          admin_group: { aggregator_id: { _eq: aggregatorId } },
-          id: { _eq: id },
-        },
-      };
-      return exp;
-    });
-    const { devices } = await this.sdk.ControlGroupDevices({ where });
-    if (!devices.length) {
-      throw new NotFoundError(`Control group with id ${id} not found`);
-    }
-    return devices;
-  }
-
-  async getControlGroupStatus(args: ControlGroupsArgs, user: AppUser): Promise<DeviceStatus[]> {
-    const { id, limit, offset } = args;
+  async getDeviceControlGroup(serialNo: number): Promise<ControlGroup[]> {
     const condition = (aggregatorId: string): Control_Group_Bool_Exp => ({
       admin_group: { aggregator_id: { _eq: aggregatorId } },
-      id: { _eq: id },
+      devices: { serialno: { _eq: serialNo } },
     });
-    const where = getAggregatorCondition(user, condition);
-    const {
-      controlGroups: [controlGroup],
-    } = await this.sdk.ControlGroupStatus({ where, limit, offset });
-    if (!controlGroup) {
-      throw new NotFoundError(`Control group with id ${id} not found`);
+    const where = getAggregatorCondition(this.context.user, condition);
+    const { controlGroups } = await this.sdk.DeviceControlGroup({ where });
+
+    if (!controlGroups.length) {
+      throw new NotFoundError(`Device with serial number ${serialNo} not found in any of your control groups`);
     }
-    return mapEddiOrZappiStatusToDeviceStatus(controlGroup.devices);
+    return controlGroups;
   }
 }
