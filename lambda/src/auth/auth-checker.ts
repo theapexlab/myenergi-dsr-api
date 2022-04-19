@@ -1,11 +1,5 @@
 import { AuthChecker } from 'type-graphql';
-import { AppContext } from '../context';
-
-export enum RoleType {
-  SUPERADMIN = 'SUPERADMIN',
-  AGGREGATOR = 'AGGREGATOR',
-  ANONYMOUS = 'ANONYMOUS',
-}
+import { AppContext, RoleType } from './auth.type';
 
 export const authChecker: AuthChecker<AppContext, RoleType> = (resolverData, roles) => {
   const { context } = resolverData;

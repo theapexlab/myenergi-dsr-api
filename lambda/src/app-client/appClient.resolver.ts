@@ -1,8 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql';
-import { RoleType } from '../auth/auth-checker';
-import { AppContext } from '../context';
-import { getDataSources } from '../data-sources';
+import { AppContext, RoleType } from '../auth/auth.type';
+import { getDataSources } from '../utils/getDataSources';
 import { AppClient, AppClientDetails, AppClientId } from './appClient.type';
 
 @Resolver()

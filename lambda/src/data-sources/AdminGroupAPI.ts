@@ -1,8 +1,8 @@
 import { GraphQLError } from 'graphql';
 import { AdminGroup, AdminGroupsArgs, MutateAdminGroupArgs } from '../admin-group';
-import { getAggregatorCondition } from '../context';
 import { Admin_Group_Bool_Exp, Device_Type_Enum } from '../generated/graphql';
 import { AffectedResponse } from '../shared';
+import { getAggregatorCondition } from '../utils/getAggregatorCondition';
 import { NotFoundError } from './CustomError';
 import { GraphqlDataSource } from './GraphqlDataSource';
 

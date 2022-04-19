@@ -1,4 +1,3 @@
-import { getAggregatorCondition } from '../context';
 import { ControlGroup } from '../control-group';
 import { MutateControlGroupArgs } from '../control-group/controlGroup.args';
 import {
@@ -8,6 +7,7 @@ import {
   Control_Group_Device_Insert_Input,
 } from '../generated/graphql';
 import { AffectedResponse, PaginationArgs } from '../shared';
+import { getAggregatorCondition } from '../utils/getAggregatorCondition';
 import { NotFoundError } from './CustomError';
 import { GraphqlDataSource } from './GraphqlDataSource';
 

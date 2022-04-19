@@ -1,5 +1,5 @@
 import { DataSource, DataSourceConfig } from 'apollo-datasource';
-import { AppContext } from '../context';
+import { AppContext } from '../auth/auth.type';
 import { getSdk } from '../generated/graphql';
 import { getGraphqlSdk } from './getGraphqlSdk';
 

@@ -1,7 +1,7 @@
-import { getAggregatorCondition } from '../context';
 import { Device } from '../device';
 import { Admin_Group_Device_Bool_Exp, Control_Group_Device_Bool_Exp } from '../generated/graphql';
-import { getDataSources } from './APIs';
+import { getAggregatorCondition } from '../utils/getAggregatorCondition';
+import { getDataSources } from '../utils/getDataSources';
 import { NotFoundError } from './CustomError';
 import { GraphqlDataSource } from './GraphqlDataSource';
 
@@ -50,6 +50,7 @@ export class DeviceAPI extends GraphqlDataSource {
 
   getDevicePostcode = async (serialNo: number): Promise<string> => {
     const { customerApi } = getDataSources(this.context);
+
     const { eddi, zappi } = await this.sdk.DeviceHubSerialNo({ serialNo });
     const { hubSerialNo } = eddi || zappi || {};
 

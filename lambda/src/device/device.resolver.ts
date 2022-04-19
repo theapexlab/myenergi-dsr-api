@@ -1,13 +1,12 @@
 /* eslint-disable class-methods-use-this */
 import { Arg, Args, Authorized, Ctx, FieldResolver, Int, Query, Resolver, Root } from 'type-graphql';
-import { RoleType } from '../auth/auth-checker';
-import { AppContext } from '../context';
+import { AppContext, RoleType } from '../auth/auth.type';
 import { ControlGroup } from '../control-group';
-import { getDataSources } from '../data-sources';
 import { DeviceHistory } from '../device-history';
 import { DeviceHistoryArgs } from '../device-history/deviceHistory.args';
 import { DeviceStatus } from '../device-status';
 import { IdArgs, PaginationArgs } from '../shared';
+import { getDataSources } from '../utils/getDataSources';
 import { Device } from './device.type';
 
 @Resolver(Device)

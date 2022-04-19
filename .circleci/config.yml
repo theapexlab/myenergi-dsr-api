@@ -75,11 +75,8 @@ jobs:
           name: 'Install dependencies'
           command: 'yarn install'
       - run:
-          name: 'Run build layer'
-          command: 'yarn build:layer'
-      - run:
-          name: 'Run build lambda'
-          command: 'yarn build:lambda'
+          name: 'Run build'
+          command: 'yarn build'
       - persist_to_workspace:
           root: .
           paths:

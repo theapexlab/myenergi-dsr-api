@@ -1,8 +1,8 @@
-import { getAggregatorCondition } from '../context';
 import { ControlGroupsArgs } from '../control-group/controlGroup.args';
 import { DeviceStatus } from '../device-status';
 import { Admin_Group_Bool_Exp, Admin_Group_Device_Bool_Exp, Control_Group_Bool_Exp } from '../generated/graphql';
 import { mapDeviceClassToDeviceType, mapEddiOrZappiStatusToDeviceStatus } from '../utils';
+import { getAggregatorCondition } from '../utils/getAggregatorCondition';
 import { NotFoundError } from './CustomError';
 import { GraphqlDataSource } from './GraphqlDataSource';
 

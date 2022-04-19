@@ -1,8 +1,8 @@
 import { DataSource, DataSourceConfig } from 'apollo-datasource';
 import axios, { AxiosInstance } from 'axios';
-import { AppContext } from '../context';
-import { jwtService } from '../services/jwtService';
 import customerMockData from '../../../test/postman/mock_data.json';
+import { AppContext } from '../auth/auth.type';
+import { jwtService } from '../services/jwtService';
 import { env, NodeEnv } from './../config';
 
 interface CustomerAddress {

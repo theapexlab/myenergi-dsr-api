@@ -8,7 +8,7 @@ import {
 import { DataSource, DataSourceConfig } from 'apollo-datasource';
 import { AppClient } from '../app-client';
 import { AppClientDetails, AppClientId } from '../app-client/appClient.type';
-import { AppContext } from '../context';
+import { AppContext } from '../auth/auth.type';
 
 export class AppClientAPI extends DataSource<AppContext> {
   context!: AppContext;

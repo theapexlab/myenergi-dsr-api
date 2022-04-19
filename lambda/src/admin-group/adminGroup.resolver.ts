@@ -1,13 +1,12 @@
 /* eslint-disable class-methods-use-this */
 import { Arg, Args, Authorized, Ctx, Int, Mutation, Query, Resolver } from 'type-graphql';
-import { RoleType } from '../auth/auth-checker';
-import { AppContext } from '../context';
-import { getDataSources } from '../data-sources';
+import { AppContext, RoleType } from '../auth/auth.type';
 import { Device } from '../device';
 import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
 import { AffectedResponse } from '../shared';
 import { mapSerialNo } from '../utils';
+import { getDataSources } from '../utils/getDataSources';
 import { AdminGroupDevicesArgs, AdminGroupHistoryArgs, AdminGroupsArgs, MutateAdminGroupArgs } from './adminGroup.args';
 import { AdminGroup } from './adminGroup.type';
 

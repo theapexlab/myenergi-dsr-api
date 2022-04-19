@@ -10,6 +10,7 @@
     "yarn": "1.22.17"
   },
   "scripts": {
+    "prepare": "husky install",
     "prestart": "docker-compose up -d",
     "start": "ts-node-dev --respawn --transpile-only ./lambda/src/server.ts",
     "lint": "eslint --ext .js,.ts,.tsx ./lambda/src/",
@@ -20,6 +21,7 @@
     "prebuild:layer": "yarn cleanup:layer",
     "build:layer": "yarn install --prod --modules-folder dist_layer/nodejs/node_modules",
     "build": "yarn build:layer && yarn build:lambda",
+    "postbuild": "npx madge --circular --extensions js ./dist/lambda/src/",
     "test:watch": "jest --watch",
     "test": "jest",
     "test:postman": "yarn newman run test/postman/postman_collection.json -e test/postman/postman_environment.json",
@@ -73,9 +75,9 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.58.0",
     "@graphql-tools/schema": "^8.3.1",
     "apollo-datasource": "^3.3.1",
-    "@aws-sdk/client-cognito-identity-provider": "^3.58.0",
     "apollo-server-lambda": "^3.6.3",
     "axios": "^0.26.1",
     "class-validator": "^0.13.2",
