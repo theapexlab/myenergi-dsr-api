@@ -9,6 +9,7 @@ import { DataSource, DataSourceConfig } from 'apollo-datasource';
 import { AppClient } from '../app-client';
 import { AppClientDetails, AppClientId } from '../app-client/appClient.type';
 import { AppContext } from '../auth/auth.type';
+import { auth } from '../config';
 
 export class AppClientAPI extends DataSource<AppContext> {
   context!: AppContext;
@@ -46,7 +47,7 @@ export class AppClientAPI extends DataSource<AppContext> {
       GenerateSecret: true,
       AllowedOAuthFlowsUserPoolClient: true,
       AllowedOAuthFlows: ['client_credentials'],
-      AllowedOAuthScopes: ['https://dsr-api-demo.com/api.readwrite'], // todo: set correct scopes
+      AllowedOAuthScopes: [auth.scope],
     });
     const { UserPoolClient } = await this.client.send(command);
     return {

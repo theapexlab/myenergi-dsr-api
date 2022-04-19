@@ -47,6 +47,7 @@ resource "aws_lambda_function" "dsr_api" {
       DAL_ADMIN_SECRET       = var.hasura_admin_secret
       USER_POOL_ID           = aws_cognito_user_pool.pool.id
       USER_POOL_REGION       = var.aws_region
+      COGNITO_OAUTH_SCOPE    = "${var.cognito_resource_server_identifier}/${var.cognito_oauth_scope}"
       ADMIN_USERNAME         = var.super_admin_username
       ADMIN_PASSWORD         = var.super_admin_password
       JWT_SECRET             = var.customer_api_jwt_secret_key

@@ -180,5 +180,13 @@ variable "customer_api_root_url" {
   description = "Root URL for customer API"
   default     = "https://staging-myaccount.myenergi.com:9090/"
 }
+variable "cognito_oauth_scope" {
+  description = "Scope for Cognito OAuth2"
+  default     = "api.readwrite"
+}
+variable "cognito_resource_server_identifier" {
+  description = "Resource server identifier for Cognito"
+  default     = "https://dsr-api.myenergi.net"
+}
 
 

@@ -17,6 +17,7 @@ type ConfigType = {
   auth: {
     userPoolId: string;
     region: string;
+    scope: string;
   };
   superAdmin: {
     username: string;
@@ -63,6 +64,12 @@ const config = convict<ConfigType>({
       format: String,
       default: 'eu-west-1',
       env: 'USER_POOL_REGION',
+    },
+    scope: {
+      doc: 'The cognito scope',
+      format: String,
+      default: '',
+      env: 'COGNITO_OAUTH_SCOPE',
     },
   },
   superAdmin: {
