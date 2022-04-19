@@ -21,7 +21,6 @@
     "prebuild:layer": "yarn cleanup:layer",
     "build:layer": "yarn install --prod --modules-folder dist_layer/nodejs/node_modules",
     "build": "yarn build:layer && yarn build:lambda",
-    "postbuild": "npx madge --circular --extensions js ./dist/lambda/src/",
     "test:watch": "jest --watch",
     "test": "jest",
     "test:postman": "yarn newman run test/postman/postman_collection.json -e test/postman/postman_environment.json",

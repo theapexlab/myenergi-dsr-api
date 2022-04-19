@@ -1,7 +1,7 @@
 import { DataSource, DataSourceConfig } from 'apollo-datasource';
 import axios, { AxiosInstance } from 'axios';
-import customerMockData from '../../../test/postman/mock_data.json';
 import { AppContext } from '../auth/auth.type';
+import customerMockData from '../mocks/customerData.json';
 import { jwtService } from '../services/jwtService';
 import { env, NodeEnv } from './../config';
 
