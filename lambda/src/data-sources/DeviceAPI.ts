@@ -48,7 +48,7 @@ export class DeviceAPI extends GraphqlDataSource {
     return devices;
   }
 
-  getDevicePostcode = async (serialNo: number): Promise<string> => {
+  getDevicePostalCode = async (serialNo: number): Promise<string | null> => {
     const { customerApi } = getDataSources(this.context);
 
     const { eddi, zappi } = await this.sdk.DeviceHubSerialNo({ serialNo });
@@ -58,15 +58,22 @@ export class DeviceAPI extends GraphqlDataSource {
       throw new NotFoundError(`Hub related to device with serial number ${serialNo} not found`);
     }
 
-    const {
-      content: { address },
-    } = await customerApi.getCustomerData(hubSerialNo);
+    const customer = await customerApi.getCustomerData(hubSerialNo);
 
-    if (!address) {
-      throw new NotFoundError(`Customer data related to device ${serialNo} hub not found`);
+    if (!customer) {
+      return null;
     }
 
-    return address.postalCode || '';
+    const {
+      content: { address },
+    } = customer;
+
+    // todo: how to respond is there is no address found for a customer
+    // if (!address) {
+    //   throw new NotFoundError(`Customer data related to device ${serialNo} hub not found`);
+    // }
+
+    return address?.postalCode ?? null;
   };
 
   async getControlGroupDevices(id: number): Promise<Device[]> {

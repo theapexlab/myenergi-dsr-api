@@ -32,10 +32,10 @@ export class DeviceResolver {
     return controlGroupApi.getDeviceControlGroup(serialNo);
   }
 
-  @FieldResolver(() => String)
-  postcode(@Ctx() ctx: AppContext, @Root() device: Device): Promise<string> {
+  @FieldResolver(() => String, { nullable: true })
+  postalCode(@Ctx() ctx: AppContext, @Root() device: Device): Promise<string | null> {
     const { deviceApi } = getDataSources(ctx);
-    return deviceApi.getDevicePostcode(device.serialNo);
+    return deviceApi.getDevicePostalCode(device.serialNo);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)

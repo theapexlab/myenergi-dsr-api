@@ -3,6 +3,7 @@ import axios, { AxiosInstance } from 'axios';
 import { AppContext } from '../auth/auth.type';
 import customerMockData from '../mocks/customerData.json';
 import { jwtService } from '../services/jwtService';
+import { logger } from '../utils/logger';
 import { env, NodeEnv } from './../config';
 
 interface CustomerAddress {
@@ -45,13 +46,18 @@ export class CustomerAPI extends DataSource<AppContext> {
     this.context = config.context;
   }
 
-  async getCustomerData(serialNo: number): Promise<CustomerData> {
+  async getCustomerData(serialNo: number): Promise<CustomerData | null> {
     if (env === NodeEnv.TEST) {
       return customerMockData;
     }
-    const { data } = await this.client.get(`CustomerData/GetCustomerData`, {
-      params: { serialNo: serialNo.toString() },
-    });
-    return data;
+    try {
+      const { data } = await this.client.get(`CustomerData/GetCustomerData`, {
+        params: { serialNo: serialNo.toString() },
+      });
+      return data;
+    } catch (error) {
+      logger.error(error);
+      return null;
+    }
   }
 }

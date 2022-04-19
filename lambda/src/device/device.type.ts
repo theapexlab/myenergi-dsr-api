@@ -15,11 +15,3 @@ export class Device implements DeviceBase {
   @Field((type) => Device_Type_Enum)
   deviceClass: Device_Type_Enum;
 }
-@ObjectType()
-export class DeviceAddress extends Device {
-  @Field({ description: 'Postalcode of the device location' })
-  postalcode: string;
-
-  @Field({ description: 'Serial no of the hub' })
-  hubSerialNo?: number;
-}
