@@ -1,18 +1,18 @@
 table:
-  name: aggregation_data
   schema: public
+  name: aggregation_data
 object_relationships:
-- name: eddi
-  using:
-    foreign_key_constraint_on:
-      column: aggregationdataid
-      table:
-        name: eddi
-        schema: public
-- name: zappi
-  using:
-    foreign_key_constraint_on:
-      column: aggregationdataid
-      table:
-        name: zappi
-        schema: public
+  - name: eddi
+    using:
+      foreign_key_constraint_on:
+        column: aggregationdataid
+        table:
+          schema: public
+          name: eddi
+  - name: zappi
+    using:
+      foreign_key_constraint_on:
+        column: aggregationdataid
+        table:
+          schema: public
+          name: zappi

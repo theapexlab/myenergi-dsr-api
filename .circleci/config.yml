@@ -24,6 +24,7 @@ jobs:
       DAL_ENDPOINT: http://localhost:8080/v1/graphql
       DAL_ADMIN_SECRET: admin123
       JWT_SECRET: 'test'
+      HASURA_GRAPHQL_ENDPOINT: http://localhost:8080/
     machine:
       image: ubuntu-2004:current
       docker_layer_caching: true
@@ -53,6 +54,12 @@ jobs:
           # Tries a limited ammount of wget calls.
           command: |
             for i in {1..25};do wget -T 15 -O- -c http://localhost:8080/healthz && exit 0; sleep 10; done; exit 1
+      - run:
+          name: 'Seed dsr-db'
+          command: |
+            yarn hasura seed apply --project hasura --database-name dsr-db &&
+            yarn hasura seed apply --project hasura --database-name main-db &&
+            yarn hasura seed apply --project hasura --database-name history-db
       - run:
           name: Run Postman tests
           command: yarn test:postman
@@ -125,12 +132,8 @@ workflows:
   lint-test-postman-test-build-validate-plan-apply:
     jobs:
       - lint-test
-      - postman-test:
-          requires:
-            - lint-test
-      - build:
-          requires:
-            - postman-test
+      - postman-test
+      - build
       - validate-plan:
           context:
             - AWS-DSR
@@ -140,6 +143,7 @@ workflows:
           type: approval
           requires:
             - validate-plan
+            - postman-test
           filters:
             branches:
               only:

@@ -1,11 +1,11 @@
 table:
-  name: user_access
   schema: public
+  name: user_access
 array_relationships:
-- name: users
-  using:
-    foreign_key_constraint_on:
-      column: accessid
-      table:
-        name: user
-        schema: public
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: accessid
+        table:
+          schema: public
+          name: user

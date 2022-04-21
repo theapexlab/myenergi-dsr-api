@@ -1,27 +1,27 @@
 services:
-  default:
-    image: postgres:12.1-alpine
+  dsr-db:
+    image: postgres:13.4-alpine
     restart: always
     environment:
-      - POSTGRES_DB=default
+      - POSTGRES_DB=myenergi
       - POSTGRES_USER=myenergi
       - POSTGRES_PASSWORD=myenergi
     ports:
       - 5432:5432
   main-db:
-    image: postgres:12.1-alpine
+    image: postgres:13.4-alpine
     restart: always
     environment:
-      - POSTGRES_DB=main-db
+      - POSTGRES_DB=myenergi
       - POSTGRES_USER=myenergi
       - POSTGRES_PASSWORD=myenergi
     ports:
       - 5433:5432
   history-db:
-    image: postgres:12.1-alpine
+    image: postgres:13.4-alpine
     restart: always
     environment:
-      - POSTGRES_DB=history-db
+      - POSTGRES_DB=myenergi
       - POSTGRES_USER=myenergi
       - POSTGRES_PASSWORD=myenergi
     ports:
@@ -31,20 +31,19 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - default
+      - dsr-db
       - main-db
       - history-db
     restart: always
-    # command: ["./wait-for-postgres.sh"]
     volumes:
-      - ./test/test-hasura/migrations:/hasura-migrations
-      - ./test/test-hasura/metadata:/hasura-metadata
+      - ./hasura/migrations:/migrations
+      - ./hasura/metadata:/metadata
     environment:
-      HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
-      HASURA_GRAPHQL_METADATA_DIR: /hasura-metadata
+      HASURA_GRAPHQL_MIGRATIONS_DIR: /migrations
+      HASURA_GRAPHQL_METADATA_DIR: /metadata
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log
-      HASURA_GRAPHQL_DATABASE_URL: postgresql://myenergi:myenergi@default:5432/default
-      HASURA_GRAPHQL_MAINDB_URL: postgresql://myenergi:myenergi@main-db:5432/main-db
-      HASURA_GRAPHQL_HISTORYDB_URL: postgresql://myenergi:myenergi@history-db:5432/history-db
+      HASURA_GRAPHQL_DATABASE_URL: postgresql://myenergi:myenergi@dsr-db:5432/myenergi
+      HASURA_GRAPHQL_MAINDB_URL: postgresql://myenergi:myenergi@main-db:5432/myenergi
+      HASURA_GRAPHQL_HISTORYDB_URL: postgresql://myenergi:myenergi@history-db:5432/myenergi
       HASURA_GRAPHQL_ADMIN_SECRET: admin123

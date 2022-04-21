@@ -1,15 +1,15 @@
 table:
-  name: user
   schema: public
+  name: user
 object_relationships:
-- name: user_access
-  using:
-    foreign_key_constraint_on: accessid
+  - name: user_access
+    using:
+      foreign_key_constraint_on: accessid
 array_relationships:
-- name: commands
-  using:
-    foreign_key_constraint_on:
-      column: commandinitiatoruserid
-      table:
-        name: command
-        schema: public
+  - name: commands
+    using:
+      foreign_key_constraint_on:
+        column: commandinitiatoruserid
+        table:
+          schema: public
+          name: command

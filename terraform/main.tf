@@ -25,17 +25,6 @@ terraform {
   required_version = "~> 1.1.6"
 }
 
-
-
-# locals {
-#   ecs_environment = [
-#     {
-#       name  = "HASURA_GRAPHQL_DATABASE_URL",
-#       value = "postgres://${var.db_user_main}:${var.db_password_main}@${var.db_host_main}:${var.db_port}/${var.db_name_main}"
-#     }
-#   ]
-# }
-
 module "hasura" {
   source                         = "./modules/hasura"
   region                         = var.aws_region
@@ -58,12 +47,11 @@ module "hasura" {
   additional_db_security_groups  = var.additional_db_security_groups
   create_iam_service_linked_role = var.create_iam_service_linked_role
   ecs_cluster_name               = var.ecs_cluster_name
-  # environment                    = local.ecs_environment
-  vpc                 = var.vpc
-  internet_gateway_id = var.internet_gateway_id
-  nat_gateway_id      = var.nat_gateway_id
-  sg_main_db          = var.sg_main_db
-  common_tags         = local.common_tags
+  vpc                            = var.vpc
+  internet_gateway_id            = var.internet_gateway_id
+  nat_gateway_id                 = var.nat_gateway_id
+  sg_main_db                     = var.sg_main_db
+  common_tags                    = local.common_tags
 }
 
 

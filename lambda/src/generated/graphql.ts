@@ -3763,7 +3763,7 @@ export type Eddi_Minute_Bool_Exp = {
 /** unique or primary key constraints on table "eddi_minute" */
 export enum Eddi_Minute_Constraint {
   /** unique or primary key constraint */
-  EddiMinutePkey = 'eddi_minute_pkey',
+  Pk_4c94f05e4de575488f4a0c2905d = 'PK_4c94f05e4de575488f4a0c2905d',
 }
 
 /** input type for incrementing numeric columns in table "eddi_minute" */
@@ -11121,7 +11121,7 @@ export type Zappi_Minute_Bool_Exp = {
 /** unique or primary key constraints on table "zappi_minute" */
 export enum Zappi_Minute_Constraint {
   /** unique or primary key constraint */
-  ZappiMinutePkey = 'zappi_minute_pkey',
+  Pk_5f4400bed8cbe77429781c5f9b3 = 'PK_5f4400bed8cbe77429781c5f9b3',
 }
 
 /** input type for incrementing numeric columns in table "zappi_minute" */

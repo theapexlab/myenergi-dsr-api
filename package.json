@@ -33,13 +33,13 @@
     "tf:destroy": "terraform -chdir=./terraform destroy -var-file ./config/terraform.tfvars",
     "deploy": "yarn build && yarn tf:apply",
     "codegen": "graphql-codegen --config codegen.yml -r dotenv/config",
-    "hasura:console": "cd ./hasura && hasura console",
-    "hasura:console:local": "cd ./test/test-hasura && hasura console",
-    "hasura:metadata:apply": "cd ./hasura && hasura metadata apply",
-    "hasura:migrate:apply": "cd ./hasura && hasura migrate apply --database-name default",
-    "hasura:squash": "cd ./hasura && hasura migrate squash  --database-name default",
-    "hasura:mark:squash": "cd ./hasura && hasura migrate apply --skip-execution --database-name default",
-    "hasura:status": "cd ./hasura && hasura migrate status --database-name default"
+    "hasura:console": "yarn hasura console --project hasura --envfile ../.env",
+    "hasura:metadata:apply": "yarn  hasura metadata apply --project hasura --envfile ../.env",
+    "hasura:migrate:apply": "yarn hasura migrate apply --database-name dsr-db --project hasura --envfile ../.env",
+    "hasura:squash": "yarn hasura migrate squash  --database-name dsr-db --project hasura --envfile ../.env",
+    "hasura:mark:squash": "yarn hasura migrate apply --skip-execution --database-name dsr-db  --project hasura --envfile ../.env",
+    "hasura:status": "yarn hasura migrate status --database-name dsr-db  --project hasura --envfile ../.env",
+    "hasura:seed": "yarn hasura seed apply --project hasura --envfile ../.env"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.6.2",

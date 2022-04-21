@@ -1,5 +1,4 @@
 version: 3
-endpoint: https://dsr-hasura-api.myenergi-dev.zoosh.ie/
 metadata_directory: metadata
 admin_secret: admin123
 actions:

@@ -6,6 +6,14 @@ data "aws_ecs_cluster" "hasura" {
   cluster_name = var.ecs_cluster_name
 }
 
+data "aws_db_instance" "main" {
+  db_instance_identifier = "main-db"
+}
+
+data "aws_db_instance" "history" {
+  db_instance_identifier = "history-service-db"
+}
+
 # -----------------------------------------------------------------------------
 # Create a task definition
 # -----------------------------------------------------------------------------
@@ -19,6 +27,14 @@ locals {
     {
       name  = "HASURA_GRAPHQL_DATABASE_URL",
       value = "postgres://${var.rds_username}:${var.rds_password}@${aws_db_instance.hasura.endpoint}/${var.rds_db_name}"
+    },
+    {
+      name  = "HASURA_GRAPHQL_MAINDB_URL",
+      value = "postgres://${var.rds_username}:${var.rds_password}@${data.aws_db_instance.main.endpoint}/${var.rds_db_name}"
+    },
+    {
+      name  = "HASURA_GRAPHQL_HISTORYDB_URL",
+      value = "postgres://${var.rds_username}:${var.rds_password}@${data.aws_db_instance.history.endpoint}/${var.rds_db_name}"
     },
     {
       name  = "HASURA_GRAPHQL_ENABLE_CONSOLE",

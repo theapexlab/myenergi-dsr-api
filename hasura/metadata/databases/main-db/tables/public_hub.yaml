@@ -1,25 +1,25 @@
 table:
-  name: hub
   schema: public
+  name: hub
 array_relationships:
-- name: eddis
-  using:
-    foreign_key_constraint_on:
-      column: hubserialno
-      table:
-        name: eddi
-        schema: public
-- name: harvis
-  using:
-    foreign_key_constraint_on:
-      column: hubserialno
-      table:
-        name: harvi
-        schema: public
-- name: zappis
-  using:
-    foreign_key_constraint_on:
-      column: hubserialno
-      table:
-        name: zappi
-        schema: public
+  - name: eddis
+    using:
+      foreign_key_constraint_on:
+        column: hubserialno
+        table:
+          schema: public
+          name: eddi
+  - name: harvis
+    using:
+      foreign_key_constraint_on:
+        column: hubserialno
+        table:
+          schema: public
+          name: harvi
+  - name: zappis
+    using:
+      foreign_key_constraint_on:
+        column: hubserialno
+        table:
+          schema: public
+          name: zappi

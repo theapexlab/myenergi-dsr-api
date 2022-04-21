@@ -25,7 +25,7 @@ You can play around with the hasura console on `http://localhost:9695/` using th
 This runs a hasura instance in the test/test-hasura folder
 
 ```bash
-  yarn hasura:console:local
+  yarn hasura:console
 ```
 
 ## Get started - AWS deployment
@@ -88,10 +88,10 @@ This runs a hasura instance in the test/test-hasura folder
 
 ### Basics
 
-- Manages database connections (`histrory`, `main`, `default`)
+- Manages database connections (`histrory-db`, `mai-db`, `dsr-db`)
 - Hasura provides GraphQL API based on database schemas
-- `default` database and its migrations are exclusively by hasura
-  - `history`, `main` databases are used only for CRUD operations
+- `dsr-db` database and its migrations are exclusively by hasura
+  - `history-db`, `main-db` databases are used only for CRUD operations
 - Interaction with hasura are excecuted via `hasura-cli`
   - hasura related metadata / migration and config file are located `./hasura` folder
   - `hasura-cli` is added to package json as dev dependency

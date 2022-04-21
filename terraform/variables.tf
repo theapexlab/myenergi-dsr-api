@@ -107,7 +107,7 @@ variable "rds_db_name" {
 variable "rds_instance" {
   description = "The size of RDS instance, eg db.t2.micro"
   type        = string
-  default     = "db.t2.micro"
+  default     = "db.t3.micro"
 }
 
 variable "rds_storage_encrypted" {
