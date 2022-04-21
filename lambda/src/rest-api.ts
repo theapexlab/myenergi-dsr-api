@@ -98,18 +98,6 @@ const restMiddleware = useSofa({
     'Query.adminGroupHistory': {
       path: '/admin-groups/:id/history',
     },
-    'Mutation.createAdminGroup': {
-      path: '/admin-groups',
-      method: 'POST',
-    },
-    'Mutation.addDeviceToAdminGroup': {
-      path: '/admin-groups/:id/add-device',
-      method: 'PUT',
-    },
-    'Mutation.removeDeviceFromAdminGroup': {
-      path: '/admin-groups/:id/remove-device',
-      method: 'PUT',
-    },
   },
 });
 
