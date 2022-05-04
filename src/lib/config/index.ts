@@ -115,7 +115,7 @@ const config = convict<ConfigType>({
 });
 
 // Load environment dependent configuration
-config.loadFile(path.join(__dirname, config.get('env') + '.json'));
+// todo: config.loadFile(path.join(__dirname, config.get('env') + '.json'));
 
 // throws error if config does not conform to schema
 config.validate({ allowed: 'strict' });
