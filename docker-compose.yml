@@ -47,3 +47,18 @@ services:
       HASURA_GRAPHQL_MAINDB_URL: postgresql://myenergi:myenergi@main-db:5432/myenergi
       HASURA_GRAPHQL_HISTORYDB_URL: postgresql://myenergi:myenergi@history-db:5432/myenergi
       HASURA_GRAPHQL_ADMIN_SECRET: admin123
+  app:
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - graphql-engine
+    profiles:
+      - ci
+    environment:
+      NODE_ENV: test
+      DAL_ENDPOINT: http://graphql-engine:8080/v1/graphql
+      DAL_ADMIN_SECRET: admin123
+      JWT_SECRET: test
+      HASURA_GRAPHQL_ENDPOINT: http://graphql-engine:8080/

@@ -55,5 +55,7 @@ zips
 # Build
 dist
 dist_layer
+dist_admin_api
+dist_aggregator_api
 
 yarn-error.log

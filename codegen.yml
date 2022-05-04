@@ -7,7 +7,7 @@ schema:
 documents:
   - 'graphql/**/*.graphql'
 generates:
-  lambda/src/generated/graphql.ts:
+  lib/generated/graphql.ts:
     plugins:
       - 'typescript'
       - 'typescript-operations'

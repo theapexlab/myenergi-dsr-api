@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist_admin_api"
+  },
+  "extends": "./tsconfig",
+  "include": ["./src/main-admin.ts", "./src/admin-api/**/*.ts", "./src/admin-api/**/*.json"]
+}

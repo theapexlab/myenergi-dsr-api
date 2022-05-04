@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist_aggregator_api"
+  },
+  "extends": "./tsconfig",
+  "include": ["./src/main-aggregator.ts", "./src/aggregator-api/**/*.ts", "./src/aggregator-api/**/*.json"]
+}

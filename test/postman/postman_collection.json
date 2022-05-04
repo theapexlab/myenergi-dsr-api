@@ -4221,21 +4221,6 @@
             }
           ],
           "request": {
-            "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "password",
-                  "value": "x",
-                  "type": "string"
-                },
-                {
-                  "key": "username",
-                  "value": "x",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "POST",
             "header": [
               {
@@ -4471,16 +4456,11 @@
         }
       ],
       "auth": {
-        "type": "basic",
-        "basic": [
+        "type": "bearer",
+        "bearer": [
           {
-            "key": "password",
-            "value": "{{adminPassword}}",
-            "type": "string"
-          },
-          {
-            "key": "username",
-            "value": "{{adminUsername}}",
+            "key": "token",
+            "value": "admin",
             "type": "string"
           }
         ]
