@@ -5,7 +5,7 @@ export const testJwt: RequestHandler = (req, res, next) => {
   const authHeader = req.header('Authorization');
   // Basic adminName || Bearer aggregatorId
   const [tokenType, aggregatorId] = authHeader?.split(' ') ?? [];
-  if (tokenType === 'Bearer' && ['/admin-api', '/admin-graphql'].includes(req.baseUrl)) {
+  if (tokenType === 'Bearer' && ['/admin', '/admin-graphql'].includes(req.baseUrl)) {
     req['auth'] = {
       roles: [Permission.aggregatorManagement],
     };

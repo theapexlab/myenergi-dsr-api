@@ -20,7 +20,4 @@ export const handler = server.createHandler({
     app.use(middleware);
     return app;
   },
-  expressGetMiddlewareOptions: {
-    path: '/graphql',
-  },
 });

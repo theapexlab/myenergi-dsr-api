@@ -20,18 +20,19 @@ const bootstrap = async (): Promise<void> => {
     schema: aggregatorSchema,
     openApi: aggregatorOpenApi,
     authMiddleware: aggregatorAuthMiddleware,
-    basePath: '/api',
+    basePath: '/aggregator/api',
+    docsPath: '/aggregator/api-docs',
   };
   const adminConfig: AppConfig = {
     schema: adminSchema,
     openApi: adminOpenApi,
     authMiddleware: adminAuthMiddleware,
-    basePath: '/admin-api',
-    graphqlPath: '/admin-graphql',
+    basePath: '/admin/api',
+    docsPath: '/admin/api-docs',
   };
   initApp(app, adminConfig);
   initApp(app, aggregatorConfig);
-  app.use('/admin-api/superadmin', express.static(path.join(__dirname, 'public')));
+  app.use('/admin/superadmin', express.static(path.join(__dirname, 'public')));
   const httpServer = http.createServer(app);
 
   const adminServer = new ApolloServer({

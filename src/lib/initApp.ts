@@ -11,16 +11,14 @@ export interface AppConfig {
   schema: GraphQLSchema;
   openApi: ReturnType<typeof OpenAPI>;
   basePath?: string;
-  graphqlPath?: string;
+  docsPath?: string;
   authMiddleware: RequestHandler;
 }
 
 export const initApp = (app: Express, config: AppConfig): void => {
-  const { schema, openApi, basePath = '', graphqlPath = '/graphql', authMiddleware } = config;
-  const docsPath = basePath === '' ? '/api-docs' : `${basePath}/docs`;
+  const { schema, openApi, basePath = '/api', docsPath = '/api-docs', authMiddleware } = config;
   app.use(cors({ origin: '*' }));
-  app.use(basePath || '/', env === 'test' ? testJwt : authMiddleware);
-  app.use(graphqlPath, env === 'test' ? testJwt : authMiddleware);
+  app.use(env === 'test' ? testJwt : authMiddleware);
   const restMiddleware = createSofaMiddleware(schema, openApi, basePath);
   app.use(bodyParser.json());
   app.use(basePath, restMiddleware);

@@ -4242,9 +4242,9 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/admin-api/add-device-to-admin-group",
-              "host": ["{{baseUrl}}"],
-              "path": ["admin-api", "add-device-to-admin-group"]
+              "raw": "{{adminUrl}}/api/add-device-to-admin-group",
+              "host": ["{{adminUrl}}"],
+              "path": ["api", "add-device-to-admin-group"]
             }
           },
           "response": [
@@ -4327,9 +4327,9 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/admin-api/remove-device-from-admin-group",
-              "host": ["{{baseUrl}}"],
-              "path": ["admin-api", "remove-device-from-admin-group"]
+              "raw": "{{adminUrl}}/api/remove-device-from-admin-group",
+              "host": ["{{adminUrl}}"],
+              "path": ["api", "remove-device-from-admin-group"]
             }
           },
           "response": [
@@ -4414,9 +4414,9 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/admin-api/create-admin-group",
-              "host": ["{{baseUrl}}"],
-              "path": ["admin-api", "create-admin-group"]
+              "raw": "{{adminUrl}}/api/create-admin-group",
+              "host": ["{{adminUrl}}"],
+              "path": ["api", "create-admin-group"]
             }
           },
           "response": [
