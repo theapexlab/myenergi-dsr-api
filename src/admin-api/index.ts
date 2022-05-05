@@ -22,5 +22,5 @@ export const handler = server.createHandler({
   },
   expressGetMiddlewareOptions: {
     path: '/graphql',
-  }
+  },
 });
