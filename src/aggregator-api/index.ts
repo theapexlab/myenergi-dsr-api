@@ -17,7 +17,11 @@ initApp(app, config);
 
 export const handler = server.createHandler({
   expressAppFromMiddleware(middleware) {
+    
     app.use(middleware);
     return app;
   },
+  expressGetMiddlewareOptions: {
+    path: '/graphql',
+  }
 });

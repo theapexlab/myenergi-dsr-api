@@ -9,4 +9,5 @@ const jwksUri = `https://cognito-idp.${region}.amazonaws.com/${UserPoolId}/.well
 export const authMiddleware = expressjwt({
   secret: jwksClient.expressJwtSecret({ jwksUri }),
   algorithms: ['RS256'],
+  credentialsRequired: false
 });
