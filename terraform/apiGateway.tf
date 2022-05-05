@@ -29,13 +29,13 @@ resource "aws_apigatewayv2_stage" "lambda" {
 
 resource "aws_apigatewayv2_route" "aggregator" {
   api_id    = aws_apigatewayv2_api.lambda.id
-  route_key = "ANY /aggregator"
+  route_key = "ANY /aggregator/{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.aggregator.id}"
 }
 
 resource "aws_apigatewayv2_route" "admin" {
   api_id    = aws_apigatewayv2_api.lambda.id
-  route_key = "ANY /admin"
+  route_key = "ANY /admin/{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.admin.id}"
 }
 
