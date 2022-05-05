@@ -10,26 +10,28 @@ import { schema as adminSchema } from './admin-api/schema';
 import { authMiddleware as aggregatorAuthMiddleware } from './aggregator-api/authMiddleware';
 import { openApi as aggregatorOpenApi } from './aggregator-api/openApi';
 import { schema as aggregatorSchema } from './aggregator-api/schema';
+import { env } from './lib/config';
 import { getContext } from './lib/context';
 import { getAPIs } from './lib/data-sources';
 import { AppConfig, initApp } from './lib/initApp';
+import { testJwt } from './lib/middlewares';
 
 const bootstrap = async (): Promise<void> => {
   const app = express();
   const aggregatorConfig: AppConfig = {
     schema: aggregatorSchema,
     openApi: aggregatorOpenApi,
-    authMiddleware: aggregatorAuthMiddleware,
     basePath: '/aggregator/api',
     docsPath: '/aggregator/api-docs',
   };
   const adminConfig: AppConfig = {
     schema: adminSchema,
     openApi: adminOpenApi,
-    authMiddleware: adminAuthMiddleware,
     basePath: '/admin/api',
     docsPath: '/admin/api-docs',
   };
+  app.use('/aggregator', env === 'test' ? testJwt : aggregatorAuthMiddleware);
+  app.use('/admin', env === 'test' ? testJwt : adminAuthMiddleware);
   initApp(app, adminConfig);
   initApp(app, aggregatorConfig);
   app.use('/admin/superadmin', express.static(path.join(__dirname, 'public')));

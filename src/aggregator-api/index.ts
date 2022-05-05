@@ -9,10 +9,10 @@ import { schema } from './schema';
 const config: AppConfig = {
   schema,
   openApi,
-  authMiddleware,
 };
 
 const app = express();
+app.use(authMiddleware);
 initApp(app, config);
 
 export const handler = server.createHandler({

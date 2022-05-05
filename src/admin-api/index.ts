@@ -10,10 +10,10 @@ import { schema } from './schema';
 const config: AppConfig = {
   schema,
   openApi,
-  authMiddleware,
 };
 
 const app = express();
+app.use(authMiddleware);
 app.use('/ui', express.static(path.join(__dirname, 'public')));
 initApp(app, config);
 
