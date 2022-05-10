@@ -3,6 +3,8 @@ resource "aws_apigatewayv2_api" "lambda" {
   protocol_type = "HTTP"
   cors_configuration  {
     allow_origins = ["*"]
+    allow_methods = ["*"]
+    allow_headers = ["*"]
   }
 }
 
