@@ -1,4 +1,4 @@
-import { ControlGroup } from '../models/control-group';
+import { AdminControlGroup, ControlGroup } from '../models/control-group';
 import { MutateControlGroupArgs } from '../models/control-group/controlGroup.args';
 import {
   Admin_Group_Device_Bool_Exp,
@@ -10,6 +10,7 @@ import { AffectedResponse, PaginationArgs } from '../models/shared';
 import { getAggregatorCondition } from '../utils/getAggregatorCondition';
 import { NotFoundError } from './CustomError';
 import { GraphqlDataSource } from './GraphqlDataSource';
+import { AdminGroupControlGroupsArgs } from '../models/admin-group';
 
 export class ControlGroupAPI extends GraphqlDataSource {
   constructor(baseURL: string, secret: string) {
@@ -33,6 +34,20 @@ export class ControlGroupAPI extends GraphqlDataSource {
     };
     const { controlGroup } = await this.sdk.CreateControlGroup({ object });
     return controlGroup;
+  }
+
+  async getControlGroupsByAdminGroupId({
+    id,
+    limit,
+    offset,
+  }: AdminGroupControlGroupsArgs): Promise<AdminControlGroup[]> {
+    const { user } = this.context;
+    const where = getAggregatorCondition<Control_Group_Bool_Exp>(user, (aggregatorId) => ({
+      admin_group: { aggregator_id: { _eq: aggregatorId } },
+      admin_group_id: { _eq: id },
+    }));
+    const { controlGroups } = await this.sdk.AdminGroupControlGroups({ offset, limit, where });
+    return controlGroups;
   }
 
   async getControlGroupById(id: number): Promise<ControlGroup> {

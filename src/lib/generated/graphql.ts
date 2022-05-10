@@ -13055,6 +13055,22 @@ export type AdminGroupDevicesQuery = {
   devices: Array<{ __typename?: 'admin_group_device'; serialNo: number; deviceClass: Device_Type_Enum }>;
 };
 
+export type AdminGroupControlGroupsQueryVariables = Exact<{
+  where?: InputMaybe<Control_Group_Bool_Exp>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+export type AdminGroupControlGroupsQuery = {
+  __typename?: 'query_root';
+  controlGroups: Array<{
+    __typename?: 'control_group';
+    id: number;
+    name: string;
+    adminGroup: { __typename?: 'admin_group'; id: number; name: string };
+  }>;
+};
+
 export type AdminGroupStatusQueryVariables = Exact<{
   where?: InputMaybe<Admin_Group_Bool_Exp>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -13502,6 +13518,18 @@ export const AdminGroupDevicesDocument = gql`
   }
   ${DeviceDataFragmentDoc}
 `;
+export const AdminGroupControlGroupsDocument = gql`
+  query AdminGroupControlGroups($where: control_group_bool_exp, $limit: Int, $offset: Int) {
+    controlGroups: control_group(where: $where, limit: $limit, offset: $offset) {
+      id
+      name
+      adminGroup: admin_group {
+        ...AdminGroupFields
+      }
+    }
+  }
+  ${AdminGroupFieldsFragmentDoc}
+`;
 export const AdminGroupStatusDocument = gql`
   query AdminGroupStatus($where: admin_group_bool_exp, $offset: Int, $limit: Int) {
     adminGroups: admin_group(where: $where) {
@@ -13716,6 +13744,19 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'AdminGroupDevices'
+      );
+    },
+    AdminGroupControlGroups(
+      variables?: AdminGroupControlGroupsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupControlGroupsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupControlGroupsQuery>(AdminGroupControlGroupsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AdminGroupControlGroups'
       );
     },
     AdminGroupStatus(

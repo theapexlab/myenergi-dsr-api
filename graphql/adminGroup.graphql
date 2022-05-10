@@ -18,6 +18,16 @@ query AdminGroupDevices($where: admin_group_device_bool_exp, $limit: Int, $offse
   }
 }
 
+query AdminGroupControlGroups($where: control_group_bool_exp, $limit: Int, $offset: Int) {
+  controlGroups: control_group(where: $where, limit: $limit, offset: $offset) {
+    id
+    name
+    adminGroup: admin_group {
+      ...AdminGroupFields
+    }
+  }
+}
+
 query AdminGroupStatus($where: admin_group_bool_exp, $offset: Int, $limit: Int) {
   adminGroups: admin_group(where: $where) {
     devices: admin_group_devices(limit: $limit, offset: $offset) {

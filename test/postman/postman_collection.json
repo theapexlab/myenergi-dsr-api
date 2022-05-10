@@ -1893,7 +1893,7 @@
         "bearer": [
           {
             "key": "token",
-            "value": "{{aggregatorId}}",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ0ZXN0QXBwQ2xpZW50SWQtMSJ9.WzYwnlT7U6MASj4Bvr4jO3t5oy-FLY3vo5716hqxqv4",
             "type": "string"
           }
         ]
@@ -4136,7 +4136,7 @@
         "bearer": [
           {
             "key": "token",
-            "value": "{{aggregatorId}}",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJ0ZXN0QXBwQ2xpZW50SWQtMSJ9.WzYwnlT7U6MASj4Bvr4jO3t5oy-FLY3vo5716hqxqv4",
             "type": "string"
           }
         ]
@@ -4197,6 +4197,19 @@
     {
       "name": "api-admin-success",
       "item": [
+        {
+          "name": "get Admin Groups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{adminUrl}}/api/admin-groups",
+              "host": ["{{adminUrl}}"],
+              "path": ["api", "admin-groups"]
+            }
+          },
+          "response": []
+        },
         {
           "name": "add Device To Admin Group mutation",
           "event": [
@@ -4460,7 +4473,7 @@
         "bearer": [
           {
             "key": "token",
-            "value": "admin",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJhZ2dyZWdhdG9yTWFuYWdlbWVudCJdfQ.k49vy0W13Xq5ElW-lB-KY07ITlTYvEvigOY_9V9RDbk",
             "type": "string"
           }
         ]

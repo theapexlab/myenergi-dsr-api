@@ -9,6 +9,7 @@ import { mapSerialNo } from '../../utils';
 import { getDataSources } from '../../utils/getDataSources';
 import { AdminGroupDevicesArgs, AdminGroupHistoryArgs, AdminGroupsArgs, MutateAdminGroupArgs } from './adminGroup.args';
 import { AdminGroup } from './adminGroup.type';
+import { AdminControlGroup } from '../control-group';
 
 @Resolver(AdminGroup)
 export class AdminGroupResolver {
@@ -56,7 +57,7 @@ export class AdminGroupResolver {
 }
 
 @Resolver()
-export class SuperAdminGroupResolver {
+export class AdminGroupCreateResolver {
   @Authorized<RoleType>(RoleType.SUPERADMIN)
   @Mutation(() => AdminGroup)
   createAdminGroup(
@@ -67,7 +68,10 @@ export class SuperAdminGroupResolver {
     const { adminGroupApi } = getDataSources(ctx);
     return adminGroupApi.create(name, aggregatorId);
   }
+}
 
+@Resolver()
+export class AdminGroupDevicesResolver {
   @Authorized<RoleType>(RoleType.SUPERADMIN)
   @Mutation(() => AffectedResponse)
   addDeviceToAdminGroup(@Ctx() ctx: AppContext, @Args() args: MutateAdminGroupArgs): Promise<AffectedResponse> {
@@ -80,5 +84,15 @@ export class SuperAdminGroupResolver {
   removeDeviceFromAdminGroup(@Ctx() ctx: AppContext, @Args() args: MutateAdminGroupArgs): Promise<AffectedResponse> {
     const { adminGroupApi } = getDataSources(ctx);
     return adminGroupApi.removeDevices(args);
+  }
+}
+
+@Resolver()
+export class AdminGroupControlGroupsResolver {
+  @Authorized<RoleType>(RoleType.SUPERADMIN)
+  @Query(() => [AdminControlGroup])
+  adminGroupControlGroups(@Ctx() ctx: AppContext, @Args() args: AdminGroupDevicesArgs): Promise<AdminControlGroup[]> {
+    const { controlGroupApi } = getDataSources(ctx);
+    return controlGroupApi.getControlGroupsByAdminGroupId(args);
   }
 }

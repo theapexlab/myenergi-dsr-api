@@ -9,6 +9,8 @@ export class AdminGroupDevicesArgs extends PaginationArgs {
   id: number;
 }
 
+export type AdminGroupControlGroupsArgs = AdminGroupDevicesArgs;
+
 @ArgsType()
 export class MutateAdminGroupArgs {
   @Field(() => Int)

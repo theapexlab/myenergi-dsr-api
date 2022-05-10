@@ -30,8 +30,12 @@ const bootstrap = async (): Promise<void> => {
     basePath: '/admin/api',
     docsPath: '/admin/api-docs',
   };
-  app.use('/aggregator', env === 'test' ? testJwt : aggregatorAuthMiddleware);
-  app.use('/admin', env === 'test' ? testJwt : adminAuthMiddleware);
+  if (env === 'test') {
+    app.use(testJwt);
+  } else {
+    app.use('/aggregator', aggregatorAuthMiddleware);
+    app.use('/admin', adminAuthMiddleware);
+  }
   initApp(app, adminConfig);
   initApp(app, aggregatorConfig);
   app.use('/admin/superadmin', express.static(path.join(__dirname, 'public')));
@@ -54,11 +58,11 @@ const bootstrap = async (): Promise<void> => {
   await aggregatorServer.start();
   adminServer.applyMiddleware({
     app,
-    path: '/admin-graphql',
+    path: '/admin',
   });
   aggregatorServer.applyMiddleware({
     app,
-    path: '/graphql',
+    path: '/aggregator',
   });
 
   await new Promise<void>((resolve) => httpServer.listen({ port: 3000 }, resolve));

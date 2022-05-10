@@ -1,20 +1,7 @@
-import { RequestHandler } from 'express';
-import { Permission } from '../services/jwtService';
+import { expressjwt } from 'express-jwt';
 
-export const testJwt: RequestHandler = (req, res, next) => {
-  const authHeader = req.header('Authorization');
-  // Basic adminName || Bearer aggregatorId
-  const [tokenType, aggregatorId] = authHeader?.split(' ') ?? [];
-  if (tokenType === 'Bearer' && ['/admin', '/admin-graphql'].includes(req.baseUrl)) {
-    req['auth'] = {
-      roles: [Permission.aggregatorManagement],
-    };
-    return next();
-  }
-  if (tokenType === 'Bearer') {
-    req['auth'] = {
-      client_id: aggregatorId,
-    };
-  }
-  return next();
-};
+export const testJwt = expressjwt({
+  secret: 'test',
+  algorithms: ['HS256'],
+  credentialsRequired: false,
+});
