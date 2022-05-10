@@ -5,6 +5,7 @@ import { server } from './graphqlServer';
 import { authMiddleware } from './authMiddleware';
 import { openApi } from './openApi';
 import { schema } from './schema';
+import cors from 'cors';
 
 const config: AppConfig = {
   schema,
@@ -12,6 +13,7 @@ const config: AppConfig = {
 };
 
 const app = express();
+app.use(cors());
 app.use(authMiddleware);
 initApp(app, config);
 

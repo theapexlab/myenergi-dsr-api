@@ -1,6 +1,9 @@
 resource "aws_apigatewayv2_api" "lambda" {
   name          = "dsr_api_gw"
   protocol_type = "HTTP"
+  cors_configuration  {
+    allow_origins = ["*"]
+  }
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
