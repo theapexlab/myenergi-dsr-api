@@ -33,18 +33,22 @@ export class DeviceAPI extends GraphqlDataSource {
 
   async getAll(input: GetDevicesInput): Promise<Device[]> {
     const { id, offset, limit } = input;
-    const where = getAggregatorCondition<Admin_Group_Device_Bool_Exp>(this.context.user, (aggregatorId) => ({
-      admin_group: { aggregator_id: { _eq: aggregatorId }, id: id ? { _eq: id } : undefined },
-    }));
+    const { user } = this.context;
+    const where = getAggregatorCondition<Admin_Group_Device_Bool_Exp>(
+      user,
+      (aggregatorId) => ({
+        admin_group: { aggregator_id: { _eq: aggregatorId }, id: id ? { _eq: id } : undefined },
+      }),
+      () => ({
+        admin_group_id: !id ? undefined : { _eq: id },
+      })
+    );
     const { devices } = await this.sdk.AdminGroupDevices({
       offset,
       limit,
       where,
     });
 
-    if (!devices.length) {
-      throw new NotFoundError(`No devices found`);
-    }
     return devices;
   }
 

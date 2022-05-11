@@ -8,6 +8,7 @@ import {
 } from '../lib/models/admin-group';
 import { AppClientResolver } from '../lib/models/app-client';
 import { ControlGroupResolver } from '../lib/models/control-group';
+import { DeviceResolver } from '../lib/models/device';
 import { LoginResolver } from '../lib/models/login';
 
 export const schema = buildSchemaSync({
@@ -19,6 +20,7 @@ export const schema = buildSchemaSync({
     AdminGroupControlGroupsResolver,
     LoginResolver,
     ControlGroupResolver,
+    DeviceResolver,
   ],
   authChecker,
 });

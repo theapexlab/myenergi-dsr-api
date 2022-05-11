@@ -18,9 +18,6 @@ export class AdminGroupAPI extends GraphqlDataSource {
       aggregator_id: { _eq: aggregatorId },
     }));
     const { adminGroups } = await this.sdk.AdminGroups({ offset, limit, where });
-    if (!adminGroups.length) {
-      throw new NotFoundError(`No admin groups found`);
-    }
     return adminGroups;
   }
 

@@ -42,10 +42,13 @@ export class ControlGroupAPI extends GraphqlDataSource {
     offset,
   }: AdminGroupControlGroupsArgs): Promise<AdminControlGroup[]> {
     const { user } = this.context;
-    const where = getAggregatorCondition<Control_Group_Bool_Exp>(user, (aggregatorId) => ({
-      admin_group: { aggregator_id: { _eq: aggregatorId } },
-      admin_group_id: { _eq: id },
-    }));
+    const where = getAggregatorCondition<Control_Group_Bool_Exp>(
+      user,
+      () => null,
+      () => ({
+        admin_group_id: { _eq: id },
+      })
+    );
     const { controlGroups } = await this.sdk.AdminGroupControlGroups({ offset, limit, where });
     return controlGroups;
   }
