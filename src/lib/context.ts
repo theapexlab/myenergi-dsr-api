@@ -7,7 +7,8 @@ import { logger } from './utils/logger';
 
 export const getContext: ContextFunction<ExpressContext, Omit<AppContext, 'dataSources'>> = async ({ req }) => {
   const payload: TokenPayload | undefined = req?.['auth'];
-  logger.info({ payload, req: !!req });
+  //  todo: remove logger once deploy to prod
+  logger.info({ payload });
   if (!payload) {
     return {
       user: {

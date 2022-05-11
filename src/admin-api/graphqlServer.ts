@@ -5,6 +5,6 @@ import { schema } from './schema';
 
 export const server = new ApolloServer({
   schema,
-  context: getContext,
+  context: ({ express }) => getContext(express),
   dataSources: getAPIs,
 });
