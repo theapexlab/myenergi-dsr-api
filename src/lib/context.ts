@@ -3,9 +3,11 @@ import { ExpressContext } from 'apollo-server-express';
 import { TokenPayload, AppContext, RoleType } from './auth/auth.type';
 import { getAPIs } from './data-sources';
 import { Permission } from './services/jwtService';
+import { logger } from './utils/logger';
 
 export const getContext: ContextFunction<ExpressContext, Omit<AppContext, 'dataSources'>> = async ({ req }) => {
   const payload: TokenPayload | undefined = req?.['auth'];
+  logger.info({ payload, req });
   if (!payload) {
     return {
       user: {
