@@ -4,17 +4,16 @@ import express from 'express';
 import http from 'http';
 import 'reflect-metadata';
 import path from 'path';
-import { authMiddleware as adminAuthMiddleware } from './admin-api/authMiddleware';
 import { openApi as adminOpenApi } from './admin-api/openApi';
 import { schema as adminSchema } from './admin-api/schema';
-import { authMiddleware as aggregatorAuthMiddleware } from './aggregator-api/authMiddleware';
 import { openApi as aggregatorOpenApi } from './aggregator-api/openApi';
 import { schema as aggregatorSchema } from './aggregator-api/schema';
-import { env } from './lib/config';
-import { getContext } from './lib/context';
 import { getAPIs } from './lib/data-sources';
 import { AppConfig, initApp } from './lib/initApp';
-import { testJwt } from './lib/middlewares';
+import { isTestEnv } from './lib/utils/helpers';
+import { getAggregatorContext } from './aggregator-api/aggregatorContext';
+import { getAdminContext } from './admin-api/adminContext';
+import { getTestContext } from './lib/utils/testContext';
 
 const bootstrap = async (): Promise<void> => {
   const app = express();
@@ -30,12 +29,6 @@ const bootstrap = async (): Promise<void> => {
     basePath: '/admin/api',
     docsPath: '/admin/api-docs',
   };
-  if (env === 'test') {
-    app.use(testJwt);
-  } else {
-    app.use('/aggregator', aggregatorAuthMiddleware);
-    app.use('/admin', adminAuthMiddleware);
-  }
   initApp(app, adminConfig);
   initApp(app, aggregatorConfig);
   app.use('/admin/superadmin', express.static(path.join(__dirname, 'public')));
@@ -44,13 +37,13 @@ const bootstrap = async (): Promise<void> => {
   const adminServer = new ApolloServer({
     schema: adminSchema,
     dataSources: getAPIs,
-    context: getContext,
+    context: isTestEnv ? getTestContext : getAdminContext,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   const aggregatorServer = new ApolloServer({
     schema: aggregatorSchema,
     dataSources: getAPIs,
-    context: getContext,
+    context: isTestEnv ? getTestContext : getAggregatorContext,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
 

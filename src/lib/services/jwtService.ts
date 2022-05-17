@@ -1,4 +1,9 @@
 import { sign } from 'jsonwebtoken';
+import { CognitoJwtVerifier } from 'aws-jwt-verify';
+import { isTestEnv } from '../utils/helpers';
+import { auth } from '../config';
+import { UnauthorizedError } from 'type-graphql';
+import { logger } from '../utils/logger';
 
 // List of all possible permissions
 export enum Permission {
@@ -27,10 +32,10 @@ export enum Permission {
   userView = 'userView',
 }
 
-interface JwtPayload {
-  email: string;
-  name: string;
-  roles: Permission[];
+export interface CustomJwtPayload {
+  email?: string;
+  name?: string;
+  roles?: Permission[];
 }
 
 class JwtService {
@@ -41,9 +46,22 @@ class JwtService {
     Permission.aggregatorManagement,
   ];
 
+  // Verifier that expects valid access tokens:
+  congnitoVerifier: any;
+
+  constructor() {
+    if (!isTestEnv) {
+      this.congnitoVerifier = CognitoJwtVerifier.create({
+        userPoolId: auth.userPoolId,
+        tokenUse: 'access',
+        clientId: null,
+      });
+    }
+  }
+
   getToken(secret: string, expiresIn: string): string {
     //  todo: what to use for name and email?
-    const payload: JwtPayload = {
+    const payload: CustomJwtPayload = {
       email: '',
       name: '',
       roles: this.roles,
@@ -53,6 +71,17 @@ class JwtService {
       expiresIn,
     });
   }
+
+  verifyCognitoToken = async (token: string): Promise<string> => {
+    if (!this.congnitoVerifier) return '';
+    try {
+      const { client_id: aggregatorId } = await jwtService.congnitoVerifier.verify(token);
+      return aggregatorId;
+    } catch (error) {
+      logger.error(error);
+      throw new UnauthorizedError();
+    }
+  };
 }
 
 export const jwtService = new JwtService();

@@ -4,7 +4,7 @@ import { AppContext } from '../auth/auth.type';
 import customerMockData from '../mocks/customerData.json';
 import { jwtService } from '../services/jwtService';
 import { logger } from '../utils/logger';
-import { env, NodeEnv } from '../config';
+import { isTestEnv } from '../utils/helpers';
 
 interface CustomerAddress {
   addressLine1: string;
@@ -47,9 +47,8 @@ export class CustomerAPI extends DataSource<AppContext> {
   }
 
   async getCustomerData(serialNo: number): Promise<CustomerData | null> {
-    if (env === NodeEnv.TEST) {
-      return customerMockData;
-    }
+    if (isTestEnv) return customerMockData;
+
     try {
       const { data } = await this.client.get(`CustomerData/GetCustomerData`, {
         params: { serialNo: serialNo.toString() },

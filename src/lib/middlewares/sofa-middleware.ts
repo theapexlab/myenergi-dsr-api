@@ -2,7 +2,7 @@ import { GraphQLSchema } from 'graphql';
 import { useSofa } from 'sofa-api';
 import type { OpenAPI } from 'sofa-api/open-api';
 import type { SofaConfig } from 'sofa-api/sofa';
-import { getRestContext } from '../context';
+import { getAggregatorRestContext } from '../../aggregator-api/aggregatorContext';
 import { errorHandlerSofa } from '../utils/errorHandler';
 
 export const routes: SofaConfig['routes'] = {
@@ -73,7 +73,7 @@ export const createSofaMiddleware = (
       openApi.addRoute(info, { basePath });
     },
     async context(expressContext) {
-      return getRestContext(expressContext);
+      return getAggregatorRestContext(expressContext);
     },
   });
 };
