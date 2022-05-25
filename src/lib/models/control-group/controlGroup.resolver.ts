@@ -3,7 +3,7 @@ import { Arg, Args, Authorized, Ctx, Int, Mutation, Query, Resolver } from 'type
 import { AppContext, RoleType } from '../../auth/auth.type';
 import { DeviceHistory } from '../device-history';
 import { DeviceStatus } from '../device-status';
-import { Device } from '../device/device.type';
+import { Device } from '../device';
 import { AffectedResponse, PaginationArgs } from '../shared';
 import { mapSerialNo } from '../../utils';
 import { getDataSources } from '../../utils/getDataSources';

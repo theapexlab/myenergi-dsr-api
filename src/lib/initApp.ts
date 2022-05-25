@@ -1,5 +1,4 @@
 import bodyParser from 'body-parser';
-import cors from 'cors';
 import { Express } from 'express';
 import { GraphQLSchema } from 'graphql';
 import { OpenAPI } from 'sofa-api';

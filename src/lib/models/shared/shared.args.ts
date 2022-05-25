@@ -23,3 +23,9 @@ export class HistoryByIdsArgs extends PaginationArgs {
   @Field()
   endDate: string;
 }
+
+@ArgsType()
+export class GroupArgs {
+  @Field(() => Int)
+  id: number;
+}

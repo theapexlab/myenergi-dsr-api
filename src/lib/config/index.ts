@@ -1,6 +1,5 @@
 import convict from 'convict';
 import 'dotenv/config';
-import path from 'path';
 
 export enum NodeEnv {
   DEV = 'development',
@@ -25,6 +24,11 @@ type ConfigType = {
     realm: string;
   };
   customerApi: {
+    jwtSecret: string;
+    expiresIn: string;
+    url: string;
+  };
+  commandApi: {
     jwtSecret: string;
     expiresIn: string;
     url: string;
@@ -112,6 +116,26 @@ const config = convict<ConfigType>({
       env: 'CUSTOMER_DATA_API_ROOT',
     },
   },
+  commandApi: {
+    jwtSecret: {
+      doc: 'JWT secret to sign the tokens for customerAPI requests',
+      format: String,
+      default: '',
+      env: 'JWT_SECRET',
+    },
+    expiresIn: {
+      doc: 'Time for which the token is valid',
+      format: String,
+      default: '1h',
+      env: 'JWT_EXPIRES_IN',
+    },
+    url: {
+      doc: 'Url of myaccount server to send command',
+      format: String,
+      default: 'http://localhost:3007/',
+      env: 'COMMAND_API_ROOT',
+    },
+  },
 });
 
 // Load environment dependent configuration
@@ -127,3 +151,4 @@ export const dal = properties.dal;
 export const auth = properties.auth;
 export const superAdmin = properties.superAdmin;
 export const customerApi = properties.customerApi;
+export const commandApi = properties.commandApi;

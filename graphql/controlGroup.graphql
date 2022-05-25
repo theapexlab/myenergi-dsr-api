@@ -17,19 +17,19 @@ mutation RemoveDeviceFromControlGroup($where: control_group_device_bool_exp = {}
 }
 
 query ControlGroupDevices($limit: Int, $offset: Int, $where: control_group_device_bool_exp = {}) {
-  devices: control_group_device(limit: $limit, offset: $offset, where: $where){
-      serialNo: serialno
-      deviceClass: device_type
+  devices: control_group_device(limit: $limit, offset: $offset, where: $where) {
+    serialNo: serialno
+    deviceClass: device_type
   }
 }
 
-query ControlGroupStatus($limit: Int, $offset: Int,  $where: control_group_bool_exp = {}) {
+query ControlGroupStatus($limit: Int, $offset: Int, $where: control_group_bool_exp = {}) {
   controlGroups: control_group(where: $where) {
     devices(limit: $limit, offset: $offset) {
       eddi: control_group_device_eddi {
         ...EddiStatus
       }
-      zappi:  control_group_device_zappi {
+      zappi: control_group_device_zappi {
         ...ZappiStatus
       }
     }
@@ -38,7 +38,7 @@ query ControlGroupStatus($limit: Int, $offset: Int,  $where: control_group_bool_
 
 query ControlGroups($limit: Int, $offset: Int, $where: control_group_bool_exp = {}) {
   controlGroups: control_group(limit: $limit, offset: $offset, where: $where) {
-     ...ControlGroupFields
+    ...ControlGroupFields
   }
 }
 

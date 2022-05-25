@@ -42,7 +42,7 @@ VALUES ('ZAPPI', 100000001, '2021-12-14 11:32:31.000000 +00:00', 3092, 0, 80, nu
     "ctNumber": 4
   }', null, null, null, null, null, null, null, null, null, null, null, null, null, false, false, false, false, true, 0,
         0, null, 0, true, false, false, false, false, false, false, false, null, null, null, null, null, null, null,
-        null, null, 10183069, null, 0, null, null, null, null, null, null, null, null, null, null);
+        null, null, 10633890, null, 0, null, null, null, null, null, null, null, null, null, null);
 
 
 INSERT INTO public.zappi (deviceclass, serialno, updatedat, currentversion, deviceinstance, deviceaddressraw,
@@ -89,7 +89,7 @@ VALUES ('ZAPPI', 100000002, '2021-12-14 11:32:31.000000 +00:00', 3092, 0, 80, nu
     "ctNumber": 4
   }', null, null, null, null, null, null, null, null, null, null, null, null, null, false, false, false, false, true, 0,
         0, null, 0, true, false, false, false, false, false, false, false, null, null, null, null, null, null, null,
-        null, null, 10183069, null, 0, null, null, null, null, null, null, null, null, null, null);
+        null, null, 10633890, null, 0, null, null, null, null, null, null, null, null, null, null);
 
 
 INSERT INTO public.zappi (deviceclass, serialno, updatedat, currentversion, deviceinstance, deviceaddressraw,
@@ -136,7 +136,7 @@ VALUES ('ZAPPI', 100000003, '2021-12-14 11:32:31.000000 +00:00', 3092, 0, 80, nu
     "ctNumber": 4
   }', null, null, null, null, null, null, null, null, null, null, null, null, null, false, false, false, false, true, 0,
         0, null, 0, true, false, false, false, false, false, false, false, null, null, null, null, null, null, null,
-        null, null, 10183069, null, 0, null, null, null, null, null, null, null, null, null, null);
+        null, null, 10633890, null, 0, null, null, null, null, null, null, null, null, null, null);
 
 INSERT INTO public.zappi (deviceclass, serialno, updatedat, currentversion, deviceinstance, deviceaddressraw,
                           specialversion, agggroupno, serverconfigtime, productcode, voltage, frequency, maxpower,
@@ -182,4 +182,4 @@ VALUES ('ZAPPI', 15595836, '2021-12-14 11:32:31.000000 +00:00', 3092, 0, 80, nul
     "ctNumber": 4
   }', null, null, null, null, null, null, null, null, null, null, null, null, null, false, false, false, false, true, 0,
         0, null, 0, true, false, false, false, false, false, false, false, null, null, null, null, null, null, null,
-        null, null, 10183069, null, 0, null, null, null, null, null, null, null, null, null, null);
+        null, null, 10633890, null, 0, null, null, null, null, null, null, null, null, null, null);

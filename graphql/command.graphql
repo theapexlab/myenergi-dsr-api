@@ -1,0 +1,64 @@
+query DeviceHubData($serialNo: Int!) {
+  devices: admin_group_device(where: { serialno: { _eq: $serialNo } }) {
+    eddi: admin_group_device_eddi {
+      deviceSerialNo: serialno
+      deviceAddressRaw: deviceaddressraw
+      hub {
+        ...HubData
+      }
+    }
+    zappi: admin_group_device_zappi {
+      deviceSerialNo: serialno
+      deviceAddressRaw: deviceaddressraw
+      hub {
+        ...HubData
+      }
+    }
+  }
+}
+
+query AdminGroupHubs($adminGroupId: Int!) {
+  devices: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
+    eddi: admin_group_device_eddi {
+      deviceSerialNo: serialno
+      deviceAddressRaw: deviceaddressraw
+      hub {
+        ...HubData
+      }
+    }
+    zappi: admin_group_device_zappi {
+      deviceSerialNo: serialno
+      deviceAddressRaw: deviceaddressraw
+      hub {
+        ...HubData
+      }
+    }
+  }
+}
+
+query ControlGroupHubs($controlGroupId: Int!) {
+  devices: control_group_device(where: { control_group_id: { _eq: $controlGroupId } }) {
+    eddi: control_group_device_eddi {
+      deviceSerialNo: serialno
+      deviceAddressRaw: deviceaddressraw
+      hub {
+        ...HubData
+      }
+    }
+    zappi: control_group_device_zappi {
+      deviceSerialNo: serialno
+      deviceAddressRaw: deviceaddressraw
+      hub {
+        ...HubData
+      }
+    }
+  }
+}
+
+fragment HubData on hub {
+  ipAddress: ipaddress
+  networkId: networkid
+  port: port
+  serialNo: serialno
+  addressRaw: masterdevicerawaddress
+}

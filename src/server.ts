@@ -10,6 +10,7 @@ import { openApi as aggregatorOpenApi } from './aggregator-api/openApi';
 import { schema as aggregatorSchema } from './aggregator-api/schema';
 import { getAPIs } from './lib/data-sources';
 import { AppConfig, initApp } from './lib/initApp';
+import cors from 'cors';
 import { isTestEnv } from './lib/utils/helpers';
 import { getAggregatorContext } from './aggregator-api/aggregatorContext';
 import { getAdminContext } from './admin-api/adminContext';
@@ -17,6 +18,7 @@ import { getTestContext } from './lib/utils/testContext';
 
 const bootstrap = async (): Promise<void> => {
   const app = express();
+  app.use(cors());
   const aggregatorConfig: AppConfig = {
     schema: aggregatorSchema,
     openApi: aggregatorOpenApi,

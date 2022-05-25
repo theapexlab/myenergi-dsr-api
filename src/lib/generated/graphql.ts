@@ -13158,6 +13158,126 @@ export type DeviceHubSerialNoQuery = {
   zappi?: { __typename?: 'zappi'; hubSerialNo?: number | null } | null;
 };
 
+export type DeviceHubDataQueryVariables = Exact<{
+  serialNo: Scalars['Int'];
+}>;
+
+export type DeviceHubDataQuery = {
+  __typename?: 'query_root';
+  devices: Array<{
+    __typename?: 'admin_group_device';
+    eddi?: {
+      __typename?: 'eddi';
+      deviceSerialNo: number;
+      deviceAddressRaw: number;
+      hub?: {
+        __typename?: 'hub';
+        ipAddress?: string | null;
+        networkId: number;
+        port: number;
+        serialNo: number;
+        addressRaw?: number | null;
+      } | null;
+    } | null;
+    zappi?: {
+      __typename?: 'zappi';
+      deviceSerialNo: number;
+      deviceAddressRaw: number;
+      hub?: {
+        __typename?: 'hub';
+        ipAddress?: string | null;
+        networkId: number;
+        port: number;
+        serialNo: number;
+        addressRaw?: number | null;
+      } | null;
+    } | null;
+  }>;
+};
+
+export type AdminGroupHubsQueryVariables = Exact<{
+  adminGroupId: Scalars['Int'];
+}>;
+
+export type AdminGroupHubsQuery = {
+  __typename?: 'query_root';
+  devices: Array<{
+    __typename?: 'admin_group_device';
+    eddi?: {
+      __typename?: 'eddi';
+      deviceSerialNo: number;
+      deviceAddressRaw: number;
+      hub?: {
+        __typename?: 'hub';
+        ipAddress?: string | null;
+        networkId: number;
+        port: number;
+        serialNo: number;
+        addressRaw?: number | null;
+      } | null;
+    } | null;
+    zappi?: {
+      __typename?: 'zappi';
+      deviceSerialNo: number;
+      deviceAddressRaw: number;
+      hub?: {
+        __typename?: 'hub';
+        ipAddress?: string | null;
+        networkId: number;
+        port: number;
+        serialNo: number;
+        addressRaw?: number | null;
+      } | null;
+    } | null;
+  }>;
+};
+
+export type ControlGroupHubsQueryVariables = Exact<{
+  controlGroupId: Scalars['Int'];
+}>;
+
+export type ControlGroupHubsQuery = {
+  __typename?: 'query_root';
+  devices: Array<{
+    __typename?: 'control_group_device';
+    eddi?: {
+      __typename?: 'eddi';
+      deviceSerialNo: number;
+      deviceAddressRaw: number;
+      hub?: {
+        __typename?: 'hub';
+        ipAddress?: string | null;
+        networkId: number;
+        port: number;
+        serialNo: number;
+        addressRaw?: number | null;
+      } | null;
+    } | null;
+    zappi?: {
+      __typename?: 'zappi';
+      deviceSerialNo: number;
+      deviceAddressRaw: number;
+      hub?: {
+        __typename?: 'hub';
+        ipAddress?: string | null;
+        networkId: number;
+        port: number;
+        serialNo: number;
+        addressRaw?: number | null;
+      } | null;
+    } | null;
+  }>;
+};
+
+export type HubDataFragment = {
+  __typename?: 'hub';
+  ipAddress?: string | null;
+  networkId: number;
+  port: number;
+  serialNo: number;
+  addressRaw?: number | null;
+};
+
 export type CreateControlGroupMutationVariables = Exact<{
   object?: Control_Group_Insert_Input;
 }>;
@@ -13418,6 +13538,15 @@ export const AdminGroupFieldsFragmentDoc = gql`
     name
   }
 `;
+export const HubDataFragmentDoc = gql`
+  fragment HubData on hub {
+    ipAddress: ipaddress
+    networkId: networkid
+    port: port
+    serialNo: serialno
+    addressRaw: masterdevicerawaddress
+  }
+`;
 export const ControlGroupFieldsFragmentDoc = gql`
   fragment ControlGroupFields on control_group {
     id
@@ -13589,6 +13718,69 @@ export const DeviceHubSerialNoDocument = gql`
       hubSerialNo: hubserialno
     }
   }
+`;
+export const DeviceHubDataDocument = gql`
+  query DeviceHubData($serialNo: Int!) {
+    devices: admin_group_device(where: { serialno: { _eq: $serialNo } }) {
+      eddi: admin_group_device_eddi {
+        deviceSerialNo: serialno
+        deviceAddressRaw: deviceaddressraw
+        hub {
+          ...HubData
+        }
+      }
+      zappi: admin_group_device_zappi {
+        deviceSerialNo: serialno
+        deviceAddressRaw: deviceaddressraw
+        hub {
+          ...HubData
+        }
+      }
+    }
+  }
+  ${HubDataFragmentDoc}
+`;
+export const AdminGroupHubsDocument = gql`
+  query AdminGroupHubs($adminGroupId: Int!) {
+    devices: admin_group_device(where: { admin_group_id: { _eq: $adminGroupId } }) {
+      eddi: admin_group_device_eddi {
+        deviceSerialNo: serialno
+        deviceAddressRaw: deviceaddressraw
+        hub {
+          ...HubData
+        }
+      }
+      zappi: admin_group_device_zappi {
+        deviceSerialNo: serialno
+        deviceAddressRaw: deviceaddressraw
+        hub {
+          ...HubData
+        }
+      }
+    }
+  }
+  ${HubDataFragmentDoc}
+`;
+export const ControlGroupHubsDocument = gql`
+  query ControlGroupHubs($controlGroupId: Int!) {
+    devices: control_group_device(where: { control_group_id: { _eq: $controlGroupId } }) {
+      eddi: control_group_device_eddi {
+        deviceSerialNo: serialno
+        deviceAddressRaw: deviceaddressraw
+        hub {
+          ...HubData
+        }
+      }
+      zappi: control_group_device_zappi {
+        deviceSerialNo: serialno
+        deviceAddressRaw: deviceaddressraw
+        hub {
+          ...HubData
+        }
+      }
+    }
+  }
+  ${HubDataFragmentDoc}
 `;
 export const CreateControlGroupDocument = gql`
   mutation CreateControlGroup($object: control_group_insert_input! = {}) {
@@ -13835,6 +14027,45 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'DeviceHubSerialNo'
+      );
+    },
+    DeviceHubData(
+      variables: DeviceHubDataQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<DeviceHubDataQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<DeviceHubDataQuery>(DeviceHubDataDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'DeviceHubData'
+      );
+    },
+    AdminGroupHubs(
+      variables: AdminGroupHubsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<AdminGroupHubsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<AdminGroupHubsQuery>(AdminGroupHubsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'AdminGroupHubs'
+      );
+    },
+    ControlGroupHubs(
+      variables: ControlGroupHubsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<ControlGroupHubsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<ControlGroupHubsQuery>(ControlGroupHubsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'ControlGroupHubs'
       );
     },
     CreateControlGroup(

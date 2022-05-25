@@ -1,5 +1,5 @@
 import { DataSources } from 'apollo-server-core/src/graphqlOptions';
-import { auth, customerApi, dal } from '../config';
+import { auth, commandApi, customerApi, dal } from '../config';
 import { AdminGroupAPI } from './AdminGroupAPI';
 import { AppClientAPI } from './AppClientAPI';
 import { ControlGroupAPI } from './ControlGroupAPI';
@@ -7,7 +7,9 @@ import { CustomerAPI } from './CustomerAPI';
 import { DeviceAPI } from './DeviceAPI';
 import { HistoryAPI } from './HistoryAPI';
 import { StatusAPI } from './StatusAPI';
+import { CommandApi } from './CommandApi';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface AppDataSources extends DataSources<Record<string, any>> {
   deviceApi: DeviceAPI;
   historyApi: HistoryAPI;
@@ -16,6 +18,7 @@ export interface AppDataSources extends DataSources<Record<string, any>> {
   adminGroupApi: AdminGroupAPI;
   appClientApi: AppClientAPI;
   customerApi: CustomerAPI;
+  commandApi: CommandApi;
 }
 
 export const getAPIs = (): AppDataSources => {
@@ -27,5 +30,6 @@ export const getAPIs = (): AppDataSources => {
     adminGroupApi: new AdminGroupAPI(dal.url, dal.adminSecret),
     appClientApi: new AppClientAPI(auth.userPoolId, auth.region),
     customerApi: new CustomerAPI(customerApi.jwtSecret, customerApi.expiresIn, customerApi.url),
+    commandApi: new CommandApi(dal.url, dal.adminSecret, commandApi.jwtSecret, commandApi.expiresIn, commandApi.url),
   };
 };

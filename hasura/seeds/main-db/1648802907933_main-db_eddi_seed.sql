@@ -34,7 +34,7 @@ VALUES ('EDDI', 200000001, '2022-01-03 02:11:42.000000 +00:00', 3048, 0, 72, nul
     "ctNumber": 3
   }', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0, 0, null, 0,
         true, false, false, false, false, false, false, false, null, null, null, null, null, null, null, null, null,
-        null, 10183069, null, 0, null, null, null, null, null, null, null, null, null, null);
+        null, 10633890, null, 0, null, null, null, null, null, null, null, null, null, null);
 
 INSERT INTO public.eddi (deviceclass, serialno, updatedat, currentversion, deviceinstance, deviceaddressraw,
                          specialversion, agggroupno, serverconfigtime, productcode, voltage, frequency, maxpower,
@@ -72,7 +72,7 @@ VALUES ('EDDI', 200000002, '2022-01-03 02:11:42.000000 +00:00', 3048, 0, 72, nul
     "ctNumber": 3
   }', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0, 0, null, 0,
         true, false, false, false, false, false, false, false, null, null, null, null, null, null, null, null, null,
-        null, 10183069, null, 0, null, null, null, null, null, null, null, null, null, null);
+        null, 10633890, null, 0, null, null, null, null, null, null, null, null, null, null);
 
 INSERT INTO public.eddi (deviceclass, serialno, updatedat, currentversion, deviceinstance, deviceaddressraw,
                          specialversion, agggroupno, serverconfigtime, productcode, voltage, frequency, maxpower,
@@ -110,4 +110,4 @@ VALUES ('EDDI', 200000003, '2022-01-03 02:11:42.000000 +00:00', 3048, 0, 72, nul
     "ctNumber": 3
   }', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0, 0, null, 0,
         true, false, false, false, false, false, false, false, null, null, null, null, null, null, null, null, null,
-        null, 10183069, null, 0, null, null, null, null, null, null, null, null, null, null);
+        null, 10633890, null, 0, null, null, null, null, null, null, null, null, null, null);

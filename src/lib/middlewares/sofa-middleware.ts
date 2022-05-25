@@ -57,6 +57,42 @@ export const routes: SofaConfig['routes'] = {
   'Query.adminGroupHistory': {
     path: '/admin-groups/:id/history',
   },
+  'Mutation.setDeviceLoad': {
+    path: '/devices/:serialNo/set-load',
+    method: 'POST',
+  },
+  'Mutation.setControlGroupLoad': {
+    path: '/control-groups/:id/set-load',
+    method: 'POST',
+  },
+  'Mutation.setAdminGroupLoad': {
+    path: '/admin-groups/:id/set-load',
+    method: 'POST',
+  },
+  'Mutation.setDeviceFrequency': {
+    path: '/devices/:serialNo/set-frequency',
+    method: 'POST',
+  },
+  'Mutation.setControlGroupFrequency': {
+    path: '/control-groups/:id/set-frequency',
+    method: 'POST',
+  },
+  'Mutation.setAdminGroupFrequency': {
+    path: '/admin-groups/:id/set-frequency',
+    method: 'POST',
+  },
+  'Mutation.clearDeviceLoad': {
+    path: '/devices/:serialNo/clear-command',
+    method: 'POST',
+  },
+  'Mutation.clearControlGroupLoad': {
+    path: '/control-groups/:id/clear-command',
+    method: 'POST',
+  },
+  'Mutation.clearAdminGroupLoad': {
+    path: '/admin-groups/:id/clear-command',
+    method: 'POST',
+  },
 };
 
 export const createSofaMiddleware = (

@@ -7,6 +7,9 @@ import {
   ZappiHistoryFragment,
   ZappiStatusFragment,
 } from '../generated/graphql';
+import { SetDeviceLoadInput } from '../data-sources/CommandApi';
+import { DeviceHubDetails, HubDetails } from '../models/hub';
+import { SetLoadCommandBaseArgs } from '../models/command/command.args';
 
 export const mapHistoryFragmentToDeviceHistory = ({
   timestamp,
@@ -43,4 +46,31 @@ export const mapEddiOrZappiStatusToDeviceStatus = (devices: EddiOrZappiStatus[])
       deviceClass: mapDeviceClassToDeviceType(device.deviceClass),
       updateDate: new Date(updateDate),
     }));
+};
+
+export const mapDeviceHubDetailsToSetDeviceLoadInputs = (
+  deviceHubDetails: DeviceHubDetails[],
+  { csn, value, ttl }: SetLoadCommandBaseArgs
+): Record<number, SetDeviceLoadInput> => {
+  return deviceHubDetails.reduce<Record<number, SetDeviceLoadInput>>((acc, { deviceAddressRaw, hub }) => {
+    const { serialNo } = hub;
+    if (acc[serialNo]) {
+      acc[serialNo].load.deviceAddresses.push(deviceAddressRaw);
+      return acc;
+    }
+    acc[serialNo] = {
+      hubDetails: hub,
+      load: {
+        csn,
+        value,
+        ttl,
+        deviceAddresses: [deviceAddressRaw],
+      },
+    };
+    return acc;
+  }, {});
+};
+
+export const mapDeviceHubDetailsToUniqueHubDetails = (deviceHubDetails: DeviceHubDetails[]): HubDetails[] => {
+  return Object.values(deviceHubDetails.reduce((acc, { hub }) => Object.assign(acc, { [hub.serialNo]: hub }), {}));
 };

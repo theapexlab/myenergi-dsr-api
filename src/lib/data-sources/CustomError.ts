@@ -15,3 +15,10 @@ export class UnAuthorizedError extends ApolloError {
     Object.defineProperty(this, 'name', { value: 'UnAuthorizedError' });
   }
 }
+export class BadUserInputError extends ApolloError {
+  constructor(message: string) {
+    super(message, ErrorCodes.UserInputError);
+
+    Object.defineProperty(this, 'name', { value: 'UserInputError' });
+  }
+}

@@ -5,6 +5,7 @@ import { AffectedResponse } from '../models/shared';
 import { getAggregatorCondition } from '../utils/getAggregatorCondition';
 import { NotFoundError } from './CustomError';
 import { GraphqlDataSource } from './GraphqlDataSource';
+import { DeviceHubDetails } from '../models/hub';
 
 export class AdminGroupAPI extends GraphqlDataSource {
   constructor(baseURL: string, secret: string) {

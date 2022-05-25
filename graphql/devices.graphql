@@ -1,16 +1,15 @@
 #  FYI:  After changing anything here run yarn codegen to generate new types
 
 query DeviceStatus($where: admin_group_device_bool_exp) {
-     devices: admin_group_device (where: $where) {
-      eddi: admin_group_device_eddi {
-        ...EddiStatus
-      }
-      zappi: admin_group_device_zappi {
-        ...ZappiStatus
-      }
+  devices: admin_group_device(where: $where) {
+    eddi: admin_group_device_eddi {
+      ...EddiStatus
     }
+    zappi: admin_group_device_zappi {
+      ...ZappiStatus
+    }
+  }
 }
-
 
 query NewDevicesBySerialNos($serialNos: [bigint!]) {
   zappis: zappi(where: { serialno: { _in: $serialNos } }) {
@@ -23,7 +22,7 @@ query NewDevicesBySerialNos($serialNos: [bigint!]) {
 
 query DeviceControlGroup($where: control_group_bool_exp = {}) {
   controlGroups: control_group(where: $where) {
-     ...ControlGroupFields
+    ...ControlGroupFields
   }
 }
 

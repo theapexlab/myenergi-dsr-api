@@ -22,7 +22,7 @@ terraform {
       name = "dsr-api-dev"
     }
   }
-  required_version = "~> 1.1.6"
+  required_version = "~> 1.2.0"
 }
 
 module "hasura" {
