@@ -134,6 +134,9 @@ export class CommandApi extends GraphqlDataSource {
     const hubDetails = devices.map(({ zappi, eddi }) => {
       return zappi || eddi;
     });
+    if (hubDetails.length === 0) {
+      throw new NotFoundError(`Hub related to control group: ${controlGroupId}, was not found`);
+    }
     return hubDetails.filter(({ hub }) => !!hub);
   }
 
@@ -142,6 +145,9 @@ export class CommandApi extends GraphqlDataSource {
     const hubDetails = devices.map(({ zappi, eddi }) => {
       return zappi || eddi;
     });
+    if (hubDetails.length === 0) {
+      throw new NotFoundError(`Hub related to admin group: ${adminGroupId}, was not found`);
+    }
     return hubDetails.filter(({ hub }) => !!hub);
   }
 }

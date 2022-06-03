@@ -188,5 +188,9 @@ variable "cognito_resource_server_identifier" {
   description = "Resource server identifier for Cognito"
   default     = "https://dsr-api.myenergi.net"
 }
+variable "command_api_root_url" {
+  description = "Root URL for command API"
+  default     = "https://api.myenergi-dev.zoosh.ie:3007/"
+}
 
 

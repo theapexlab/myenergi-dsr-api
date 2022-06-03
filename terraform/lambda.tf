@@ -13,6 +13,7 @@ locals {
     JWT_SECRET             = var.customer_api_jwt_secret_key
     JWT_EXPIRES_IN         = var.customer_api_jwt_expires_in
     CUSTOMER_DATA_API_ROOT = var.customer_api_root_url
+    COMMAND_API_ROOT = var.command_api_root_url
   }
 }
 
