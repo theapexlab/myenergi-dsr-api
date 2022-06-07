@@ -60,6 +60,10 @@ resource "aws_lambda_function" "dsr_aggregator_api" {
   source_code_hash = data.archive_file.dsr_aggregator_api.output_base64sha256
   role             = aws_iam_role.lambda_exec.arn
   timeout          = 30
+  vpc_config {
+    security_group_ids = var.security_group_ids
+    subnet_ids = var.private_subnet_ids
+  }
 
   environment {
     variables = local.lambda_environment

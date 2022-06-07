@@ -184,13 +184,23 @@ variable "cognito_oauth_scope" {
   description = "Scope for Cognito OAuth2"
   default     = "api.readwrite"
 }
+
 variable "cognito_resource_server_identifier" {
   description = "Resource server identifier for Cognito"
   default     = "https://dsr-api.myenergi.net"
 }
+
 variable "command_api_root_url" {
   description = "Root URL for command API"
-  default     = "https://api.myenergi-dev.zoosh.ie:3007/"
+  default     = "http://internal-internal-299730921.eu-west-1.elb.amazonaws.com:3007/"
 }
 
+variable "security_group_ids" {
+  description = "Security group IDs for lamba's  vpc configuration"
+  default     = ["sg-0110f11a6f21a6547"]
+}
 
+variable "private_subnet_ids" {
+  description = "Private subnet IDs for lamba's  vpc configuration"
+  default     = ["subnet-0ca5007b8bdabe5dc", "subnet-054b9e0244ac02225", "subnet-0e0cf361db59fd786"]
+}

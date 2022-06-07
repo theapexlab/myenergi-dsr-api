@@ -7,4 +7,5 @@ export const server = new ApolloServer({
   schema,
   context: ({ express }) => getAdminContext(express),
   dataSources: getAPIs,
+  introspection: true,
 });
