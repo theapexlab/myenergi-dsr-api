@@ -59,7 +59,7 @@ resource "aws_lambda_function" "dsr_aggregator_api" {
   layers           = [aws_lambda_layer_version.dependency_layer.arn]
   source_code_hash = data.archive_file.dsr_aggregator_api.output_base64sha256
   role             = aws_iam_role.lambda_exec.arn
-  timeout          = 10
+  timeout          = 30
 
   environment {
     variables = local.lambda_environment

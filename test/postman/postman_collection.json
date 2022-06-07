@@ -2539,7 +2539,7 @@
 													"",
 													"pm.test(\"Response have correct devices\", () => {",
 													"    pm.expect(responseJson.id).to.eq(commandId);",
-													"    pm.expect(Date.parse(responseJson.commandInitiated)).to.gte(Date.parse(currentTime));",
+													"    pm.expect(Date.parse(responseJson.commandInitiated)).to.lte(Date.parse(currentTime));",
 													"    pm.expect(responseJson.csn).to.eq(csn);",
 													"    pm.expect(responseJson.error).to.eq(error);",
 													"});",

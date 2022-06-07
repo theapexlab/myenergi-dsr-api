@@ -34,7 +34,7 @@ export class CommandApi extends GraphqlDataSource {
         Accept: 'application/json',
         Authorization: `Bearer ${jwt}`,
       },
-      timeout: 15000,
+      timeout: 30000,
     });
   }
 
@@ -72,6 +72,8 @@ export class CommandApi extends GraphqlDataSource {
         load,
       });
 
+      logger.info(`Command sent: ${JSON.stringify(data)}`);
+
       return {
         id: data.id,
         error: null,
@@ -101,6 +103,8 @@ export class CommandApi extends GraphqlDataSource {
         hubDetails,
         frequencyResponse,
       });
+
+      logger.info(`Command sent: ${JSON.stringify(data)}`);
 
       return {
         id: data.id,
