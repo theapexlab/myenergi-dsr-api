@@ -10,6 +10,7 @@ import { AppClientResolver } from '../lib/models/app-client';
 import { ControlGroupResolver } from '../lib/models/control-group';
 import { DeviceResolver } from '../lib/models/device';
 import { LoginResolver } from '../lib/models/login';
+import { DeviceStatusResolver } from '../lib/models/device-status';
 
 export const schema = buildSchemaSync({
   resolvers: [
@@ -21,6 +22,7 @@ export const schema = buildSchemaSync({
     LoginResolver,
     ControlGroupResolver,
     DeviceResolver,
+    DeviceStatusResolver,
   ],
   authChecker,
 });

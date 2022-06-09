@@ -38,6 +38,9 @@ fragment ZappiStatus on zappi {
   chargeEnergy: chargeenergy
   voltage
   frequency
+  pilotState: pilotstate
+  hubSerialNo: hubserialno
+  dsrLoadControlActive :dsrdatalca
 }
 
 fragment EddiStatus on eddi {
@@ -47,4 +50,6 @@ fragment EddiStatus on eddi {
   chargeEnergy: chargeenergy
   voltage
   frequency
+  hubSerialNo: hubserialno
+  dsrLoadControlActive :dsrdatalca
 }

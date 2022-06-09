@@ -4,6 +4,7 @@ import { getAggregatorCondition } from "../utils/getAggregatorCondition";
 import { getDataSources } from "../utils/getDataSources";
 import { NotFoundError } from "./CustomError";
 import { GraphqlDataSource } from "./GraphqlDataSource";
+import { CustomerData } from "./CustomerAPI";
 
 interface GetDevicesInput {
   id?: number;
@@ -53,48 +54,58 @@ export class DeviceAPI extends GraphqlDataSource {
   }
 
   getDevicePostalCode = async (serialNo: number): Promise<string | null> => {
-    const { customerApi } = getDataSources(this.context);
-
-    const { eddi, zappi } = await this.sdk.DeviceHubSerialNo({ serialNo });
-    const { hubSerialNo } = eddi || zappi || {};
-
-    if (!hubSerialNo) {
-      throw new NotFoundError(`Hub related to device with serial number ${serialNo} not found`);
-    }
-
-    const customer = await customerApi.getCustomerData(hubSerialNo);
-
+    const hubSerialNo = await this.geHubSerialNoByDeviceSerialNo(serialNo);
+    const customer = await this.getCustomerDataByHubSerialNo(hubSerialNo);
     if (!customer) {
       return null;
     }
-
     const {
       content: { address },
     } = customer;
-
     // todo: how to respond is there is no address found for a customer
     // if (!address) {
     //   throw new NotFoundError(`Customer data related to device ${serialNo} hub not found`);
     // }
-
     return address?.postalCode ?? null;
   };
 
   getDeviceIsAvailable = async (serialNo: number): Promise<boolean | null> => {
-    const { customerApi } = getDataSources(this.context);
+    const { statusApi } = getDataSources(this.context);
+    const deviceStatus = await statusApi.getDeviceStatus(serialNo);
+    if (!deviceStatus) {
+      throw new NotFoundError(`Status related to device with serial number ${serialNo} not found`);
+    }
+    const { dsrLoadControlActive, pilotState } = deviceStatus;
+    const hubSerialNo = await this.geHubSerialNoByDeviceSerialNo(serialNo);
+    const customerData = await this.getCustomerDataByHubSerialNo(hubSerialNo);
+    const {
+      content: { flexOptIn },
+    } = customerData;
+    const isAvailableForDsr = pilotState === "A" && flexOptIn && !dsrLoadControlActive;
+    // TODO: extend isAvailableForDsr when SE-852 is implemented
+    // TODO: extend isAvailableForDsr when charge set to 'urgent'
+    // const isAvailableForDsr = flexOptIn && booleanFieldThatIsMissing
+    // return isAvailableForDsr;
+    return isAvailableForDsr;
+  };
+
+  async geHubSerialNoByDeviceSerialNo(serialNo: number): Promise<number> {
     const { eddi, zappi } = await this.sdk.DeviceHubSerialNo({ serialNo });
     const { hubSerialNo } = eddi || zappi || {};
-    console.log(hubSerialNo);
     if (!hubSerialNo) {
       throw new NotFoundError(`Hub related to device with serial number ${serialNo} not found`);
     }
-    const customer = await customerApi.getCustomerData(hubSerialNo);
-    console.log(customer);
-    if (!customer) {
-      return null;
+    return hubSerialNo;
+  }
+
+  async getCustomerDataByHubSerialNo(hubSerialNo: number): Promise<CustomerData> {
+    const { customerApi } = getDataSources(this.context);
+    const customerData = await customerApi.getCustomerData(hubSerialNo);
+    if (!customerData) {
+      throw new NotFoundError(`Customer data related to hub ${hubSerialNo} not found`);
     }
-    return false;
-  };
+    return customerData;
+  }
 
   async getControlGroupDevices(id: number): Promise<Device[]> {
     const { user } = this.context;

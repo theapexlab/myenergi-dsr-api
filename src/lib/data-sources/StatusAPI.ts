@@ -13,11 +13,14 @@ export class StatusAPI extends GraphqlDataSource {
 
   async getDeviceStatus(serialNo: number): Promise<DeviceStatus> {
     const { user } = this.context;
-    const condition = (aggregatorId): Admin_Group_Device_Bool_Exp => ({
+    const aggregatorCondition = (aggregatorId): Admin_Group_Device_Bool_Exp => ({
       serialno: { _eq: serialNo },
       admin_group: { aggregator_id: { _eq: aggregatorId } },
     });
-    const where = getAggregatorCondition(user, condition);
+    const adminCondition = (): Admin_Group_Device_Bool_Exp => ({
+      serialno: { _eq: serialNo },
+    });
+    const where = getAggregatorCondition(user, aggregatorCondition, adminCondition);
     const {
       devices: [device],
     } = await this.sdk.DeviceStatus({
@@ -32,6 +35,7 @@ export class StatusAPI extends GraphqlDataSource {
       ...deviceProps,
       deviceClass: mapDeviceClassToDeviceType(deviceProps.deviceClass),
       updateDate: new Date(updateDate),
+      pilotState: device.eddi ? null : device.zappi.pilotState,
     };
   }
 
@@ -42,7 +46,10 @@ export class StatusAPI extends GraphqlDataSource {
       admin_group: { aggregator_id: { _eq: aggregatorId } },
       id: { _eq: id },
     });
-    const where = getAggregatorCondition(user, condition);
+    const adminCondition = (): Control_Group_Bool_Exp => ({
+      id: { _eq: id },
+    });
+    const where = getAggregatorCondition(user, condition, adminCondition);
     const {
       controlGroups: [controlGroup],
     } = await this.sdk.ControlGroupStatus({ where, limit, offset });
@@ -58,7 +65,10 @@ export class StatusAPI extends GraphqlDataSource {
       aggregator_id: { _eq: aggregatorId },
       id: { _eq: id },
     });
-    const where = getAggregatorCondition(user, condition);
+    const adminCondition = (): Admin_Group_Bool_Exp => ({
+      id: { _eq: id },
+    });
+    const where = getAggregatorCondition(user, condition, adminCondition);
 
     const {
       adminGroups: [adminGroup],

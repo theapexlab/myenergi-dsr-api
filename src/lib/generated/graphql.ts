@@ -205,6 +205,10 @@ export type Admin_Group_Bool_Exp = {
 /** unique or primary key constraints on table "admin_group" */
 export enum Admin_Group_Constraint {
   /** unique or primary key constraint */
+  AdminGroupAggregatorIdKey = 'admin_group_aggregator_id_key',
+  /** unique or primary key constraint */
+  AdminGroupNameKey = 'admin_group_name_key',
+  /** unique or primary key constraint */
   AdminGroupPkey = 'admin_group_pkey',
 }
 
@@ -1528,10 +1532,14 @@ export type Command_Insert_Input = {
 export type Command_Max_Fields = {
   __typename?: 'command_max_fields';
   commandinitiated?: Maybe<Scalars['timestamptz']>;
+  commandinitiatorservice?: Maybe<Scalars['command_commandinitiatorservice_enum']>;
   commandinitiatoruserid?: Maybe<Scalars['Int']>;
   commandlastsent?: Maybe<Scalars['timestamptz']>;
+  commandstate?: Maybe<Scalars['command_commandstate_enum']>;
   commandtries?: Maybe<Scalars['smallint']>;
+  commandtype?: Maybe<Scalars['command_commandtype_enum']>;
   destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
+  destinationdevicename?: Maybe<Scalars['command_destinationdevicename_enum']>;
   destinationdeviceserialno?: Maybe<Scalars['bigint']>;
   hubipaddress?: Maybe<Scalars['String']>;
   hubnetworkid?: Maybe<Scalars['Int']>;
@@ -1542,10 +1550,14 @@ export type Command_Max_Fields = {
 /** order by max() on columns of table "command" */
 export type Command_Max_Order_By = {
   commandinitiated?: InputMaybe<Order_By>;
+  commandinitiatorservice?: InputMaybe<Order_By>;
   commandinitiatoruserid?: InputMaybe<Order_By>;
   commandlastsent?: InputMaybe<Order_By>;
+  commandstate?: InputMaybe<Order_By>;
   commandtries?: InputMaybe<Order_By>;
+  commandtype?: InputMaybe<Order_By>;
   destinationdeviceaddressraw?: InputMaybe<Order_By>;
+  destinationdevicename?: InputMaybe<Order_By>;
   destinationdeviceserialno?: InputMaybe<Order_By>;
   hubipaddress?: InputMaybe<Order_By>;
   hubnetworkid?: InputMaybe<Order_By>;
@@ -1557,10 +1569,14 @@ export type Command_Max_Order_By = {
 export type Command_Min_Fields = {
   __typename?: 'command_min_fields';
   commandinitiated?: Maybe<Scalars['timestamptz']>;
+  commandinitiatorservice?: Maybe<Scalars['command_commandinitiatorservice_enum']>;
   commandinitiatoruserid?: Maybe<Scalars['Int']>;
   commandlastsent?: Maybe<Scalars['timestamptz']>;
+  commandstate?: Maybe<Scalars['command_commandstate_enum']>;
   commandtries?: Maybe<Scalars['smallint']>;
+  commandtype?: Maybe<Scalars['command_commandtype_enum']>;
   destinationdeviceaddressraw?: Maybe<Scalars['Int']>;
+  destinationdevicename?: Maybe<Scalars['command_destinationdevicename_enum']>;
   destinationdeviceserialno?: Maybe<Scalars['bigint']>;
   hubipaddress?: Maybe<Scalars['String']>;
   hubnetworkid?: Maybe<Scalars['Int']>;
@@ -1571,10 +1587,14 @@ export type Command_Min_Fields = {
 /** order by min() on columns of table "command" */
 export type Command_Min_Order_By = {
   commandinitiated?: InputMaybe<Order_By>;
+  commandinitiatorservice?: InputMaybe<Order_By>;
   commandinitiatoruserid?: InputMaybe<Order_By>;
   commandlastsent?: InputMaybe<Order_By>;
+  commandstate?: InputMaybe<Order_By>;
   commandtries?: InputMaybe<Order_By>;
+  commandtype?: InputMaybe<Order_By>;
   destinationdeviceaddressraw?: InputMaybe<Order_By>;
+  destinationdevicename?: InputMaybe<Order_By>;
   destinationdeviceserialno?: InputMaybe<Order_By>;
   hubipaddress?: InputMaybe<Order_By>;
   hubnetworkid?: InputMaybe<Order_By>;
@@ -1976,6 +1996,8 @@ export type Control_Group_Bool_Exp = {
 
 /** unique or primary key constraints on table "control_group" */
 export enum Control_Group_Constraint {
+  /** unique or primary key constraint */
+  ControlGroupNameAdminGroupIdKey = 'control_group_name_admin_group_id_key',
   /** unique or primary key constraint */
   ControlGroupPkey = 'control_group_pkey',
 }
@@ -7688,8 +7710,13 @@ export type Hub_Variance_Fields = {
   uptime?: Maybe<Scalars['Float']>;
 };
 
+export type Jsonb_Cast_Exp = {
+  String?: InputMaybe<String_Comparison_Exp>;
+};
+
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
+  _cast?: InputMaybe<Jsonb_Cast_Exp>;
   /** is the column contained in the given json value */
   _contained_in?: InputMaybe<Scalars['jsonb']>;
   /** does the column contain the given json value at the top level */
@@ -13091,6 +13118,9 @@ export type AdminGroupStatusQuery = {
         deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
+        pilotState?: string | null;
+        hubSerialNo?: number | null;
+        dsrLoadControlActive?: boolean | null;
       } | null;
       eddi?: {
         __typename?: 'eddi';
@@ -13100,6 +13130,8 @@ export type AdminGroupStatusQuery = {
         deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
+        hubSerialNo?: number | null;
+        dsrLoadControlActive?: boolean | null;
       } | null;
     }>;
   }>;
@@ -13336,6 +13368,8 @@ export type ControlGroupStatusQuery = {
         deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
+        hubSerialNo?: number | null;
+        dsrLoadControlActive?: boolean | null;
       } | null;
       zappi?: {
         __typename?: 'zappi';
@@ -13345,6 +13379,9 @@ export type ControlGroupStatusQuery = {
         deviceClass: string;
         updateDate: string;
         chargeEnergy?: number | null;
+        pilotState?: string | null;
+        hubSerialNo?: number | null;
+        dsrLoadControlActive?: boolean | null;
       } | null;
     }>;
   }>;
@@ -13384,6 +13421,8 @@ export type DeviceStatusQuery = {
       deviceClass: string;
       updateDate: string;
       chargeEnergy?: number | null;
+      hubSerialNo?: number | null;
+      dsrLoadControlActive?: boolean | null;
     } | null;
     zappi?: {
       __typename?: 'zappi';
@@ -13393,6 +13432,9 @@ export type DeviceStatusQuery = {
       deviceClass: string;
       updateDate: string;
       chargeEnergy?: number | null;
+      pilotState?: string | null;
+      hubSerialNo?: number | null;
+      dsrLoadControlActive?: boolean | null;
     } | null;
   }>;
 };
@@ -13426,6 +13468,9 @@ export type ZappiStatusFragment = {
   deviceClass: string;
   updateDate: string;
   chargeEnergy?: number | null;
+  pilotState?: string | null;
+  hubSerialNo?: number | null;
+  dsrLoadControlActive?: boolean | null;
 };
 
 export type EddiStatusFragment = {
@@ -13436,6 +13481,8 @@ export type EddiStatusFragment = {
   deviceClass: string;
   updateDate: string;
   chargeEnergy?: number | null;
+  hubSerialNo?: number | null;
+  dsrLoadControlActive?: boolean | null;
 };
 
 export type DeviceHistoryByIdsQueryVariables = Exact<{
@@ -13568,6 +13615,9 @@ export const ZappiStatusFragmentDoc = gql`
     chargeEnergy: chargeenergy
     voltage
     frequency
+    pilotState: pilotstate
+    hubSerialNo: hubserialno
+    dsrLoadControlActive: dsrdatalca
   }
 `;
 export const EddiStatusFragmentDoc = gql`
@@ -13578,6 +13628,8 @@ export const EddiStatusFragmentDoc = gql`
     chargeEnergy: chargeenergy
     voltage
     frequency
+    hubSerialNo: hubserialno
+    dsrLoadControlActive: dsrdatalca
   }
 `;
 export const ZappiHistoryFragmentDoc = gql`

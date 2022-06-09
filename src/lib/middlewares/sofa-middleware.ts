@@ -1,12 +1,13 @@
-import { GraphQLSchema } from "graphql";
-import { useSofa } from "sofa-api";
-import type { OpenAPI } from "sofa-api/open-api";
-import type { SofaConfig } from "sofa-api/sofa";
-import { getAggregatorRestContext } from "../../aggregator-api/aggregatorContext";
-import { errorHandlerSofa } from "../utils/errorHandler";
+import { GraphQLSchema } from 'graphql';
+import { useSofa } from 'sofa-api';
+import type { OpenAPI } from 'sofa-api/open-api';
+import type { SofaConfig } from 'sofa-api/sofa';
+import { getAggregatorRestContext } from '../../aggregator-api/aggregatorContext';
+import { errorHandlerSofa } from '../utils/errorHandler';
 
 export const routes: SofaConfig['routes'] = {
-  'Query.deviceAdress': {//TODO: remove or add resolver this?
+  'Query.deviceAdress': {
+    //TODO: remove or add resolver this?
     path: '/devices/:serialNo/address',
   },
   'Query.deviceStatus': {

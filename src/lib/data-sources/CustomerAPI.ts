@@ -1,8 +1,10 @@
-import { DataSource, DataSourceConfig } from "apollo-datasource";
-import axios, { AxiosInstance } from "axios";
-import { AppContext } from "../auth/auth.type";
-import { jwtService } from "../services/jwtService";
-import { logger } from "../utils/logger";
+import { DataSource, DataSourceConfig } from 'apollo-datasource';
+import axios, { AxiosInstance } from 'axios';
+import { AppContext } from '../auth/auth.type';
+import { jwtService } from '../services/jwtService';
+import { logger } from '../utils/logger';
+import { isTestEnv } from '../utils/helpers';
+import customerMockData from '../mocks/customerData.json';
 
 interface CustomerAddress {
   addressLine1: string;
@@ -14,12 +16,14 @@ interface CustomerAddress {
   countryCode: string;
 }
 
-interface CustomerData {
+export interface CustomerData {
   status: boolean;
   message: string;
   field: string;
   content: {
-    id: string;
+    flexOptIn: boolean;
+    showDSRModal: boolean;
+    id: number;
     address: CustomerAddress;
   };
 }
@@ -46,7 +50,7 @@ export class CustomerAPI extends DataSource<AppContext> {
   }
 
   async getCustomerData(serialNo: number): Promise<CustomerData | null> {
-    // if (isTestEnv) return customerMockData;
+    if (isTestEnv) return customerMockData;
 
     try {
       const { data } = await this.client.get(`CustomerData/GetCustomerData`, {

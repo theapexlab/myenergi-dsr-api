@@ -1,12 +1,22 @@
 /* eslint-disable class-methods-use-this */
-import { FieldResolver, Resolver, Root } from 'type-graphql';
+import { Args, Authorized, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
 import { DeviceStatus } from './deviceStatus.type';
+import { AppContext, RoleType } from '../../auth/auth.type';
+import { getDataSources } from '../../utils/getDataSources';
+import { IdArgs } from '../shared';
 
 @Resolver(DeviceStatus)
 export class DeviceStatusResolver {
-  @FieldResolver()
-  isAvailable(@Root() _deviceStatus: DeviceStatus): boolean {
-    //  todo: implement custom logic to determine this flag (eg.: customer opt-in/out)
-    return true;
+  @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)
+  @Query(() => DeviceStatus)
+  deviceStatus(@Ctx() ctx: AppContext, @Args() { serialNo }: IdArgs): Promise<DeviceStatus> {
+    const { statusApi } = getDataSources(ctx);
+    return statusApi.getDeviceStatus(serialNo);
+  }
+
+  @FieldResolver(() => Boolean, { nullable: true })
+  isAvailable(@Ctx() ctx: AppContext, @Root() deviceStatus: DeviceStatus): Promise<boolean | null> {
+    const { deviceApi } = getDataSources(ctx);
+    return deviceApi.getDeviceIsAvailable(deviceStatus.serialNo);
   }
 }

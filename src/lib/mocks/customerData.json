@@ -3,11 +3,13 @@
   "message": "",
   "field": "",
   "content": {
-    "id": "2",
+    "id": 2,
     "firstName": "GabiTest",
     "lastName": "PlesaTest",
     "mobileCode": "+44",
     "mobileNumber": "1234567890",
+    "flexOptIn": true,
+    "showDSRModal": false,
     "address": {
       "addressLine1": "69 Buckingham Palace Road",
       "addressLine2": "",
@@ -20,3 +22,4 @@
     }
   }
 }
+
