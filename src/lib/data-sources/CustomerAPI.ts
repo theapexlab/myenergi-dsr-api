@@ -1,10 +1,8 @@
-import { DataSource, DataSourceConfig } from 'apollo-datasource';
-import axios, { AxiosInstance } from 'axios';
-import { AppContext } from '../auth/auth.type';
-import customerMockData from '../mocks/customerData.json';
-import { jwtService } from '../services/jwtService';
-import { logger } from '../utils/logger';
-import { isTestEnv } from '../utils/helpers';
+import { DataSource, DataSourceConfig } from "apollo-datasource";
+import axios, { AxiosInstance } from "axios";
+import { AppContext } from "../auth/auth.type";
+import { jwtService } from "../services/jwtService";
+import { logger } from "../utils/logger";
 
 interface CustomerAddress {
   addressLine1: string;
@@ -33,6 +31,7 @@ export class CustomerAPI extends DataSource<AppContext> {
   constructor(private secret: string, private expiresIn: string, readonly baseURL: string) {
     super();
     const jwt = jwtService.getToken(this.secret, this.expiresIn) || '';
+    // console.log(jwt);
     this.client = axios.create({
       baseURL,
       headers: {
@@ -47,7 +46,7 @@ export class CustomerAPI extends DataSource<AppContext> {
   }
 
   async getCustomerData(serialNo: number): Promise<CustomerData | null> {
-    if (isTestEnv) return customerMockData;
+    // if (isTestEnv) return customerMockData;
 
     try {
       const { data } = await this.client.get(`CustomerData/GetCustomerData`, {

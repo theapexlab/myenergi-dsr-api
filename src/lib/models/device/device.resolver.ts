@@ -1,13 +1,13 @@
 /* eslint-disable class-methods-use-this */
-import { Arg, Args, Authorized, Ctx, FieldResolver, Int, Query, Resolver, Root } from 'type-graphql';
-import { AppContext, RoleType } from '../../auth/auth.type';
-import { ControlGroup } from '../control-group';
-import { DeviceHistory } from '../device-history';
-import { DeviceHistoryArgs } from '../device-history/deviceHistory.args';
-import { DeviceStatus } from '../device-status';
-import { IdArgs, PaginationArgs } from '../shared';
-import { getDataSources } from '../../utils/getDataSources';
-import { Device } from './device.type';
+import { Arg, Args, Authorized, Ctx, FieldResolver, Int, Query, Resolver, Root } from "type-graphql";
+import { AppContext, RoleType } from "../../auth/auth.type";
+import { ControlGroup } from "../control-group";
+import { DeviceHistory } from "../device-history";
+import { DeviceHistoryArgs } from "../device-history/deviceHistory.args";
+import { DeviceStatus } from "../device-status";
+import { IdArgs, PaginationArgs } from "../shared";
+import { getDataSources } from "../../utils/getDataSources";
+import { Device } from "./device.type";
 
 @Resolver(Device)
 export class DeviceResolver {
@@ -36,6 +36,12 @@ export class DeviceResolver {
   postalCode(@Ctx() ctx: AppContext, @Root() device: Device): Promise<string | null> {
     const { deviceApi } = getDataSources(ctx);
     return deviceApi.getDevicePostalCode(device.serialNo);
+  }
+
+  @FieldResolver(() => Boolean, { nullable: true })
+  isAvailable(@Ctx() ctx: AppContext, @Root() device: Device): Promise<boolean | null> {
+    const { deviceApi } = getDataSources(ctx);
+    return deviceApi.getDeviceIsAvailable(device.serialNo);
   }
 
   @Authorized<RoleType>(RoleType.SUPERADMIN, RoleType.AGGREGATOR)

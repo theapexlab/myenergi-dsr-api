@@ -1,9 +1,9 @@
-import { Device } from '../models/device';
-import { Admin_Group_Device_Bool_Exp, Control_Group_Device_Bool_Exp } from '../generated/graphql';
-import { getAggregatorCondition } from '../utils/getAggregatorCondition';
-import { getDataSources } from '../utils/getDataSources';
-import { NotFoundError } from './CustomError';
-import { GraphqlDataSource } from './GraphqlDataSource';
+import { Device } from "../models/device";
+import { Admin_Group_Device_Bool_Exp, Control_Group_Device_Bool_Exp } from "../generated/graphql";
+import { getAggregatorCondition } from "../utils/getAggregatorCondition";
+import { getDataSources } from "../utils/getDataSources";
+import { NotFoundError } from "./CustomError";
+import { GraphqlDataSource } from "./GraphqlDataSource";
 
 interface GetDevicesInput {
   id?: number;
@@ -78,6 +78,22 @@ export class DeviceAPI extends GraphqlDataSource {
     // }
 
     return address?.postalCode ?? null;
+  };
+
+  getDeviceIsAvailable = async (serialNo: number): Promise<boolean | null> => {
+    const { customerApi } = getDataSources(this.context);
+    const { eddi, zappi } = await this.sdk.DeviceHubSerialNo({ serialNo });
+    const { hubSerialNo } = eddi || zappi || {};
+    console.log(hubSerialNo);
+    if (!hubSerialNo) {
+      throw new NotFoundError(`Hub related to device with serial number ${serialNo} not found`);
+    }
+    const customer = await customerApi.getCustomerData(hubSerialNo);
+    console.log(customer);
+    if (!customer) {
+      return null;
+    }
+    return false;
   };
 
   async getControlGroupDevices(id: number): Promise<Device[]> {
